@@ -463,8 +463,8 @@
     <url>%2F%2F2017-07-05-28972%2F</url>
     <content type="text"><![CDATA[目的： Github + Hexo + Next + 域名搭建可自定义前端样式的免费博客 超快速度： Node.js 所带来的超快生成速度，让上百个页面在几秒内瞬间完成渲染。 支持 Markdown： Hexo 支持 GitHub Flavored Markdown 的所有功能，甚至可以整合 Octopress 的大多数插件。 一键部署： 只需一条指令即可部署到 GitHub Pages, Heroku 或其他网站。 丰富的插件： Hexo 拥有强大的插件系统，安装插件可以让 Hexo 支持 Jade, CoffeeScript。 准备： GitHub账号申请 新建一个仓库（new repository），并命名为YourSiteName.github.io 用一键安装包安装nodejs环境 - http://nodejs.cn/download/ 安装git工具 - https://git-scm.com/downloads 部署: 使用npm安装hexo - 命令行$ npm install -g hexo-cli 初始化框架 - 命令行$ hexo init| cd| npm install 新建文章（创建一个Hello World） - 命令行$ hexo new “Hello World” (该命令在/source/_post里添加hello-world.md文件，之后新建的文章都将存放在此目录下。) 新建关于我等相关页面 - 命令行$ hexo new page “about” (该命令在/source/about里添加index.md文件) 生成网站 命令行$ hexo generate 或者 $ hexo g (此时会将/source的.md文件生成到/public中，形成网站的静态文件。) 使用Next主题让站点更酷炫, 下载https://github.com/iissnan/hexo-theme-next 并放入项目根目录下的themes/next (可修改该模板中的内容或替换相关图片) 在source文件夹中新增CNAME,404.html等固定页面 启用模板, 需要修改根目录/_config.yml配置项theme: next 验证是否启用 $ hexo s –debug, 如显示theme: next则为成功,默认是theme: landscape Ctrl+C退出debug, 正常启动服务器 - 命令行$ hexo server 或者 $ hexo s (输入http://localhost:4000即可查看网站。) 部署网站 - $ hexo deploy 或者 $ hexo d, 部署网站之前需要生成静态文件，即可以用$ hexo generate -d直接生成并部署。此时需要在_config.yml中配置你所要部署的站点： Docs: http://hexo.io/docs/deployment.htmleploy: type: git repo: git@github.com:YourRepository.git branch: master 更多: Hexo配置参考: https://github.com/Jianfengxia/hexo-next-blog- fw/blob/master/_config.yml Next配置参考: https://github.com/Jianfengxia/hexo-next-blog- fw/blob/master/themes/next/_config.yml 404页面配置参考: https://github.com/Jianfengxia/hexo-next-blog- fw/blob/master/source/404.html CNAME域名配置参考:https://github.com/Jianfengxia/hexo-next-blog- fw/blob/master/source/CNAME 官网[Next] [Hexo | 配置] [Hexo | 指令] [Next | 主题设定] [Next | 第三方服务] 那么到此为止网站的雏形算是完成了，接下来你就要自己去管理和完善个人网站了。 充:** 便将之前blog中的文章和标签自动导入该框架,写了个简单的python脚本实现同步: import MySQLdb import os port os.path port sys f setPosts(id, title, date, updated, tags, content): base_path = os.path.split(os.path.realpath(sys.argv[0]))[0] base_path = base_path + &quot;/source/_posts/&quot; open(base_path + str(id) + ‘.md’, ‘w’) –\n’) itle: “‘ + title + ‘“\n’) ite(‘date: ‘ + str(date) + ‘\n’) ite(‘updated: ‘ + str(updated) + ‘\n’) write(‘comments: true’ + ‘\n’) ite(‘tags: [“‘ + tags + ‘“]\n’) (‘—\n’) ite(content + ‘\n’) def getPosts(): try: conn = MySQLdb.connect( host=&apos;10.1.134.114&apos;, port=3306, user=&apos;user&apos;, passwd=&apos;passwd&apos;, db=&apos;lag&apos;, ) cur = conn.cursor() cur.execute(&apos;SET NAMES UTF8&apos;) sql = &quot;SELECT tasks.id,tasks.title,tasks.end_at,tasks.updated_at,group_concat(DISTINCT tags.topic SEPARATOR &apos;\&quot;,\&quot;&apos;) as tags,tasks.content FROM tasks INNER JOIN task_tags ON task_tags.task_id = tasks.id INNER JOIN tags ON task_tags.tag_id = tags.id WHERE tasks.deleted_at is NULL and tasks.price &gt; 0 and tasks.user_id=9 GROUP BY tasks.id&quot; cur.execute(sql) posts = cur.fetchall() # print(posts) for post in posts: setPosts(post[0], post[1], post[2], post[3], post[4], post[5]) print post[0] cur.close() conn.close() except MySQLdb.Error, e: print &quot;Mysql Error %d: %s&quot; % (e.args[0], e.args[1]) getPosts()]]></content>
       <tags>
-        <tag>JavaScript</tag>
         <tag>Python</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -786,7 +786,7 @@
   <entry>
     <title><![CDATA[svn迁移到git仓库并保留commit历史记录]]></title>
     <url>%2F%2F2017-03-30-Git-svn2git%2F</url>
-    <content type="text"><![CDATA[最近在做svn迁移到gitlab，由于之前一直是由svn做版本控制。最简单的方式是将svn的内容export出来，然后添加到gitlab即可。但是，如果svn用的时间很长了，而且很多commit，我们希望保存svn commit的信息以便做版本的控制和比较。幸好git提供了相应的解决办法。 1.环境准备： yum install -y git-svn 2.svn账号与git账号映射，users.txt svn账号=git账号名称&#117;&#x73;&#101;&#x72;&#110;&#x61;&#x6d;&#101;&#64;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#x6d; 3.svn转换为git git svn clone svn://ip端口/projectname –no-metadata –authors-file=users.txt –trunk=trunk projectnamecd projectname 4.添加git仓库 git remote add origin git@xxx.xxx.xxx.xxx:root/projectname.git 5.提交到gitlab git push -u origin master 参考文档：http://blog.163.com/pjt_ren/blog/static/188250602013101102615844/http://www.lovelucy.info/codebase-from-svn-to-git-migration-keep-commit-history.html]]></content>
+    <content type="text"><![CDATA[最近在做svn迁移到gitlab，由于之前一直是由svn做版本控制。最简单的方式是将svn的内容export出来，然后添加到gitlab即可。但是，如果svn用的时间很长了，而且很多commit，我们希望保存svn commit的信息以便做版本的控制和比较。幸好git提供了相应的解决办法。 1.环境准备： yum install -y git-svn 2.svn账号与git账号映射，users.txt svn账号=git账号名称&#117;&#115;&#101;&#x72;&#110;&#97;&#x6d;&#x65;&#64;&#109;&#97;&#x69;&#108;&#46;&#99;&#111;&#109; 3.svn转换为git git svn clone svn://ip端口/projectname –no-metadata –authors-file=users.txt –trunk=trunk projectnamecd projectname 4.添加git仓库 git remote add origin git@xxx.xxx.xxx.xxx:root/projectname.git 5.提交到gitlab git push -u origin master 参考文档：http://blog.163.com/pjt_ren/blog/static/188250602013101102615844/http://www.lovelucy.info/codebase-from-svn-to-git-migration-keep-commit-history.html]]></content>
       <tags>
         <tag>运维</tag>
       </tags>
@@ -853,8 +853,8 @@
     <url>%2F%2F2017-03-21-Book-IntoManagement%2F</url>
     <content type="text"><![CDATA[1、管理的基本职能。职能一：计划制定目标并确定达成这些目标所必需的行动。所有层次的管理者都必须为其工作小组制定计划。包括： 研究活动条件 制定业务决策 编制行动计划 实施目标和战略管理职能二：组织管理活动的根本职能，其它活动的保证和依托。包括： 设计组织机构和结构 设计岗位，人员配备 建立组织制度 监督组织运行 实施组织变革和人力资源开发职能三：领导领导是一门非常奥妙的艺术，贯穿于整个管理中。 沟通信息 统一思想和行动 激励组织成员职能四：控制控制是管理工作不可分割的一部分，控制的实质是使计划与实际作业动态适应。包括： 确立标准 衡量绩效 纠正偏差管理是由计划、组织、领导、控制等职能组成的系统过程 2、管理者的定义、分类（按地位）及其职责，什么是管理错位？（50）定义：管理者是在组织中从事管理工作并对此负责的人，其区别于其他角色的显著特征是管理者拥有直接下属。通过综合运用人力资源和其他资源，以有效地实现目标的过程。分类（按地位）及其职责： 高层管理者:对组织负全责。主要侧重于沟通组织与外部的联系和决定组织的大政方针。注重良好环境的创造和重大决策的正确性。 中层管理者:承上启下。主要职责是正确领会高层的指示精神，创造性地结合本部门的工作实际，有效指挥各基层管理者开展工作。注重的是日常管理事务。 基层管理者:主要职责是直接指挥和监督现场作业人员，保证完成上级下达的各项计划和指令。他们主要关心的是具体任务的完成。 管理错位：常见的错位表现高层：事必躬亲中层：上传下达基层：只拉车不看路或无视上级的指示 3、管理者的职权：支配权、强制权、奖赏权。 支配权 命令 服从 工作需要 管理者工作职责范围内强制权 威胁 迫使 下属惧怕 下属履行应尽职责奖赏权 奖励 诱使 交换原则 下属从事额外工作 支配权:管理者拥有的支配权局限于管理者的工作职责范围之内。工作需要 强制权:是和威胁相联系的迫使他人服从的力量。强职权只适用于管理者要求下属履行其职责范围内的工作。强制权发生作用的基础是下属的惧怕。 奖赏权:奖赏权是建立在交换原则基础之上的。（佩服小强（蟑螂）能上电梯去值班履行管理者职能） 4、管理者应具备的三种基本技能：技术技能、人际技能、概念技能。（记住人参是不能顶着锅盖去妓院的，这不是他的基本技能呀） 技术技能：是指执行一项特定的任务所必需的能力。履行决策，计划，组织，控制等管理职能的基础。 人际技能：是指与人共事，激励或指导组织中的各类员工或群体的能力。获取信息，履行领导职能，组织落实和创造良好的组织环境所必需。 概念技能：是指一种洞察既定环境复杂程度的能力和减少这种复杂性的能力。履行决策和指挥职责所必需。综上，并不是什么人都适合走上管理者岗位的。科学管理之父——泰勒 美国 《《科学管理原理》行为科学的创始人——梅约 美国（霍桑试验）《工业文明中人的问题》一般管理理论 现代经营管理之父——法约尔 法国人 主要著作：《工业管理与一般管理》他认为管理的成功取决于是否灵活地贯彻管理的一系列原则。官僚组织理论 组织理论之父——韦伯 德国 《社会和经济组织的理论》名著推荐 《新教伦理与资本主义精神》定量管理思想认为 有效管理的关键在于度的把握，只有致力于定量化，才能真正提高管理的效率与效益。权变管理思想认为 世界上不存在普遍适用的最佳的管理理论与方法，每一种管理理论与方法都有其一定的适用范围。勒温理论：领导的工作作风：专制作风，民主作风，放任自流作风。四分图理论：领导行为分为以人为重和以工作为重。管理方格理论：贫乏的管理：不称职的管理； 任务式的管理：员工没有进取精神；领导权变理论：费特勒模型、应变领导模式理论。人性假设理论：人之所以会采取某种特定的行为是由其动机所决定的激励理论:]]></content>
       <tags>
-        <tag>管理</tag>
         <tag>读书</tag>
+        <tag>管理</tag>
       </tags>
   </entry>
   <entry>
@@ -903,8 +903,8 @@
     <url>%2F%2F2017-03-13-Book-EffectiveExecutive%2F</url>
     <content type="text"><![CDATA[《卓有成效的管理者》告诉我们：一群平凡人，能做出不平凡的事业吗？这是完全可以做到的。只要我们组织中的每一个人都能做到卓有成效。卓有成效可以学会吗？卓有成效是可以学会的。每个人都必须卓有成效吗？ 卓有成效是管理者必须做到的事，但是在所有的知识组织中。每一位知识工作者其实都是管理者一即使他没有所谓的职权。只要他能为组织做出突出的贡献。 管理者的成效往往是决定组织工作成效的最关键因素；并不是只有高级管理人员才是管理者，所有负责行动和决策而又有助于提高机构工作效能的人，都应该像管理者一样工作和思考。 如何卓有成效？记录并分析时间的使用情况，把眼光集中在贡献上，充分发挥人的长处，要事优先，有效决策。 卓有成效是管理者必须做到的事，但是在所有的知识组织中，每一位知识工作者其实都是管理者——即使他没有所谓的职权，只要他能为组织做出突出的贡献。 管理者的成效往往是决定组织工作成效的最关键因素；并不是只有高级管理人员才是管理者，所有负责行动和决策而又有助于提高机构工作效能的人，都应该像管理者一样工作和思考。 一位卓有成效的管理者，一般具有以下6个特征： 重视目标和绩效，只做正确的事情。 一次只做一件事情，并只做最重要的事情。 作为一名知识工作者，他知道自己所能做出的贡献。 在选用高层管理者时，他注重的是出色的绩效和正直的品格。 他知道增进沟通的重要性；他有选择性地搜集所需要的信息。 他只做有效的决策。]]></content>
       <tags>
-        <tag>管理</tag>
         <tag>读书</tag>
+        <tag>管理</tag>
       </tags>
   </entry>
   <entry>
