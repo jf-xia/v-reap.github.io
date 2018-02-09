@@ -301,145 +301,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-28-Linux-LogAnalytics/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-03-28-Linux-LogAnalytics/" itemprop="url">Centos 日志分析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-28T08:00:00+08:00">
-                2017-03-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="日志系统主要分为三类"><a href="#日志系统主要分为三类" class="headerlink" title="日志系统主要分为三类"></a>日志系统主要分为三类</h1><h2 id="系统接入日志"><a href="#系统接入日志" class="headerlink" title="系统接入日志:"></a>系统接入日志:</h2><p>多个程序会记录该日志记录到/var/log/wtmp和/var/run/utmp文件中telnet、ssh等程序会更新wtmp和utmp文件系统管理员可以根据该日志跟踪到谁在何时登录到系统。</p>
-<h2 id="进程统计日志"><a href="#进程统计日志" class="headerlink" title="进程统计日志:"></a>进程统计日志:</h2><p>linux内核记录该日志当一个进程终止时进程统计文件pacct或acct中会进行记录。进程统计日志可以供系统管理员分析系统使用者对系统进行的配置以及对文件进行的操作。</p>
-<h2 id="错误日志"><a href="#错误日志" class="headerlink" title="错误日志:"></a>错误日志:</h2><p>Syslog日志系统已经被许多设备兼容Linux的syslog可以记录系统事件主要由syslogd程序执行Linux系统下各种进程、用户程序和内核都可以通过Syslog文件记录重要信息错误日志记录在/var/log/messages中。有许多Linux/Unix程序创建日志。像HTTP和FTP这样提供网络服务的服务器也保持详细的日志。<br><img src="/uploads/ueditor/php/upload/image/20170327/1490579873.png" alt="blob.png"></p>
-<h2 id="用于入侵检测日志"><a href="#用于入侵检测日志" class="headerlink" title="用于入侵检测日志:"></a>用于入侵检测日志:</h2><blockquote>
-<p>需要检查的系统日志文件主要包括一般信息日志、网络连接日志、文件传输日志以及用户登录日志等。</p>
-</blockquote>
-<h2 id="可疑的日志记录"><a href="#可疑的日志记录" class="headerlink" title="可疑的日志记录:"></a>可疑的日志记录:</h2><ol>
-<li>非正常时间凌晨的用户登录;</li>
-<li>关键日志记录损坏尤其是记录用户登录登出信息的wtmp文件;</li>
-<li>非正常IP的用户登录;</li>
-<li>用户登录失败甚至一再尝试登录并失败的日志记录;</li>
-<li>非正常的超级用户权限切换su指令;</li>
-<li>非正常的控制进程启动或重启记录。</li>
-</ol>
-<h2 id="检查步骤"><a href="#检查步骤" class="headerlink" title="检查步骤:"></a>检查步骤:</h2><ol>
-<li>users命令在一行打印出当前登录的用户信息每个用户名代表对应一个登录会话。结合who命令以及进程统计日志可以分析黑客伪造这两个命令的情况</li>
-<li>发现当前系统存在哪些不法用户: who /var/log/wtmp 或 last [root] lastlog</li>
-<li>ac命令根据系统的wtmp文件中的登入登出信息生成用户连接时间单位小时的报告如下所示</li>
-<li>用netstat –an看一下发现比较奇怪的端口</li>
-<li>来到/var/log目录下看一下secure日志</li>
-<li>再来定位一下图一中异常的screen程序用命令 Locate screen来定位输出如下图所示看来有很多文件要查</li>
-<li>发现一个uid0的bone用户uid0不是管理员用户吗我们到/etc/passwd中发现果真是存在一个root用户bone</li>
-<li>侵者已经取得了系统的最高权限。将其删除</li>
-</ol>
-<p>通过调查分析和日志取证找出异常程序和入侵帐户。从我们后面的分析日志中分析得出系统被入侵的原因是因为存在一个存在密码为passwd的弱口令帐号入侵者通过探测到这个弱口令帐户远程登陆到系统并且利用一些方法提高了权限最后得到了管理员root权限。</p>
-<p>其实在服务器部署完后安全工作我们也要做的非常到位，避免留过多的隐患给有坏心眼的人。有一遍安全部署方面的帖子，链接是：<a href="http://ks0101.blog.51cto.com/8639108/1365721" target="_blank" rel="noopener">http://ks0101.blog.51cto.com/8639108/1365721</a>  有兴趣可以看看，会起到很大作用的。</p>
-<h2 id="附录-日-志-文-件-说-明"><a href="#附录-日-志-文-件-说-明" class="headerlink" title="附录: 日 志 文 件 说 明"></a>附录: 日 志 文 件 说 明</h2><p>/var/log/message 系统启动后的信息和错误日志，是Red Hat Linux中最常用的日志之一<br>/var/log/secure 与安全相关的日志信息<br>/var/log/maillog 与邮件相关的日志信息<br>/var/log/cron 与定时任务相关的日志信息<br>/var/log/spooler 与UUCP和news设备相关的日志信息<br>/var/log/boot.log 守护进程启动和停止相关的日志消息</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">系统：</span><br><span class="line"><span class="meta">#</span> uname -a# 查看内核/操作系统/CPU信息</span><br><span class="line"><span class="meta">#</span> cat /etc/issue</span><br><span class="line"><span class="meta">#</span> cat /etc/redhat-release # 查看操作系统版本</span><br><span class="line"><span class="meta">#</span> cat /proc/cpuinfo  # 查看CPU信息</span><br><span class="line"><span class="meta">#</span> hostname# 查看计算机名</span><br><span class="line"><span class="meta">#</span> lspci -tv# 列出所有PCI设备</span><br><span class="line"><span class="meta">#</span> lsusb -tv# 列出所有USB设备</span><br><span class="line"><span class="meta">#</span> lsmod # 列出加载的内核模块</span><br><span class="line"><span class="meta">#</span> env # 查看环境变量</span><br><span class="line">资源：</span><br><span class="line"><span class="meta">#</span> free -m# 查看内存使用量和交换区使用量</span><br><span class="line"><span class="meta">#</span> df -h # 查看各分区使用情况</span><br><span class="line"><span class="meta">#</span> du -sh &lt;目录名&gt;  # 查看指定目录的大小</span><br><span class="line"><span class="meta">#</span> grep MemTotal /proc/meminfo # 查看内存总量</span><br><span class="line"><span class="meta">#</span> grep MemFree /proc/meminfo # 查看空闲内存量</span><br><span class="line"><span class="meta">#</span> uptime# 查看系统运行时间、用户数、负载</span><br><span class="line"><span class="meta">#</span> cat /proc/loadavg  # 查看系统负载</span><br><span class="line">磁盘和分区：</span><br><span class="line"><span class="meta">#</span> mount | column -t  # 查看挂接的分区状态</span><br><span class="line"><span class="meta">#</span> fdisk -l# 查看所有分区</span><br><span class="line"><span class="meta">#</span> swapon -s# 查看所有交换分区</span><br><span class="line"><span class="meta">#</span> hdparm -i /dev/hda  # 查看磁盘参数(仅适用于IDE设备)</span><br><span class="line"><span class="meta">#</span> dmesg | grep IDE  # 查看启动时IDE设备检测状况</span><br><span class="line">网络：</span><br><span class="line"><span class="meta">#</span> ifconfig# 查看所有网络接口的属性</span><br><span class="line"><span class="meta">#</span> iptables -L# 查看防火墙设置</span><br><span class="line"><span class="meta">#</span> route -n# 查看路由表</span><br><span class="line"><span class="meta">#</span> netstat -lntp# 查看所有监听端口</span><br><span class="line"><span class="meta">#</span> netstat -antp# 查看所有已经建立的连接</span><br><span class="line"><span class="meta">#</span> netstat -s# 查看网络统计信息</span><br><span class="line">进程：</span><br><span class="line"><span class="meta">#</span> ps -ef# 查看所有进程</span><br><span class="line"><span class="meta">#</span> top # 实时显示进程状态（另一篇文章里面有详细的介绍）</span><br><span class="line">用户：</span><br><span class="line"><span class="meta">#</span> w # 查看活动用户</span><br><span class="line"><span class="meta">#</span> id &lt;用户名&gt;# 查看指定用户信息</span><br><span class="line"><span class="meta">#</span> last # 查看用户登录日志</span><br><span class="line"><span class="meta">#</span> cut -d: -f1 /etc/passwd # 查看系统所有用户</span><br><span class="line"><span class="meta">#</span> cut -d: -f1 /etc/group # 查看系统所有组</span><br><span class="line"><span class="meta">#</span> crontab -l# 查看当前用户的计划任务</span><br><span class="line">服务：</span><br><span class="line"><span class="meta">#</span> chkconfig –list  # 列出所有系统服务</span><br><span class="line"><span class="meta">#</span> chkconfig –list | grep on # 列出所有启动的系统服务</span><br><span class="line">程序：</span><br><span class="line"><span class="meta">#</span> rpm -qa# 查看所有安装的软件包</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-27-Book-HackersPainters/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1709,6 +1570,134 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-14-Book-10KHours/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Coding & Integrity">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-03-14-Book-10KHours/" itemprop="url">异类-一万小时定律</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-14T08:00:00+08:00">
+                2017-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>更新：这里的练习</p>
+<p>作家格拉德威尔在《异类》一书中指出：“人们眼中的天才之所以卓越非凡，并非天资超人一等，而是付出了持续不断的努力。<strong>1万小时的锤炼是任何人从平凡变成世界级大师的必要条件。”他将此称为“一万小时定律”。</strong>要成为某个领域的专家，需要10000小时，按比例计算就是：如果每天工作八个小时，一周工作五天，那么成为一个领域的专家至少需要五年。这就是一万小时定律。</p>
+<p>“一万小时法则”在成功者身上很容易得到验证。作为电脑天才，比尔·盖茨13岁时有机会接触到世界上最早的一批电脑终端机，开始学习计算机编程，7年后他创建微软公司时，他已经连续练习了7年的程序设计，超过了1万小时。</p>
+<p>为什么是一万个小时？</p>
+<p>“一万小时法则”的关键在于，一万小时是最底限，而且没有例外之人。没有人仅用3000小时就能达到世界级水准；7500小时也不行；一定要10000小时——10年，每天3小时——无论你是谁。这等于是在告诉大家，一万小时的练习，是走向成功的必经之路。</p>
+<p>音乐神童莫扎特，在6岁生日之前，他音乐家的父亲已经指导他练习了3500个小时。到他21岁写出最脍炙人口的第九号协奏曲时，可想而知他已经练习了多少小时。象棋神童鲍比·菲舍尔，17岁就奇迹般奠定了大师地位，但在这之前他也投入了10年时间的艰苦训练。</p>
+<p>在大量的调查研究中，科学家发现，无论是在对作曲家、篮球运动员、小说家、钢琴家还是象棋选手的研究中，这个数字——一万，反复出现。</p>
+<p>这是“一万小时法则”被提出的事实论据。</p>
+<p><strong>成功代表</strong></p>
+<p>一万小时定律的成功代表大画家达·芬奇，当初从师学艺就是从练习画一只只鸡蛋开始的。他日复一日，年复一年，变换着不同角度、不同光线，少说也得练习一万个小时，打下了扎实的基本功，从最简单一万小时定律提法来源于《异数》最枯燥的重复中掌握了达到最高深艺术境界的途径。这才有了后来的世界名画《蒙娜丽莎》、《最后的晚餐》。</p>
+<p>田坛飞人刘翔，我们只看见他在赛场上的风驰电掣，一骑绝尘，可是为了他在赛场上的10多秒的辉煌，他从7岁开始至今已苦练了19年，不知跑了几个一万小时，汗水流了几吨，经历了多少挫折和失败，才换来了“阳光总在风雨后”。</p>
+<p>青岛港吊装大师许振超，能把吊装技术练得像绣花一样精细，丝毫不差，多次在吊装技术比赛中技压群雄，还多次打破世界港口吊装纪录。为了这“一招鲜”，他至少练了30年，苦心孤诣，练习不辍，足足有好几个一万小时。</p>
+<p>美国游泳好手麦克．菲尔普斯，除了手脚特长的天赋异禀，他每天练习八小时，全年无休，这样持续五六年，方能谛造一人独得八面金牌的奥运奇迹。</p>
+<p>写出《明朝那些事儿》的当年明月，5岁时开始看历史，《上下五千年》他11岁之前读了7遍，11岁后开始看《二十四史》、《资治通鉴》，然后是《明实录》、《清实录》、《明史纪事本末》、《明通鉴》、《明汇典》和《纲目三编》。他陆陆续续看了15年，大概总共看了6000多万字的史料，每天都要学习两小时。把这几个时间数字相乘，15年乘2小时再乘以360天，等于10800个小时。所以在海关工作的他，才能白天当公务员，晚上化身网络作家，在电脑前码字。</p>
+<p>从台湾超级星光大道走出来的萧敬腾，15岁时学习爵士鼓，18岁时开始在酒吧、餐厅驻唱，每天要唱很长时间，跟好几个场子，时间最长的时候，一天超过12个小时。</p>
+<p>知名武侠作家沧月，5岁以后开始博览群书，10岁左右练习写武侠小说，读本科和研究生的7年半时间，更是每天花上六七个小时来写小说。单是大学期间所练习的时间，就远远不止一万个小时。在练习的这些年中，她始终保持着旺盛的精力和浓厚的兴趣，从不会觉得乏味。但她深知，自己付出的也很多。</p>
+<p>股神巴菲特、微软创办人比尔盖兹、苹果计算机乔布斯，在他们的专业领域，投注都超过一万小时以上，他们专注的阅读、思考、研究、实践，才有今日的成就。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -1758,7 +1747,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">127</span>
+                <span class="site-state-item-count">126</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
