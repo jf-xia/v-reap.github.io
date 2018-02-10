@@ -301,7 +301,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-02-09-Habit-GTD/">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-10-DesignPatterns-DI&IoC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -320,7 +320,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-02-09-Habit-GTD/" itemprop="url">时间管理笔记</a></h1>
+                <a class="post-title-link" href="/2017-03-10-DesignPatterns-DI&IoC/" itemprop="url">实战理解 DI & IoC 设计模式</a></h1>
         
 
         <div class="post-meta">
@@ -332,8 +332,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-09T13:00:00+08:00">
-                2017-02-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-10T08:00:00+08:00">
+                2017-03-10
               </time>
             
 
@@ -369,237 +369,1182 @@
       
         
           
-            <h2 id="成功人士都有写日记的习惯"><a href="#成功人士都有写日记的习惯" class="headerlink" title="成功人士都有写日记的习惯"></a>成功人士都有写日记的习惯</h2><p><img src="/uploads/ueditor/php/upload/image/20170209/1486619319.png" alt="blob.png"></p>
-<p>时间是无法管理的，能够管理的只有自己。透过管理自己的习惯，管理自己的事件来达成对时间的管理。</p>
-<p>德鲁克提出了时间管理的二八法则，他认为我们要去做重要的事，所以就引发了我现在想跟大家分享一句话：“人生不在于做多少事，而在于把重要的事情专注做. 用心做. 它做<br>到极致！”</p>
-<p>青蛙代表有挑战的事情。</p>
-<p>GTD的思想是来自美国人—大卫·艾伦，他写了3本书《搞定1. 2. 3》</p>
-<p><img src="/uploads/ueditor/php/upload/image/20170209/1486619415.png" alt="blob.png"></p>
-<p>管理的不是时间，而是自己，通过管理自己人生的目标，管理自己的习惯，甚至管理每天的行为跟目标的关系才是很重要的。</p>
-<h2 id="管理时间的核心是事件的分类"><a href="#管理时间的核心是事件的分类" class="headerlink" title="管理时间的核心是事件的分类"></a>管理时间的核心是事件的分类</h2><p><strong>事件的分类：</strong></p>
+            <p><strong>摘要: </strong>理解什么是Di/IoC，依赖注入/控制反转。两者说的是一个东西，是当下流行的一种设计模式。大致的意思就是，准备一个盒子(容器)，事先将项目中可能用到的类扔进去，在项目中直接从容器中拿，也就是避免了直接在项目中到处new，造成大量耦合。取而代之的是在项目类里面增设 setDi()和getDi()方法，通过Di同一管理类。<br>详细概念推荐文章： <a href="http://docs.phalconphp.com/en/latest/reference/di.html" target="_blank" rel="noopener">http://docs.phalconphp.com/en/latest/reference/di.html</a><br>中文版： <a href="http://phalcon.5iunix.net/reference/di.html" target="_blank" rel="noopener">http://phalcon.5iunix.net/reference/di.html</a></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Di</span> <span class="keyword">implements</span> \<span class="title">ArrayAccess</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $_bindings = <span class="keyword">array</span>();<span class="comment">//服务列表</span></span><br><span class="line">    <span class="keyword">private</span> $_instances = <span class="keyword">array</span>();<span class="comment">//已经实例化的服务</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//获取服务</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">($name,$params=array<span class="params">()</span>)</span></span>&#123;</span><br><span class="line">        <span class="comment">//先从已经实例化的列表中查找</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;_instances[$name]))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_instances[$name];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//检测有没有注册该服务</span></span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;_bindings[$name]))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        $concrete = <span class="keyword">$this</span>-&gt;_bindings[$name][<span class="string">'class'</span>];<span class="comment">//对象具体注册内容</span></span><br><span class="line">        </span><br><span class="line">        $obj = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//匿名函数方式</span></span><br><span class="line">        <span class="keyword">if</span>($concrete <span class="keyword">instanceof</span> \Closure)&#123;</span><br><span class="line">            $obj = call_user_func_array($concrete,$params);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//字符串方式</span></span><br><span class="line">        <span class="keyword">elseif</span>(is_string($concrete))&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">empty</span>($params))&#123;</span><br><span class="line">                $obj = <span class="keyword">new</span> $concrete;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">//带参数的类实例化，使用反射</span></span><br><span class="line">                $class = <span class="keyword">new</span> \ReflectionClass($concrete);</span><br><span class="line">                $obj = $class-&gt;newInstanceArgs($params);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果是共享服务，则写入_instances列表，下次直接取回</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;_bindings[$name][<span class="string">'shared'</span>] == <span class="keyword">true</span> &amp;&amp; $obj)&#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;_instances[$name] = $obj;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> $obj;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//检测是否已经绑定</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">has</span><span class="params">($name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;_bindings[$name]) <span class="keyword">or</span> <span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;_instances[$name]);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//卸载服务</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">remove</span><span class="params">($name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">unset</span>(<span class="keyword">$this</span>-&gt;_bindings[$name],<span class="keyword">$this</span>-&gt;_instances[$name]);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//设置服务</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">set</span><span class="params">($name,$class)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_registerService($name, $class);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//设置共享服务</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setShared</span><span class="params">($name,$class)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_registerService($name, $class, <span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//注册服务</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">_registerService</span><span class="params">($name,$class,$shared=false)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;remove($name);</span><br><span class="line">        <span class="keyword">if</span>(!($class <span class="keyword">instanceof</span> \Closure) &amp;&amp; is_object($class))&#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;_instances[$name] = $class;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;_bindings[$name] = <span class="keyword">array</span>(<span class="string">"class"</span>=&gt;$class,<span class="string">"shared"</span>=&gt;$shared);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//ArrayAccess接口,检测服务是否存在</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">offsetExists</span><span class="params">($offset)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;has($offset);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//ArrayAccess接口,以$di[$name]方式获取服务</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">offsetGet</span><span class="params">($offset)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;get($offset);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//ArrayAccess接口,以$di[$name]=$value方式注册服务，非共享</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">offsetSet</span><span class="params">($offset, $value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;set($offset,$value);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//ArrayAccess接口,以unset($di[$name])方式卸载服务</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">offsetUnset</span><span class="params">($offset)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;remove($offset);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>演示：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">header(<span class="string">"Content-Type:text/html;charset=utf8"</span>);</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name;</span><br><span class="line">    <span class="keyword">public</span> $age;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($name=<span class="string">""</span>)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;name = $name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span> <span class="string">"di.php"</span>;</span><br><span class="line">$di = <span class="keyword">new</span> Di();</span><br><span class="line"><span class="comment">//匿名函数方式注册一个名为a1的服务</span></span><br><span class="line">$di-&gt;setShared(<span class="string">'a1'</span>,<span class="function"><span class="keyword">function</span><span class="params">($name=<span class="string">""</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> A($name);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//直接以类名方式注册</span></span><br><span class="line">$di-&gt;set(<span class="string">'a2'</span>,<span class="string">'A'</span>);</span><br><span class="line"><span class="comment">//直接传入实例化的对象</span></span><br><span class="line">$di-&gt;set(<span class="string">'a3'</span>,<span class="keyword">new</span> A(<span class="string">"小唐"</span>));</span><br><span class="line"></span><br><span class="line">$a1 = $di-&gt;get(<span class="string">'a1'</span>,<span class="keyword">array</span>(<span class="string">"小李"</span>));</span><br><span class="line"><span class="keyword">echo</span> $a1-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小李</span></span><br><span class="line">$a1_1 = $di-&gt;get(<span class="string">'a1'</span>,<span class="keyword">array</span>(<span class="string">"小王"</span>));</span><br><span class="line"><span class="keyword">echo</span> $a1-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小李</span></span><br><span class="line"><span class="keyword">echo</span> $a1_1-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小李</span></span><br><span class="line"></span><br><span class="line">$a2 = $di-&gt;get(<span class="string">'a2'</span>,<span class="keyword">array</span>(<span class="string">"小张"</span>));</span><br><span class="line"><span class="keyword">echo</span> $a2-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小张</span></span><br><span class="line">$a2_1 = $di-&gt;get(<span class="string">'a2'</span>,<span class="keyword">array</span>(<span class="string">"小徐"</span>));</span><br><span class="line"><span class="keyword">echo</span> $a2-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小张</span></span><br><span class="line"><span class="keyword">echo</span> $a2_1-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小徐</span></span><br><span class="line"></span><br><span class="line">$a3 = $di[<span class="string">'a3'</span>];<span class="comment">//可以直接通过数组方式获取服务对象</span></span><br><span class="line"><span class="keyword">echo</span> $a3-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小唐</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//error_reporting(0);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//class Container</span></span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line"><span class="comment">//    public $binds;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//    public $instances;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//    public function bind($abstract, $concrete)</span></span><br><span class="line"><span class="comment">//    &#123;</span></span><br><span class="line"><span class="comment">//        if ($concrete instanceof Closure) &#123;</span></span><br><span class="line"><span class="comment">//            $this-&gt;binds[$abstract] = $concrete;</span></span><br><span class="line"><span class="comment">//        &#125; else &#123;</span></span><br><span class="line"><span class="comment">//            $this-&gt;instances[$abstract] = $concrete;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//    public function make($abstract, $parameters = [])</span></span><br><span class="line"><span class="comment">//    &#123;</span></span><br><span class="line"><span class="comment">//        if (isset($this-&gt;instances[$abstract])) &#123;</span></span><br><span class="line"><span class="comment">//            return $this-&gt;instances[$abstract];</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//        array_unshift($parameters, $this);</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//        return call_user_func_array($this-&gt;binds[$abstract], $parameters);</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//// 创建一个容器（后面称作超级工厂）</span></span><br><span class="line"><span class="comment">//$container = new Container;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//// 向该 超级工厂 添加 超人 的生产脚本</span></span><br><span class="line"><span class="comment">//$container-&gt;bind('superman', function($container, $moduleName) &#123;</span></span><br><span class="line"><span class="comment">//    $container-&gt;name = 'Jack';</span></span><br><span class="line"><span class="comment">//    $moduleName-&gt;name = 'Jack';</span></span><br><span class="line"><span class="comment">//    return new Superman($container-&gt;make($moduleName));</span></span><br><span class="line"><span class="comment">//&#125;);</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//// 向该 超级工厂 添加 超能力模组 的生产脚本</span></span><br><span class="line"><span class="comment">//$container-&gt;bind('xpower', function($container) &#123;</span></span><br><span class="line"><span class="comment">//    $container-&gt;power = '100';</span></span><br><span class="line"><span class="comment">//    return new XPower;</span></span><br><span class="line"><span class="comment">//&#125;);</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//// 同上</span></span><br><span class="line"><span class="comment">//$container-&gt;bind('ultrabomb', function($container) &#123;</span></span><br><span class="line"><span class="comment">//    $container-&gt;power = '10000';</span></span><br><span class="line"><span class="comment">//    return new UltraBomb;</span></span><br><span class="line"><span class="comment">//&#125;);</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//// ******************  华丽丽的分割线  **********************</span></span><br><span class="line"><span class="comment">//// 开始启动生产</span></span><br><span class="line"><span class="comment">//$superman_1 = $container-&gt;make('superman', 'xpower');</span></span><br><span class="line"><span class="comment">//$superman_2 = $container-&gt;make('superman', 'ultrabomb');</span></span><br><span class="line"><span class="comment">//$superman_3 = $container-&gt;make('superman', 'xpower');</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">////var_dump($container-&gt;binds['superman']);</span></span><br></pre></td></tr></table></figure>
+<p>set方式注册的，每次获取的时候都会重新实例化  </p>
+<p>setShared方式的，则只实例化一次，也就是所谓的单例模式</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-09-Book-WorldOrder/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Coding & Integrity">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-03-09-Book-WorldOrder/" itemprop="url">世界秩序-基辛格</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-09T08:00:00+08:00">
+                2017-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这本书的作者是美国前国务卿基辛格，相信很多人都对这个名字耳熟能详，在他的推动下，尼克松总统踏上了前往中国的’破冰之旅’,实现了中美建交，开启了一个新的时代，进而深刻影响了人类历史和世界格局。就是这样一位具有全球视野的战略高手，在自己90高龄的时候，将自己的毕生智慧和深刻思考，凝结成这本书，它很有可能是基辛格先生的收官之作和告别演说。</p>
 <blockquote>
-<p>一是日程<br>二是有截至日的清单事件<br>三是没有截止日的清单事件</p>
+<p><strong>杜鲁门秩序：</strong>罗斯福和丘吉尔所设想的、杜鲁门总统于1945年创立的美国式世界秩序，给全球带来了60年的和平与繁荣，但它很可能会在我们有生之年消亡。</p>
+<p><strong>中国式秩序：</strong>在蒙受屈辱达两个世纪之后，中国开始走上预示着和平与繁荣的征程。1978年，中国作出了正确的决策，即开放本国经济和实现与世界经济的一体化。然而在全球多边论坛上，中国应该采取少出风头的策略。目前的世界秩序有利于中国。</p>
+<p><strong>新保守主义秩序：</strong>新保守派认为，由于美国的国力巨大，所以它应当按照自己的形象来塑造世界，并阻止敌对强国崛起。虽然伊斯兰恐怖主义是当前的威胁，但是真正举足轻重的威胁是中国的崛起。中国是惟一一个能够形成超过美国的GDP的大国。</p>
+<p><strong>本·拉登秩序：</strong>伊斯兰教在精神上是世界上最强大的宗教。正如阿富汗勇敢的圣战者所显示的，穆斯林是不怕战斗和死亡的，更大的袭击会随之而来。随着时间的推移，西方会感到厌倦和害怕，它会退缩。</p>
 </blockquote>
-<p>保持严谨，但不失灵活性。  </p>
-<p>《搞定1》书中，大卫·艾伦是这么提及的：大多数的人总是陷于日常繁杂的事务难以脱身，进而非常严重地阻碍他们集中精力去总揽大局。</p>
-<p>所以大卫·艾伦的观点是：自下而上是关键！我们要从眼下的事情开始，获得掌控，然后再去逐步升级。</p>
-<p>那我们现在来谈一谈如何做眼下重要紧急的事务以及紧急不重要也就是紧急的事务，如何快速把它们消灭掉？</p>
-<p>执行可以有4个方案：  </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-07-IT-Exchange/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Coding & Integrity">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-03-07-IT-Exchange/" itemprop="url">Exchange 2010高可用部署</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-07T08:00:00+08:00">
+                2017-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Exchange 2010 SP2 高可用性（一）部署CAS/HUB服务器</p>
+<p>首先来说一下我的环境，我的实验环境为单域环境，域名为非常经典的contoso.net。环境中会用到4台Exchange Server 2010<br>SP2服务器，我们用其中的2台来部署Exchange的CAS/HUB角色，通过Windows的负载均衡技术。…</p>
+<p>Exchange 2010 SP2 高可用性（二）创建CAS服务器阵列</p>
+<p>CAS服务器(客户端访问服务器)是面向客户端的一个门户，客户端不管是通过OWA、POP3、IMAP或者Outlook<br>Anywhere方式访问邮箱，都需要首先连接到CAS服务器上，因此CAS服务器非常的重要，为了减轻单台CAS服务器的负担和避免单点故障的</p>
+<p>Exchange 2010 SP2 高可用性（三）部署邮箱服务器</p>
+<p>邮箱服务器是Exchange的重要角色之一，它的主要作用是承载所有用户的邮箱，除此之外还有联盟邮箱、仲裁邮箱等，同样是很重要的，单台邮箱服务器一旦损坏，那我<br>们的工作就得停滞，数据也有可能会丢失，所以这里我们部署…</p>
+<p>详情见<a href="http://www.exchangecn.com/exchange2010/20150627_4290.html" target="_blank" rel="noopener">http://www.exchangecn.com/exchange2010/20150627_4290.html</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-06-Book-LeanStartup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Coding & Integrity">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-03-06-Book-LeanStartup/" itemprop="url">精益创业 埃里克·莱斯</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-06T08:00:00+08:00">
+                2017-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>从《精益创业》一书中提到的主要思路和脉络，结合在现实中使用的频率，精益创业提到的三个主要工具是：</p>
 <blockquote>
-<p>第一. 你完成它；<br>第二. 你推迟它；<br>第三. 你可以委托；<br>第四. 你可以删除掉。  </p>
-</blockquote>
-<p>这就是4D原则，第一个“D”是Do（做），第二个”D”是defer（推迟），第三个“D”是Delegate（委托），第四个“D”是Delay（删除）。  </p>
-<p>中国古老的哲学告诉我们：时间的本质就是当下，因为过去心不可得，未来心不可得，我们只能活在当下。</p>
-<p>番茄工作法的作者把时间分成3类：  </p>
-<blockquote>
-<p>第一种是工作的时间，要求要很专注。<br>第二种是休息的时间，要求我们完全地放松自己，可以很慵懒. 很自由。<br>第三种是战略思维和全局观的时间，这个时间里我们就要在自己所有的事物当中去选择我们当下（或者今天）要做什么。  </p>
-</blockquote>
-<p><img src="/uploads/ueditor/php/upload/image/20170209/1486619888.png" alt="blob.png"></p>
-<p>那么除了专注的时间和休息的时间，我们还必须拥有第三类的时间：也就是要有一个全局观的时间。</p>
-<p>建议你每天拿出1%的时间用来做计划，做反思。  </p>
-<p><img src="/uploads/ueditor/php/upload/image/20170209/1486619939.png" alt="blob.png"></p>
-<p>土豆，青蛙，番茄钟，两素一荤炖起来味道会怎么样呢？你的效率会非常非常地高！</p>
-<p>土豆，青蛙，番茄，也就是我们在线下课堂上给易效能的学员讲到的：收集-排程-执行的理念。  </p>
-<p>收集-排程-执行被称为”行动三角形”。</p>
-<p><img src="/uploads/ueditor/php/upload/image/2017020
-9/1486619475.png" alt="blob.png"></p>
-<p>首先要把一切事务赶出大脑，把大脑清空，把脑子里的事都写下来；</p>
-<p>然后，我们再按照轻重缓急把它们分类，跟特定时间有关的就写到日历表上；有截止日的事件要列清单管理；没有截止日的就按“情境”来分解；  </p>
-<p>最后就是行动了：应用执行. 委托. 推迟和删除的4D原则来对事情进行消灭，做到既严谨又不失灵活性。  </p>
-<h2 id="时间管理的基础是精力管理"><a href="#时间管理的基础是精力管理" class="headerlink" title="时间管理的基础是精力管理"></a>时间管理的基础是精力管理</h2><p><img src="/uploads/ueditor/php/upload/image/20170209/1486620115.png" alt="blob.png">  </p>
-<p>亚里士多德说过这样一句话：“优秀是一种习惯！”</p>
-<p>习惯的养成是一次只做一个，每天坚持做，从你认为最好的. 最重要的那个开始：</p>
-<blockquote>
-<p>秘诀之一：一次只能养成一个习惯！<br>秘诀之二：习惯要每天做才能养成！<br>再告诉大家一个秘诀：要想做到一件事，那就让自己爱上它吧！</p>
-</blockquote>
-<p>丘吉尔在25岁的时候说：他渴望自由；过了25年之后，他说自律很重要；又过了25年，在他75岁的时候，他说：<strong>自律就是自由！</strong></p>
-<h2 id="冥想的奇迹之旅"><a href="#冥想的奇迹之旅" class="headerlink" title="冥想的奇迹之旅"></a>冥想的奇迹之旅</h2><p>冥想是最自然. 最有价值的人类活动，如果大家能够每天练习的话， 在心理. 情感. 精神的各个方面，你会发生惊人的改变。  </p>
-<p>时间管理的基础是精力管理。</p>
-<p>而在一些讲拖延症. 自控力的著作中，它们都非常推崇冥想，这是因为他们认为冥想可以改变拖延症，认为冥想可以提升自控力。</p>
-<h2 id="世界上最大的借口就是“我有拖延症”"><a href="#世界上最大的借口就是“我有拖延症”" class="headerlink" title="世界上最大的借口就是“我有拖延症”"></a>世界上最大的借口就是“我有拖延症”</h2><p>其实“拖延”和“拖延症”，有很大区别。</p>
-<p>简单来讲，线下人生就是由许许多多的坏习惯组成的生活方式；</p>
-<p>而线上的人生就是由许许多多的好习惯组成的生活方式。  </p>
-<p>这样大家就明白了，线下的人生就是拖延的人生。  </p>
-<p>有一本叫《拖延心理学》的书谈到了患拖延症的四个原因：</p>
-<blockquote>
-<p>第一. 对成功信心不足；<br>第二. 讨厌被人委派任务；<br>第三. 注意力分散，很容易冲动；<br>第四. 目标与酬劳太过遥远。  </p>
-</blockquote>
-<p>这里有一个公式：  </p>
-<p>U=EV / I×D<br>U代表效率，E和V是分子，I×D是分母。<br>这个公式可以让我们通过分析分子和分母的大小，从而帮助我们把拖延降到最低。<br>E，是指对成功的信心；<br>V，是指我们对任务和事情感到愉悦的程度；<br>I，是指你有多容易分心；<br>D，是指你多久会产生回报。  </p>
-<p>今天我们谈到拖延症的危害，严重的，可以杀死一个人，因为它与良好的生活方式相冲突，这样就直接影响到我们的人体健康。  </p>
-<p>拖延症会因为让你精力不济，从而让大家进入到更多的恶性循环中。  </p>
-<p>那么我们现在就来聊一聊拖延症的治疗方法：</p>
-<p>治疗拖延症需要“标本兼治”，这里开出三药—然后三圈交际，运动和冥想，治拖最难但是效果最好的方法，就是增强自己的自控力；  </p>
-<blockquote>
-<p>一. 做快乐的事情；这个方法加强的是U=E×V / I×D这个公式中的分子部分。<br>二. 专注，并形成自己的优势。做自己喜欢做的事情，简化自己的目标，少就是多，只做自己喜欢做的事情。<br>三. 能服务到社会. 客户，以及身边的人。  </p>
-</blockquote>
-<h2 id="先完成再完美"><a href="#先完成再完美" class="headerlink" title="先完成再完美"></a>先完成再完美</h2><p>很多人都有完美主义情节，总想好好地开始做一件很重要的事情，可是当你想着“好好开始”时，你却总是开始不了。</p>
-<p>今天我们就要把大家的思想调个头，叫：烂开始，好开展，好结果。</p>
-<p>一个有截止日的任务，如果我们能早早地动手做完它，我们就有时间去修改修正它，越修改越修正它就会越完美。</p>
-<h2 id="你知道自己的时间都去哪里了吗"><a href="#你知道自己的时间都去哪里了吗" class="headerlink" title="你知道自己的时间都去哪里了吗"></a>你知道自己的时间都去哪里了吗</h2><p>今天给大家分享一个很重要的观念：没有记录就没有发生。  </p>
-<p>柳比歇夫有一个习惯，就是每天只要是用时超过5分钟以上的事件，他都会在本子上记录下来。</p>
-<p>大家可以在一天结束之际，通过回忆的方式去记录自己今天一天的时间分配，不过按照德鲁克的建议，他说，<strong>时间记录最好是在这件事正在发生时做</strong>。</p>
-<h2 id="怎样才能学好一门课程"><a href="#怎样才能学好一门课程" class="headerlink" title="怎样才能学好一门课程"></a>怎样才能学好一门课程</h2><p>学习的金字塔分成上部和下部。<br>上部：被动学习。它包含了：听讲. 阅读. 视听。<br>上部和下部的过渡是：演示。<br>下部：主动学习，在学习的基座上。它包含了：讨论实践和教授他人。  </p>
-<p>在被动的学习当中，知识在你身上的留存是低的；<br>在主动的学习当中，知识在你身上的留存是高的。<br>所以主动地学习和被动地学习的差距是巨大的。  </p>
-<p>这里想要给大家明确一个观点：一个知识只是听了，它的意义并不大，重点是要去实践，实践一次，意义也不是很大，大家要做的是持续地. 反复地去实践！</p>
-<p><strong>最好的学习是教会别人</strong>。</p>
-<h2 id="科学地“重复”才能事半功倍"><a href="#科学地“重复”才能事半功倍" class="headerlink" title="科学地“重复”才能事半功倍"></a>科学地“重复”才能事半功倍</h2><p>艾宾浩斯记忆曲线的八大周期到底是什么结构呢？</p>
-<blockquote>
-<p>第一个周期是5分钟；<br>第二个周期是30分钟；<br>第三个周期是12小时；<br>第四个周期是1天；<br>第五个周期是2天；<br>第六个周期是4天；<br>第七个周期是7天；<br>第八个周期是15天；  </p>
-</blockquote>
-<p>如果能够严密地按照这八个周期来进行学习，我们就可以牢记住任何知识。  </p>
-<p>所以大家现在更清晰我们上一讲的内容：知识学一遍没有用，要重复地，积极地去学习才有用，而且要按照艾宾浩斯记忆曲线严密地进行学习，我们才能学得更牢固！  </p>
-<p>服务的人越多，你的效能就越大，教会别人才是最好的学习！</p>
-<h2 id="天才来自刻意的练习！"><a href="#天才来自刻意的练习！" class="headerlink" title="天才来自刻意的练习！"></a>天才来自刻意的练习！</h2><p>“天才”是来自刻意的练习，它决定了我们是不是伟大水平，而非一般水平。</p>
-<p>刻意练习就是让我们永远在不熟练的地方，在经常犯错的地方练习，而且要大量重复。  </p>
-<h2 id="如何避免做事只有三分钟热度"><a href="#如何避免做事只有三分钟热度" class="headerlink" title="如何避免做事只有三分钟热度"></a>如何避免做事只有三分钟热度</h2><p>为了解决这个问题，那我们今天就来讲讲—动机。</p>
-<p>“动机”分为三个层次：</p>
-<blockquote>
-<p>生物冲动 -&gt; 外部驱动(寻求奖励. 避免惩罚) -&gt; 内在驱动(能够自主地引导自己)</p>
-</blockquote>
-<p>我们要去到第三层，叫做“内在驱动”！第二层我们就叫它“外在动机”吧。</p>
-<p>内在的驱动对人行为的影响更大，外在动机对人的驱动力是下降的，生物冲动更是一时的！  </p>
-<h2 id="做正确的事是根本"><a href="#做正确的事是根本" class="headerlink" title="做正确的事是根本"></a>做正确的事是根本</h2><p>中国有一个成语叫作“南辕北辙”，这个成语很形象地指出了方向和方法之间的区别。  </p>
-<p>所以今天要给大家一个明确的观点：方向大于方法。</p>
-<p>如何行动的话题我们之前谈了很多，那我们就来谈谈愿景和行动的关系。</p>
-<p>GTD理念的创始人大卫·艾伦告诉我们：<strong>只有把愿景跟行动结合在一起，那才是人生的希望。</strong></p>
-<p>其实人生不在于做多少事，更重要的是你在做的这个事，是你自己选择的，是你自己愿意的，不要等到已经走到底了，才发现是错的。</p>
-<h2 id="什么样的人生最值得拥有"><a href="#什么样的人生最值得拥有" class="headerlink" title="什么样的人生最值得拥有"></a>什么样的人生最值得拥有</h2><p>有目标只是基础，因为目标还有正确与否的问题，还有值得与不值得的问题，不过前提是我们必须先有目标本身，然后才有不断修正的过程。</p>
-<blockquote>
-<p>其实人生就是这样，它是由无数小目标组成的，它也是一个目标不断被修正的过程。</p>
-</blockquote>
-<p>许多人用一辈子的时间在赚钱，却忘记了给自己规划一个值得拥有的生命。</p>
-<h2 id="寻找一生成功的因子"><a href="#寻找一生成功的因子" class="headerlink" title="寻找一生成功的因子"></a>寻找一生成功的因子</h2><p><img src="/uploads/ueditor/php/upload/image/2017020
-9/1486625293.png" alt="blob.png"></p>
-<p>什么样的目标才是平衡的，才是长期对自己. 对人类有价值的，而且还会让你感到更幸福的呢？<br>哈佛大学提出：核心目标是我们要建立成长性的目标. 人际关系的目标以及对社会的贡献。<br>卡耐基也说：一个人的成功，15%靠能力，85%靠人际关系。<br>中国的哲学谈到“内圣外王”。<br>这四个字的意思是：对内，要成为圣人；对外，要成为王者。<br>所谈的也就是大学之道：修身 齐家 治国 平天下。  </p>
-<p>成功的因子：快乐. 优势. 有意义:  </p>
 <ul>
-<li>我们要做快乐的事情，因为快乐才能持续，欲望不能让我们成功，快乐能让我们更持续，能让我们不断成长；</li>
-<li>快乐到最后会帮助我们建立起自己的优势；  </li>
-<li>有优势不是为了自己，我们更重要的使命是去满足别人需要，做一个对他人对社会有意义的存在；  </li>
+<li>“最小可用品”</li>
+<li>“客户反馈”</li>
+<li>“快速迭代”。</li>
 </ul>
-<h2 id="连接想法与行动的三个问句"><a href="#连接想法与行动的三个问句" class="headerlink" title="连接想法与行动的三个问句"></a>连接想法与行动的三个问句</h2><p>杂事不可以被管理，能够管理的只有行动！</p>
-<p>杂事与行动之间，我们要透过3个问题来连接，请你把它记下来：  </p>
+</blockquote>
+<p>最小可用品–是指将创业者或者新产品的创意用最简洁的方式开发出来，可能是产品界面，也可以是能够交互操作的胚胎原型。它的好处是能够直观的被客户感知到，有助于激发客户的意见。通常最小可用品有四个特点：体现了项目创意、能够测试和演示、功能极简、开发成本最低甚至是零成本。</p>
+<p>客户反馈–是指通过直接或间接的方式，从最终用户那里获取针对该产品的意见。通过客户反馈渠道了解关键信息，包括：客户对产品的整体感觉、客户并不喜欢/并不需要的功能点、客户认为需要添加的新功能点、客户认为某些功能点应该改变的实现方式等；获得客户反馈的方式主要是现场使用、实地观察。对于精益创业者而言，一切活动都是围绕客户而进行，产品开发中的所有决策权都交给用户，因此，如果没有足够多的客户反馈，就不能称为精益创业。</p>
+<p>快速迭代–是针对客户反馈意见以最快的速度进行调整，融合到新的版本中。对于互联网时代而言，速度比质量更重要，客户需求快速变化，因此，不追求一次性满足客户的需求，而是通过一次又一次的迭代不断让产品的功能丰满。所以，才会有微信在第一年发布了15个版本，扣扣保镖3周上线的记录。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-02-Habit-GoogleTM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Coding & Integrity">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-03-02-Habit-GoogleTM/" itemprop="url">Google员工的时间管理法则分享</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-02T08:30:00+08:00">
+                2017-03-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>就现在，停下手里的所有工作，深呼吸。</p>
+<p>仔细想想，你虽然忙，但真正掌控自己的时间了吗？</p>
+<p>拿我本人来说，我感觉自己大脑里有两个房间，而这两个房间里分别住着两个人。一个人的身份是总裁，一个人的身份是木匠。</p>
+<p>总裁怎么度过他的一天？他们每项工作为 30 分钟，每天都在做不同的 30分钟工作。因为处理的都是事务性和行政的任务，所以不存在打扰思路的问题。总裁每天只需要坐在办公室，那些 30分钟的工作，就像俄罗斯方块不断落到你头上。而你也需要不断移动和填充那些方块，在各个缝隙里填满你的一天。</p>
+<p>那么，另一个房间的木匠怎么度过他的一天？木匠做的是那些创造性的工作，他需要去自主思考、去创造，去建设新事物。而所有这些思考，至少需要耗费几个小时或者一天的时间。而在此过程中，即使一个 30 分钟的会议插进去，也会破坏他的全部工作效率。  </p>
+<p>在我们每个人在工作时间内，不仅需要做总裁，也需要做木匠。而老实说，那些做木匠的时光，才是真正让我们在工作中有成长的过程。<br>但是烦恼的是，总裁总是跳出来打扰木匠。</p>
+<p>哇塞，我头脑想到一个好点子！我迫不及待的想尝试了！你知道嘛，迫不及待！我现在要试！这会改变我，改变世界！但，呃！等等，我现在必须得开会去……  </p>
+<p>不行，这种工作模式绝对不行。如果你想成功，如果你想实践自己脑子里的好点子，你必须去确定自己什么时间，什么地方，你真的会预留时间去思考你的项目。</p>
+<p>这里有一项关于工作效率的一项报告。</p>
+<p>实验室给两组人，分别灌输了相同的「健康很重要」，「你不健康会死」这种极其关键的健身内容。</p>
+<p>实验人员要求第一组人员亲口保证，下周必须锻炼——每个人都保证了，对天发誓一定会锻炼。但等时间到了下周，只有 39% 的人真的履行诺言去锻炼。 实验人员也要求第二组人员亲口保证，下周必须锻炼。不过，实验人员进一步要求人员保证锻炼的详细内容，比如下周什么时间锻炼，在哪里锻炼，怎么锻炼，锻炼多长时间。而等时间到了下周，91% 的人确实按照他们所说的去锻炼了。 懂了吗？所以，你如果真正想做什么事情，就必须把你的承诺记录下来，记在你的日历上。包括要做的时间和地点，越多细节越好，因为只有这样，你欺软怕硬的大脑才会被说服：哦，这件事会真正发生，我确实会做这件事。  </p>
+<p>但假如，你一直想研究 AI 项目。你在日程本上写：本周五，就等着会议结束后…… 我就开始…… 不要这么写。</p>
+<p>如果你真正想做什么，请去为它计划一个准确时间。永远不要腾出时间来做某事，因为你不知道中间还有什么变故发生。</p>
+<p>而你选择做事情的时间也很重要。根据调查，个人精力能量水平在一周五天的工作时间中会有波动的。所以，依照能量波动做计划，显然是个更好。  </p>
+<p>这里是能量波动图:</p>
 <ul>
-<li>要不要做？  </li>
-<li>我要的结果是什么？  </li>
-<li>我下一步的行动是什么？  </li>
+<li>周一：本周能量还算不错的一天，但你兴致也没那么高。所以周一适合做一些强度低的任务，比如设定目标，计划任务以及寻找材料。</li>
+<li>周二和周三：本周能量的最高峰。如果这是一只股票，你绝对适合立刻抛售它。你应该把最棘手的问题、最麻烦的难题，头脑风暴、写作任务以及各种规划放在这两天。</li>
+<li>周四：你的能量已经开始慢慢走低。这时候适合安排和参加会议，和同事交流——尤其是适合开一些需要你耐心而达成共识的会议。  </li>
+<li>周五：最低能量的一天。你不想工作。你想要周末。而这时候，适合做一些开放性密度低的工作，比如计划下你未来，梳理下你的工作关系，以及总结下本周内容。</li>
 </ul>
-<h2 id="用反思三问清空爆满的收件箱"><a href="#用反思三问清空爆满的收件箱" class="headerlink" title="用反思三问清空爆满的收件箱"></a>用反思三问清空爆满的收件箱</h2><p>我们要把收件箱清空，把每件杂事都转化成：我+动词+关键人+事情。</p>
-<p>这时候我们的杂事和想法就没有了，有的都是下一步行动。  </p>
-<p>我+动词+关键人+事情，这个句式里面有动词，有动词我们就能很容易地进行相应的行动，并且把类似的行动组合在一起批量地做。  </p>
-<p>比如：打电话. 电脑处理. 在家. 外出. 委托他人……根据性质与情境，我们可以批量地行动处理。  </p>
-<p>要把大脑里的想法和杂事转化为下一步行动和情境清单，以及日程表，就必须经过这3个问题：要不要做？我要达到的结果是什么？我的下一步行动是什么？</p>
-<h2 id="遇到大事-难事了怎么办"><a href="#遇到大事-难事了怎么办" class="headerlink" title="遇到大事. 难事了怎么办"></a>遇到大事. 难事了怎么办</h2><p>生活和工作中还有很多更重要的事情需要我们用“项目”的思维来完成。<br>例如：生二娃. 环球旅行，为孩子找一个好的学校就读. 自己写书. 出书……<br>当面对这些比较复杂的事情时，我们就需要把它升级成为“项目”来统筹执行。<br>面对复杂的事件时，我们同样问那3个问句，只是第三句“我的下一步行动是什么？”需要反复不断地问，以至于我们会得到N多个下一步行动，直到事情去到我们想要的那个结<br>果。  </p>
-<p>所以项目是什么？  </p>
-<p>项目就是很多个下一步行动的集合清单，清单上的所有行动都要指向我们渴望得到的那个结果。<br>所以，反思，明确意义真的很有价值，它起到了一个再判断的作用，它使我们更加明确自己做这件事的意义和价值，以及我们要去到的方向和要得到的结果。<br>当对收件箱里的杂事明确意义之后，我们就能判断它是应该被删除掉，扔进垃圾桶，还是应该进入情境清单，或者是进入日历，亦或者进入项目清单，亦或者进入将来/也许清单。  </p>
-<p>其实，<strong>时间管理的本质是对事件的分类</strong>。  </p>
-<h2 id="先有意义，再有条理！"><a href="#先有意义，再有条理！" class="headerlink" title="先有意义，再有条理！"></a>先有意义，再有条理！</h2><p>先有意义，再有条理！把杂事进行分类和整理，从本质上来讲是不可能实现的。<br>因为我们大多数人只懂分类，不懂“明确意义”，所以大家的整理就仅限于把东西归归位。<br>对事务明确意义就是要：删除不需要做的；暂时保留还需要酝酿的；待办的就放入日历和情境清单中。</p>
-<p>管理学大师德鲁克讲：<strong>80%的事情不需要做，或者不需要自己做</strong>。</p>
-<p>为什么要先有意义，再有条理呢？<br>因为人活一生，事情是做不完的，我们只能做重要的事。  </p>
-<h2 id="培养自己每周做检视的习惯"><a href="#培养自己每周做检视的习惯" class="headerlink" title="培养自己每周做检视的习惯"></a>培养自己每周做检视的习惯</h2><p><img src="/uploads/ueditor/php/upload/image/2017020
-9/1486626064.png" alt="blob.png">  </p>
-<h2 id="如何做好自己的月度检视？"><a href="#如何做好自己的月度检视？" class="headerlink" title="如何做好自己的月度检视？"></a>如何做好自己的月度检视？</h2><p>德鲁克曾在自己的书中分享了一个检视自己目标的方法，叫“回馈分析法”，这套体系在欧洲宗教界已经非常成熟了。</p>
-<p>首先，他让我们列出未来9到12个月的目标；  </p>
-<p>然后，每个月都去检视自己在过去的这一个月中得到的成果与自己所定目标的关系。  </p>
-<h2 id="梦想板与年度检视是一对孪生兄弟！"><a href="#梦想板与年度检视是一对孪生兄弟！" class="headerlink" title="梦想板与年度检视是一对孪生兄弟！"></a>梦想板与年度检视是一对孪生兄弟！</h2><p>成就一件事，我们只欠3点认识：</p>
+<p>小 Tip：永远把最重要的工作，安排在早上！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-02-Habit-SelfManagement/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Coding & Integrity">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-03-02-Habit-SelfManagement/" itemprop="url">五项管理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-02T08:00:00+08:00">
+                2017-03-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="成功-心态-目标-时间-学习-行动"><a href="#成功-心态-目标-时间-学习-行动" class="headerlink" title="成功 = 心态 + 目标 + 时间 + 学习 + 行动"></a>成功 = 心态 + 目标 + 时间 + 学习 + 行动</h1><p><img src="/uploads/ueditor/php/upload/image/20170302/1488415415.png" alt="blob.png"></p>
+<h1 id="成功-心态-能力"><a href="#成功-心态-能力" class="headerlink" title="成功 = 心态 + 能力"></a>成功 = 心态 + 能力</h1><p><img src="/uploads/ueditor/php/upload/image/20170302/1488415261.png" alt="blob.png"></p>
+<h1 id="心态每日评估"><a href="#心态每日评估" class="headerlink" title="心态每日评估"></a>心态每日评估</h1><p><img src="/uploads/ueditor/php/upload/image/20170302/1488415279.png" alt="blob.png"></p>
+<h1 id="心态训练"><a href="#心态训练" class="headerlink" title="心态训练"></a>心态训练</h1><p><img src="/uploads/ueditor/php/upload/image/20170302/1488415308.png" alt="blob.png"></p>
+<h1 id="行动者宣誓"><a href="#行动者宣誓" class="headerlink" title="行动者宣誓"></a>行动者宣誓</h1><p><img src="/uploads/ueditor/php/upload/image/20170302/1488415398.png" alt="blob.png"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-01-Book-ThePracticeOfManagement/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Coding & Integrity">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-03-01-Book-ThePracticeOfManagement/" itemprop="url">管理的实践 彼得.德鲁克</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-01T08:00:00+08:00">
+                2017-03-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>管理的定义: 管理就是界定企业的使命,并激励和组织人力资源去实现这个使命。界定使命的是企业家的任务，而激励与组织人力资源是领导力的范畴，两者的结合就是管理。</p>
+<p>管理的两个要务：</p>
 <ol>
-<li>烂开始。有了目标之后，我们要从最重要的小事开始行动。  </li>
-<li>反复练习。烂开始但不能懒行动，在持续做的过程中我们还要注意不断地对目标进行修正与改进，每天让自己进步一点点。<br>按照每周，每月，每年的“反思”架构，并且运用艾宾浩斯记忆曲线的8个周期来进行不断复习，我们就能牢记所有需要被记忆的东西。  </li>
-<li>以梦想为做事标准。我们牢记自己的梦想与目标之后，每天我们在选择做最重要的事情的时候，就有了标准。  </li>
+<li>投入 &lt; 产出</li>
+<li>权衡目前利益与长期利益  </li>
 </ol>
-<h2 id="影响人生的11个习惯！"><a href="#影响人生的11个习惯！" class="headerlink" title="影响人生的11个习惯！"></a>影响人生的11个习惯！</h2><p>哪些习惯能让我们走向成功，实现梦想呢？</p>
+<p>管理的三个任务：  </p>
 <ol>
-<li>冥想-使用正念·冥想的方法，早. 中. 晚个三次，如果实在做不到，那么当你要面临重大挑战之前，也一定要抽一点儿时间来冥想一下。  </li>
-<li>早起-很多服务世界500强企业的成功人士都是早起鸟。  </li>
-<li>仪式感-村上春树讲，生活中需要一些小确幸和仪式感。大家可以去探索自己和自己的家庭所适用的一些独特的仪式。</li>
-<li>节俭-许多大富豪在生活中都有节俭的习惯。如果大家能在白手起家的时候就养成节俭的习惯，那么你会更值得人敬佩。</li>
-<li>热爱自己的事业 -乔布斯曾经说：“你必须找到自己热爱的东西，做出伟大的成就，实现它的唯一方法就是热爱你所做的事情。”</li>
-<li>阅读-巴菲特每天有80%的时间在阅读，他每年给股东写的信中都要推荐书籍。</li>
-<li>打造自动化的收入-有名的人都非常注重自己的知识产权，他们出版书籍，把自己的品牌进行授权，善用理财知识等等，以获得更广泛的收入来源。</li>
-<li>为自己打工 -如果你为老板打工，那么你就是在为老板付出自己的时间，如果你是为自己打工，那么就是在为自己付出时间。以主人翁的心态工作，让自己更有责任感，这样也能有更多的收入。  </li>
-<li>坚持锻炼-科学表明：锻炼有助于提升我们的精力. 记忆力和注意力，并保持思维敏捷，维持我们的健康，它能帮助我们睡眠，提高我们的工作效率，甚至它还是我们意志力的体现，让别人<br>看到之后能够更加信任我们。</li>
-<li>和成功人士交朋友  -成功人士的交往都是广泛性和多样性的，不是我们一般人三点一线第生活状态。我们要特别关注自己与他人的弱连接，不要仅仅停留在自己的舒适区，只与自己身边的强连接联系。  </li>
-<li>做慈善-很多成功的人士都是在一开始就关注并参与公益和慈善活动的。  </li>
+<li>实现组织的特定目的和使命</li>
+<li>使工作富有成效，员工具有成就感</li>
+<li>处理对社会的影响与承担社会责任  </li>
 </ol>
-<h2 id="推荐时间管理的经典书籍"><a href="#推荐时间管理的经典书籍" class="headerlink" title="推荐时间管理的经典书籍"></a>推荐时间管理的经典书籍</h2><ul>
-<li>《百年德鲁克》</li>
-<li>《高效能人士7个习惯》</li>
-<li>《搞定I》</li>
-<li>《搞定II》</li>
-<li>《搞定III》</li>
-<li>《番茄工作法》</li>
-<li>《番茄工作法图解》</li>
-<li>《晨间日记的奇迹》</li>
-<li>《善用时间》</li>
-</ul>
-<h2 id="建立人际交往中的“弱连接”！"><a href="#建立人际交往中的“弱连接”！" class="headerlink" title="建立人际交往中的“弱连接”！"></a>建立人际交往中的“弱连接”！</h2><p><strong>情感靠的是强连接，信息靠的是弱连接</strong>，这两者合在一起构成我们人际关系的要件。  </p>
-<p>所有的相遇都是有价值的，所有的相遇都是久别重逢。</p>
-<p>今天世界上为什么Facebook马克会这么成功，中国的微信张小龙为什么这么成功？就是因为他们俩创造了能够连接我们弱连接的强大工具。</p>
-<h2 id="经营弱连接的4个关键！"><a href="#经营弱连接的4个关键！" class="headerlink" title="经营弱连接的4个关键！"></a>经营弱连接的4个关键！</h2><p>如何经营我们的弱连接，让它为我们的人生的成长以及工作. 事业提供更有价值的动力。</p>
-<p>专长. 分享. 接触与反馈：</p>
-<ol>
-<li>我们必须有专长，一家公司需要有定位，一个人也需要有定位。</li>
-<li>你一定要广泛地去分享，量越大越好。</li>
-<li>有效的接触, 有个理论叫12次接触理论</li>
-<li>反馈, 它是建立在前三部的基础之上</li>
-</ol>
-<h2 id="连梦话都可以录的工具是哪个？"><a href="#连梦话都可以录的工具是哪个？" class="headerlink" title="连梦话都可以录的工具是哪个？"></a>连梦话都可以录的工具是哪个？</h2><p>易录 - 两个核心功能凸显了它的专业性：</p>
-<p>第一个是可以在没有声音时自动停止录音，有声音了又会自动启动录音；  </p>
-<p>第二个是可以简要做编辑。  </p>
-<h2 id="“天作孽尤可谅，自作孽不可活”的时间管理解读版！"><a href="#“天作孽尤可谅，自作孽不可活”的时间管理解读版！" class="headerlink" title="“天作孽尤可谅，自作孽不可活”的时间管理解读版！"></a>“天作孽尤可谅，自作孽不可活”的时间管理解读版！</h2><p><img src="/uploads/ueditor/php/upload/image/2017020
-9/1486627088.png" alt="blob.png"></p>
-<p>精力分为4个维度，第一是<strong>身体</strong>，第二是<strong>情绪</strong>，第三是<strong>思想</strong>，第四是<strong>精神</strong>。</p>
-<p>当一个人没有精力的时候或者低情绪的时候，是很难有效率的。<br>来自美国社会心理学家费斯汀格，他是这么说的：<br>生活当中的10%是由发生在你身上的事情组成的，而另外的90%，则是由你对所发生的事情如何反应所决定的。<br>换而言之，生活中有10%的事情是我们无法掌控的，另外的90%却是我们能够控制的。<br><strong>你控制不了前面的10%，但完全可以通过你的心态与行为决定剩余的90%。</strong></p>
-<h2 id="情绪，越抗拒越持续！"><a href="#情绪，越抗拒越持续！" class="headerlink" title="情绪，越抗拒越持续！"></a>情绪，越抗拒越持续！</h2><p>它的背后是你的信念与认知，正是这样的信念与认知，造成了你的自动化反应。</p>
-<p>它有几个特点：</p>
-<ol>
-<li>越抗拒，越持续。</li>
-<li>谁不舒服，谁解决问题。</li>
-<li>解决问题的核心，也是源头，即自己是一切的根源。</li>
-</ol>
-<h2 id="每个人都有一个自己的世界！"><a href="#每个人都有一个自己的世界！" class="headerlink" title="每个人都有一个自己的世界！"></a>每个人都有一个自己的世界！</h2><p><img src="/uploads/ueditor/php/upload/image/2017020
-9/1486627279.png" alt="blob.png">  </p>
-<p>事件. 抗拒. 信念. 自动化反应. 我是对的，这些是我们情绪的非常重要的来源。<br>它的来源不是事实的本身，而是我们对事件的认知，其实就是我们的信念与认知的系统。<br>我们谈一个很重要的观点，叫做事情是中性的，好坏，对错，美丑，完全来自于我们自己的演绎。<br>天下皆知美之为美，斯恶矣。皆知善之为善，斯不善矣。故有无相生，难易相成，长短相形，高下相倾，音声相和，前后相随。<br><strong>90％我们是可以掌控的，这个掌控来源于自己对事物的反应。</strong><br>那么事件发生，你下意识的反应是正向的，还是负向的呢？它完全来自于你自己的演绎。  </p>
-<h2 id="让我们永远在“线上”玩游戏！"><a href="#让我们永远在“线上”玩游戏！" class="headerlink" title="让我们永远在“线上”玩游戏！"></a>让我们永远在“线上”玩游戏！</h2><p>线下是什么呢？</p>
-<p>线下更多是负向的情绪，比如说批判. 担心. 指责. 恐惧. 抱怨. 比较等等。  </p>
-<p>线上则是爱. 和平. 喜悦。  </p>
-<p>也有的是在线上和线下之间，也叫压线，比如说宽恕。  </p>
-<p>我们不可能永远在线上，也不可能永远在线下。  </p>
-<p>所以我们的情绪永远是转化的。  </p>
-<p>我们的情绪能够从下到上，也就是向上；有时候也会从上到下，也就是向下；还有可能是维持不变，叫压线。</p>
-<h2 id="一切的发生都是为了成就我们自己！"><a href="#一切的发生都是为了成就我们自己！" class="headerlink" title="一切的发生都是为了成就我们自己！"></a>一切的发生都是为了成就我们自己！</h2><p><img src="/uploads/ueditor/php/upload/image/2017020
-9/1486627407.png" alt="blob.png"></p>
-<p>一切的发生，都是来成就你的，永远要感恩每一个发生。<br>你要享受每一个发生，不仅仅是接纳，接纳还不够，你的情绪还没有到线上，当你享受了，你就开始往上走了。<br>你说我接受都难了，还让我谈感谢？<br>其实感谢每一个发生还不够，你还应该非常惭愧，惭愧为什么会发生呢？就是菩萨畏因。<br>其实惭愧是非常非常高的一份能量。<br>如果你还想获得更高的能量或情绪，可以做什么？<br>那就是这辈子拥有一颗慈悲的心。<br><strong>一切的发生都是最好的安排，都是来成就我们的。</strong></p>
-<h2 id="一事、一日、一生的视角"><a href="#一事、一日、一生的视角" class="headerlink" title="一事、一日、一生的视角"></a>一事、一日、一生的视角</h2><p>没有反思的人生不值得过。</p>
-<p>反思，是需要有层次的。  </p>
-<p>“反思”最常见的3种类型：  </p>
-<ul>
-<li>是对一件事的反思；  </li>
-<li>是对一天的反思；  </li>
-<li>是对一生的反思。</li>
-</ul>
-<p><strong>对一件事的反思：</strong></p>
-<p>就是用3个问句：要不要做？我要的结果是什么？下一步行动是什么？从而把想法转化成下一步行动。</p>
-<p>对一件事的反思要秉承一个原则：要先有意义，再有条理。</p>
-<p>当我们能够对一件事进行反思之后，我们就拥有了自己的日程和清单事务的架构，进而，我们就能对自己的一天进行反思。</p>
-<p><strong>对一天的反思：</strong></p>
-<p>关于这一点我们可以学习一下100美金钞票上印着的那个人物-–富兰克林他的做法。</p>
-<p>富兰克林每天过晚十早五的生活。</p>
-<p>他每天早上起来都要问自己：今天我要做些什么？</p>
-<p>晚上睡觉前还要问自己：今天我都做了些什么？</p>
-<p>我们所处的情境也在不断地变化，在可以选择的情境下，我们要秉承：要事优先的原则，首先处理青蛙事件</p>
-<p><strong>对一生的反思：</strong></p>
-<p>我们的人生需要有导航系统，而导航也是有层次的：<br>最底层的是【跑道】，然后是1万米～5万米的人生高空。【跑道】里放的都是由想法或者杂事转换成的下一步行动清单。都是重要且紧急的事情，也是符合GTD的原理<strong>自下而上，是我们应该要首先去处理的、简单的，只有一步行动的事情。</strong>【跑道】里的事务我们要运用4D的原则：先做重要的，委托相对不重要的，推辞相对不重要的，删除很不重要的。<br>在【跑道】之上就是【1万米项目】、【2万米八大关注】、【3万米目标】、【4万米愿景】、【5万米宗旨】。</p>
-<p>在一生的纬度的“反思”我们可以问5个问句：</p>
-<ol>
-<li>我要做些什么？这个问题可以用“对一件事的反思”那3个问句来回答，这个问题关注的是【1万米项目】上的事务，是近期要完成的事情。</li>
-<li>我的角色和职责是什么？这个问题针对的是【2万米八大关注】里的事项。</li>
-<li>我长期的目标是什么？这个问题针对的是【3万米目标】里的事项。</li>
-<li>我理想的蓝图是什么？这个问题针对的是【4万米愿景】里的事项。</li>
-<li>我为人的宗旨、世界观、原则是什么？这个问题针对的是【5万米宗旨】里的事项。</li>
-</ol>
-<p>大家需要不断地变换自己的视角，聚焦思考反思自己要做的每一件事，自己每一天要如何度过，自己要过一个怎样的人生。</p>
+<p>彼得·德鲁克自序<br>概论　管理的本质<br>第1章 管理层的角色<br>第2章 管理层的职责<br>　第3章 管理层面临的挑战<br>第一部分 管理企业<br>　第4章 西尔斯公司的故事<br>　第5章 企业是什么<br>　第6章 我们的事业是什么<br>　第7章 企业的目标<br>　第8章 今天的决策，明天的成果??<br>　第9章 生产的原则<br>第二部分 管理管理者<br>　第10章 福特的故事<br>　第11章 目标管理与自我控制<br>　第12章 管理者必须管理<br>　第13章 组织的精神<br>　第14章 首席执行官与董事会<br>　第15章 培养管理者<br>第三部分 管理的结构<br>　第16章 企业需要哪一种结构<br>　第17章 建立管理结构<br>　第18章 大企业、小企业和成长中的企业<br>第四部分 管理员工和工作<br>　第19章 的故事<br>　第20章 雇佣整个人<br>　第21章 人事管理是否已告彻底失败<br>　第22章 创造巅峰绩效的组织<br>　第23章 激励员工创造最佳绩效<br>　第24章 经济层面<br>　第25章 主管<br>　第26章 专业人员<br>第五部分 当一名管理者意味着什么<br>　第27章 管理者及其工作<br>　第28章 做决策<br>　第29章 未来的管理者<br>结语　管理层的责任</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-02-28-Book-FinanceAnalysis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Coding & Integrity">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-02-28-Book-FinanceAnalysis/" itemprop="url">财务分析与决策 肖星</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T08:00:00+08:00">
+                2017-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>财务分析与决策，是清华大学MOOC, 肖星主讲，同时她还写了本书:一本书读懂财报，分享书中的一个故事:</p>
+<p>会计界的一名老教授写了一篇文章，他在这篇文章中回忆了他过去的一段经历，这段经历正跟“会计是什么”有关。</p>
+<p>在他上大学的第一天，他的老师就语重心长地告诉他：“会计是一门科学，哪怕是犯了一点错误，也不能算做好了会计工作。”于是他默默在心里发誓，一定要做一个合格的高水平的会计，一丝不苟。 可等到他读了研究生，他读研期间的老师却给了他一个不一样，甚至是完全相反的答案：“会计是一门艺术。做会计不仅要把每一步的加减乘除都计算得精确无比，而且要在会计准则的范围之内作出选择和判断，让它能够准确地描绘一个企业。”原来会计是一门艺术，听上去不错，于是他便下定决心学好这门艺术。 可等到他工作了，会计事务所的老前辈却又一次颠覆了他关于会计的所有概念：“你还太年轻了，会计既不是科学，也不是艺术。”这下，年轻时的老教授彻底糊涂了。既然会计不是科学也不是艺术，那会计到底是什么呢？</p>
+<p>要解释清楚这个问题，恐怕得再讲一个小故事了。<br>这个故事发生在一家上市公司。这一年，这家上市公司亏了整整1个亿，老板急得团团转。万般无奈之下，他下决心要在账面上把亏损变成盈利。 但是怎么才能让1个亿的亏损变成盈利呢？这家公司发现，自己在银行有1.6个亿的贷款，于是这家公司的工作人员便想出一个“妙招”来：先用价值3000万元的房子抵掉这家公司欠银行的1.6亿元，然后再用1.6亿元现金把抵债的房子买回来。 看上去，这家公司不过就是用1.6亿元现金偿还了1.6亿元的贷款，但它却奇迹般地把自己的亏损变成了盈利，这是怎么回事呢？其实奥妙就藏在这价值3000万元的房子里。由于这所房子，这场还款大戏被分割为上下半场、两笔交易：上半场——这家公司用价值3000万元抵偿了它在银行1.6亿元的贷款；下半场——这家公司用1.6亿元购买了一所价值3000万元的房子。由于企业的利润表只受到出售资产的影响而不会受到购买资产的影响，因此，这个购买行为只会在该公司的利润表上产生1.6亿元的资产。相比这个房子原来的价值3000万元来说，账面价值增加了1.3亿元。扣掉这家公司亏损的1个亿，这家公司依然盈利3000万元。另外，在这家公司的报表上，也出现了另一个结果——报表上房子这项资产原先价值3000万元，现在却增值到了1.6亿元。你觉得这家公司在做假账？这很难说，它并没有违反会计准则。 现在再来想想，如果会计既不是科学，也不是艺术，那会计究竟是什么？<br>其实，会计变幻莫测，它往往不是黑白分明的，它存在很多判断和选择，会造成很多不同的结果，会计是魔法。 那么，为什么看似枯燥、单调的会计会有这么丰富的内涵呢？为什么人们会关心会计作不同选择所带来的不同结果呢？答案在于，在商业社会当中，几乎所有人都或多或少地用会计信息作决策。企业的管理层可能会用会计信息来判断企业的经营状况，从而作出更有效的战略决策；咨询公司可能会根据会计信息来制订这个公司的咨询方案；投资银行可能会根据会计报表来决定这个公司的定价应该是什么样的；证券公司可能要通过会计信息来判断这个公司的价值是多少……所以我们会发现，商业社会当中形形色色的人都会用财务信息来帮自己作决策；故事中的这家公司也正是因为别人会根据它的财务报表作决策，才绞尽脑汁地把自己的亏损变成盈利。因此，通过分析财务信息作决策就变成了这本书的主题。<br>值得注意的是，这个盈利3000万元的故事发生在较早的年代，有它之所以发生的特定历史环境和制度环境，需要理性看待。</p>
+<p><strong>读书摘要</strong></p>
+<h1 id="一、四大报表"><a href="#一、四大报表" class="headerlink" title="一、四大报表"></a>一、四大报表</h1><h2 id="1、资产负债表：又叫平衡表或财务状况表，是唯一一个描述特定时间点状态的报表。"><a href="#1、资产负债表：又叫平衡表或财务状况表，是唯一一个描述特定时间点状态的报表。" class="headerlink" title="1、资产负债表：又叫平衡表或财务状况表，是唯一一个描述特定时间点状态的报表。"></a>1、资产负债表：又叫平衡表或财务状况表，是唯一一个描述特定时间点状态的报表。</h2><p>1）恒等式：资产=负债+所有者权益</p>
+<p>2）主要分为五大类：流动资产、非流动资产、流动负债（短期负债）、长期负债、所有者权益。</p>
+<p>3）排列原则： ①左区为资产、右区为负债与所有者权益。 ②按流动性由高到低向下排列，如资产中的货币资金和负债中的短期借款永远是在第一栏。</p>
+<p>4）流动资产：是指在一年或超过一年的营业周期内可以变现或者运营的资产。流动资产周转速度越快，变现能力越强，资金链就越健康。<br>①包括货币资金、短期投资、应收票据、应收账款、存货。<br>②流动资产的周转图：货币资金→储备资金与固定资金→生产资金→成品资金→货币资金③流动资产的划分：速动资产与非速动资产、货币性流动资产与非货币流动资产。<br>④流动比率=流动资产/流动负债，流动比率2:1比较合适，太高说明资金闲置、太低可能无法及时偿债。<br>⑤流动资产周转率=主营业务收入净额/流动资产平均余额（即（年初+年末）÷2），流动资产周转速度越快，说明流动资产利用效率越高。</p>
+<p>5）非流动资产：相对来说，占用资金多、周转慢、变现能力差。<br>①持有到期投资：指有明确意图并有能力持有到期，到期日固定、回收金额固定或可确定的非衍生性金融资产，比如债券。<br>②长期应收款：指企业融资租赁而产生的应收款项，以及采用递延方式分期付款、实际上具有融资性质的销售商品和提供劳务等经营活动产生的应收款项。<br>③长期股权投资：指通过投资取得被投资企业的股份。<br>④工程物资：指用于固定资产建造的建筑材料以及企业的高价周转件。（尚需加工建设的物资）⑤投资性房地产：指为赚取租金或资本增值的房地产。<br>⑥固定资产：指使用期限超过一年的房屋、建筑、机器、机械、运输工具以及其他与生产经营有关的设备、器具、工具。（生产经营、≥1年）<br>⑦在建工程：指正在建设、尚未竣工投入使用的建设项目，主要是固定资产的新建、改建、扩建，或技术改造设备更新等未完工的工程支出。<br>⑧无形资产：指拥有或者控制的没有实物形态的、可辨认的非货币性资产。（专利权、商标权、商誉）<br>⑨长期待摊费用：指已经支出，但摊销期限在一年以上的各项费用。<br>⑩可供出售的金融资产：指初始确认时就被认定为可供出售的非衍生性金融资产，如债券、基金、股票。</p>
+<p>6）流动负债：指企业将在一年内或超过一年的一个营业周期内偿还的债务。<br>①短期借款：企业为维持正常生产经营所需的资金或为抵偿某项债务而向银行或金融机构借入的、还款期限在一年以内的各种借款。<br>②应付票据：指因采用商业汇票结算方式而发生的，在制定日期内无条件支付确定的金额给收款人或者票据的持有人，包括商业承兑汇票、银行承兑汇票。<br>③应付账款：因购买材料、商品或接受劳务供应等发生的债务。<br>④预收货款：可以视作短期融资的一种，主要针对紧缺商品。<br>⑤应付工资：可视作企业对员工的一种负债。<br>⑥应交税金：指应交尚未交的各项税金，如增值税、消费税、营业税、所得税、资源税、土地增值税、城市维护建设税、个税等。<br>⑦应付利润：按协议需支付给投资者或合作伙伴的利润。<br>⑧预提费用：指按规定预先提取尚未实际支付的各项费用。<br>⑨其他应付款、一年内到期的长期负债。</p>
+<p>7）长期负债：相对来说，数额巨大、偿还期限较长。 ①企业举长期债务，往往需要资产担保或担保人，必要情况下还需设置偿债基金。②长期借款、应付债券、长期应付款、住房基金，又以前三者最为常见。③企业的短期偿债能力是长期偿债能力的基础。</p>
+<p>8）所有者权益：也称股东权益或净资产。 ①来源：股本、投资后的经营增值（留存收益）、直接计入的利得或利失。②排列：实收资本、资本公积、盈余公积、未分配利润。</p>
+<h2 id="2、利润表：也叫损益表，是反映企业在一定的会计期间内生产经营成果的会计报表，表现为盈利或亏损。"><a href="#2、利润表：也叫损益表，是反映企业在一定的会计期间内生产经营成果的会计报表，表现为盈利或亏损。" class="headerlink" title="2、利润表：也叫损益表，是反映企业在一定的会计期间内生产经营成果的会计报表，表现为盈利或亏损。"></a>2、利润表：也叫损益表，是反映企业在一定的会计期间内生产经营成果的会计报表，表现为盈利或亏损。</h2><p>1）恒等式：利润=收入-费用</p>
+<p>2）营业收入：<br>①营业收入=主营业务收入+其它业务收入<br>②销售收入净额=营业收入-销售退回及折让</p>
+<p>3）营业成本：也成为运营成本，指企业所销售商品或提供劳务的成本。<br>①营业成本=主营业务成本+其他业务成本<br>②商品流通企业，销售成本往往构成营业成本的主体，销售成本=期初存货+本期进货+本期进货运费-期末存货</p>
+<p>4）营业毛利：<br>①营业毛利=营业收入-营业成本<br>②营业毛利率=营业毛利/营业收入净额，反映获取毛利的能力。</p>
+<p>5）营业费用：也称产品销售费用，是商品销售过程中发生的各种费用。</p>
+<p><img src="/uploads/ueditor/php/upload/image/20170228/148824
+3465.png" alt="blob.png"></p>
+<p>6）期间费用：期间费用是指企业本期发生的、不能直接或间接归入营业成本，而是直接计入当期损益的各项费用。 包括销售费用、管理费用、财务费用。</p>
+<p>7）营业利润：指企业的税前利润，为缴纳所得税的依据。营业利润=营业毛利（营业收入-营业成本）-营业税金及附加-期间费用（销售费用+财务费用+管理费用）-资产减值损失+公允价值变动净收益（或净损失）+投资净收益（或净损失）</p>
+<p>8）营业外利润：企业经营副业所带来的利润<br>①营业外利润=营业外收入-营业外费用<br>②营业外收入=利息收入+处置固定资产收益+技术服务收入+其他收入<br>③营业外费用=按权益法认定之投资净损+利息费用+处置固定资产损失+兑换净损+灾害损失净额+其他损失</p>
+<p>9）税前利润：也称之为利润总额，税前利润=营业利润+营业外利润</p>
+<p>10）税后利润：一般称为净利润或净收入<br>①净利润=利润总额-所得税费用<br>②净利润=利润总额×（1-所得税率）<br>③所得税率：一般企业为25%，小微企业为20%，国家高新技术企业为15%。</p>
+<p>11）每股收益：也叫每股盈余，每股收益=本期净利润/股份总数</p>
+<h2 id="3、现金流量表：在一定会计期间现金和现金等价物流入与流出的报表。现金流量净额-流入额-流出额"><a href="#3、现金流量表：在一定会计期间现金和现金等价物流入与流出的报表。现金流量净额-流入额-流出额" class="headerlink" title="3、现金流量表：在一定会计期间现金和现金等价物流入与流出的报表。现金流量净额=流入额-流出额"></a>3、现金流量表：在一定会计期间现金和现金等价物流入与流出的报表。现金流量净额=流入额-流出额</h2><p>1）经营活动现金流：<br>①直接法：列出流入与流出的主要类别；<br>②间接法：调整当期去的的净利润，并损益某些项目。</p>
+<p>2）投资活动现金流：企业对长期资产的构建与处置产生的现金流量。</p>
+<p>3）筹资活动现金流：指导致企业资本及债务规模和构成发生变化的活动所产生的现金流量。</p>
+<p>4、股东权益变动表：也可以称为所有者权益变动表，反应构成所有者权益的各组成部分当期的增减变动情况的报表。<br>1）资本公积：超过企业注册资本的金额以及直接计入所有者权益的利得和损失，及股本溢价+利得和损失。<br>①资本溢价：企业收到投资者超出其占有股本的部分，原因为溢价或超额缴纳资本。<br>②分类：<br> A、可用于直接转增资本的资本公积，包括股本溢价、拨款转入、外币资本折算差额和其他资本公积；<br> B、不可直接用于转增资本的资本公积，包括接受捐赠的非现金资产准备、股权投资准备、关联交易差价。<br>③引入新投资者的出资总额=（实收资本+留存收益）×欲占注册资本比例/（1-欲占注册资本比例）</p>
+<p>2）盈余公积：按规定从净利润中提取的各种积累资金。分为法定盈余公积与任意盈余公积。<br>①法定盈余公积：按税后净利润的10%提取，当超过注册资本的50%时可不再提取。<br>②任意盈余公积：由企业股东大会决议是否提取与提取比例。<br>③盈余公积的作用：<br> A、弥补亏损：弥补亏损的三种方法，后五个年度的税前利润弥补、五年后的税后利润弥补、盈余公积弥补（董事会提议、股东会批准）。<br> B、转增资本：经股东会批准，按股东原持有比例结转，且转增后留存的盈余公积不得少于注册资本的25%。<br> C、分配股利：一般而言，企业当年没有利润就不得分配股利，如必须分配股利，则需满足：<br>  a、弥补亏损后仍有结余、<br>  b、股息率不超过票面值的6%、<br>  c、分配后法定盈余公积不得低于注册资本的25%。一般情况下，经提取形成盈余公积后就不得用于向投资者分配利润或股利。<br>3）留存收益：也成为留存盈余，指在经营中创造的、没有分配所有者而留存在公司的盈利。<br>①留存收益包括盈余公积（有特定用途）和未分配利润（无指定用途）。<br>②库藏股：也叫回收股，为上市公司名词，是指公司将发行的股票买回尚未注销或重新售出的股票，不能列为公司资产，以负数形式列为一项股东权益。</p>
+<h1 id="二、财务报表基本分析"><a href="#二、财务报表基本分析" class="headerlink" title="二、财务报表基本分析"></a>二、财务报表基本分析</h1><h2 id="1、盈利能力分析：企业获取利润的能力，企业资金或资本增值能力。"><a href="#1、盈利能力分析：企业获取利润的能力，企业资金或资本增值能力。" class="headerlink" title="1、盈利能力分析：企业获取利润的能力，企业资金或资本增值能力。"></a>1、盈利能力分析：企业获取利润的能力，企业资金或资本增值能力。</h2><p>1）营业毛利率=营业毛利/营业收入净额×100%</p>
+<p>2）营业利润率=营业利润/营业收入净额×100%<br>①营业利润=营业毛利（营业收入-营业成本）-营业税金及附加-期间费用（销售费用+财务费用+管理费用）-资产减值损失+公允价值变动净收益（或净损失）+投资净收益（或净损失）<br>②营业税金及附加：营业税、消费税、资源税、教育费附加、城市维护建设费。</p>
+<p>3）净利率=净利润/总营业收入×100%，净利润=利润总额（即营业利润+营业外利润）×（1-所得税率）</p>
+<p>4）资产报酬率=（净利润+利息费用×（1-所得税率））/平均资产总额×100%，指息税前利润与平均资产总额的比率。</p>
+<p>5）净资产收益率（ROE）=所有者权益报酬率=净值报酬率=权益利润率=净资产利润率，反映了企业以自有资本获取净收益的能力。①净资产收益率=净利润/平均所有者权益×100%②平均所有者权益=（年初+年末）/2</p>
+<h2 id="2、经营效率分析：也叫运营能力分析，指企业对各项资产的运用效率。包括资产周转率与周转速度。"><a href="#2、经营效率分析：也叫运营能力分析，指企业对各项资产的运用效率。包括资产周转率与周转速度。" class="headerlink" title="2、经营效率分析：也叫运营能力分析，指企业对各项资产的运用效率。包括资产周转率与周转速度。"></a>2、经营效率分析：也叫运营能力分析，指企业对各项资产的运用效率。包括资产周转率与周转速度。</h2><p>1）总资产周转指标分析：<br> ①总资产周转率=销售收入净额/平均资产总额×100%<br> ②总资产周转天数=360/总资产周转率</p>
+<p>2）分类资产周转分析：<br>①流动资产周转分析：<br> A、流动资产周转率=销售收入净额/流动资产平均余额×100%<br> B、流动资产周转天数=360/流动资产周转率<br>②固定资产周转分析：<br> A、固定资产周转率=销售收入净额/固定资产平均净值×100%<br> B、固定资产周转天数=360/固定资产周转率</p>
+<p>3）单项资产周转分析：<br> ①应收账款周转分析：<br>  A、应收账款周转率=销售收入净额/平均应收账款×100%<br>  B、应收账款周转天数=360/应收账款周转率<br> ②存货周转分析：<br>  A、存货周转率=营业成本（销货成本）/平均存货×100%<br>  B、存货周转天数=360/存货周转率</p>
+<h2 id="3、偿债能力分析：指企业用其资产偿还短期与长期债务的能力。"><a href="#3、偿债能力分析：指企业用其资产偿还短期与长期债务的能力。" class="headerlink" title="3、偿债能力分析：指企业用其资产偿还短期与长期债务的能力。"></a>3、偿债能力分析：指企业用其资产偿还短期与长期债务的能力。</h2><p>1）短期偿债能力指标：<br> ①流动比率=流动资产/流动负债，一般2:1为宜。<br> ②速动比率=速动资产/流动负债，一般1:1为宜。速动资产为货币资金、短期投资、应收票据、应收账款。<br> ③现金比率=（货币资产+交易性金融资产）/流动负债，≥1即可，真实的反应企业短期偿债能力。<br> ④利息保障倍数=息税前利润（税前利润+利息费用）/利息费用，一般≥5较为标准。</p>
+<p>2）长期偿债能力指标：<br> ①资产负债率=负债总额/资产总额×100%，资产负债率在40%-60%为宜。在不发生债务危机时，负债率高，则充分利用了财务杠杆。<br> ②净资产比率（股东权益比率）=股东权益总额/资产总额×100%=1-资产负债率，在40%-60%为宜。<br>  A、权益系数=1/净资产比率=资产总额/股东权益=1+总负债/股东权益=1+产权比率<br>  B、产权比率=总负债/股东权益，≤1为宜。<br>  C、财务杠杆：当资产收益率（即净利润/平均资产总额）大于负债成本率时，负债经营有利于提高企业的资金收益率。<br> ③资本周转率（净值周转率）=（货币资金+短期投资+应收票据）/长期负债<br> ④清算价值比率=（资产总额+无形及递延资产总计）/负债总额，该指标越大，偿债能力越强。<br> ⑤长期资产适合率=（股东权益+长期负债总额）/（固定资产总额+长期投资总额）×100%，≥1为宜。</p>
+<h2 id="4、成长能力分析：也成为企业的发展能力分析，描述企业持续发展的潜能。"><a href="#4、成长能力分析：也成为企业的发展能力分析，描述企业持续发展的潜能。" class="headerlink" title="4、成长能力分析：也成为企业的发展能力分析，描述企业持续发展的潜能。"></a>4、成长能力分析：也成为企业的发展能力分析，描述企业持续发展的潜能。</h2><p>1）销售增长率=本年度销售增长额/上年销售收入净额×100%，三年销售收入平均增长率=（本年销售收入/3年前销售收入）1^3-1</p>
+<p>2）总资产增长率=本年总资产增长额/年初资产总额×100%</p>
+<p>3）资本积累率（股东权益增长率）=本年股东权益增长额/股东权益年初余额</p>
+<h1 id="三、财务分析的高阶篇：财务综合分析，将运营能力、偿债能力、盈利能力、成长能力纳入一个系统分析。"><a href="#三、财务分析的高阶篇：财务综合分析，将运营能力、偿债能力、盈利能力、成长能力纳入一个系统分析。" class="headerlink" title="三、财务分析的高阶篇：财务综合分析，将运营能力、偿债能力、盈利能力、成长能力纳入一个系统分析。"></a>三、财务分析的高阶篇：财务综合分析，将运营能力、偿债能力、盈利能力、成长能力纳入一个系统分析。</h1><h2 id="1、杜邦分析法："><a href="#1、杜邦分析法：" class="headerlink" title="1、杜邦分析法："></a>1、杜邦分析法：</h2><p><img src="/uploads/ueditor/php/upload/image/20170228/148824
+3534.png" alt="blob.png"></p>
+<h2 id="2、沃尔分析法："><a href="#2、沃尔分析法：" class="headerlink" title="2、沃尔分析法："></a>2、沃尔分析法：</h2><p>1）对应公式： ①综合得分=评分值+调整分 ②调整分=（实际比率-行业标准比率）/每分比率 ③每分比率=（行业最高比率-行业标准比率<br>）/（最高评分-评分值）</p>
+<p>2）示例如下：</p>
+<p><img src="/uploads/ueditor/php/upload/image/20170228/1488243644.png" alt="blob.png"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-02-27-Book-Influence/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Coding & Integrity">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-02-27-Book-Influence/" itemprop="url">影响力笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-27T08:00:00+08:00">
+                2017-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>网上流传一份查理·芒格（Charlie Thomas Munger）的推荐书单。</p>
+<p>其中有一本心理学著作《影响力》，芒格是这么说的：</p>
+<p>　　<strong>“这本了不起的书，解释了我们如何被他人操控，可别犹豫把它推荐给你的朋友。”</strong></p>
+<p>据说，芒格特别喜欢这本书，还向它的作者罗伯特·西奥迪尼（Robert B.Cialdini）赠送了一股伯克希尔哈撒韦公司的股票（价值10万美元）。</p>
+<h2 id="第一章-心理影响"><a href="#第一章-心理影响" class="headerlink" title="第一章 心理影响"></a>第一章 心理影响</h2><h3 id="实验1：插队"><a href="#实验1：插队" class="headerlink" title="实验1：插队"></a>实验1：插队</h3><p>一个心理学家跑到图书馆，请排队等候复印的人帮她一个小忙。</p>
+<p>“对不起，我有5页纸要复印，能不能让我先复印呢？”当她这样说时，60%的人答应了。</p>
+<p>然后，她换了一种说法：”对不起，能不能让我先复印呢？因为我要复印几页纸。”她只多加了两个字”因为”，但同意的人居然增加到了93%。</p>
+<p>虽然心理学家早就知道，当我们请别人帮忙时，如果能够讲出一个理由，得到帮助的可能性就更大。但是这个实验证明，只是听到”因为”两个字，人们就会认为她是有理由的，从而给予帮助。这证明了人类存在心理定势，会不自觉地受到影响。</p>
+<h2 id="第二章-互惠（Reciprocity）"><a href="#第二章-互惠（Reciprocity）" class="headerlink" title="第二章 互惠（Reciprocity）"></a>第二章 互惠（Reciprocity）</h2><h3 id="实验2：捐款信"><a href="#实验2：捐款信" class="headerlink" title="实验2：捐款信"></a>实验2：捐款信</h3><p>美国伤残军人协会每年发出很多募捐信，经过统计，18%的收信人会捐款。</p>
+<p>有一年，该协会主动在信中放了一个小礼物（比如背面涂了不干胶的标签），结果捐款率几乎翻了一倍，35%的收信人捐款了。</p>
+<p>这说明人们存在”互惠心理”，接受别人的礼物后会有一种负债感，觉得自己应该回报。所以，先给予别人一点小恩小惠，然后再提出请求，将会大大提高对方答应请求的可能性。</p>
+<h3 id="实验3：陪同参观"><a href="#实验3：陪同参观" class="headerlink" title="实验3：陪同参观"></a>实验3：陪同参观</h3><p>心理学家来到大学校园，询问大学生们是否愿意陪一群少年犯去参观动物园，只有17%学生表示愿意。</p>
+<p>心理学家换了一种说法，先问你是否愿意每周为少年犯提供2小时的咨询服务，至少坚持两年？所有人都表示不愿意。心理学家又问，那么你是否愿意陪他们去参观一次动物园呢？这一次，50%的学生表示愿意。</p>
+<p>可以看到，让对方先拒绝一个更大的请求，会使得另一个较小的请求被接受的可能性上升三倍。心理学的解释是，人们不喜欢有负债感，当你拒绝对方的时候就会形成潜在的负债感，即使你实际上没有欠对方任何东西。为了做到不亏欠，人们往往会同意第二个较小的请求。另一方面，这里还涉及心理学的对比原理，因为两个请求形成对比，使得第二个请求看上去不那么过份，所以更有可能得到同意。</p>
+<p>这种情况在实际生活中的应用是，如果你要向别人推销，就要先展示质次价高的商品；如果你要向别人借钱，就要先开口借一个很高的金额。这样会增加第二个请求被接受的可能性。</p>
+<h2 id="第三章-承诺和一致（Commitment-and-Consistency）"><a href="#第三章-承诺和一致（Commitment-and-Consistency）" class="headerlink" title="第三章 承诺和一致（Commitment and Consistency）"></a>第三章 承诺和一致（Commitment and Consistency）</h2><h3 id="实验4：看管物品"><a href="#实验4：看管物品" class="headerlink" title="实验4：看管物品"></a>实验4：看管物品</h3><p>心理学家在海滩上随便找一个人作为实验对象，在离他1米的地方，放下浴巾，很放松地躺在上面，听着便携式收音机传出来的音乐。几分钟之后，心理学家从浴巾上爬起来，向大海走去。</p>
+<p>过了一会，一个假扮的小偷来了，拿起收音机就走。通常情况下，实验对象都不愿冒险去阻拦那个小偷。在20次的实验中，只有4个人挺身而出。</p>
+<p>心理学家改变做法，在下海游泳时，口头请求实验对象帮忙照看一下东西，所有实验对象都答应了。当小偷再来拿收音机时，20个实验对象中有19个人挺身而出。他们追赶着小偷，叫他停下来，要求他对自己的行为做出解释，而且大多数人都会冲上去拉住他，或者干脆把收音机从他手里夺过来。</p>
+<p>这是因为人们希望能够遵守承诺。人们在心理上有一种要与过去的所作所为保持一致的愿望。一旦做出了某个决定，或选择了某种立场，就有一种压力要与它保持一致，证明之前所做的决策。</p>
+<h3 id="实验5：公益广告牌"><a href="#实验5：公益广告牌" class="headerlink" title="实验5：公益广告牌"></a>实验5：公益广告牌</h3><p>心理学家假扮成义工，在加州的一个居民区内，挨家挨户地向居民们提出请求，希望允许在社区草地上树立一块超大的公益广告牌。</p>
+<p>为了让居民了解广告牌竖起来之后的样子，他们展示了一张照片：一栋漂亮的房子几乎被广告牌遮得严严实实，广告牌上面歪歪扭扭地写着几个字”小心驾驶”。83%的居民理所当然地拒绝了这个要求。</p>
+<p>心理学家又换了一个社区，先向居民询问，是否同意树立一块宣传安全驾驶的小牌子。这个请求不算什么，几乎所有人都答应了。两个星期后，心理学家拿着同一张大广告牌的照片，再来征求居民同意，这次只有24%的居民拒绝这个要求。</p>
+<p>人们之所以对同一张广告牌，产生不同的态度。原因就是一旦人们之前同意了某个请求，后面的态度就会发生改变，他会答应陌生人的请求，努力与自己过去的承诺保持一致。</p>
+<p>一般来说，当一个人公开选择了某种立场之后，马上就产生一种维持这个立场的压力，因为他想在别人眼里显得前后一致。而且，知道你的立场的人越多，你就越不愿意去改变它。所以，让对方信守承诺的最好方法，就是让他把承诺写下来，再尽量多地向他人展示。</p>
+<h2 id="第四章-社会认同（Social-Proof）"><a href="#第四章-社会认同（Social-Proof）" class="headerlink" title="第四章 社会认同（Social Proof）"></a>第四章 社会认同（Social Proof）</h2><h3 id="实验6：怕狗的小朋友"><a href="#实验6：怕狗的小朋友" class="headerlink" title="实验6：怕狗的小朋友"></a>实验6：怕狗的小朋友</h3><p>心理学家挑选了一些怕狗的幼儿园小朋友，让他们每天花20分钟观看一个小男孩高兴地与狗玩耍。结果，这一做法使得怕狗的儿童发生了明显变化。</p>
+<p>仅仅在4天之后，就有67%的儿童愿意钻进圈着小狗的围栏里，与小狗玩耍。而且当其他人离开后，他们仍旧待在那里，亲热地拍打或抚摸小狗。</p>
+<p>这说明周围人的做法对我们决定自己的行动，具有很重要的指导作用。</p>
+<h3 id="实验7：旁观者"><a href="#实验7：旁观者" class="headerlink" title="实验7：旁观者"></a>实验7：旁观者</h3><p>心理学家让一个纽约大学的学生，在马路上假装癫痫病发作。</p>
+<p>当只有一个旁观者在场的时候， 85%的情况他会选择去帮助发病的大学生。当有5个旁观者在场的时候，大学生得到帮助的概率只有31%。</p>
+<p>既然绝大部分单独经过的人，都会伸出援手，我们就很难说这是一个”冷漠的社会”。但是，与一般的看法相反，旁观者越多，实际上得到帮助的可能性反而变小了，这是为什么？</p>
+<p>心理学家认为，原因至少有两个。第一个原因是，当有多个旁观者时，每个人的责任感都会下降，”也许其他人会帮忙的，也许有人已经这样做了。”结果，没有一个人帮忙。第二个原因是，每个人看到其他人都没有行动，就认为既然大家都不担心，说明一切正常。而且，我们都不喜欢在别人面前显得慌乱。</p>
+<p>重要的是认识到，旁观者没有采取行动并不是因为冷漠无情或缺乏善意，而是因为他们不知道是否有紧急事件发生，也不知道自己是否有责任去采取行动。如果他们明确地知道自己负有责任，他们的反应是非常迅速的。</p>
+<p>当你遇到危险，正确的做法是从人群中挑出一个人来，盯着他，指着他，直接对他说：”你，穿蓝夹克的先生，我需要帮助，请叫一辆救护车来。”通过这么简单的一句话，你可以让周围的人了解你的处境、明确他们的责任、消除所有可能妨碍或延误救助的不确定性。</p>
+<h2 id="第五章-喜好（Liking）"><a href="#第五章-喜好（Liking）" class="headerlink" title="第五章 喜好（Liking）"></a>第五章 喜好（Liking）</h2><h3 id="实验8：足球队的称呼"><a href="#实验8：足球队的称呼" class="headerlink" title="实验8：足球队的称呼"></a>实验8：足球队的称呼</h3><p>在期末考试结束以后，心理学家对亚利桑那州立大学的学生做电话调查，询问他们该校足球队上一场比赛的输赢。</p>
+<p>如果上一场比赛输了，只有17%的学生会说”我们的球队”；如果上一场比赛赢了，用到”我们”这个词的学生就会增加到41%。</p>
+<p>这种差异的原因是，人们对与自己相似的人会产生好感。因为没人喜欢当失败者，所以人们更愿意与失败者保持距离或差异。</p>
+<h2 id="第六章-权威（Authority）"><a href="#第六章-权威（Authority）" class="headerlink" title="第六章 权威（Authority）"></a>第六章 权威（Authority）</h2><h3 id="实验9：估计身高"><a href="#实验9：估计身高" class="headerlink" title="实验9：估计身高"></a>实验9：估计身高</h3><p>心理学家将一位来自英国剑桥大学的访问者，依次介绍给澳大利亚某所大学五个班级的学生。但在每一个班上介绍他时，他的身份都不相同。</p>
+<p>在第一个班上，他被介绍为学生；在第二个班上，他被介绍为实验员；在第三个班上，他被介绍为讲师；在第四个班上，他被介绍为高级讲师；而在第五个班上，他被介绍为教授。</p>
+<p>当他离开之后，心理学家要学生们估计那位访问者的身高。结果发现，随着地位每一次升高，学生们估计的身高平均会增加1.5厘米。所以，当访问者是”教授”时比他是”学生”时，身高要高出6厘米。</p>
+<p>这说明头衔对人们有很大的影响力，一个人的头衔越显赫，人们对这个人的身高就估计得越高。这反映了人们仰视权威的心理。</p>
+<h3 id="实验10：闯红灯"><a href="#实验10：闯红灯" class="headerlink" title="实验10：闯红灯"></a>实验10：闯红灯</h3><p>心理学家让一名31岁的男子在好几个不同的地方，闯红灯横穿马路。</p>
+<p>有一半时间，他穿着一套烫得很平整的高级西服，系着领带；而另一半时间，他穿着普通的工作服。后一种情况时，并没有多少人跟着他一起闯红灯；而前一种情况时，跟着他的人简直是成群结队。</p>
+<p>这说明，人们很容易从服装去判断权威。如果对方穿着一套权威的衣服，大多数人会选择服从。</p>
+<h3 id="实验11：按喇叭"><a href="#实验11：按喇叭" class="headerlink" title="实验11：按喇叭"></a>实验11：按喇叭</h3><p>心理学家在旧金山的繁忙路口做了一项调查。</p>
+<p>当绿灯亮起的时候，如果前面停着一辆普通的经济型轿车，久久不开，几乎后面所有的司机都按了喇叭，而且大多数人按了不止一次。但是，如果前面停的是一辆豪华的高级轿车，只有50%的司机会按喇叭，其他人老老实实在后面等着，直到它开动为止。</p>
+<p>这说明，人们会从车辆判断车主的地位，尊敬拥有名车的人。</p>
+<h2 id="第七章-稀缺（Scarcity）"><a href="#第七章-稀缺（Scarcity）" class="headerlink" title="第七章 稀缺（Scarcity）"></a>第七章 稀缺（Scarcity）</h2><h3 id="实验12：品尝拼干"><a href="#实验12：品尝拼干" class="headerlink" title="实验12：品尝拼干"></a>实验12：品尝拼干</h3><p>心理学家让一些消费者品尝同样的饼干。</p>
+<p>有一半人的罐子里有10块饼干，而另一半人的罐子里只有2块饼干。结果可想而知，后一半人对饼干的评价更高。</p>
+<p>这说明人们对稀缺的东西，会做出更高的评价。因此，与其告诉人们将会得到什么，不如告诉他们将会失去什么，这样更容易对他人产生影响。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-02-23-Book-WealthOfNations/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Coding & Integrity">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-02-23-Book-WealthOfNations/" itemprop="url">无形之手 - 国富论的一段话</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-23T08:00:00+08:00">
+                2017-02-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>所以,每个人都会尽其所能,运用自己的资本来争取最大的利益.一般而言,他不会有意图为公众服务,也不自知对社会有什么贡献.他关心的仅是自己的安全、自己的利益.但如此一来,他就好像被一只无形之手引领,在不自觉中对社会的改进尽力而为.在一般的情形下,一个人为求私利而无心对社会作出贡献,其对社会的贡献远比有意图作出的大.</p>
+</blockquote>
+<p>17-18世纪的欧洲,一大批哲学家深入研究人性规律,直接催生经济学和现代社会科学,人性自私论则成为经济学的哲学基础.曼德维尔“私恶即是公利”、“人类所有值得颂扬的功绩和行动,背后动机都是虚荣和自利”等著名观点,对斯密和经济学的影响极其深远.</p>
+<p>经济学逻辑方法的决定论、机械论和均衡论,追根溯源,则是源于人性自私论.人性自私假说是西方先哲对人类行为的最基本公设,是经济学大厦的基础.人的自私欲望无限和自然资源有限之间构成难解难分之矛盾和冲突.经济学应运而生,冀图解决这个特殊矛盾.</p>
+<p>斯密《国富论》主要是阐释自私的好处.指出自私可以给社会整体带来很大的利益.</p>
+<p>埃德温·坎南为《国富论》写了序言：“<strong>渗透整个《国富论》的基本信念,就是自私能够创造经济社会利益.自斯密之后,该信念遂成为经济学的起点.</strong>”</p>
+<p>当然,对自私的最佳描述仍然是《国富论》“每个人都会尽其所能,运用自己的资本来争取最大的利益.在一般的情形下,一个人为求私利而无心对社会做出的贡献,远比有意图做出的要大.”</p>
 
           
         
@@ -638,7 +1583,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span>
+    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -683,7 +1628,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">121</span>
+                <span class="site-state-item-count">135</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -696,7 +1641,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

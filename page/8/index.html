@@ -301,7 +301,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-01-IT-500W_PV/">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-30-Python-paramiko/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -320,7 +320,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-06-01-IT-500W_PV/" itemprop="url">建设一个能承受500万PV/每天的网站</a></h1>
+                <a class="post-title-link" href="/2017-06-30-Python-paramiko/" itemprop="url">paramiko远程连接ssh2 - Python自动化运维</a></h1>
         
 
         <div class="post-meta">
@@ -332,8 +332,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-01T08:00:00+08:00">
-                2017-06-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-30T08:00:00+08:00">
+                2017-06-30
               </time>
             
 
@@ -369,33 +369,35 @@
       
         
           
-            <p>你想建设一个能承受500万PV/每天的网站吗？ 500万PV是什么概念？服务器每秒要处理多少个请求才能应对？如果计算呢？  </p>
-<h1 id="PV是什么："><a href="#PV是什么：" class="headerlink" title="PV是什么："></a>PV是什么：</h1><p>PV是page view的简写。PV是指页面的访问次数，每打开或刷新一次页面，就算做一个pv。</p>
-<h1 id="计算模型："><a href="#计算模型：" class="headerlink" title="计算模型："></a>计算模型：</h1><p>每台服务器每秒处理请求的数量=((80%<em>总PV量)/(24小时</em>60分<em>60秒</em>40%)) / 服务器数量 。<br>其中关键的参数是80%、40%。表示一天中有80%的请求发生在一天的40%的时间内。24小时的40%是9.6小时，有80%的请求发生一天的9.6个小时当中（很适合互联网的应用，白天请求多，晚上请求少）。</p>
-<h1 id="简单计算的结果："><a href="#简单计算的结果：" class="headerlink" title="简单计算的结果："></a>简单计算的结果：</h1><p>((80%<em>500万)/(24小时</em>60分<em>60秒</em>40%))/1 = 115.7个请求/秒<br>((80%<em>100万)/(24小时</em>60分<em>60秒</em>40%))/1 = 23.1个请求/秒</p>
-<h1 id="初步结论："><a href="#初步结论：" class="headerlink" title="初步结论："></a>初步结论：</h1><p>现在我们在做压力测试时，就有了标准，如果你的服务器一秒能处理115.7个请求，就可以承受500万PV/每天。如果你的服务器一秒能处理23.1个请求，就可以承受100万PV/每天。</p>
-<h1 id="留足余量："><a href="#留足余量：" class="headerlink" title="留足余量："></a>留足余量：</h1><p>以上请求数量是均匀的分布在白天的9.6个小时中，但实际情况并不会这么均匀的分布，会有高峰有低谷。为了应对高峰时段，应该留一些余地，最少也要x2倍，x3倍也不为过。<br>115.7个请求/秒 <em>2倍=231.4个请求/秒<br>115.7个请求/秒 </em>3倍=347.1个请求/秒<br>23.1个请求/秒 <em>2倍=46.2个请求/秒<br>23.1个请求/秒 </em>3倍=69.3个请求/秒</p>
-<h1 id="最终结论："><a href="#最终结论：" class="headerlink" title="最终结论："></a>最终结论：</h1><p>如果你的服务器一秒能处理231.4–347.1个请求/秒，就可以应对平均500万PV/每天。<br>如果你的服务器一秒能处理46.2–69.3个请求，就可以应对平均100万PV/每天。</p>
-<h1 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h1><p>这里说明每秒N个请求，就是QPS。因为我关心的是应用程序处理业务的能力。</p>
-<h1 id="实际经验："><a href="#实际经验：" class="headerlink" title="实际经验："></a>实际经验：</h1><ol>
-<li>根据实际经验，采用两台常规配置的机架式服务器，配置是很常见的配置，例如一个4核CPU+4G内存+服务器SAS硬盘。</li>
-<li>个人武断的认为在服务器CPU领域Intel的CPU要优于AMD的CPU，有反对的就反对吧，我都说我武断了（请看CPU性能比较），不要太相信AMD的广告，<br>比较CPU性能简单办法就是比价格，不要比频率与核心数，价格相差不多的性能也相差不多。</li>
-<li>硬盘的性能很重要，由其是数据库服务器。一般的服务器都配1.5万转的SAS硬盘，高级一点的可以配SSD固态硬盘，性能会更好。最最最最重要的指标是“随机读写<br>性能”而不是“顺序读写性能”。（本例还是配置最常见的1.5万转的SAS硬盘吧）</li>
-<li>一台服务器跑Tomcat运行j2ee程序,一台服务器跑MySql数据库,程序写的中等水平(这个真的不好量化)，是论坛类型的应用(总有回帖,不太容易做缓存<br>,也无法静态化)。</li>
-<li>以上软硬件情况下，是可以承受100万PV/每天的。(已留有余量应对突然的访问高峰)</li>
-</ol>
-<h1 id="注意机房的网络带宽："><a href="#注意机房的网络带宽：" class="headerlink" title="注意机房的网络带宽："></a>注意机房的网络带宽：</h1><p>有人说以上条件我都满足了，但实际性能还是达不到目标。这时请注意你对外的网络的带宽，在国内服务器便宜但带宽很贵，很可能你在机房是与大家共享一条100M的光纤，实际每个人可分到2M左右带宽。再好一点5M,再好一点双线机房10M独享，这已经很贵了（北京价格）。<br>一天总流量：每个页面20k字节*100万个页面/1024=19531M字节=19G字节，19531M/9.6小时=2034M/小时=578K字节/s如果请求是均匀分布的，需要5M（640K字节）带宽（5Mb=640KB注意大小写，b是位，B是字节，差了8倍），但所有请求不可能是均匀分布的，当有高峰时5M带宽一定不够，X2倍就是10M带宽。10M带宽基本可以满足要求。<br>以上是假设每个页面20k字节，基本不包含图片，要是包含图片就更大了，10M带宽也不能满足要求了。你自已计算吧。</p>
-<h1 id="附：性能测试基本概念"><a href="#附：性能测试基本概念" class="headerlink" title="附：性能测试基本概念"></a>附：性能测试基本概念</h1><hr>
-<p>基本概念：<br>Throughput（吞吐量）：按照常规理解网络吞吐量表示在单位时间内通过网卡数据量之和，其中即包括本机网卡发送出去的数据量也包括本机网卡接收到的数据量。<br>一个100Mb(位)的双工网卡，最大发送数据的速度是12.5M字节/s ， 最大接收数据的速度是12.5M字节/s， 可以 同时 收发 数据。<br>并发用户数：是同时执行操作的用户(线程数)。<br>响应时间：从请求发出到收到响应花费的时间 。<br>QPS - Queries Per Second  每秒处理的查询数（如果是数据库，就相当于读取）<br>TPS - Transactions Per Second  每秒处理的事务数(如果是数据库，就相当于写入、修改)<br>IOPS，每秒磁盘进行的I/O操作次数<br>例如对某个数据库测试，分开两次测QPS与TPS。<br>QPS（读取）值总是高于TPS(写、改)，并且有倍率关系，因为：</p>
+            <p>paramiko是用python语言写的一个模块，遵循SSH2协议，支持以加密和认证的方式，进行远程服务器的连接。</p>
+<p>由于使用的是python这样的能够跨平台运行的语言，所以所有python支持的平台，如Linux, Solaris, BSD, MacOS X,Windows等，paramiko都可以支持，因此，如果需要使用SSH从一个平台连接到另外一个平台，进行一系列的操作时，paramiko是最佳工具之一。  </p>
 <ol>
-<li>数据库对查询可能有缓存。</li>
-<li>机械硬盘或SSD硬盘的读就是比写快。</li>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install paramiko</li>
 </ol>
-<hr>
-<p>JMeter测试参数说明：<br>Label：每一个测试单元的名字。<br>Samples：表示一个测试单元一共发出了多少个请求。<br>Average：平均响应时间——默认情况下是单个 Request 的平均响应时间，当使用了 Transaction Controller<br>时，也可以以Transaction 为单位显示平均响应时间。，不重要。<br>Median：中位数，也就是 50％ 用户的响应时间，如果把响应时间从小到大顺序排序，那么50％的请求的响应时间在这个范围之内。重要。<br>90% Line：90％ 用户的响应时间，如果把响应时间从小到大顺序排序，那么90％的请求的响应时间在这个范围之内。重要 。<br>Min：最小响应时间，不重要。<br>Max：最大响应时间，出现几率只不过是千分之一甚至万分之一，不重要。<br>Error%：本次测试中出现错误的请求的数量<br>Throughput：吞吐量——默认情况下表示每秒完成的请求数（Request per Second），当使用了 Transaction<br>Controller 时，也可以表示类似 LoadRunner 的 Transaction per Second 数</p>
-<h2 id="KB-Sec：每秒从服务器端接收-到的数据量-只是接收-，相当于LoadRunner中的Throughput-Sec"><a href="#KB-Sec：每秒从服务器端接收-到的数据量-只是接收-，相当于LoadRunner中的Throughput-Sec" class="headerlink" title="KB/Sec：每秒从服务器端接收 到的数据量(只是接收)，相当于LoadRunner中的Throughput/Sec"></a>KB/Sec：每秒从服务器端接收 到的数据量(只是接收)，相当于LoadRunner中的Throughput/Sec</h2><p>loadrunner测试参数说明：<br>响应时间： 取90%值，如果把响应时间从小到大顺序排序，那么90％的请求的响应时间在这个范围之内。重要。<br>每秒点击数 ：hits per Second,每秒钟向服务器提交请求的数量。<br>TPS： Transaction per Second ，每秒事务数，一个事务是指一个客户机向服务器发送请求然后服务器做出反应的过程<br>Throughput（吞吐量）： Loadrunner记录的Throughput是接收到服务器返回的所有字节数之和，与本地发出的字节数无关。<br>Throughput/Sec： 每秒的吞吐量。<br>对于BS架构的一般分析 响应时间、点击率、吞吐量、TPS（每秒事务数）。</p>
-<h2 id="对于CS架构的一般分析-TPS（每秒事务数）"><a href="#对于CS架构的一般分析-TPS（每秒事务数）" class="headerlink" title="对于CS架构的一般分析 TPS（每秒事务数）"></a>对于CS架构的一般分析 TPS（每秒事务数）</h2><p>Apache ab测试参数说明：<br>RPS： Request per Second,每秒处理的请求数</p>
+<p>Examples:</p>
+<p>```python</p>
+<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> #!/usr/bin/env python</p>
+<p> import paramiko</p>
+<p> hostname=’10.1.134.128’</p>
+<p> username=’username’</p>
+<p> password=’password’</p>
+<p> #paramiko.util.log_to_file(‘syslogin.log’)</p>
+<pre><code>ssh=paramiko.SSHClient()
 
+#ssh.load_system_host_keys()
+
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+ssh.connect(hostname=hostname,username=username,password=password)
+
+stdin,stdout,stderr=ssh.exec_command(&apos;free -m&apos;)
+
+print stdout.read()
+
+ssh.close()
+</code></pre>
           
         
       
@@ -438,7 +440,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-05-26-Book-ITIL/">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-29-Python-pexpect/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -457,7 +459,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-05-26-Book-ITIL/" itemprop="url">ITIL</a></h1>
+                <a class="post-title-link" href="/2017-06-29-Python-pexpect/" itemprop="url">pexpect命令行交互(Linux Only) - Python自动化运维</a></h1>
         
 
         <div class="post-meta">
@@ -469,8 +471,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-26T08:00:00+08:00">
-                2017-05-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-29T08:00:00+08:00">
+                2017-06-29
               </time>
             
 
@@ -506,506 +508,44 @@
       
         
           
-            <p>ITIL即IT基础架构库(Information Technology Infrastructure Library,ITIL，信息技术基础架构库)由英国政府部门CCTA(Central Computing and Telecommunications Agency)在20世纪80年代末制订，现由英国商务部OGC(Office of Government Commerce)负责管理，主要适用于IT服务管理（ITSM）。ITIL为企业的IT服务管理实践提供了一个客观、严谨、可量化的标准和规范。</p>
-<p>ITIL最新版本是V3.0，它包含5个生命周期：</p>
-<ul>
-<li>战略阶段（Service Strategy)</li>
-<li>设计阶段（Service Design)</li>
-<li>转换阶段（Service Transition)</li>
-<li>运营阶段（Service Operation)</li>
-<li>改进阶段（Service Improvement)</li>
-</ul>
-<p><a href="/uploads/ueditor/php/upload/file/20170526/1495792665.pdf">ITIL_V3中文蓝皮书.pdf</a></p>
-<p><a href="/uploads/ueditor/php/upload/file/20170526/1495792666.pdf">翰纬-ITIL+v3白皮书.pdf</a></p>
-<p><img src="/uploads/ueditor/php/upload/image/20170526/1495792595.png" alt="blob.png"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-05-19-Book-ConwayLaw/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-05-19-Book-ConwayLaw/" itemprop="url">康威定律</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-19T08:00:00+08:00">
-                2017-05-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Mike从他的角度归纳这篇论文中的其他一些核心观点，如下：</p>
-<ul>
-<li>第一定律<ul>
-<li>Communication dictates design</li>
-<li>组织沟通方式会通过系统设计表达出来</li>
-</ul>
-</li>
-<li>第二定律<ul>
-<li>There is never enough time to do something right, but there is always enough time to do it over  </li>
-<li>时间再多一件事情也不可能做的完美，但总有时间做完一件事情</li>
-</ul>
-</li>
-<li>第三定律<ul>
-<li>There is a homomorphism from the linear graph of a system to the linear graph of its design organization</li>
-<li>线型系统和线型组织架构间有潜在的异质同态特性</li>
-</ul>
-</li>
-<li>第四定律<ul>
-<li>The structures of large systems tend to disintegrate during development, qualitatively more so than with small systems</li>
-<li>大的系统组织总是比小系统更倾向于分解</li>
-</ul>
-</li>
-</ul>
-<h3 id="人是复杂社会动物"><a href="#人是复杂社会动物" class="headerlink" title="人是复杂社会动物"></a>人是复杂社会动物</h3><ul>
-<li>第一定律<ul>
-<li>Communication dictates design</li>
-<li>组织沟通方式决定系统设计<br>沟通成本 = n(n-1)/2，沟通成本随着项目或者组织的人员增加呈指数级增长。是的，项目管理这个算法的复杂度是O(n^2)。举个例子</li>
-</ul>
-</li>
-<li>5个人的项目组，需要沟通的渠道是 5*(5–1)/2 = 10</li>
-<li>15个人的项目组，需要沟通的渠道是15*(15–1)/2 = 105</li>
-<li>50个人的项目组，需要沟通的渠道是50*(50–1)/2 = 1,225</li>
-<li>150个人的项目组，需要沟通的渠道是150*(150–1)/2 = 11,175</li>
-<li>第二定律:<ul>
-<li>There is never enough time to do something right, but there is always enough time to do it over</li>
-<li>时间再多一件事情也不可能做的完美，但总有时间做完一件事情</li>
-</ul>
-</li>
-<li>第三定律<ul>
-<li>There is a homomorphism from the linear graph of a system to the linear graph of its design organization</li>
-<li>线型系统和线型组织架构间有潜在的异质同态特性</li>
-</ul>
-</li>
-</ul>
-<h3 id="康威定律如何解释微服务的合理性"><a href="#康威定律如何解释微服务的合理性" class="headerlink" title="康威定律如何解释微服务的合理性"></a>康威定律如何解释微服务的合理性</h3><p>了解了康威定律是什么，再来看看他如何在半个世纪前就奠定了微服务架构的理论基础。</p>
-<ul>
-<li>人与人的沟通是非常复杂的，一个人的沟通精力是有限的，所以当问题太复杂需要很多人解决的时候，我们需要做拆分组织来达成对沟通效率的管理</li>
-<li>组织内人与人的沟通方式决定了他们参与的系统设计，管理者可以通过不同的拆分方式带来不同的团队间沟通方式，从而影响系统设计</li>
-<li>如果子系统是内聚的，和外部的沟通边界是明确的，能降低沟通成本，对应的设计也会更合理高效</li>
-<li>复杂的系统需要通过容错弹性的方式持续优化，不要指望一个大而全的设计或架构，好的架构和设计都是慢慢迭代出来的<br>带来的具体的实践建议是：</li>
-<li>我们要用一切手段提升沟通效率，比如slack，github，wiki。能2个人讲清楚的事情，就不要拉更多人，每个人每个系统都有明确的分工，出了问题知道马上找谁，避免踢皮球的问题。</li>
-<li>通过MVP的方式来设计系统，通过不断的迭代来验证优化，系统应该是弹性设计的。</li>
-<li>你想要什么样的系统设计，就架构什么样的团队，能扁平化就扁平化。最好按业务来划分团队，这样能让团队自然的自治内聚，明确的业务边界会减少和外部的沟通成本，每个小团队都对自己的模块的整个生命周期负责，没有边界不清，没有无效的扯皮，inter-operate, not integrate。</li>
-<li>做小而美的团队，人多会带来沟通的成本，让效率下降。亚马逊的Bezos有个逗趣的比喻，如果2个披萨不够一个团队吃的，那么这个团队就太大了。事实上一般一个互联网公司小产品的团队差不多就是7，8人左右（包含前后端测试交互用研等，可能身兼数职）。<br>再对应下衡量微服务的标准，我们很容易会发现他们之间的密切关系：</li>
-<li>分布式服务组成的系统</li>
-<li>按照业务而不是技术来划分组织</li>
-<li>做有生命的产品而不是项目</li>
-<li>Smart endpoints and dumb pipes（我的理解是强服务个体和弱通信）</li>
-<li>自动化运维（DevOps）</li>
-<li>容错</li>
-<li>快速演化</li>
-</ul>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
-<li><a href="http://www.infoq.com/cn/presentations/team-building-implementation-in-distributed-world" target="_blank" rel="noopener">远距离条件下的康威定律——分布式世界中实现团队构建</a>，本文图片来源该ppt截图</li>
-<li><a href="https://en.wikipedia.org/wiki/Conway%27s_law" target="_blank" rel="noopener">Conway‘s Law in wiki</a></li>
-<li><a href="http://www.melconway.com/Home/Conways_Law.html" target="_blank" rel="noopener">Conway’s Law Homepage</a></li>
-</ul>
-<p><img src="/uploads/ueditor/php/upload/image/20170519/1495179187.png" alt="blob.png"><br><img src="/uploads/ueditor/php/upload/image/20170519/1495179911.png" alt="blob.png"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-05-09-Book-LifePsychology/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-05-09-Book-LifePsychology/" itemprop="url">心理学与生活 - 南京大学</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-09T08:00:00+08:00">
-                2017-05-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="记忆的分类"><a href="#记忆的分类" class="headerlink" title="记忆的分类"></a>记忆的分类</h2><ol>
-<li>外显记忆（explicit memory）：需要可以努力去记忆。</li>
-<li>内隐记忆（implicit memory）：不需要意识控制，也不需要意志努力。</li>
-<li>程序性记忆（procedural memory）：一种关于怎么做事情的过程、步骤等具体操作的记忆。</li>
-<li>陈述性记忆（declarative memory）：一种依靠语言描述来进行的记忆。如背单词。</li>
-<li>情景记忆（episodic ）：对过去经验中时间、地点、过程等的记忆。</li>
-<li>语义记忆（semantic memory）：对抽象语言符号的记忆。</li>
-</ol>
-<ul>
-<li>容易忘记：语义记忆，外显记忆，陈述性记忆。难以忘记：情景记忆，程序性记忆，内隐记忆。</li>
-<li>感觉记忆（0.5—4s）；短时记忆（5s—60s）：容易被打扰；长时记忆（大于60s）<br><img src="/uploads/ueditor/php/upload/image/20170508/1494208289.png" alt="blob.png"></li>
-</ul>
-<h2 id="三大学习方式"><a href="#三大学习方式" class="headerlink" title="三大学习方式"></a>三大学习方式</h2><ul>
-<li>经典条件反射（classical conditional reflex）：巴普洛夫的狗。先有刺激再有反应。</li>
-<li>操作性条件反射（operant conditioning reflex）：斯金纳的老鼠。先有反应再有刺激。即行为的结果，增加了行为的频率。</li>
-<li>观察学习（observational learning）：班都拉提出来的。模仿，即看着看着就会了。譬如，谈恋爱。<br><img src="/uploads/ueditor/php/upload/image/20170508/1494208358.png" alt="blob.png"></li>
-</ul>
-<h2 id="你不知道的东西，潜意识知道"><a href="#你不知道的东西，潜意识知道" class="headerlink" title="你不知道的东西，潜意识知道"></a>你不知道的东西，潜意识知道</h2><p>意识和潜意识。通过梦、自由联想和催眠可以进入潜意识。弗洛伊德的精神分析基本假设认为人的行为是受到原始欲望所驱使的，所以归根到底人的行为是由本能驱动的。<br><strong>弗洛伊德人格结构理论：</strong></p>
-<ul>
-<li>本我（id）：原始冲动。按照快乐原则行事。</li>
-<li>自我（ego）：人格中相对理性的一面，它协调者本我和外界之间的关系。以我按照现实原则行事。</li>
-<li>超我（superego）：所有价值观的源泉，是我们后天慢慢习得的一种社会规范和道德。超我就是被内化的道德。按照道德原则行事。<br>本我和超我常常有冲突。自我起到调节两者的作用。调节失败的话就有可能会人格分裂。<br>自我通过部分第压抑本我的冲动，从而避免了和超我之间产生冲突。即自我开启了自我防御机制。<br><img src="/uploads/ueditor/php/upload/image/20170508/1494208396.jpg" alt=""><br><img src="/uploads/ueditor/php/upload/image/20170508/1494208465.png" alt="blob.png"></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-05-08-Book-IntrPsychology/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-05-08-Book-IntrPsychology/" itemprop="url">心理学概论(历史) - 清华大学</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-08T08:00:00+08:00">
-                2017-05-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="http://blog.sina.com.cn/s/blog_6011d5ef0101rr0j.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_6011d5ef0101rr0j.html</a></p>
-<p>著名心理学家艾宾浩斯曾经说过，心理学有一个长期的过去，但是只有一个短暂的历史。</p>
-<p>这句话是什么意思呢？也就是说我们人类对自己心理的关注其实是渊远流传，在我们中国文化里头，就有很多对心的分析、心的判断。洛阳亲友如相问、一片冰心在玉壶，讲得就是自己的心；知我者谓我心忧不知我者谓我何求，讲的也就是我们人类的需求。</p>
-<p>人类的心理活动，甚至上升到了哲学的高度。在中国历史上有一个哲学流派叫心学，它的基本观点就是：<strong>世上无心外之物,世上无心外之理</strong>。</p>
-<p>但是什么是心、心存在何处、心有什么样的表现，这样一个问题难住了人类的科学家几千年，那么心理学的历史到底从何算起呢？</p>
-<p>德国冯特创建第一个心理学实验室。1879年12月。用以研究人类意识活动的基本过程。</p>
-<p>冯特不光创建了第一个心理学实验室，他还招收了很多优秀的学生，这些人都成为各个国家的心理学的领军人物，其中一个是铁钦纳。</p>
-<p>铁钦纳作为冯特的学生，把心理学的实验传统带到了美国，创立完善了结构主义的心理学理论。(在康乃尔大学创建美国第一个心理学实验室)。</p>
-<p>结构主义认为心理学应该研究人类的意识，而人类的意识就是由一块块意识的元素所组成，所以这就是像科学的结构主义理论一样，人类的心理活动也应该从元素研究开始。</p>
-<p>斯坦利霍尔：儿童心理学运动之父和青春期发展理论家</p>
-<p>心理学历史上还有一个非常重要的人物叫威廉•杰姆斯，他是公认的美国心理学的奠基者。</p>
-<p>威廉杰姆斯：美国心理学的奠基者【机能主义】，信奉达尔文主义。认为意识就像一条生命的泉水，源源不断融入到我们的心中。创造了意识流的概念。心理学应该关注各种心理活动存在的原因意义和价值。认为人类的心理活动都是几千万年人类进化选择出来的心理特征和心理特质，这种特质都有它存在的意义。</p>
-<p>威廉•杰姆斯是哈佛大学的心理学教授，他对意识问题也很关注，但他不同意冯特和铁钦纳的观点，他不认为意识只是一些毫无生命的简单的元素和方块，他觉得意识就像一条生命的泉水源源不断融入到我们的心中，所以他创造了一个概念叫意识流。</p>
-<p>作为这个机能主义的奠基人，他觉得心理学家更应该关注各种心理活动它存在的原因意义和价值，他信奉达尔文主义，所以认为所有的人类的心理活动，都是几千万年人类进化选择出来的心理特征和心理特质，而这种心理特质都有它存在的意义，所以我们把以威廉•杰姆斯为首的心理学理论流派叫机能主义流派。</p>
-<p>当机能主义在美国兴起的时候，在欧洲悄然兴起了另外一种心理学的研究理论流派，就是著名的弗洛伊德的精神分析理论。</p>
-<p>弗洛尹德精神分析理论：人类的心理活动主要由无意识的心理活动引起，自由联想，反映心理下意识的欲望和需求。引用一些梦的分析来探索人类的内在的无意识的冲动【欧洲】</p>
-<p>他引用一些梦的分析来探索人类的内在的、无意识的冲动，他也对生活中间人类的口误、人类的一些基本的错误感兴趣。一个学生迟到了，开口就说我恨不得还可以晚点再来，其实就反映了他内在的一些心理的冲动和欲望。</p>
-<p>弗洛伊德是20世纪最有影响的心理学家，不光是对我们心理学影响很大，对人类的哲学、艺术、历史学、社会学、政治学都有非常大的影响，所以有人说弗洛伊德代表了心理学。</p>
-<p>其实这是一种误解，我们现在的心理学，早已经发现弗洛伊德的很多观点和理论其实没有现代科学的证据，而且大部分的证据来自于对病人的分析，所以有很多以偏概全的倾向性。</p>
-<p>弗洛伊德的主要理论包括冰山理论意识、潜意识理论、心理发展阶段理论、心理防御机制。</p>
-<p><img src="/uploads/ueditor/php/upload/image/20170508/1494207483.png" alt="blob.png"><img src="/uploads/ueditor/php/upload/image/20170508/1494207491.png" alt="blob.png"></p>
-<p><img src="/uploads/ueditor/php/upload/image/20170508/1494207506.png" alt="blob.png"><img src="/uploads/ueditor/php/upload/image/20170508/1494207523.png" alt="blob.png"></p>
-<p>当弗洛伊德理论在欧洲大陆兴盛的时候，在美国出现了一种新的心理学理论流派叫做行为主义，其代表任务包括华生和斯金纳。</p>
-<p>华生：认为心理学家应该更多的研究一些可以观察可以测量，可以定义的心理学变量【行为】。行为是人类外显的表现，可以做具体的观察，研究。是人类对外在刺激的一种自发的，自动的反应。行为是可以塑造可以改变的。“任何人如果给以足够的行为塑造，可以让它变成我们所期望的任何其他人”</p>
-<p>行为主义的第二个代表人物叫斯金纳，他认为心理学家不应该花时间去研究不可捉摸的人类意识，我们应该去研究人类的行为，人类行为都是可以通过操作性条件反射加以塑造、加以改变的。</p>
-<p>斯金纳的行为主义，对人类的学习、记忆、教育研究都有很大的促进作用，但他的很多观点、已经过时，因为我们现代心理学发现，人类的思维一定是我们心理活动非常重要的一个方面，我们不可能把人类的思维、意识排除在心理学研究的范围之外。</p>
-<p>在谈到行为主义的时候，我们就不得不介绍一个做出了世界性贡献的中国人，他就是著名的行为主义心理学家郭任远先生。《向本能主义说不》第一次提出来本能的研究，在很大程度上都是循环论证，应该用行为的研究来分析，人类的心理活动。</p>
-<p>无论是弗洛伊德的精神分析理论，还是行为主义的基本理论，都有很大程度的宿命论的意思，放弃了人类的主观的主动精神和自由意志，所以有些心理学家认为我们心理学应该具有更大的人文的精神、人文的情怀。两个代表人物，一个叫罗杰斯，一个叫马斯洛，他们认为我们人类应该有更高级的追求，我们不是简单的对外在环境做出反应、做出适应、做出调整。</p>
-<p>马斯洛是一个著名的人文主义的心理学家，他的基本理论就是认为人类有很多的需求，有些需求是我们基本的生存需求，但是人类也有很多更高级的追求，在基本需求满足以后，我们人类一定会追求高级的心理需求。马斯洛的需求层次理论到底有哪些具体内容呢？</p>
-<p>下面我们看一看马斯洛需求层次结构： 生理的需求physiological needs【本能层次的需要，包括食欲，睡眠，欲望等】；安全的需求security needs【避免对生命构成威胁的需要】；社交的需求social needs【社会需要，包括对友谊，爱情以及隶属关系的需求】；尊重的需求esteemneeds【想被人承认的需要】；自我实现的需求sell-actualization needs【对理想实现，发挥最大潜能的需要；最高境界，人的潜能和理想的最大化】</p>
-<p><img src="/uploads/ueditor/php/upload/image/20170508/1494207594.png" alt="blob.png"></p>
-<p>马斯洛的需求层次的最高境界就是自我实现，指的是人的潜能和理想的最大化，那么这种自我实现在我们中国文化环境下可能是另外一种境界。</p>
-<p>台湾中央研究院的著名心理学家杨国枢先生，就认为我们中国人的自我，其实是国家、家庭和个人的三位一体，是一种整体性的、集体的自我实现。这种自我实现是我们人类追求<br>的最高的境界。</p>
-<p>到底什么样的人能够达到自我实现的境界呢？马斯洛通过对林肯、斯宾诺莎和他周围的很多成功人士的分析和调查总结出来自我实现的人应该具备的一些心理特质。</p>
-<p><img src="/uploads/ueditor/php/upload/image/20170508/1494207626.png" alt="blob.png"></p>
-<p> <img src="/uploads/ueditor/php/upload/image/20170508/1494207678.png" alt="blob.png"></p>
-<p>这些特质包括： </p>
+            <p>Pexpect是一个纯Python模块,可以用来和ssh、ftp、passwd、telnet等命令行命令进行交互使用</p>
 <ol>
-<li>全面准确的知觉现实 </li>
-<li>接纳自己与他人 </li>
-<li>对人自发坦率和真实 </li>
-<li>以问题为中心而不是以自我为中心 </li>
-<li>具有超然于世和独处的需求</li>
-<li>具有自主性在环境和文化中能保持相对独立性 </li>
-<li>具有永不衰退的鉴赏力 </li>
-<li>具有难以形容的高峰体验 </li>
-<li>对人充满爱心 </li>
-<li>具有深厚的友情 </li>
-<li>具备民主精神 </li>
-<li>区分手段和目的 </li>
-<li>富于创造性 </li>
-<li>处事幽默风趣 </li>
-<li>反对盲目遵从</li>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install pexpect</li>
 </ol>
-<p>为什么心理学有这么多的流派、有这么多的不同的看法和争论，其实它核心的问题就是心理的复杂、心理活动的不可捉摸和心理研究的巨大的挑战。</p>
-<p>心理学和其他任何人类科学一样，都是需要通过不断的发展、不断的升华、不断的总结，真正的掌握我们科学的基本规律。在很多情况下，不同的学派其实是抓住了心理活动的不同的侧面，就像盲人摸象一样，每一个盲人其实只是接触了象的某一个部分、某一个部位、某一种角度，我们心理学的各种流派也是抓住了人类心理活动的不同的角度，不同的方<br>向、不同的方面，整合起来就形成了一个对人心的基本认识基本判断。</p>
-<p>那么心理学未来如何去发展呢，现在看来起码有三大研究领域会产生引人入胜的层出不穷的新的研究、新的发现，我个人认为这三大领域，也许能够代表人类心理学未来的研究重点、研究突破和研究方向。</p>
-<p>第一个领域就是认知神经领域，它是七十年代兴起的认知革命的延续，它借用了生物科学的一些全新的技术，特别是核磁共振技术来研究人类心理活动的脑机制。看一看我们的心理活动，是不是受到了人脑的生物的具体的局限，它的脑区的范围在什么地方，表现又有如何，这些脑科学的革命，对人类的认知科学有巨大的促进作用。认知革命发源于七十年代，主要是用计算机信息技术来分析，了解人类的心理活动的普遍规律，它的一个核心思想，就是我们人脑它是一个黑箱，我们很难知道这个黑箱的具体运作，通过对我们的输入和输出的分析，我们可以推测黑箱的基本运作和基本的研究范式，认知革命借助神经科学技术，它现在正在进行，我们在未来的心理学概论课中会介绍认知的一些新的发现、新的突破和新的证据。</p>
-<p>心理学第二个非常重要的革命，我个人认为是文化革命。在九十年代，美国心理学家开始意识到不是所有人都说英文，不是所有的人都有美国人那样特殊的心理的表现，这些心理学家认为我们应该从社会文化的角度，分析探索人类心理活动的基本规律。文化心理学研究领域的一个著名的代表人物，就是我的导师理查德.尼斯贝特，美国密西根大学心理学的终身教授和美国科学院和文学院双料院士，他和我以及其他同事做了很多文化差异的基本研究，发现东方人和西方人在思维、判断、情绪、认识等各个方面都有非常大的差异。</p>
-<p>其中一个有趣的研究就是让来自世界不同地方的人观察一下鱼缸的活动。下面就请看我当年在美国密西根大学做博士论文时候完成的一个跨文化的比较。</p>
-<p>心理学的未来研究发展值得关注的第三个方向，我个人认为是九十年代末期兴起的积极心理学，积极心理学奠基人马丁•塞利格曼和奇克森特米海伊，他们认为心理学家应该多多关注人类的优点、美德和最佳行为，人类的优势其实是多方面的，我们不光有思维的优势，我们也有情感的优势，我们也有道德的优势，我们还有创造的优势，我们人有追求、有理想，我们人也有同情心、利他心，人不光是一个生物的动物，也是一个社会的动物，更是一个道德的动物。</p>
-<p><img src="/uploads/ueditor/php/upload/image/20170508/1494207873.png" alt="blob.png"></p>
-<p>积极心理学是我们心理学未来发展，非常有前途、有希望的学科，因为我们心理学家是关心人类、共情人类、支持人类，也是希望能够理解人类的学科。</p>
-<p>心理学是一个通人心 、接地气、有追求的、伟大的科学，心理学的历史就是不断升华自己 、提升自己、创造新的自己的一个历史。</p>
+<p>Examples:</p>
+<p>```python<br> from pexpect import pxssh</p>
+<p> import getpass</p>
+<p>y:</p>
+<p>  s = pxssh.pxssh()</p>
+<p>  hostname = raw_input(‘hostname: ‘)</p>
+<p>  username = rawsername: ‘)</p>
+<p>  password = getpass.getpass(‘password: ‘)</p>
+<p>  s.login (hostname, username, password)</p>
+<p>  s.sendline (‘uptime’)  # run a command</p>
+<pre><code>s.prompt()             # match the prompt
+</code></pre><p>  print s.before         # print everything before the prompt.</p>
+<pre><code>    s.sendline (&apos;ls -l&apos;)
+
+    s.prompt()
+
+    print s.before
+
+    s.sendline (&apos;df&apos;)
+
+    s.prompt()
+
+    print s.before
+
+    s.logout()
+
+except pxssh.ExceptionPxssh, e:
+
+    print &quot;pxssh failed on login.&quot;
+
+    print str(e)
+</code></pre><p>Hacker Example: 用Pxssh暴力破解SSH密码:<a href="http://book.51cto.com/art/201601/504626.htm" target="_blank" rel="noopener">http://book.51cto.com/art/201601/504626.htm</a></p>
 
           
         
@@ -1049,7 +589,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-05-03-Book-FBISpeedReadingPeople/">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-28-Python-xlsx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -1068,7 +608,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-05-03-Book-FBISpeedReadingPeople/" itemprop="url">FBI教你读心术 - 乔.纳瓦罗</a></h1>
+                <a class="post-title-link" href="/2017-06-28-Python-xlsx/" itemprop="url">xlsxWriter构造xlsx文件 - Python自动化运维</a></h1>
         
 
         <div class="post-meta">
@@ -1080,8 +620,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-03T08:00:00+08:00">
-                2017-05-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-28T08:00:00+08:00">
+                2017-06-28
               </time>
             
 
@@ -1117,115 +657,104 @@
       
         
           
-            <p>奇异集团前总裁 杰克‧威尔许:<br> 我把六、七成时间都花费在「人」身上，<br> 但还是有百分之二十五的机率，<br> 会看走眼、用错人。 </p>
-<p><a href="/uploads/ueditor/php/upload/file/20170502/1493697985.pptx">《FBI教你读心术》运用发表.pptx</a></p>
-<p><img src="/uploads/ueditor/php/upload/image/20170502/1493706277.png" alt="blob.png"><img src="/uploads/ueditor/php/upload/image/20170502/1493706286.png" alt="blob.png"><br><img src="/uploads/ueditor/php/upload/image/20170502/1493706296.png" alt="blob.png"><img src="/uploads/ueditor/php/upload/image/20170502/1493706309.png" alt="blob.png"><br><img src="/uploads/ueditor/php/upload/image/20170502/1493706328.png" alt="blob.png"><img src="/uploads/ueditor/php/upload/image/20170502/1493706337.png" alt="blob.png"></p>
+            <p>xlsxWriter支持多种excle功能；与excel完美兼容；写大文件，速度快且只占用很小的内存空间, 不支持读或者改现有的excel文件</p>
 <ol>
-<li>真正的吃惊表情转瞬即逝，超过一秒钟便是假装的;</li>
-<li>撒谎者不像惯常理解的那样会回避对方的眼神，反而更需要眼神交流来判断你是否相信他说的话;</li>
-<li>“你去过她家吗?”“不，我没有去过她家”，对问题的生硬重复是典型的撒谎;</li>
-<li>男性鼻子下方有海绵体，摸鼻子代表想要掩饰某些内容;</li>
-<li>手放在眉骨附近表示羞愧;</li>
-<li>描述一连串发生的事情，编造都是按时间顺序进行的，能否流利准确地进行倒叙是判断对方是否说谎的标准之一;</li>
-<li>叙事时眼球向左下方看，这代表大脑在回忆，所说的是真话;而谎言不需要回忆的过程</li>
-<li>说话时单肩耸动，表示对所说的话极不自信，是说谎的表现;</li>
-<li>人在害怕时会出现生理逃跑反应———血液从四肢回流到腿部(做好逃跑准备)，因此手的体表温度会下降;</li>
-<li>明知故问的时候眉毛微微上扬;</li>
-<li>如果对方对你的质问表示不屑，通常你的质问会是真的;</li>
-<li>假笑眼角是没有皱纹的。</li>
-<li>当面部表情两边不对称的时候，极有可能他们的表情是装出来的;</li>
-<li>摩挲自己的手，是一种自我安慰的表现。当你不相信你自己所说的话，这样使自己安心;</li>
-<li>抿嘴两次，典型的模棱两可;  </li>
-<li>双手抱胸、退一步——肢体 抗 议，说明他的话不可信;</li>
-<li>虚情假意不会有眨眼。</li>
-<li>纵火案犯与强 奸犯在动机上有着惊人的相似性。记住两点，生活会更简单——</li>
-<li>重要的不是他是否撒谎，而是为什么要撒谎。</li>
-<li>真相和快乐不可兼得。</li>
-<li>说谎者在说谎前会眼神飘移 在想好说什么谎后 会眼神肯定 如果你冷静的反驳 说谎者会再次出现眼神飘移。  </li>
-<li>撒谎者面对一个提问，通常会先有点失措，然后借假笑的时间迅速思考，想出一个并不高明的谎言，然后异常坚定地回应。而且，会一直自言自语，越说越多，因为沉默的时候，他觉得别人还在怀疑他。</li>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install xlsxwriter</li>
 </ol>
-<h2 id="第一集："><a href="#第一集：" class="headerlink" title="第一集："></a>第一集：</h2><ol>
-<li>倒叙法：先说正叙，后说倒叙。测试说谎</li>
-<li>眼睛法：看着你有可能是在说谎，想看看你是否相信这个谎言。看左边，回忆，真话。</li>
-<li>要三个人保持秘密的方法就是，其中两个人死了。</li>
-<li>心生恐惧，典型的生理逃跑反应，血液从四肢回流到腿部做好逃跑准备，他的手部首先冰凉。</li>
-<li>你去过她家吗?不，我没有去过她家。 这样生硬的重复是典型的谎言。</li>
-<li>真相和快乐不可兼得。</li>
-<li>说话时单肩耸动，表示对所说的话极不自信，身体和语言的不一致，表明在说谎。</li>
-<li>如果吃惊的表情维持超过1秒，那就是在装，说明他在说谎。真正的吃惊表情转瞬即逝。</li>
-<li>眨眼睛就是真情</li>
-<li>瞳孔放大代表有性欲 哈哈</li>
-<li>男人摸鼻子代表想要掩饰</li>
-<li>手放在眉骨附近代表羞愧</li>
-<li>如果眉毛向下紧，那是真惊讶，如果眉毛上抬，表示其实知道而且在说谎</li>
-</ol>
-<h2 id="第二集："><a href="#第二集：" class="headerlink" title="第二集："></a>第二集：</h2><ol>
-<li>说话时倒退一步，代表对自己所说的观点没有信心。</li>
-<li>人们说谎的时候会摸脖子，这是个经典的动作。</li>
-<li>纵火和强奸有非常大的相关性，它们都是为了自我证明而出现的犯罪行为。</li>
-<li>对人说话时向前伸下巴，代表生气或者愤怒。</li>
-<li>语速快，将物体放在胸前，使自己与人竖起一道屏障，这是焦虑的表现。</li>
-<li>如果可以，选择观察，让别人来问问题，这样能更好地观察而避免分心。</li>
-<li>没有预谋、只有一次、并且无其他暴力行为的强奸行为，一般都是罪犯为了证明自己力量的男性主义崇尚者。</li>
-<li>叙述者做出撇嘴的动作(嘴角两边向下，成一个凸行的弧度)，这是一个经典的泄露内心的表情，就是对自己所说的话没有信心，或者有撒谎的嫌疑。mouth shrug\hands shrug</li>
-<li>不要让事实妨碍真相。(这句话同第一集的那句“真相和快乐不可兼得”一样，太精辟了)</li>
-<li>说话时手掌向外一翻一翻的，代表没有信心或者编造故事。</li>
-<li>吃安定可以减少情绪起伏额</li>
-<li>女性如果看到同胞说自己被强奸而无动于衷的话，那说明她们知道这是在说谎，这个根本没有发生。</li>
-</ol>
-<h2 id="第三集"><a href="#第三集" class="headerlink" title="第三集:"></a>第三集:</h2><ol>
-<li>话语重复，并且声音上扬——撒谎</li>
-<li>在学校里，越受欢迎的孩子，越会撒谎，他们能说会道，隐藏自己的感情。研究by福斯特</li>
-<li>当人的脸部表情两边不对称的时候，极有可能他们表现出来的感情是装出来的。</li>
-<li>对自己描述的情况，会出现某些细节遗忘，但能进行及时纠正，很有可能不是在撒谎。如：回忆高度时把100000英尺改为100500英尺。</li>
-<li>说话缓慢轻柔表明内心极度的悲伤和焦虑。</li>
-<li>如果没有合适的问题，就不可能得到正确的答案。(同上一集的不要让事实妨碍真相，呵呵。)其实还有一句，既是在说假话，又不是在撒谎，那就是当不知道自己说的是假话。</li>
-<li>摩挲自己的双手——自我安慰的状态，当你不相信自己在说什么的时候，就会出现这个动作来使自己安心。</li>
-<li>如果先突然大声说话，然后再用手猛拍桌子，这是对可怕事情反应的手势时间差。如果是真的发火，这两个动作会同时进行。</li>
-<li>在刑事案件中，只有清白的人才敢承认自己和死者有过争执。罪犯是不会承认任何事情的，并且表面上会装得很无辜。</li>
-<li>当真正的凶手看到被害者照片的时候，会表现出恶心、轻蔑甚至是害怕。但绝对不会是吃惊。</li>
-</ol>
-<h2 id="第四集："><a href="#第四集：" class="headerlink" title="第四集："></a>第四集：</h2><ol>
-<li>要是有人要将要实施血腥的罪行，就会出现这样的表情：眉毛朝下皱紧，上眼睑扬起，眼周绷紧。</li>
-<li>(微)表情是无意识的，不是通过选择而做出的，因此是控制不了的。并且和国籍没有关系。</li>
-<li>几乎所有的婚礼上，都交织着香槟和怨恨。</li>
-<li>眉毛上扬并挤在一起，那是害怕担忧和恐惧。</li>
-<li>说话时眨眼睛——隐瞒了什么。</li>
-<li>说话犹豫且重复，没有办法组织好自己该说的话，所以明显是在说谎。</li>
-<li>手指指向一边，眼睛却朝另一边看，说谎的时候就会这样，绞尽脑汁编造事实，肢体则完全跟不上。</li>
-<li>亮出中指(fuck的手势)，这是象征性的还有特定意识的下意识手势，充满敌意。</li>
-</ol>
-<h2 id="第五集："><a href="#第五集：" class="headerlink" title="第五集："></a>第五集：</h2><ol>
-<li>被询问时，咬嘴唇、抓耳朵，这是在提高自己的控制感——焦虑的表现。</li>
-<li>如果事先已经准备好了谎言，会强烈希望快点把谎话说完。也就是反应时差(提问和回答之间的停顿时间)很短很短，甚至不足一秒。</li>
-<li>在痛苦的尽头，总是有欢笑。——拉蒙 德 卡波莫</li>
-<li>鼻孔扩大、嘴唇绷紧——发火了，但还在控制当中。</li>
-<li>叙述时低着头并且抚摸自己的额头，这是羞愧的表现。</li>
-<li>脸颊升高，嘴角下撇，这是悔恨的表现。</li>
-<li>适不适合并不是最关键的，关键在于适应改变的能力。达尔文</li>
-<li>轻微的摇头表示“不”，当我们在说“yes”的时候却言不由衷，就会不小心做这个动作。</li>
-<li>眉毛挑起、皱到一起——害怕。</li>
-</ol>
-<h2 id="第六集："><a href="#第六集：" class="headerlink" title="第六集："></a>第六集：</h2><ol>
-<li>问最关键的问题，而且是在当事人毫无准备的情况下，往往可以得出毫无粉饰的表情，我叫它原生态表情，hoho~</li>
-<li>试探一个人是不是说谎，最简单并且最邪恶的办法就是也扯个谎让他往里跳。</li>
-<li>咧嘴并且嘴角向下：这下玩儿完了。</li>
-<li>说话之后手紧握椅子扶手，对自己的表述不认可。</li>
-<li>抿嘴，试图掩盖。</li>
-<li>自我阉割的恋童癖者说实话……(这条实用性不大)</li>
-<li>吞咽表示强烈的情感。</li>
-<li>摸自己的脸颊靠近耳根部位，紧张。</li>
-</ol>
-<h2 id="第七集："><a href="#第七集：" class="headerlink" title="第七集："></a>第七集：</h2><ol>
-<li>在进行类似指纹调查时，只有罪犯，才会知道指纹不是他们自己的。</li>
-<li>在中东，出场顺序是很讲究的。最重要的人往往最后一个入场。</li>
-<li>“……，我只会说一次!”——经典的强势表述，如果说的是真话，就不需要这样。</li>
-<li>显然，科学和商业无法融合。</li>
-<li>“To my knowledge…”，“就我所知……”——这样的开头，也许意味着事实上知道些什么，从另一个角度上来说，也许坦白一切了已经。</li>
-<li>回答问题时咬紧嘴唇，这是焦虑的体现。</li>
-<li>侦破谎言的关键在于，问对问题。</li>
-</ol>
+<p>Examples:</p>
+<p>```python</p>
+<p> #coding: utf-8</p>
+<p> import xlsxwriter</p>
+<p> workbook = xlsxwriter.Workbook(‘E:\python\pyauto\3\XlsxWriter\chart.xlsx’)</p>
+<p> worksheet = workbook.add_worksheet()</p>
+<p>art = workbook.add_chart({‘type’: ‘column’})</p>
+<p>tle = [u’业务名称’,u’星期一’,u’星期二’,u’星期三’,u’星期四’,u’星期五’,u’星期六’,u’星期日’,u’平均流量’]</p>
+<p> buname= [u’业务官网’,u’新闻中心’,u’购物频道’,u’体育频道’,u’亲子频道’]</p>
+<p> data = [</p>
+<pre><code>[150,152,158,149,155,145,148],
 
+[89,88,95,93,98,100,99],
+
+[201,200,198,175,170,198,195],
+
+[75,77,78,78,74,70,79],
+
+[88,85,87,90,93,88,84],
+</code></pre><p> ]</p>
+<p> format=workbook.add_format()</p>
+<p> format.set_border(1)</p>
+<p>rmat_title=workbook.add_format()</p>
+<p>rmat_title.set_border(1)</p>
+<p>itle.set_color(‘#cccccc’)</p>
+<p>itle.set_align(‘center’)</p>
+<p> format_title.set_bold()</p>
+<p> format_ave=workbook.add_format()</p>
+<p> format_ave.set_border(1)</p>
+<p> format_ave.set_num_format(‘0.00’)</p>
+<pre><code>worksheet.write_row(&apos;A1&apos;,title,format_title)
+
+worksheet.write_column(&apos;A2&apos;, buname,format)
+
+worksheet.write_row(&apos;B2&apos;, data[0],format)
+
+worksheet.write_row(&apos;B3&apos;, data[1],format)
+
+worksheet.write_row(&apos;B4&apos;, data[2],format)
+
+worksheet.write_row(&apos;B5&apos;, data[3],format)
+
+worksheet.write_row(&apos;B6&apos;, data[4],format)
+
+# Insert an image.
+
+worksheet.insert_image(&apos;B25&apos;, &apos;E:\\python\\pyauto\\3\\XlsxWriter\\img\\python-logo.png&apos;)
+
+
+
+def chart_series(cur_row):
+
+    worksheet.write_formula(&apos;I&apos;+cur_row, \
+
+     &apos;=AVERAGE(B&apos;+cur_row+&apos;:H&apos;+cur_row+&apos;)&apos;,format_ave)
+
+    chart.add_series({
+
+        &apos;categories&apos;: &apos;=Sheet1!$B$1:$H$1&apos;,
+
+        &apos;values&apos;:     &apos;=Sheet1!$B$&apos;+cur_row+&apos;:$H$&apos;+cur_row,
+
+        &apos;line&apos;:       {&apos;color&apos;: &apos;black&apos;},
+
+        &apos;name&apos;:    &apos;=Sheet1!$A$&apos;+cur_row,
+
+    })
+
+
+
+for row in range(2, 7):
+
+    chart_series(str(row))
+
+
+
+#chart.set_table()
+
+#chart.set_style(30)
+
+chart.set_size({&apos;width&apos;: 577, &apos;height&apos;: 287})
+
+chart.set_title ({&apos;name&apos;: u&apos;业务流量周报图表&apos;})
+
+chart.set_y_axis({&apos;name&apos;: &apos;Mb/s&apos;})
+
+
+
+worksheet.insert_chart(&apos;A8&apos;, chart)
+
+workbook.close()
+</code></pre>
           
         
       
@@ -1268,7 +797,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-04-28-Book-ThinkTech/">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-27-Python-scapy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -1287,7 +816,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-04-28-Book-ThinkTech/" itemprop="url">思考的技术 - 大前研一</a></h1>
+                <a class="post-title-link" href="/2017-06-27-Python-scapy/" itemprop="url">scapy交互式数据包处理 - Python自动化运维</a></h1>
         
 
         <div class="post-meta">
@@ -1299,8 +828,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-28T08:00:00+08:00">
-                2017-04-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-27T08:00:00+08:00">
+                2017-06-27
               </time>
             
 
@@ -1336,245 +865,284 @@
       
         
           
-            <p>大前研一，1943年出生于福冈县，毕业于早稻田大学理工系。获得东京工业大学原子核工科硕士学位、麻省理工学院原子力学工科博士学位。曾任麦肯锡咨询公司日本分社社长，1994年辞职。之后从事国际跨国公司和亚太地区国家经济顾问活动，同时他大胆地提出了“无国界经济学”和“地域国家论”的观点。被英国《经济学人》杂志评选为“全球五位管理大师”之一、“日本战略之父”。《金融时报》如此描述这位日裔美籍经济管理学家：“他是日本仅有的一位极为成功的管理学宗师。” 曾任美国加州大学洛杉矶分校研究生院教授，斯坦福大学商学院客座教授。2005年，作为日本远程教育的尝试者，大前研一创办了创业家学校并担任校长。著有《专业主义》、《思考的技术》、《OFF学》、《M型社会》、《即战力》、《无国界的国界》等多部具有影响力的经典著作。他在《中国的影响》一书中提出对中国未来发展的中肯建议被众多国人所熟知和接受。</p>
-<p><a href="https://wenku.baidu.com/view/bbd44264ee06eff9aef80760.html" target="_blank" rel="noopener">https://wenku.baidu.com/view/bbd44264ee06eff9aef80760.html</a></p>
-<p><a href="https://wenku.baidu.com/view/82f9bc04a5e9856a561260ef.html?re=view" target="_blank" rel="noopener">https://wenku.baidu.com/view/82f9bc04a5e9856a561260ef.html?re=view</a></p>
-<p><a href="/uploads/ueditor/php/upload/file/20170427/1493262135.ppt">大前研一《思考的技术》-读后感.ppt</a></p>
-<p><img src="/uploads/ueditor/php/upload/image/20170427/1493261692.png" alt="blob.png"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-04-27-Book-McKinseyWorkingMethod/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-04-27-Book-McKinseyWorkingMethod/" itemprop="url">麦肯锡方法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-27T08:00:00+08:00">
-                2017-04-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="第一部分：麦肯锡思考企业问题的方法"><a href="#第一部分：麦肯锡思考企业问题的方法" class="headerlink" title="第一部分：麦肯锡思考企业问题的方法"></a>第一部分：麦肯锡思考企业问题的方法</h1><h2 id="一、建立解决方案"><a href="#一、建立解决方案" class="headerlink" title="一、建立解决方案"></a>一、建立解决方案</h2><ol>
-<li>以事实为基础：对收集事实的积极态度，必须不害怕、不逃避事实</li>
-<li>严格的结构化：MECE原则（相互独立、完全穷尽）。对事件细节的归类一般可以分为三种，或者加一个其他类。这三种分类必须相互独立没有交集，且每一个分类能完全穷尽其范围内的细节（可再下列其他分支）</li>
-<li>以假设为导向<blockquote>
-<p>定义最初的假设：在你找出问题之前想出来的解决方案（有待证明或驳斥，并非答案）<br>创造最初的假设：用一两个小时翻这个行业的出版物（不是为了了解事实，而是吸收这个行业的气息），或者最好找到了解这一行业的人。根据“关键驱动因素”原则建立框架（一、二、三），并进一步建立“问题树模型”。<br>检验最初的假设：考虑客户情况，是否是最佳假设？是否已经涵盖所有问题？是否已经考虑到了关于这个问题的搜有关键驱动因素？建议方案是否都是可行的、可证明的。</p>
-</blockquote>
-</li>
-</ol>
-<h2 id="二、制定计划"><a href="#二、制定计划" class="headerlink" title="二、制定计划"></a>二、制定计划</h2><ol>
-<li>问题不会永远是问题：深入的挖掘收集事实，搞清楚交给你的问题是不是真正的问题。找出真正决定性问题所在</li>
-<li>不要去重新发明解决问题的工具：增值分析、商业流程分析、重建商业流程（BPR）、产品-市场扫描等等。分析框架对于战略性的商业分析具有强大的启动作用。</li>
-<li>不存在统一的解决方案：相似的商业问题不意味着有相似的解决方案。即使你最初的经验假设可能是正确的，也要用足够事实去证明你最初的猜想。</li>
-<li>不要让事实去适应你的解决方法：保持开放而富有弹性的思维，不要让强有力的假设变成头脑僵化的借口。从连续不断的事实收集和分析中停下来，问一问自己过去一个礼拜（或一个月）你已经获取的新信息与你最初的假设是否自恰？如果不自恰，应当适当改变假设。</li>
-<li>确保你的解决方法适合你的客户：即便再完美的方案，如果客户无法实施，也是徒劳无益的。了解客户管理层的优势、劣势、能力——什么是管理层做不到的。根据这些来剪裁你的最终方案。常见的局限条件是：政治原因、缺乏资源、能力有限。</li>
-<li>有时候要让解决方案来找你：最初假设只是有助与你组织和深化你的思维，只有足够的事实和创造性思维结合，新的假设和解决方案才会出现。</li>
-<li>在实际调研和方案产生过程中遇到客户内部阻力怎么办：<blockquote>
-<p>重新定义问题：发现A问题角力会浪费大量精力与资源且有很大阻力时，及早的提出问题不是A，而是B。要表现出出色的商业判断力，而不是成为一个不及时的逃避问题者。<br>锲而不舍的实施你的解决方案：不改变绝佳的解决方案，而是把方案实施时间拉长，等人事阻力离开企业后再实施方案达到最佳方案。<br>解决政治问题:商业政治的本质是人们按照自己的利益行事，最终方案要考虑对客户内部政治群体的不同激励因素和整体组织因素。记住政治是可能性艺术，客户拒绝的理想方案就是无用方案。</p>
-</blockquote>
-</li>
-</ol>
-<h2 id="三、80-20和其他一些重要规则"><a href="#三、80-20和其他一些重要规则" class="headerlink" title="三、80/20和其他一些重要规则"></a>三、80/20和其他一些重要规则</h2><ol>
-<li>80/20规则：很多时候，这个法则是解决问题的启动点。</li>
-<li><p>不要想把整个海洋煮沸:不要试图分析所有事情，要有所选择，找出应该做的事情的优先顺序。</p>
-</li>
-<li><p>发现关键驱动因素:把精力放在最重要的因素上（是什么影响了你的企业？），注意避免“计算平局率（即问题中每一个增加的方程，要求系统的计算量增加至少是方程数的平方）”。</p>
-</li>
-<li>电梯测试:如果你对你的解决方案足够了解，那么30秒内你就能清晰的把问题解释清楚（30秒电梯内和客户沟通的时间）。盯住三个最重要的建议（并且用数字和关键词说明），别去担心支持材料，等有时间再去说支持材料。</li>
-<li>先摘好摘的果子:学会重视部分问题的解决和阶段性的成果。将能1，使客户更加热情和信任2，让客户即时的利润提高或效率提升3，鼓舞团队士气</li>
-<li>每天制作一个图表:做好良好的时间规划和一天总结。静坐半小时问自己今天学到的三件最重要的事情是什么？制作成简易的三行两列表格，进入分析模式，想一想他们有没有意义，可以用在你的解决方案的什么地方。</li>
-<li>一个垒一个垒的打:你不可能把一切事情都做完，即时你设法做到了一次反而会引起周围人对你不切实际的期望，一旦你没有满足这种期望，要想重新赢得信任的困难的。不要期许再商业上总出现本垒打，你最好一个垒一个垒的打。</li>
-<li>要关注大画面:时不时的从正在做的事情中抬头想一想，正在做的事情对解决问题究竟如何？它是如何推进你的思路的？这是不是你应该做的最重要的事情？如果它对整件事没有什么帮助，你为什么要去做呢？</li>
-<li>只管说“我不知道”:没有什么把握的事情，只管说我不知道，不要信口开河试图蒙混过去。</li>
-<li>不要接受“我没有什么概念”:你客户的“我没有什么概念”的意思是“我太忙了，没时间考虑这个问题”。你不能轻易接受这句话，刨根问底，问及细节或者让客户估计状况，这都能让你更接近精确的商业决策。</li>
-</ol>
-<h1 id="第二部分：解决企业问题的麦肯锡工作法"><a href="#第二部分：解决企业问题的麦肯锡工作法" class="headerlink" title="第二部分：解决企业问题的麦肯锡工作法"></a>第二部分：解决企业问题的麦肯锡工作法</h1><h2 id="四、推销研究"><a href="#四、推销研究" class="headerlink" title="四、推销研究"></a>四、推销研究</h2><ol>
-<li>如何在没有推销的情况下销售:做到“市场营销”而不是“推销”。直接招揽生意会有失专业身份。利用出版物（免费的麦肯锡季刊或者丛书寄送给客户）。利用Alumini网络。与潜在用户保持非正式接触的庞大关系网（如参与慈善团体、文化组织这些业余活动）。通过一切正式或非正式得场合让你的潜在客户知道你。</li>
-<li>小心自己的承诺:构造项目:DSC（客户服务主管）、优秀的项目经理应该做到把团队的能力和客户要求平衡到精确的程度：告诉客户“我们要做甲和乙这两件事情，我们可以做丙事情，但是那会把团队累垮。”对团队说“我们已经向客户保证要做丙事情，所有要说到做到”。这样团队能发挥到极致，客户又能觉得花费物有所值且超出自己的期望。</li>
-</ol>
-<h2 id="五、组成团队"><a href="#五、组成团队" class="headerlink" title="五、组成团队"></a>五、组成团队</h2><ol>
-<li>获取综合的正确性:两种团队选择理论：1，智力决定一切。2，特殊的经验和技能。</li>
-<li>有一点Team bonding活动能走的更长远的:不需要太多的活动，比如去当地最好的酒店，看演出，玩游戏。试着把团队成员的另一半叫上，有助于他们理解他们所爱的人及同事在干什么，也有助于你理解你的同事。</li>
-<li>把握团队温度以保持士气:<br>把握团队温度：保证他们乐于正在做的事情，注意发现他们对正在做的事情那个有没什么疑问，如果发现不妥，赶紧安排安抚措施。<br>让你的团队明白他们要干的事情是什么：让他们知道他们做的事情对一个整体的重要性和对客户的价值创造，“毫无价值的事情”会让团队士气低落。<br>以尊重对待你的团队同事：尊重他人和你有不一样的优先考虑，己所不欲，勿施于人。<br>了解你的同事：他结婚了吗？有孩子吗？爱好是什么？这都有助于你理解他们。<br>当日子不好过的时候：除了告诉队友“我能感觉你们大家的痛苦”之外，你能做的也就是不屈不挠的坚持下去，这就是生活，保持士气，至少保证项目结束大家不会想辞职。</li>
-</ol>
-<h2 id="六、处理好等级结构"><a href="#六、处理好等级结构" class="headerlink" title="六、处理好等级结构"></a>六、处理好等级结构</h2><ol>
-<li>让你的上司脸上有光:兴许整个公司里见到你最多的人就是你上司，所以最佳方法就是让她高兴一点，脸上有光：首先意味着尽最大能力做好工作，其次保证你知道的一切你的上司也知道，一定要让信息顺畅，让他知道你在哪在干什么会有什么问题。于此同时，又能用结构清晰的语音邮件和电子邮件来传递必要信息。</li>
-<li>处理好登记层次的进取策略:你可以越级传递信息（但是会比较冒险），在一个等级僵化的组织里，最好请示上司还不是直接传递信息。</li>
-</ol>
-<h2 id="七、做研究"><a href="#七、做研究" class="headerlink" title="七、做研究"></a>七、做研究</h2><ol>
-<li>不要去重新发明轮子:也许你面临的问题，正是公司别的部门或者其他公司的人已经解决过的问题，善于节省时间和精力，不要重新发明轮子。除了行业杂志、报纸、资料库、数据库以外，行业人士常去的咖啡馆也是获取信息之处。</li>
-<li>特殊的研究秘诀:<br>从Annual report入手：拿到一个公司的年报时，首先要看的是“股东信息”或“董事长评论”，用略带怀疑的眼光去看，能看到上年度业绩，管理层未来发展战略。然后迅速浏览鬼獒价格、收益、EPS等关键财务指标，同时还能了解到经营单位、生产线信息、高管、办公设置及地点，接着你就可以钻研这些数字了。<br>找出暴露出来的东西：找出特别好和特别差的方面，用计算机勾勒出一幅图画。比如把每一个销售人员的业绩输入表格，看看最好的和最差的数据，搞清楚出现这些的原因，你的研究就开始大踏步前进。<br>找出最佳经验：找出这个行业中业绩最佳者，然后去模仿他们，往往是对付业绩不佳的速效药。找不到竞争对手的资料，可以去找供应商、消费者、华尔街上的分析师、行业的朋友、商学院的朋友在公司内部，找到业绩最佳的个人和团队，也能学到最佳经验。</li>
-</ol>
-<h2 id="八、进行走访"><a href="#八、进行走访" class="headerlink" title="八、进行走访"></a>八、进行走访</h2><p>走访是弥补书本信息不足的最佳方法。这些人拥有你想要的信息：客户公司的主管、生产线上的监工、供应商、顾客、行业专家、竞争对手等等。</p>
+            <p>scapy是python写的一个功能强大的交互式数据包处理程序，可用来发送、嗅探、解析和伪造网络数据包，常常被用到网络攻击和测试中。它可以代替hping,arpspoof.ARP SK,arping,p0f,甚至是部分nmap,Tcpdump和tshark。</p>
 <ol>
-<li><p>做好准备：写出走访提纲<br>可能你只有30分钟时间和一个你再也不会见到的人呆在一起，因此要想清楚你要提出的问题。首先把需要答案的问题列出来，先不管顺序。其次更为重要的是，你真正需要的是什么？你想达到的目的是什么？为什么要走访这个人？把目的定义清楚会有助于你按正确的顺序提问。要了解走访对象的性格，并且从热身问题问起（比如行业的看法，对对方的赞许和寒暄）。在问题中嵌入一些事实上你知道答案的问题，用以洞察被访者的诚实程度和知识面，对于一些复杂的问题，可能不止一个答案，你要问的详尽。在提纲写出来之后，你还要仔细想想你最想了解的是哪三个问题。在访问结束之前，记得问“麦肯锡原始问题”：你还有没什么想要告诉我。访问部门主管的好处是：他了解高层不愿意谈的问题（谁可以推动哪个部门、问题的症结在哪里等）</p>
-</li>
-<li><p>在走访过程中，注意聆听和引导<br>让被访者清楚你正在听（插入对、我明白、唔-唔之类的语言，肢体语言比如身体靠近，点头，做笔记（即时他在说废话））。有时候，静默不说话反而能让对方讲更多信息。</p>
-</li>
-<li><p>走访成功的7个秘诀<br>让被访者的上司安排会面：当被上级告知这次走访很重要时，他才不会东拉西扯不着重点。<br>两个人一起进行走访：轮流提问和做笔记，有一个对行业了解的人更加。<br>倾听，不要指导：不要问选择题，问问答题。这样你才能获取更多信息。<br>复述，复述，复述：很多被访者的言语并不十分有逻辑，这时候你需要用你理解的答案复述给他听，询问是否正确的理解了他的信息，同时给他补充信息和强调重点的机会。<br>采用旁敲侧击的方式：或许直接提问会惹怒被访者，注意照顾被访者的情感和必要兜圈子、旁敲侧击。<br>不要问太多：关于行业的信息你从行业报告和网络都能获得，没必要什么都问他，集中问题在你想了解的几个最重要方面。不要穷追不舍，让对方产生不舒适则更难得到有效信息。<br>采用考伦波策略（来源于70年代电视剧）：即在离开的门口转身提问。要是你需要得到某个特殊问题的答案，或者一份特殊数据。一旦走访结束，每个人都会放松下来，<br>他的压迫感会消失，提放心理大大下降。这时候往往会告诉你你费心寻找的信息。“超级”考伦波策略：等过了一两天后，只不过顺便路过被访者办公室，记起了一个你忘记问的问题，这样显得你没有威胁性，更容易得到信息。</p>
-</li>
-<li><p>不要让被访者无处躲藏<br>因为你代表一部分客户高层的“权利”，所以不要让中层被访者觉得自己在被审问，而担心自己丢掉职位，你要指出不光是对他访问，还包括整个企业提高效益，如果你能告诉他你能为他提高工作效率，提高他雇员的盈利能力，和他共享整个企业的信息，访问能顺利进行。</p>
-</li>
-<li><p>困难的走访<br>记住授权给你的人的级别。如果遇到有敌意的不愿意提供信息的人，你可以施展“职权”或者必要的时候当场给他的上司打电话。对付喋喋不休者，除了旁敲侧击，也许最好的方法就是找一个别的知道这个事情的人访问。如果你要访问的人是这样一个人，即你的调研会让他丢掉工作，而你和他都深知这一点，这种情况下你除了尽职尽责、完全公正，不生气急躁也不情绪低落，你没有别的办法。内心平静的完成工作，记住，没有人说生活是公平的。</p>
-</li>
-<li><p>一定要写感谢信<br>在和人谈话完毕后，回去记得花时间写感谢信，不但有礼貌而且很职业，且会在今后的合作给你带来意想不到的回报。</p>
-</li>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install scapy</li>
 </ol>
-<h2 id="九、头脑风暴"><a href="#九、头脑风暴" class="headerlink" title="九、头脑风暴"></a>九、头脑风暴</h2><ol>
-<li>预先准备的力量</li>
-</ol>
-<p>在头脑风暴之前，要把你整理到事实要点整理成清晰的提要，分发给每一个成员阅读，这样产生思想的时候，你们有了同样的知识基础。比较好的态度是：“我认为情况可能是这样的，大家一起来推敲一下这个假设。”当然，在事先准备上，你不止需要准备一个假设，在讨论的时候一些不适用的假设可以被迅速排除，而有可能性的假设你要让团队是自由发挥。无论如何得一点是，最低限度为：你要了解事实。</p>
+<p>Examples:</p>
+<p>```python</p>
+<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> import os,sys,time,subprocess</p>
+<p> import warnings,logging</p>
+<p> warnings.filterwarnings(“ignore”, category=DeprecationWarning)</p>
+<p> logging.getLogger(“scapy.runtime”).setLevel(logging.ERROR)</p>
+<p>om scapy.all import traceroute</p>
+<p>mains = raw_input(‘Please input one or more IP/domain: ‘)</p>
+<p> target =  domains.split(‘ ‘)</p>
+<pre><code>dport = [80]
+
+if len(target) &gt;= 1 and target[0]!=&apos;&apos;:
+
+    res,unans = traceroute(target,dport=dport,retry=-2)
+
+    res.graph(target=&quot;&gt; test.svg&quot;)
+
+    time.sleep(1)
+
+    subprocess.Popen(&quot;/usr/bin/convert test.svg test.png&quot;, shell=True)
+
+else:
+
+    print &quot;IP/domain number of errors,exit&quot;
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-26-Python-rrdtool/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Coding & Integrity">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-06-26-Python-rrdtool/" itemprop="url">rrdtool绘制趋势图 - Python自动化运维</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-26T08:00:00+08:00">
+                2017-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>rrdtool（round robin database）工具为环状数据库的存储格式，round robin是一种处理定量数据以及当前元素指针的技术。rrd<br>tool主要用来跟踪对象的变化情况，生成这些变化的走势图，比如业务的访问流量、系统性能、磁盘利用率等趋势图，很多流行监控平台都使用到rrdtool，比较有名<br>的为Cacti、Ganglia、Monitorix等。更多rrdtool介绍见官网<a href="http://oss.oetiker.ch/rrdtool/。rrdtoo" target="_blank" rel="noopener">http://oss.oetiker.ch/rrdtool/。rrdtoo</a><br>l是一个复杂的工具，涉及较多参数概念，本节主要通过Python的rrdtool模块对rrdtool的几个常用方法进行封装，包括create、fetch、gr<br>aph、info、update等方法，本节对rrdtool的基本知识不展开说明，重点放在Python rrdtool模块的常用方法使用介绍上。</p>
 <ol>
-<li><p>在一干二净的屋子里进行<br>记住，进入房间里应该有空白的白板。其他应该遵循的准则如下：<br>没有坏主意：不要让大家恐惧自己会提出“坏主意”，应该鼓励每个人积极表达自己的想法。<br>没有不值得回答的问题：不要以为什么常识都是理所当然的，任何一个简单常识刨根问底下去都可能得到非常有益的启示。<br>准备好扼杀自己的婴儿：如果你的主意从头到尾没有被作为问题或答案的一部分，那么忍痛割爱吧，或者事后提出。不要带着誓死捍卫的情绪去参加会议。<br>知道什么时候说什么话：在气氛转变之前，团队可以忍受的头脑风暴的时间是两个小时，即时的停止防止团队疲惫、迟钝及情绪暴躁。如果必须全天开会，那么做好后勤保障，可以允许跑题开玩笑，但片刻后要调动大家保持注意力，会议中提供半小时的休息，出去一会是整理思维舒展筋骨的好机会。</p>
-</li>
-<li><p>好记性不如烂笔头<br>任何奇思妙想会在你肾上腺素用完、疲惫降临的时候彻底忘却。麦肯锡使用一种可以备份白板笔记的白板，当然你可以让用技术含量低的便签纸复制内容（切记要整齐），会议结束派专人吧便签纸内容誊写在普通纸上给团队成员传阅。</p>
-</li>
-<li><p>头脑风暴练习<br>公布式的练习：给会议室每个人一沓自粘式的便签条，让与会者把任何相关的主意都写下来，每个主意写一张条子，一起交给负责人，由负责人大声读出来，这样能很快形成大量不错的主意且避免每一个主意都接着纠缠不休的讨论。</p>
-</li>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install rrdtool</li>
 </ol>
-<p>文件夹练习：在办公室摆上许多夹子（每个之上标上不同分类和问题），让团队成员把自己的主意写在相应的夹子里（每个人笔颜色不一样，这样能分辨是谁的主意）</p>
-<p>在紧张气氛中处理大规模头脑风暴的方法：首先要求客户对象把已有方案中不喜欢的一切内容讲出来，等他们发泄完了，让他们提出哪些做得比较好的方面，以及哪些可能在他们企业部门实施。这样一是可能产生之前没有想到的好方案，二是有助于哪些先前怀疑态度者接受麦肯锡的解决方法。</p>
-<p>还有一个对付爱在头脑风暴上煽风点火或者发牢骚的人的办法，让负责人站在他背后，有时甚至去触碰它的肩膀。暗示他他正在受到关注，如果他还在喋喋不休，负责人可以提示他为什么不大声讲出来给大家听呢。</p>
-<h1 id="第三部分：麦肯锡推销解决方案的方法"><a href="#第三部分：麦肯锡推销解决方案的方法" class="headerlink" title="第三部分：麦肯锡推销解决方案的方法"></a>第三部分：麦肯锡推销解决方案的方法</h1><h2 id="十、情况介绍"><a href="#十、情况介绍" class="headerlink" title="十、情况介绍"></a>十、情况介绍</h2><p>麦肯锡情况介绍的一般形式：会议室里采用装订精美的蓝皮工作簿，非正式小会谈则是一叠图表订成的卡片</p>
-<ol>
-<li><p>结构化<br>麦肯锡的方法是我们最前面提到的MECE原则。当然这如果不符合你的思维习惯，你也可以采用别的结构，比如：“告诉人们你打算告诉他们的内容，把你已经告诉他们的内容一再的讲给他们听”。</p>
-</li>
-<li><p>记住努力的边际效用是递减的<br>掂量一下最后24小时，是让你的团队睡个好觉更重要，还是修改一些情况说明重新装订成册更重要。不要让最佳方案成为优先方案的对立面。修改也要有原则，最终展示前的24小时，打印、装订、制作PPT这些工作必须已经完成。这24小时应该尽可能的预言，讨论客户可能会提出的的问题，哪怕是在办公室休息一天也好。如果你的上级对文件有最后发言权，那么提前48小时给他审批。</p>
-</li>
-<li><p>预先准备好一切<br>一次好的present不应当包含对客户而言一无所知的事情。把所有部门负责人召集来之前应该让他们过目一遍你的发现（提前每个部门单独访问的目的是：了解一些你可能忽略的问题，防止在最后present上提出的方案对一些部门不利，引起这些部门负责人的暴怒，至少他们有了心理准备）</p>
-</li>
-</ol>
-<h2 id="十一、用图表表示数据（注：这一部分可参考麦肯锡的一书）"><a href="#十一、用图表表示数据（注：这一部分可参考麦肯锡的一书）" class="headerlink" title="十一、用图表表示数据（注：这一部分可参考麦肯锡的一书）"></a>十一、用图表表示数据（注：这一部分可参考麦肯锡的<say it="" with="" charts="">一书）</say></h2><ol>
-<li><p>简单明了：每张图表应该只包含一个信息<br>禁止使用分散注意力的色彩，用尽量少的单色来制作图表（网上有麦肯锡的PPT模板），如非必要不用三维图，坚持每张图表只包含一种信息，标题简单明了，需要特别注意的点用底纹、爆炸型的扇形区域或者大箭头来突出信息。如果同样一幅图有多个重点，则复制一次图表，在下一页再重新标明新的重点。一个大章节控制在10页PPT以下。</p>
-</li>
-<li><p>运用瀑布图展示信息<br>书中不够详尽，具体学习可参考：<a href="http://excelpro" target="_blank" rel="noopener">http://excelpro</a>. blog. sohu. com/84903213. html</p>
-</li>
-</ol>
-<h2 id="十二、管理好内部沟通"><a href="#十二、管理好内部沟通" class="headerlink" title="十二、管理好内部沟通"></a>十二、管理好内部沟通</h2><ol>
-<li><p>让信息流动起来<br>内部交流的方式有：消息（声音邮件、电子邮件、备忘录等）和会议以及随机交流（四处走走，走廊里、饮水机旁、吃午饭的路上）。会议是团队的凝固剂，不光提供信息流动的机会，而且提醒出席会议的人“他们是团队的组成部分”，为了保证团队里每个人到场，将会议作为日程的固定项目，当然如果没有事情要谈，放45分钟假也是好选择。会议成功的关键：议程（保持在所需的最低数量）和领导（保持议程精练，频繁开会总比开长会要好）。</p>
-</li>
-<li><p>有效信息的三个关键<br>信息交流的方式以上已经讲了，要注意三个特征：<br>简洁：张口说话把信息量缩减到3，4点，如有必要可以用纸列出要点。<br>完整：不但要说自己正在干什么，还要回报到底是怎么一回事以及你对这件事情的看法。<br>结构：用MECE吧。但是别给你女朋友发信息也遵循MECE原则。</p>
-</li>
-<li><p>凡事留神<br>不要在公众场合拿出客户资料开始工作，不在办公室外提及客户的名字，在讨论客户时，使用代码，不要乱扔文件，即时上锁。</p>
-</li>
-</ol>
-<h2 id="十三、与客户一道工作"><a href="#十三、与客户一道工作" class="headerlink" title="十三、与客户一道工作"></a>十三、与客户一道工作</h2><ol>
-<li><p>让客户站在你的一边<br>保证大家绑在一起的关键是：把他们的目标转换为我们的目标，任何一方的失败都意味着另外一方的失败。还有，让客户意识到与麦肯锡一道工作是一段有意义的经历，至少他们都学到很多其他地方学不到的东西，这对他的职业生涯大有裨益，甚至有机会在企业里实现大的变革。和客户一起去球场或者好的餐馆吃饭吧（这样人们都放下了“办公室面孔”）。</p>
-</li>
-<li><p>如何与客户团队中的“讨债鬼”打交道<br>客户里的“讨债鬼”就是没有什么用处的人以及有意作对的人，工作时尽量绕开他们。对于消极怠工的没用处的人，给他一些单独的工作让他去做，保证这不是什么关键的部分。而有意作对的人，他可能是公司有权势的人派来的，尽量不要让敏感信息落入他手，设法了解他的幕后指挥者的意图（最后方案里也可利用这一意图）。最后，如果可能的花，团结没有什么作用的人，让他理解并接受我们的解决方案，不要和我们作对。</p>
-</li>
-<li><p>让客户参与过程<br>让客户参与的第一步就是理解他们的打算和意图，只有他们觉得你的努力有助于他们的利益时，他们才会支持你。记住，他们的利益是会随着时间变化的，所以经常的联系和更新很重要，按照客户预定的时间表工作，试探着安排会议议题。参加第三章，阶段性的胜利和成果会让他们热情更大，客户参与达成解决方案的过程（且他们也理解这个方案）远比把解决方案装订整齐扎上漂亮的丝带有效的多。即时你的工作量再多，实际上你让客户能觉得这是他们自己的解决方案或者模型的话，不是什么坏事。</p>
-</li>
-<li><p>让整个企业接受<br>为了避免方案最后被束之高阁。不要以为把方案提交给董事会通过就万事大吉了，还要提交给中层管理者以及生产线上的工人（他们是否接受方案对真正实施至关重要）。记得把你的方案剪裁的适合你的听众（别对司机和首席执行官都是讲一个东西），一是要展现整个画面，二是把干什么，为什么这么干讲清楚，尊重他们。</p>
-</li>
-<li><p>严格实施<br>在每一个小项目之后用括号写上项目日期及负责人。按照实施计划把详尽安排分配给每一个人，每一个短周期开一个会，任何没有完成任务的人必须在全组面前解释为什么没有完成任务。</p>
-</li>
-</ol>
-<h1 id="第四部分：在麦肯锡生存"><a href="#第四部分：在麦肯锡生存" class="headerlink" title="第四部分：在麦肯锡生存"></a>第四部分：在麦肯锡生存</h1><h2 id="十四、找到自己的师傅"><a href="#十四、找到自己的师傅" class="headerlink" title="十四、找到自己的师傅"></a>十四、找到自己的师傅</h2><p>Mentor能为你指导工作并指导职业生涯的规划。这一点，对任何组织都适用。</p>
-<h2 id="十五、生存在路上"><a href="#十五、生存在路上" class="headerlink" title="十五、生存在路上"></a>十五、生存在路上</h2><p>全国或者全球旅行好耗费你很多精力，把旅行当做是探险会减轻你的负担，恰当的计划和心态也很重要。利用出差去稍微旅游半天一天放松自己，旅行时你做你经历以外的事情的机会。安排好访问客户的时间，保证你周一或者周五是在家里的（多休息一天嘛），如果可能的话尽量只带一个手提包，别托运行李了。事先知道可靠的出租车公司。如果需要长期在外，就去找找当地的团队成员、大学同学，大家一起吃个饭或者看演出、球赛。实在不行就在房间里读书看电视也行，不要把旅程变成不舒适的“工作、吃饭、睡觉”。另外一个有趣的建议是：尊重空乘人员，他们能给你多一个毛毯或者别的帮助。</p>
-<h2 id="十六、无论去哪里都带上这三件东西"><a href="#十六、无论去哪里都带上这三件东西" class="headerlink" title="十六、无论去哪里都带上这三件东西"></a>十六、无论去哪里都带上这三件东西</h2><p>出外旅行的三样东西：PTM（passport，ticket，money）。另外三件是：旅行计划的copy，每一个要见的人的名字和联系方式、一本好书。<br>服装：多带一件衬衫或者一条裤子；男士多带两条领带；女士多带一双舒适的平底鞋；休闲装；运动装（防止你的健康状况下降）；一件毛衣（飞机上能保暖）<br>工具：便签纸；方格纸（用于画图）；你送给客户的任何东西的复本；金融计算器（你会容易忘记，但他比瑞士军刀还管用）<br>个人用品：牙刷；男士刮胡刀；女士小化妆包；抗酸剂药片（用于治疗胃、十二指肠溃疡和胃酸分泌过多症）；一瓶泰诺；一大瓶泰诺（健康状况下降很容易感冒）<br>与你单位保持联系的物品：个人记事本；信用卡（单独放在皮夹子里也不错）；航班时刻表；移动电话（忘了什么，可以让他们传给你就近的传真机）；客户的地址和路线图<br>娱乐用品：一本好书；飞机上阅读的剪报；mp3；在laptop上玩的游戏<br>如果你在一些诡异的国家工作，比如巴西，那么：雨伞、太阳镜、避孕套。</p>
-<h2 id="十七、好助手是你的生命线"><a href="#十七、好助手是你的生命线" class="headerlink" title="十七、好助手是你的生命线"></a>十七、好助手是你的生命线</h2><p>秘书为你记录口信、安排日程、打字、复印、整理文件、后方援助等等，所以对她好一点、关心她的成长、对她问有所答。实际上为了留住好的秘书，麦肯锡负责行政和招聘的很多管理人员都是从秘书起步的。</p>
-<h2 id="十八、麦肯锡的招聘风格"><a href="#十八、麦肯锡的招聘风格" class="headerlink" title="十八、麦肯锡的招聘风格"></a>十八、麦肯锡的招聘风格</h2><p>麦肯锡寻找的是名牌商学院、法学院、经济学以及金融学研究生项目培养出来的尖子中的尖子。当然，医生、科学家、政界人事也是商学领域之外的人才。麦肯锡会用一流的酒店和餐馆来吸引人才。麦肯锡用案例来寻找具有分析思考能力的人（他们可以把问题分解成其组成部分，找到组织起来的证据，有商业判断能力、明白自己解决方案的含义）。面试的时候带上计算器，如让你估算全美国有多少加油站，考察的不是这个结果，而是你得出数字的方法（比如知道全美国人口——每个家庭平均人口2. 5个——平均每个家庭拥有1. 8辆车——全美的汽车数量再爱估算需要多少加油站）。</p>
-<p>麦肯锡都是绝顶聪明的人，但是反对那些绝顶聪明又难以相处的人加入。另外，面试时你的陈述（准备好的材料简历）会被随时打断。毫无疑问，进入麦肯锡的条件是：智力比平均值高一点，具有好大学和名牌商学院的成绩单，展示过去所有工作中取得成绩的证据、证明自己具有非同一般的分析能力。准备案例是很重要的，处理复杂问题时不会顿住，而是能越挖越深的人是麦肯锡想要的人。</p>
-<h2 id="十九、如果你还想要自己的生活的话，那就要定一些规则"><a href="#十九、如果你还想要自己的生活的话，那就要定一些规则" class="headerlink" title="十九、如果你还想要自己的生活的话，那就要定一些规则"></a>十九、如果你还想要自己的生活的话，那就要定一些规则</h2><p>因为你一周工作80小时甚至更多，除了吃饭、睡觉和个人卫生保健活动外，你没有任何时间做任何其他事情了。所以遵守三条原则：<br>一周拿一天不要工作：大部分人挑周六或周日，告诉老板除非有十分紧急的事情，否则这一天你绝对不工作。这一天和朋友、家人在一起，或者只是看看报纸，让脑子离开工作一下。<br>别把工作带回家：如果有需要，在办公室多干一个小时，家应该是一个属于你的地方。<br>事先计划：不要在周五从机场回来的路上还在想周末找一些工作去做。如果休息时间除了看书你还想做别的事情，你必须事先做好计划。<br>立下规则的最大好处是让每一个人——上司、恋人（妻子）、孩子、你自己知道并理解你希望怎么样。</p>
+<p>Examples:</p>
+<p>第一步　采用create方法创建rrd数据库，参数指定了一个rrd文件、更新频率setp、起始时间–<br>start、数据源DS、数据源类型DST、数据周期定义RRA等，详细源码如下：【/root/xls/create.py】</p>
+<p>```python</p>
+<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> #!/usr/bin/python  </p>
+<p> import rrdtool  </p>
+<p> import time  </p>
+<p>r_time=str(int(time.time()))    #获取当前Linux时间戳作为rrd起始时间  </p>
+<p> #数据写频率–step为300秒(即5分钟一个数据点)  </p>
+<p>d=rrdtool.create(‘Flow.rrd’,’–step’,’300’,’–start’,cur_time,  </p>
+<p>义数据源eth1_in(入流量)、eth1_out(出流量)；类型都为COUNTER(递增)；600秒为心跳值，  </p>
+<p>含义是600秒没有收到值，则会用UNKNOWN代替；0为最小值；最大值用U代替，表示不确定  </p>
+<p>‘DS:eth1_in:COUNTER:600:0:U’,  </p>
+<p>‘DS:eth1_out:COUNTER:600:0:U’,  </p>
+<p>#RRA定义格式为[RRA:CF:xff:steps:rows]，CF定义了AVERAGE、MAX、MIN三种数据合并方式  </p>
+<p>#xff定义为0.5，表示一个CDP中的PDP值如超过一半值为UNKNOWN，则该CDP的值就被标为UNKNOWN  </p>
+<p>#下列前4个RRA的定义说明如下，其他定义与AVERAGE方式相似，区别是存最大值与最小值  </p>
+<h1 id="每隔5分钟-1-300秒-存一次数据的平均值-存600笔，即2-08天"><a href="#每隔5分钟-1-300秒-存一次数据的平均值-存600笔，即2-08天" class="headerlink" title="每隔5分钟(1*300秒)存一次数据的平均值,存600笔，即2.08天"></a>每隔5分钟(1*300秒)存一次数据的平均值,存600笔，即2.08天</h1><pre><code># 每隔30分钟(6*300秒)存一次数据的平均值,存700笔，即14.58天（2周）  
+
+# 每隔2小时(24*300秒)存一次数据的平均值,存775笔，即64.58天（2个月）  
+
+# 每隔24小时(288*300秒)存一次数据的平均值,存797笔，即797天(2年)  
+
+&apos;RRA:AVERAGE:0.5:1:600&apos;,  
+
+&apos;RRA:AVERAGE:0.5:6:700&apos;,  
+</code></pre><p>   ‘RRA:AVERAGE:0.5:24:775’,  </p>
+<p>   ‘RRA:AVERAGE:0.5:288:797’,  </p>
+<p>   ‘RRA:MAX:0.5:1:600’,  </p>
+<p>   ‘RRA:MAX:0.5:6:700’,  </p>
+<p>   ‘RRA:MAX:0.5:24:775’,  </p>
+<p>   ‘RRA:MAX:0.5:444:797’,  </p>
+<p>   ‘RRA:MIN:0.5:1:600’,  </p>
+<pre><code>&apos;RRA:MIN:0.5:6:700&apos;,  
+
+&apos;RRA:MIN:0.5:24:775&apos;,  
+
+&apos;RRA:MIN:0.5:444:797&apos;)  
+</code></pre><p> if rrd:  </p>
+<pre><code>print rrdtool.error()
+</code></pre><p>　采用updatev方法更新rrd数据库，参数指定了当前的Linux时间戳，以及指定eth1_in、eth1_out值（当前网卡的出入流量），网卡流量<br>过psutil模块来获取，如psutil.network_io_counters()[1]为入流量，关于psutil模块的介绍见第1.1。详细源码如下<br>root/xls/update.py】</p>
+<p>加入crontab，并配置5分钟作为采集频率，crontab配置如下：<em>/5 </em> <em> </em> * /usr/bin/python<br>ot/xls/update.py &gt; /dev/null 2&gt;&amp;1</p>
+<h1 id="–-coding-utf-8-–-1"><a href="#–-coding-utf-8-–-1" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> #!/usr/bin/python  </p>
+<p> import rrdtool  </p>
+<p> import time,psutil  </p>
+<p> total_input_trwork_io_counters()[1]    #获取网卡入流量  </p>
+<p> total_output_traffic = psutil.network_io_counters()[0] #获取网卡出流量  </p>
+<p> starttime=int(time.time())    #获取当前Linux时间戳  </p>
+<p> #将获取到的三个数据作为updatev的参数，返回{‘return_value’: 0L}则说明更新成功，反  </p>
+<p> update=rrdtool.updatev(‘/root/xls/Flow.rrd’,’%s:%s:%s’ % r(starttime),str(total_input_traffic),str(total_output_traffic)))  </p>
+<p> print update</p>
+<p>第三步　采用graph方法绘制图表，此示例中关键参数使用了–x-grid定义X轴网格刻度；DEF指定数据源；使用CDEF合并数据；HRULE绘制水平线（告<br>警线）；GPRINT输出最大值、最小值、平均值等。详细源码如下：【/root/xls/graph.py】</p>
+<pre><code># -- coding: utf-8 --
+
+#!/usr/bin/python  
+
+import rrdtool  
+
+import time  
+
+#定义图表上方大标题  
+
+title=&quot;Server network  traffic flow (&quot;+time.strftime(&apos;%Y-%m-%d&apos;,time.localtime(time.time()))+&quot;)&quot;  
+
+#重点解释&quot;--x-grid&quot;,&quot;MINUTE:12:HOUR:1:HOUR:1:0:%H&quot;参数的作用（从左往右进行分解）  
+
+&quot;MINUTE:12&quot; #表示控制每隔12分钟放置一根次要格线  
+
+&quot;HOUR:1&quot;  #表示控制每隔1小时放置一根主要格线  
+
+&quot;HOUR:1&quot; # 表示控制1个小时输出一个label标签  
+
+&quot;0:%H&quot;  #0表示数字对齐格线，%H表示标签以小时显示  
+
+rrdtool.graph( &quot;Flow.png&quot;, &quot;--start&quot;, &quot;-1d&quot;,&quot;--vertical-label=Bytes/s&quot;,
+
+&quot;--x-grid&quot;,&quot;MINUTE:12:HOUR:1:HOUR:1:0:%H&quot;,
+
+ &quot;--width&quot;,&quot;650&quot;,&quot;--height&quot;,&quot;230&quot;,&quot;--title&quot;,title,  
+
+ &quot;DEF:inoctets=Flow.rrd:eth1_in:AVERAGE&quot;,    #指定网卡入流量数据源DS及CF  
+
+ &quot;DEF:outoctets=Flow.rrd:eth1_out:AVERAGE&quot;,    #指定网卡出流量数据源DS及CF  
+
+ &quot;CDEF:total=inoctets,outoctets,+&quot;,    #通过CDEF合并网卡出入流量，得出总流量total  
+
+
+
+&quot;LINE1:total#FF8833:Total traffic&quot;,    #以线条方式绘制总流量  
+
+ &quot;AREA:inoctets#00FF00:In traffic&quot;,    #以面积方式绘制入流量  
+
+ &quot;LINE1:outoctets#0000FF:Out traffic&quot;,    #以线条方式绘制出流量  
+
+ &quot;HRULE:6144#FF0000:Alarm value\\r&quot;,    #绘制水平线，作为告警线，阈值为6.1k  
+
+ &quot;CDEF:inbits=inoctets,8,*&quot;,    #将入流量换算成bit，即*8，计算结果给inbits  
+
+ &quot;CDEF:outbits=outoctets,8,*&quot;,    #将出流量换算成bit，即*8，计算结果给outbits  
+
+&quot;COMMENT:\\r&quot;,                    #在网格下方输出一个换行符  
+
+ &quot;COMMENT:\\r&quot;,  
+
+ &quot;GPRINT:inbits:AVERAGE:Avg In traffic\: %6.2lf %Sbps&quot;,    #绘制入流量平均值  
+
+ &quot;COMMENT:   &quot;,  
+
+ &quot;GPRINT:inbits:MAX:Max In traffic\: %6.2lf %Sbps&quot;,    #绘制入流量最大值  
+
+ &quot;COMMENT:  &quot;,  
+
+ &quot;GPRINT:inbits:MIN:MIN In traffic\: %6.2lf %Sbps\\r&quot;,    #绘制入流量最小值  
+
+ &quot;COMMENT: &quot;,  
+
+ &quot;GPRINT:outbits:AVERAGE:Avg Out traffic\: %6.2lf %Sbps&quot;,    #绘制出流量平均值  
+
+ &quot;COMMENT: &quot;,  
+
+ &quot;GPRINT:outbits:MAX:Max Out traffic\: %6.2lf %Sbps&quot;,    #绘制出流量最大值  
+
+ &quot;COMMENT: &quot;,  
+
+ &quot;GPRINT:outbits:MIN:MIN Out traffic\: %6.2lf %Sbps\\r&quot;)    #绘制出流量最小值
+</code></pre><p>以上代码将生成一个Flow.png文件</p>
+<p>查看rrd文件内容有利于观察数据的结构、更新等情况，rrdtool提供几个常用命令：</p>
+<p>info查看rrd文件的结构信息，如rrdtool info Flow.rrd；</p>
+<p>first查看rrd文件第一个数据的更新时间，如rrdtool first Flow.rrd；</p>
+<p>last查看rrd文件最近一次更新的时间，如rrdtool last Flow.rrd；</p>
+<p>fetch根据指定时间、CF查询rrd文件，如rrdtool fetch Flow.rrd AVERAGE （必须为大写）</p>
+<p><strong>rrdtool参数说明</strong>: <a href="http://bbs.chinaunix.net/thread-2150417-1-1.html和http://oss.oetiker.ch/rrdtool/doc/index.en.html。" target="_blank" rel="noopener">http://bbs.chinaunix.net/thread-2150417-1-1.html和http://oss.oetiker.ch/rrdtool/doc/index.en.html。</a></p>
 
           
         
@@ -1618,7 +1186,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-04-25-Book-StrangeLife/">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-23-Python-smtplib/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -1637,7 +1205,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-04-25-Book-StrangeLife/" itemprop="url">奇特的一生 - 柳比歇夫</a></h1>
+                <a class="post-title-link" href="/2017-06-23-Python-smtplib/" itemprop="url">smtplib发送邮件 - Python自动化运维</a></h1>
         
 
         <div class="post-meta">
@@ -1649,8 +1217,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-25T08:00:00+08:00">
-                2017-04-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-23T08:00:00+08:00">
+                2017-06-23
               </time>
             
 
@@ -1686,17 +1254,227 @@
       
         
           
-            <p><strong>培养对时间的管理也能培养出道德情操 </strong></p>
-<p>人最宝贵的是生命。但是仔细分析一下这个生命，可以说，最宝贵的是时间。因为生命是由时间构成的，是一小时一小时、一分钟一分钟累积起来的。没人能预计他在下一分钟里能发生什么，但至少我们可以记得前一分钟我们做过什么。</p>
-<p>这里是要讲述一个将自己的一生用时间来计划的人——柳比歇夫。柳比歇夫通过他的时间统计法对自己进行了研究和试验：试验在写、读、听、工作、思索各方面，他到底能干多少？干多少？怎么干？他不让自己负担过重，力不胜任；他总是循着他能力的边缘前进，他对自己能力的掂量精确无疑。</p>
-<p>如果每个人都能知道自己能干些什么，那生活会变得多么美好！因为每个人的能力都比他自己感觉到的大得多，也就不会有那么多的人感叹自己因能力有限而导致一事无成。</p>
-<p><img src="/uploads/ueditor/php/upload/image/20170424/1493000644.png" alt="blob.png"></p>
-<p><strong>柳比歇夫究竟有多牛：</strong></p>
-<p>他生前发表了七十来部学术著作。其中有分散分析、生物分类学、昆虫学方面的经典著作;这些著作在国外广为翻译出版。</p>
-<p>各种各样的论文和专著，他一共写了五百多印张。五百印张，等于一万二千五百张打字稿。即使以专业作家而论，这也是个庞大的数字。</p>
-<p>柳比歇夫的遗产包括几个部分:有著作，探讨地蚤的分类、科学史、农业、遗传学、植物保护、哲学、昆虫学、动物学、进化论、无神论。此外，他还写过回忆录，追忆许多科学家，谈到他一生的各个阶段以及彼尔姆大学……</p>
-<p>他讲课，当大学教研室主任兼研究所一个室的负责人，还常常到各地考察;三十年代他跑遍了俄罗斯的欧洲部分，去过许多集体农庄，实地研究果树害虫、玉米害虫、黄鼠……在所谓的业余时间，作为“休息”，他研究地蚤的分类。单单这一项，工作量就颇为可观:到一九五五年，柳比歇夫已搜集了三十五箱地蚤标本。共一万三千只。其中五千只公地蚤做了器官切片。总计三百种。这些地蚤都要鉴定、测量、做切片、制作标本。他收集的材料比动物研究所多五倍。他对跳甲属的分类，研究了一生。</p>
-<p>他的知识面有多广，是很难测度的。谈起英国的君主制度，他能够说出任何一个英国国王临朝秉政的细节;说到宗教，不管是古兰经、犹太传经，还是罗马教廷的源流、马丁·路德的学说、毕达哥拉斯学派的思想……他都是如数家珍。他懂复变数理论、农业经济、罗·费歇的社会达尔文主义、古希腊古罗马，天知道他还精通些什么。</p>
+            <ol>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install smtplib</li>
+</ol>
+<p>Examples:</p>
+<p>```python</p>
+<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> import smtplib</p>
+<p> from email.mime.multipart import MIMEMultipart</p>
+<p> from email.mime.text import MIMEText</p>
+<p> from email.mime.image import MIMEImage</p>
+<p> HOST = “m.xxx.com”</p>
+<p> TO = “jianfeng.xia@xxx.com”</p>
+<p> EmailUser = “Task.system”</p>
+<p> EmailPass = “gta@2017”</p>
+<p> FROM = “Task.system@xxx.com”</p>
+<p>BJECT = u”官网业务服务质量周报”</p>
+<p> def addimg(src,imgid):</p>
+<pre><code>    fp = open(src, &apos;rb&apos;)
+
+
+    msgImage = MIMEImage(fp.read())
+
+
+    fp.close()
+
+
+    msgImage.add_header(&apos;Content-ID&apos;, imgid)
+
+
+    return msgImage
+
+
+
+
+
+msg = MIMEMultipart(&apos;related&apos;)
+
+
+msgtext = MIMEText(&quot;&lt;font color=red&gt;官网业务周平均延时图表:&lt;br&gt;&lt;img src=\&quot;cid:weekly\&quot; border=\&quot;1\&quot;&gt;&lt;br&gt;详细内容见附件。&lt;/font&gt;&quot;,&quot;html&quot;,&quot;utf-8&quot;)
+
+
+msg.attach(msgtext)
+
+
+#msg.attach(addimg(&quot;img/weekly.png&quot;,&quot;weekly&quot;))
+
+
+
+
+
+#attach = MIMEText(open(&quot;doc/week_report.xlsx&quot;, &quot;rb&quot;).read(), &quot;base64&quot;, &quot;utf-8&quot;)
+
+
+#attach[&quot;Content-Type&quot;] = &quot;application/octet-stream&quot;
+
+
+#attach[&quot;Content-Disposition&quot;] = &quot;attachment; filename=\&quot;业务服务质量周报(12周).xlsx\&quot;&quot;.decode(&quot;utf-8&quot;).encode(&quot;gb18030&quot;)
+
+
+#msg.attach(attach)
+
+
+
+
+
+msg[&apos;Subject&apos;] = SUBJECT
+
+
+msg[&apos;From&apos;]=FROM
+
+
+msg[&apos;To&apos;]=TO
+
+
+try:
+
+
+    server = smtplib.SMTP()
+
+
+    server.connect(HOST,&quot;587&quot;)
+
+
+    server.starttls()
+
+
+    server.login(EmailUser, EmailPass)
+
+
+    server.sendmail(FROM, TO, msg.as_string())
+
+
+    server.quit()
+
+
+    print &quot;邮件发送成功！&quot;
+
+
+except Exception, e:  
+
+
+    print &quot;失败：&quot;+str(e)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-22-JS-npm.taobao/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Coding & Integrity">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-06-22-JS-npm.taobao/" itemprop="url">nodejs服务部署&搭建&学习&淘宝 NPM 镜像</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-22T15:00:00+08:00">
+                2017-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="使用淘宝-NPM-镜像"><a href="#使用淘宝-NPM-镜像" class="headerlink" title="使用淘宝 NPM 镜像"></a>使用淘宝 NPM 镜像</h2><p>大家都知道国内直接使用 npm 的官方镜像是非常慢的，这里推荐使用淘宝 NPM 镜像。</p>
+<p>淘宝 NPM 镜像是一个完整 npmjs.org 镜像，你可以用此代替官方版本(只读)，同步频率目前为 10分钟 一次以保证尽量与官方服务同步。</p>
+<p>你可以使用淘宝定制的 cnpm (gzip 压缩支持) 命令行工具代替默认的 npm:</p>
+<p> $ npm install -g cnpm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>
+<p>这样就可以使用 cnpm 命令来安装模块了：</p>
+<p> $ cnpm install [name]</p>
+<p>更多信息可以查阅：<a href="http://npm.taobao.org/" target="_blank" rel="noopener">http://npm.taobao.org/</a>。</p>
 
           
         
@@ -1740,7 +1518,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-04-21-Book-TheRoadLessTraveled1/">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-22-Python-pycurl/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -1759,7 +1537,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-04-21-Book-TheRoadLessTraveled1/" itemprop="url">少有人走的路1:心智成熟的旅程-M·斯科特·派克</a></h1>
+                <a class="post-title-link" href="/2017-06-22-Python-pycurl/" itemprop="url">PycURL模拟用户访问服务器 - Python自动化运维</a></h1>
         
 
         <div class="post-meta">
@@ -1771,8 +1549,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-21T08:00:00+08:00">
-                2017-04-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-22T08:00:00+08:00">
+                2017-06-22
               </time>
             
 
@@ -1808,10 +1586,485 @@
       
         
           
-            <p> 正如本书开篇所言：人生苦难重重。M·斯科特·派克让我们更加清楚：<strong>人生是一场艰辛之旅，心智成熟的旅程相当漫长。但是，他没有让我们感到恐惧，相反，他带领我们去经历一系列艰难乃至痛苦的转变，最终达到自我认知的更高境界</strong>。</p>
-<p> M·斯科特·派克，我们这个时代最杰出的心理医生，他的杰出不仅在其智慧，更在于他的真诚和勇气。儿童时，他就以“童言无忌”远近闻名；少年时，他又勇敢地放弃了父母为他安排的辉煌前程，毅然选择了自己的人生道路，最终当上了一名心理医生。他曾在美军日本冲绳基地担任心理医生，为美军军官做心理医生。在近二十年的职业生涯中，他治俞了成千上万个病人，他以从业经验为基础写作的《少有人走的路》，创造了出版史上的一大奇迹。 </p>
-<p><img src="/uploads/ueditor/php/upload/image/20170628/1498636440.jpeg" alt="少有人走的路-心智成熟的旅程.jpg"><br><img src="/uploads/ueditor/php/upload/image/20170628/1498636495.png" alt="blob.png"><br><img src="/uploads/ueditor/php/upload/image/20170628/1498636509.png" alt="blob.png"></p>
-<p>心智成熟之旅艰苦卓绝，无论是思考还是行动，你都离不开勇敢、进取和独立的精神。即便有先知的告诫，你仍需独自前行。没有任何一位心灵导师能够牵着你的手前进，也没有任何既定的宗教仪式能让你一蹴而就。任何训诫，都不能免除心灵旅行者必经的痛苦。你只有自己选择人生道路，忍受生活的艰辛与磨难，最终才能到达人生新的境界。</p>
+            <p>Libcurl 是一个支持FTP，FTPS，HTTP，HTTPS，GOPHER，TELNET，DICT，FILE 和<br>LDAP的客户端URL传输库。libcurl也支持HTTPS认证，HTTP、POST、HTTP<br>PUT、FTP上传，代理，Cookies，基本身份验证，FTP文件断点继传，HTTP代理通道等等。</p>
+<ol>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install pycurl<br>Examples:</li>
+</ol>
+<p>```python</p>
+<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> import os,sys<br> import time<br> import sys<br> import pycurl</p>
+<p> URL=”<a href="http://www.xxx.com" target="_blank" rel="noopener">http://www.xxx.com</a>“</p>
+<p> #URL=”<a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a>“</p>
+<p> #URL=”<a href="http://www.google.com.hk" target="_blank" rel="noopener">http://www.google.com.hk</a>“<br>= pycurl.Curl()<br>setopt(pycurl.URL, URL)</p>
+<p> #连接超时时间,5秒<br> c.setopt(pycurl.CONNECTTIMEOUT, 5)</p>
+<p> #下载超时时间,5秒<br> c.setopt(pycurl.TIMEOUT, 5)<br> c.setopt(pycurl.FORBID_REUSE, 1)<br> c.setopt(pycurl.MAXREDIRS, 1)<br>    c.setopt(pycurl.NOPROGRESS, 1)<br>    c.setopt(pycurl.DNS_CACHE_TIMEOUT,30)<br>    indexfile = open(os.path.dirname(os.path.realpath(<strong>file</strong>))+”/content.txt”, “wb”)<br>    c.setopt(pycurl.WRITEHEADER, indexfile)<br>    c.setopt(pycurl.WRITEDATA, indexfile)<br>    try:<br>        c.perform()<br>    except Exception,e:<br>        print “connecion error:”+str(e)<br>        indexfile.close()<br>        c.close()<br>        sys.exit()</p>
+<pre><code>NAMELOOKUP_TIME =  c.getinfo(c.NAMELOOKUP_TIME)
+CONNECT_TIME =  c.getinfo(c.CONNECT_TIME)
+PRETRANSFER_TIME =   c.getinfo(c.PRETRANSFER_TIME)
+STARTTRANSFER_TIME = c.getinfo(c.STARTTRANSFER_TIME)
+TOTAL_TIME = c.getinfo(c.TOTAL_TIME)
+HTTP_CODE =  c.getinfo(c.HTTP_CODE)
+SIZE_DOWNLOAD =  c.getinfo(c.SIZE_DOWNLOAD)
+HEADER_SIZE = c.getinfo(c.HEADER_SIZE)
+SPEED_DOWNLOAD=c.getinfo(c.SPEED_DOWNLOAD)
+
+print &quot;HTTP Code: %s&quot; %(HTTP_CODE)
+print &quot;DNS time: %.2f ms&quot;%(NAMELOOKUP_TIME*1000)
+print &quot;start connecion time: %.2f ms&quot; %(CONNECT_TIME*1000)
+print &quot;perpare tran time: %.2f ms&quot; %(PRETRANSFER_TIME*1000)
+print &quot;tran start time: %.2f ms&quot; %(STARTTRANSFER_TIME*1000)
+print &quot;tran total time: %.2f ms&quot; %(TOTAL_TIME*1000)
+
+print &quot;download data size: %d bytes/s&quot; %(SIZE_DOWNLOAD)
+print &quot;HTTP head size: %d byte&quot; %(HEADER_SIZE)
+print &quot;avg download speed: %d bytes/s&quot; %(SPEED_DOWNLOAD)
+
+indexfile.close()
+c.close()
+</code></pre><p><img src="/uploads/ueditor/php/upload/image/20170619/1497862725.png" alt="blob.png"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-21-Python-filecmp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Coding & Integrity">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-06-21-Python-filecmp/" itemprop="url">filecmp比较文件夹的内容 - Python自动化运维</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-21T08:00:00+08:00">
+                2017-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install filecmp</li>
+</ol>
+<p>Examples:</p>
+<p>```python</p>
+<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> import filecmp</p>
+<p> a=”E:\python\pyauto\2\filecmp\dir1”</p>
+<p> b=”E:\python\pyauto\2\filecmp\dir2”</p>
+<p> dirobj=filecmp.dircmp(a,b,[‘test.py’])</p>
+<p> print “——————-report———————“</p>
+<p> dirobj.report()</p>
+<p> print “————-report_partial_closure———–”</p>
+<p> dirobj.report_partial_closure()</p>
+<p> print “————-report_full_closure————–”</p>
+<pre><code>dirobj.report_full_closure()
+</code></pre><p> print “left_list:”+ str(dirobj.left_list)</p>
+<p> print “right_list:”+ str(dirobj.right_list)</p>
+<p> print “common:”+ str(dirobj.common)</p>
+<p> print “left_only:”+ str(dirobj.left_only)</p>
+<p> print “right_only:”+ str(dirobj.right_only)</p>
+<p> print “common_dirs:”+ str(dirobj.common_dirs)</p>
+<p>int “common_files:”+ str(dirobj.common_files)</p>
+<p>int “common_funny:”+ str(dirobj.common_funny)</p>
+<p>int “same_file:”+ str(dirobj.same_files)</p>
+<p>iff_files:”+ str(dirobj.diff_files)</p>
+<p>y_files:”+ str(dirobj.funny_files)</p>
+<p> Example(比较2个文件夹的不同之处):</p>
+<p>ing: utf-8 –</p>
+<p>in/env python</p>
+<p>port os, sys</p>
+<p>port filecmp</p>
+<p>port re</p>
+<p> import shutil</p>
+<p>st=[]</p>
+<p>dir1, dir2):</p>
+<pre><code>dircomp=filecmp.dircmp(dir1,dir2)
+</code></pre><p>_in_one=dircomp.left_only</p>
+<p>_in_one=dircomp.diff_files</p>
+<p>=os.path.abspath(dir1)</p>
+<pre><code>[holderlist.append(os.path.abspath( os.path.join(dir1,x) )) for x in only_in_one]
+</code></pre><p>  [holderlist.append(os.path.abspath( os.path.join(dir1,x) )) for x in diff_in_one]</p>
+<p>  if len(dircomp.common_dirs) &gt; 0:</p>
+<p>for item in dircomp.common_dirs:</p>
+<pre><code>         compareme(os.path.abspath(os.path.join(dir1,item)), \
+
+      os.path.abspath(os.path.join(dir2,item)))
+
+        return holderlist
+
+
+
+def main():
+
+    if len(sys.argv) &gt; 2:
+
+        dir1=sys.argv[1]
+
+        dir2=sys.argv[2]
+
+    else:
+
+        print &quot;Usage: &quot;, sys.argv[0], &quot;datadir backupdir&quot;
+
+        sys.exit()
+
+
+
+    source_files=compareme(dir1,dir2)
+
+    dir1=os.path.abspath(dir1)
+
+
+
+    if not dir2.endswith(&apos;/&apos;): dir2=dir2+&apos;/&apos;
+
+    dir2=os.path.abspath(dir2)
+
+    destination_files=[]
+
+    createdir_bool=False
+
+
+
+    for item in source_files:
+
+        destination_dir=re.sub(dir1, dir2, item)
+
+        destination_files.append(destination_dir)
+
+        if os.path.isdir(item):
+
+            if not os.path.exists(destination_dir):
+
+                os.makedirs(destination_dir)
+
+                createdir_bool=True
+
+
+
+    if createdir_bool:
+
+        destination_files=[]
+
+        source_files=[]
+
+        source_files=compareme(dir1,dir2)
+
+        for item in source_files:
+
+            destination_dir=re.sub(dir1, dir2, item)
+
+            destination_files.append(destination_dir)
+
+
+
+    print &quot;update item:&quot;
+
+    print source_files 
+
+
+
+    copy_pair=zip(source_files,destination_files)
+
+    for item in copy_pair:
+
+        if os.path.isfile(item[0]):
+
+            shutil.copyfile(item[0], item[1])
+
+
+
+if __name__ == &apos;__main__&apos;:
+
+    main()
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-20-Python-difflib/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Coding & Integrity">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-06-20-Python-difflib/" itemprop="url">difflib文本内容对比 - Python自动化运维</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-20T08:00:00+08:00">
+                2017-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install difflib</li>
+</ol>
+<p>Examples:</p>
+<p>```python</p>
+<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> #!/usr/bin/python</p>
+<p> import difflib</p>
+<p> text1 = “””text1:</p>
+<p> This module provides classes and functions for comparing sequences.</p>
+<p> including HTML and context and unified diffs.</p>
+<p> difflib document v7.4</p>
+<p> add string</p>
+<p> “””</p>
+<p> text1_lines = text1.splitlines()</p>
+<p> text2 = “””text2:</p>
+<p> This module provides classes and functions for Comparing sequences.</p>
+<p> including HTML and context and unified diffs.</p>
+<p> difflib document v7.5”””</p>
+<p> text2_lines = text2.splitlines()</p>
+<p> d = difflib.Differ()</p>
+<p>ff = d.compare(text1_lines, text2_lines)</p>
+<p>n’.join(list(diff))</p>
+<p>比较2个文件的不同之处):</p>
+<h1 id="–-coding-utf-8-–-1"><a href="#–-coding-utf-8-–-1" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p>/usr/bin/python</p>
+<p> import difflib</p>
+<p> import sys</p>
+<p> try:</p>
+<pre><code>    textfile1=sys.argv[1]
+
+    textfile2=sys.argv[2]
+
+except Exception,e:
+
+    print &quot;Error:&quot;+str(e)
+
+    print &quot;Usage: simple3.py filename1 filename2&quot;
+
+    sys.exit()
+
+
+
+def readfile(filename):
+
+    try:
+
+        fileHandle = open (filename, &apos;rb&apos; ) 
+
+        text=fileHandle.read().splitlines()
+
+        fileHandle.close()
+
+        return text
+
+    except IOError as error:
+
+       print(&apos;Read file Error:&apos;+str(error))
+
+       sys.exit()
+
+
+
+if textfile1==&quot;&quot; or textfile2==&quot;&quot;:
+
+    print &quot;Usage: simple3.py filename1 filename2&quot;
+
+    sys.exit()
+
+
+
+
+
+text1_lines = readfile(textfile1) 
+
+text2_lines = readfile(textfile2) 
+
+
+
+d = difflib.HtmlDiff()
+
+print d.make_file(text1_lines, text2_lines)
+</code></pre><p>效果图:</p>
+<p><img src="/uploads/ueditor/php/upload/image/20170619/1497861412.png" alt="blob.png"></p>
 
           
         
@@ -1850,7 +2103,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1895,7 +2148,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">121</span>
+                <span class="site-state-item-count">135</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1908,7 +2161,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
