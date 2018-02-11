@@ -301,123 +301,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-10-DesignPatterns-DI&IoC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-03-10-DesignPatterns-DI&IoC/" itemprop="url">实战理解 DI & IoC 设计模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-10T08:00:00+08:00">
-                2017-03-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>摘要: </strong>理解什么是Di/IoC，依赖注入/控制反转。两者说的是一个东西，是当下流行的一种设计模式。大致的意思就是，准备一个盒子(容器)，事先将项目中可能用到的类扔进去，在项目中直接从容器中拿，也就是避免了直接在项目中到处new，造成大量耦合。取而代之的是在项目类里面增设 setDi()和getDi()方法，通过Di同一管理类。<br>详细概念推荐文章： <a href="http://docs.phalconphp.com/en/latest/reference/di.html" target="_blank" rel="noopener">http://docs.phalconphp.com/en/latest/reference/di.html</a><br>中文版： <a href="http://phalcon.5iunix.net/reference/di.html" target="_blank" rel="noopener">http://phalcon.5iunix.net/reference/di.html</a></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Di</span> <span class="keyword">implements</span> \<span class="title">ArrayAccess</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $_bindings = <span class="keyword">array</span>();<span class="comment">//服务列表</span></span><br><span class="line">    <span class="keyword">private</span> $_instances = <span class="keyword">array</span>();<span class="comment">//已经实例化的服务</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//获取服务</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">($name,$params=array<span class="params">()</span>)</span></span>&#123;</span><br><span class="line">        <span class="comment">//先从已经实例化的列表中查找</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;_instances[$name]))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_instances[$name];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//检测有没有注册该服务</span></span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;_bindings[$name]))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        $concrete = <span class="keyword">$this</span>-&gt;_bindings[$name][<span class="string">'class'</span>];<span class="comment">//对象具体注册内容</span></span><br><span class="line">        </span><br><span class="line">        $obj = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//匿名函数方式</span></span><br><span class="line">        <span class="keyword">if</span>($concrete <span class="keyword">instanceof</span> \Closure)&#123;</span><br><span class="line">            $obj = call_user_func_array($concrete,$params);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//字符串方式</span></span><br><span class="line">        <span class="keyword">elseif</span>(is_string($concrete))&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">empty</span>($params))&#123;</span><br><span class="line">                $obj = <span class="keyword">new</span> $concrete;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">//带参数的类实例化，使用反射</span></span><br><span class="line">                $class = <span class="keyword">new</span> \ReflectionClass($concrete);</span><br><span class="line">                $obj = $class-&gt;newInstanceArgs($params);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果是共享服务，则写入_instances列表，下次直接取回</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;_bindings[$name][<span class="string">'shared'</span>] == <span class="keyword">true</span> &amp;&amp; $obj)&#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;_instances[$name] = $obj;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> $obj;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//检测是否已经绑定</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">has</span><span class="params">($name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;_bindings[$name]) <span class="keyword">or</span> <span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;_instances[$name]);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//卸载服务</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">remove</span><span class="params">($name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">unset</span>(<span class="keyword">$this</span>-&gt;_bindings[$name],<span class="keyword">$this</span>-&gt;_instances[$name]);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//设置服务</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">set</span><span class="params">($name,$class)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_registerService($name, $class);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//设置共享服务</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setShared</span><span class="params">($name,$class)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_registerService($name, $class, <span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//注册服务</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">_registerService</span><span class="params">($name,$class,$shared=false)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;remove($name);</span><br><span class="line">        <span class="keyword">if</span>(!($class <span class="keyword">instanceof</span> \Closure) &amp;&amp; is_object($class))&#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;_instances[$name] = $class;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;_bindings[$name] = <span class="keyword">array</span>(<span class="string">"class"</span>=&gt;$class,<span class="string">"shared"</span>=&gt;$shared);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//ArrayAccess接口,检测服务是否存在</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">offsetExists</span><span class="params">($offset)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;has($offset);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//ArrayAccess接口,以$di[$name]方式获取服务</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">offsetGet</span><span class="params">($offset)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;get($offset);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//ArrayAccess接口,以$di[$name]=$value方式注册服务，非共享</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">offsetSet</span><span class="params">($offset, $value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;set($offset,$value);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//ArrayAccess接口,以unset($di[$name])方式卸载服务</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">offsetUnset</span><span class="params">($offset)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;remove($offset);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>演示：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">header(<span class="string">"Content-Type:text/html;charset=utf8"</span>);</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name;</span><br><span class="line">    <span class="keyword">public</span> $age;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($name=<span class="string">""</span>)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;name = $name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span> <span class="string">"di.php"</span>;</span><br><span class="line">$di = <span class="keyword">new</span> Di();</span><br><span class="line"><span class="comment">//匿名函数方式注册一个名为a1的服务</span></span><br><span class="line">$di-&gt;setShared(<span class="string">'a1'</span>,<span class="function"><span class="keyword">function</span><span class="params">($name=<span class="string">""</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> A($name);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//直接以类名方式注册</span></span><br><span class="line">$di-&gt;set(<span class="string">'a2'</span>,<span class="string">'A'</span>);</span><br><span class="line"><span class="comment">//直接传入实例化的对象</span></span><br><span class="line">$di-&gt;set(<span class="string">'a3'</span>,<span class="keyword">new</span> A(<span class="string">"小唐"</span>));</span><br><span class="line"></span><br><span class="line">$a1 = $di-&gt;get(<span class="string">'a1'</span>,<span class="keyword">array</span>(<span class="string">"小李"</span>));</span><br><span class="line"><span class="keyword">echo</span> $a1-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小李</span></span><br><span class="line">$a1_1 = $di-&gt;get(<span class="string">'a1'</span>,<span class="keyword">array</span>(<span class="string">"小王"</span>));</span><br><span class="line"><span class="keyword">echo</span> $a1-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小李</span></span><br><span class="line"><span class="keyword">echo</span> $a1_1-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小李</span></span><br><span class="line"></span><br><span class="line">$a2 = $di-&gt;get(<span class="string">'a2'</span>,<span class="keyword">array</span>(<span class="string">"小张"</span>));</span><br><span class="line"><span class="keyword">echo</span> $a2-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小张</span></span><br><span class="line">$a2_1 = $di-&gt;get(<span class="string">'a2'</span>,<span class="keyword">array</span>(<span class="string">"小徐"</span>));</span><br><span class="line"><span class="keyword">echo</span> $a2-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小张</span></span><br><span class="line"><span class="keyword">echo</span> $a2_1-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小徐</span></span><br><span class="line"></span><br><span class="line">$a3 = $di[<span class="string">'a3'</span>];<span class="comment">//可以直接通过数组方式获取服务对象</span></span><br><span class="line"><span class="keyword">echo</span> $a3-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小唐</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//error_reporting(0);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//class Container</span></span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line"><span class="comment">//    public $binds;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//    public $instances;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//    public function bind($abstract, $concrete)</span></span><br><span class="line"><span class="comment">//    &#123;</span></span><br><span class="line"><span class="comment">//        if ($concrete instanceof Closure) &#123;</span></span><br><span class="line"><span class="comment">//            $this-&gt;binds[$abstract] = $concrete;</span></span><br><span class="line"><span class="comment">//        &#125; else &#123;</span></span><br><span class="line"><span class="comment">//            $this-&gt;instances[$abstract] = $concrete;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//    public function make($abstract, $parameters = [])</span></span><br><span class="line"><span class="comment">//    &#123;</span></span><br><span class="line"><span class="comment">//        if (isset($this-&gt;instances[$abstract])) &#123;</span></span><br><span class="line"><span class="comment">//            return $this-&gt;instances[$abstract];</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//        array_unshift($parameters, $this);</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//        return call_user_func_array($this-&gt;binds[$abstract], $parameters);</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//// 创建一个容器（后面称作超级工厂）</span></span><br><span class="line"><span class="comment">//$container = new Container;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//// 向该 超级工厂 添加 超人 的生产脚本</span></span><br><span class="line"><span class="comment">//$container-&gt;bind('superman', function($container, $moduleName) &#123;</span></span><br><span class="line"><span class="comment">//    $container-&gt;name = 'Jack';</span></span><br><span class="line"><span class="comment">//    $moduleName-&gt;name = 'Jack';</span></span><br><span class="line"><span class="comment">//    return new Superman($container-&gt;make($moduleName));</span></span><br><span class="line"><span class="comment">//&#125;);</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//// 向该 超级工厂 添加 超能力模组 的生产脚本</span></span><br><span class="line"><span class="comment">//$container-&gt;bind('xpower', function($container) &#123;</span></span><br><span class="line"><span class="comment">//    $container-&gt;power = '100';</span></span><br><span class="line"><span class="comment">//    return new XPower;</span></span><br><span class="line"><span class="comment">//&#125;);</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//// 同上</span></span><br><span class="line"><span class="comment">//$container-&gt;bind('ultrabomb', function($container) &#123;</span></span><br><span class="line"><span class="comment">//    $container-&gt;power = '10000';</span></span><br><span class="line"><span class="comment">//    return new UltraBomb;</span></span><br><span class="line"><span class="comment">//&#125;);</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//// ******************  华丽丽的分割线  **********************</span></span><br><span class="line"><span class="comment">//// 开始启动生产</span></span><br><span class="line"><span class="comment">//$superman_1 = $container-&gt;make('superman', 'xpower');</span></span><br><span class="line"><span class="comment">//$superman_2 = $container-&gt;make('superman', 'ultrabomb');</span></span><br><span class="line"><span class="comment">//$superman_3 = $container-&gt;make('superman', 'xpower');</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">////var_dump($container-&gt;binds['superman']);</span></span><br></pre></td></tr></table></figure>
-<p>set方式注册的，每次获取的时候都会重新实例化  </p>
-<p>setShared方式的，则只实例化一次，也就是所谓的单例模式</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-09-Book-WorldOrder/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1579,6 +1462,124 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-02-20-Book-NewCapital/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Coding & Integrity">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-02-20-Book-NewCapital/" itemprop="url">新资本论笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-20T08:00:00+08:00">
+                2017-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>生活中，我们常常会感慨物价飞涨，通货膨胀，货币购买力下降，房产泡沫太多。但其实，这些口语化的抱怨背后，是一个<strong>一般性的和世界性的普遍问题</strong>：资产价格涨幅总是比老百姓收入的增速快得多；虚拟经济的涨幅总是比实体经济的涨幅快得多；从更广阔和更一般的视野来看，虚拟经济、虚拟资本、金融资产的增速或积累速度远远超过实体经济（真实经济）、物质资本、人力资本的增速或积累速度。西方发达国家出现这个奇特现象已经有30多年了，新兴市场国家出现这个现象则是过去10年间的事。某些流动性金融资产（包括可买卖的股票、债券、外汇、衍生金融产品等等）的规模和价格的增长速度甚至还要超过房地产规模和价格的增速。而这些问题，正是作者在本书中所要探索和解决的。作者立足于开放的国际化大环境，从宏观和微观两个方面，深度剖析中国经济的发展国策和企业发展战略；采用全新的思路，深度解读对外资和跨国公司进行规范管理的完整思路以及中国企业如何发展的策略。全书分为全球金融资本主义的兴起、危机和救赎三卷，视野宏观，气势磅礴。</p>
+<p>作者在书中提出全球经济“<strong>脱实向虚</strong>”的概念。它具体表现在:首先<strong>金融业增加值占GDP的比例越来越大</strong>。其次<strong>金融业的地位从实体经济的“仆人”变成“主人”</strong>，虚拟经济和虚拟资本主导和支配着实体经济和物质资本的投资和积累，货币和金融市场成为整个市场体系里最具有权力的市场。同时利率和汇率等最重要的价格信号与实体经济的基本面基本脱节，资产市场和金融市场的投机和预期决定汇率和利率，它们反过来左右和决定实体经济的投资和消费。最后虚拟经济和虚拟资本的积累速度远远超过真实GDP、人均收入和人均工资的增速，导致收入差距和贫富分化日益恶化</p>
+<p>作者认为当今人类经济已经进入全球金融资本主义新时代。如果不站到全球产业分工体系、全球商品服务市场、全球货币金融市场体系的新视角和新高度，将完全无法理解当今人类经济体系所面临的根本性难题，更无法找到改革全球经济治理、实现全球经济持久复苏的正确方略。而这正是本书的出发点。作者在多年研究的基础上，全面分析了全球金融资本主义的起源和历史，论述了<strong>如何解决国家主权与宏观经济政策独立的矛盾</strong>，并探讨了全球金融资本主义未来的救赎之策以及中国战略。</p>
+<p>作者在讲述资本主义的发展史时提到自1971年布雷顿森林体系崩溃以来的40多年，全球经济体系的内在结构终于从量变转为质变。以全球性货币金融市场、全球流动性金融资产、全球范围内<strong>虚拟经济与真实经济相背离为显著特征的全球金融资本主义</strong>，已经成为支配整个人类社会的经济体系。人类经济已经进入全球金融资本主义新时代。</p>
+<p>然而现在流行的传统教科书经济理论仍是产业资本主义时代的经济理论，相信产业资本居主导地位，决定经济体系价格体系和分配制度，相信实体经济支配虚拟经济。但是在全球金融资本主义时代，上述一切皆颠倒过来。虚拟经济支配实体经济，货币金融决定实体经济的价格体系和分配体系；大宗商品价格被完全金融化，与实体经济供需脱节；企业不再追求利润最大化，而是市值最大化。作者认为之所以2008年金融海啸过去多年之后仍无解；<strong>世界各国采取了所能够采取的一切宏观经济政策，经济复苏却依然疲弱乏力；量化宽松不断增加货币供应量和全球流动性，真实经济的信用供给和需求依然萎靡不振；</strong>购买力平价理论和利率平价理论几乎完全失效；是因为传统的经济学家所习以为常的理论模型和思维方式已经过时，全球金融资本主义经济体系正以排山倒海、雷霆万钧之力，猛烈冲击着封闭经济模型和旧的思维方式。如果不站到全球产业分工体系、全球商品服务市场、全球货币金融市场体系的新视角和新高度，我们就完全无法理解当今人类经济体系所面临的根本性难题，更无法找到改革全球经济治理、实现全球经济持久复苏的正确方略。书中许多理论看似深奥而遥远，实际上，它与我们的生活密切相关，许多生活中的问题就可以用它来解决。读完这本书，让我在看待生活中的热点问题时，不会人云亦云，而是多了一份理性的思考。</p>
+<p>当前中国，最有价值的不是货币，因为货币已经高达130万亿，而且还处于高速增长中，也就是中国不缺资本，但中国最缺的是优秀的企业家和优秀的企业，真正优秀的企业家在中国是非常稀有的资源，需要得到社会的理解和保护。如果我们放任高杠杆资金的恣意妄为，放任高杠杆投机资金的违法、违规，那么中国整个社会的企业环境将会急剧恶化，所有的优秀企业和优秀企业家都将处于高度不安状态，今天是招行，明天是民生银行，现在是金地和万科，接下来是格力，中国所有的优秀企业都会被高杠杆的投机资金一一斩首，这无疑是一场灾难。 资本都是逐利的，百亿级别的资本大战让人见识了资本的力量，很多人感慨努力创业最后都可能是为资本打工。资本如此强势介入，是否会推动社会进步，目前还是未知数。但可以预知的是，这一大战无论如何收场都会对资本市场乃至经济本身产生影响。在大众创业、万众创新的大背景下，资本非常重要，但如何善用资本是每个创业者甚至监管者都要思考的问题。</p>
+<p>经济，金融，资本，杠杆，股权稀释，这些看似高大上的词汇其实离我们并不远，将所学的知识运用于生活，去解决生活中的问题，这便是最好的收获。总而言之，在拜读完这部高深的著作后，我觉得我看问题的视野拓宽了，分析问题的角度更加全面，我想，这便是我阅读此书最大的收获吧。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -1641,7 +1642,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
