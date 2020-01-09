@@ -92,21 +92,20 @@
 
 
 
-
 <meta name="description" content="• 深度了解事件系统（event system）。 Salt 基于消息队列（message queue）构建。命令首先由 Master 产生任务（job）并推送到队列中。Minion监听队列中能够匹配到自己的任务。当 Minion 获取到一个任务时，会尝试执行和自己相关联的任务。一旦任务完成，会将任务的执行结果发送到另外一个Master 监听的队列。 Minion 并不是只能处理由 Master">
 <meta name="keywords" content="Saltstack">
 <meta property="og:type" content="article">
 <meta property="og:title" content="saltstack event system笔记">
-<meta property="og:url" content="http://blog.todo4team.net/2017-08-09-OpenSource-SaltEvent/index.html">
-<meta property="og:site_name" content="Love Coding &amp; Integrity">
+<meta property="og:url" content="http://blog.toob.net.cn/2017-08-09-OpenSource-SaltEvent/index.html">
+<meta property="og:site_name" content="Jack Xia">
 <meta property="og:description" content="• 深度了解事件系统（event system）。 Salt 基于消息队列（message queue）构建。命令首先由 Master 产生任务（job）并推送到队列中。Minion监听队列中能够匹配到自己的任务。当 Minion 获取到一个任务时，会尝试执行和自己相关联的任务。一旦任务完成，会将任务的执行结果发送到另外一个Master 监听的队列。 Minion 并不是只能处理由 Master">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://blog.todo4team.net/uploads/ueditor/php/upload/image/20170807/1502087899.png">
+<meta property="og:image" content="http://blog.toob.net.cn/uploads/ueditor/php/upload/image/20170807/1502087899.png">
 <meta property="og:updated_time" content="2017-08-07T08:26:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="saltstack event system笔记">
 <meta name="twitter:description" content="• 深度了解事件系统（event system）。 Salt 基于消息队列（message queue）构建。命令首先由 Master 产生任务（job）并推送到队列中。Minion监听队列中能够匹配到自己的任务。当 Minion 获取到一个任务时，会尝试执行和自己相关联的任务。一旦任务完成，会将任务的执行结果发送到另外一个Master 监听的队列。 Minion 并不是只能处理由 Master">
-<meta name="twitter:image" content="http://blog.todo4team.net/uploads/ueditor/php/upload/image/20170807/1502087899.png">
+<meta name="twitter:image" content="http://blog.toob.net.cn/uploads/ueditor/php/upload/image/20170807/1502087899.png">
 
 
 
@@ -134,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.todo4team.net/2017-08-09-OpenSource-SaltEvent/"/>
+  <link rel="canonical" href="http://blog.toob.net.cn/2017-08-09-OpenSource-SaltEvent/"/>
 
 
 
 
 
-  <title>saltstack event system笔记 | Love Coding & Integrity</title>
+  <title>saltstack event system笔记 | Jack Xia</title>
   
 
 
@@ -176,12 +175,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Love Coding & Integrity</span>
+        <span class="site-title">Jack Xia</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle">分享&自我完善, 爱&心智成熟</p>
+        <p class="site-subtitle">笔记</p>
       
   </div>
 
@@ -303,7 +302,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-08-09-OpenSource-SaltEvent/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-08-09-OpenSource-SaltEvent/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -312,7 +311,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
+      <meta itemprop="name" content="Jack Xia">
     </span>
 
     
@@ -522,7 +521,7 @@
                alt="Jack Xia" />
           <p class="site-author-name" itemprop="name">Jack Xia</p>
            
-              <p class="site-description motion-element" itemprop="description">为自我完善的意愿编码人生, 以爱促进自我和他人的心智成熟</p>
+              <p class="site-description motion-element" itemprop="description">MIS, Gamification, Education</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -543,7 +542,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -585,7 +584,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -687,7 +686,7 @@
 
   <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
 
-
+<script type="text/javascript" src="//cdn.bootcss.com/mermaid/6.0.0/mermaid.min.js"></script>
 
   
 

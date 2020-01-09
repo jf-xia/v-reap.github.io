@@ -92,24 +92,23 @@
 
 
 
-
 <meta name="description" content="GRAINS 组件是saltstack中非常重要的一个组件，其主要用于记录Minion的一些静态信息，如比：CPU、内存、磁盘、网络等。grains信息是每次客户端启动后自动上报给master的，一旦这些静态信息发生改变需要重启minion 或者 重新同步下 grains。除此之外我们还可以自定义Grains的一些信息。自定义的方法有三种：1、通过Minion配置文件定义；2、通过Grains相关">
 <meta name="keywords" content="运维,Python,Saltstack">
 <meta property="og:type" content="article">
 <meta property="og:title" content="saltstack grains 示例">
-<meta property="og:url" content="http://blog.todo4team.net/2017-07-06-OpenSource-SaltGrains/index.html">
-<meta property="og:site_name" content="Love Coding &amp; Integrity">
+<meta property="og:url" content="http://blog.toob.net.cn/2017-07-06-OpenSource-SaltGrains/index.html">
+<meta property="og:site_name" content="Jack Xia">
 <meta property="og:description" content="GRAINS 组件是saltstack中非常重要的一个组件，其主要用于记录Minion的一些静态信息，如比：CPU、内存、磁盘、网络等。grains信息是每次客户端启动后自动上报给master的，一旦这些静态信息发生改变需要重启minion 或者 重新同步下 grains。除此之外我们还可以自定义Grains的一些信息。自定义的方法有三种：1、通过Minion配置文件定义；2、通过Grains相关">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://blog.todo4team.net/uploads/ueditor/php/upload/image/20170706/1499305756.png">
-<meta property="og:image" content="http://blog.todo4team.net/uploads/ueditor/php/upload/image/20170706/1499305728.png">
-<meta property="og:image" content="http://blog.todo4team.net/uploads/ueditor/php/upload/image/20170706/1499305854.png">
-<meta property="og:image" content="http://blog.todo4team.net/uploads/ueditor/php/upload/image/20170706/1499305927.png">
+<meta property="og:image" content="http://blog.toob.net.cn/uploads/ueditor/php/upload/image/20170706/1499305756.png">
+<meta property="og:image" content="http://blog.toob.net.cn/uploads/ueditor/php/upload/image/20170706/1499305728.png">
+<meta property="og:image" content="http://blog.toob.net.cn/uploads/ueditor/php/upload/image/20170706/1499305854.png">
+<meta property="og:image" content="http://blog.toob.net.cn/uploads/ueditor/php/upload/image/20170706/1499305927.png">
 <meta property="og:updated_time" content="2017-07-07T06:12:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="saltstack grains 示例">
 <meta name="twitter:description" content="GRAINS 组件是saltstack中非常重要的一个组件，其主要用于记录Minion的一些静态信息，如比：CPU、内存、磁盘、网络等。grains信息是每次客户端启动后自动上报给master的，一旦这些静态信息发生改变需要重启minion 或者 重新同步下 grains。除此之外我们还可以自定义Grains的一些信息。自定义的方法有三种：1、通过Minion配置文件定义；2、通过Grains相关">
-<meta name="twitter:image" content="http://blog.todo4team.net/uploads/ueditor/php/upload/image/20170706/1499305756.png">
+<meta name="twitter:image" content="http://blog.toob.net.cn/uploads/ueditor/php/upload/image/20170706/1499305756.png">
 
 
 
@@ -137,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.todo4team.net/2017-07-06-OpenSource-SaltGrains/"/>
+  <link rel="canonical" href="http://blog.toob.net.cn/2017-07-06-OpenSource-SaltGrains/"/>
 
 
 
 
 
-  <title>saltstack grains 示例 | Love Coding & Integrity</title>
+  <title>saltstack grains 示例 | Jack Xia</title>
   
 
 
@@ -179,12 +178,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Love Coding & Integrity</span>
+        <span class="site-title">Jack Xia</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle">分享&自我完善, 爱&心智成熟</p>
+        <p class="site-subtitle">笔记</p>
       
   </div>
 
@@ -306,7 +305,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-07-06-OpenSource-SaltGrains/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-06-OpenSource-SaltGrains/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -315,7 +314,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
+      <meta itemprop="name" content="Jack Xia">
     </span>
 
     
@@ -539,7 +538,7 @@
                alt="Jack Xia" />
           <p class="site-author-name" itemprop="name">Jack Xia</p>
            
-              <p class="site-description motion-element" itemprop="description">为自我完善的意愿编码人生, 以爱促进自我和他人的心智成熟</p>
+              <p class="site-description motion-element" itemprop="description">MIS, Gamification, Education</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -560,7 +559,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -618,7 +617,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -720,7 +719,7 @@
 
   <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
 
-
+<script type="text/javascript" src="//cdn.bootcss.com/mermaid/6.0.0/mermaid.min.js"></script>
 
   
 

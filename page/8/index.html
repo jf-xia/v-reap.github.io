@@ -92,17 +92,16 @@
 
 
 
-
-<meta name="description" content="为自我完善的意愿编码人生, 以爱促进自我和他人的心智成熟">
+<meta name="description" content="MIS, Gamification, Education">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Love Coding &amp; Integrity">
-<meta property="og:url" content="http://blog.todo4team.net/page/8/index.html">
-<meta property="og:site_name" content="Love Coding &amp; Integrity">
-<meta property="og:description" content="为自我完善的意愿编码人生, 以爱促进自我和他人的心智成熟">
+<meta property="og:title" content="Jack Xia">
+<meta property="og:url" content="http://blog.toob.net.cn/page/8/index.html">
+<meta property="og:site_name" content="Jack Xia">
+<meta property="og:description" content="MIS, Gamification, Education">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Love Coding &amp; Integrity">
-<meta name="twitter:description" content="为自我完善的意愿编码人生, 以爱促进自我和他人的心智成熟">
+<meta name="twitter:title" content="Jack Xia">
+<meta name="twitter:description" content="MIS, Gamification, Education">
 
 
 
@@ -130,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.todo4team.net/page/8/"/>
+  <link rel="canonical" href="http://blog.toob.net.cn/page/8/"/>
 
 
 
 
 
-  <title>Love Coding & Integrity</title>
+  <title>Jack Xia</title>
   
 
 
@@ -174,12 +173,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Love Coding & Integrity</span>
+        <span class="site-title">Jack Xia</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle">分享&自我完善, 爱&心智成熟</p>
+        <p class="site-subtitle">笔记</p>
       
   </div>
 
@@ -301,7 +300,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-29-Python-pexpect/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-30-Python-paramiko/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -310,7 +309,146 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-06-30-Python-paramiko/" itemprop="url">paramiko远程连接ssh2 - Python自动化运维</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-30T08:00:00+08:00">
+                2017-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>paramiko是用python语言写的一个模块，遵循SSH2协议，支持以加密和认证的方式，进行远程服务器的连接。</p>
+<p>由于使用的是python这样的能够跨平台运行的语言，所以所有python支持的平台，如Linux, Solaris, BSD, MacOS X,Windows等，paramiko都可以支持，因此，如果需要使用SSH从一个平台连接到另外一个平台，进行一系列的操作时，paramiko是最佳工具之一。  </p>
+<ol>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install paramiko</li>
+</ol>
+<p>Examples:</p>
+<p>```python</p>
+<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> #!/usr/bin/env python</p>
+<p> import paramiko</p>
+<p> hostname=’10.1.134.128’</p>
+<p> username=’username’</p>
+<p> password=’password’</p>
+<p> #paramiko.util.log_to_file(‘syslogin.log’)</p>
+<pre><code>ssh=paramiko.SSHClient()
+
+#ssh.load_system_host_keys()
+
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+ssh.connect(hostname=hostname,username=username,password=password)
+
+stdin,stdout,stderr=ssh.exec_command(&apos;free -m&apos;)
+
+print stdout.read()
+
+ssh.close()
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-29-Python-pexpect/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
     </span>
 
     
@@ -450,7 +588,7 @@ except pxssh.ExceptionPxssh, e:
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-28-Python-xlsx/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-28-Python-xlsx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -459,7 +597,7 @@ except pxssh.ExceptionPxssh, e:
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
+      <meta itemprop="name" content="Jack Xia">
     </span>
 
     
@@ -658,7 +796,7 @@ workbook.close()
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-27-Python-scapy/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-27-Python-scapy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -667,7 +805,7 @@ workbook.close()
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
+      <meta itemprop="name" content="Jack Xia">
     </span>
 
     
@@ -799,7 +937,7 @@ else:
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-26-Python-rrdtool/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-26-Python-rrdtool/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -808,7 +946,7 @@ else:
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
+      <meta itemprop="name" content="Jack Xia">
     </span>
 
     
@@ -1047,7 +1185,7 @@ rrdtool.graph( &quot;Flow.png&quot;, &quot;--start&quot;, &quot;-1d&quot;,&quot;
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-23-Python-smtplib/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-23-Python-smtplib/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -1056,7 +1194,7 @@ rrdtool.graph( &quot;Flow.png&quot;, &quot;--start&quot;, &quot;-1d&quot;,&quot;
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
+      <meta itemprop="name" content="Jack Xia">
     </span>
 
     
@@ -1261,7 +1399,7 @@ except Exception, e:
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-22-JS-npm.taobao/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-22-JS-npm.taobao/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -1270,7 +1408,7 @@ except Exception, e:
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
+      <meta itemprop="name" content="Jack Xia">
     </span>
 
     
@@ -1379,7 +1517,7 @@ except Exception, e:
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-22-Python-pycurl/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-22-Python-pycurl/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -1388,7 +1526,7 @@ except Exception, e:
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
+      <meta itemprop="name" content="Jack Xia">
     </span>
 
     
@@ -1527,7 +1665,7 @@ c.close()
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-21-Python-filecmp/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-21-Python-filecmp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -1536,7 +1674,7 @@ c.close()
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
+      <meta itemprop="name" content="Jack Xia">
     </span>
 
     
@@ -1774,7 +1912,7 @@ if __name__ == &apos;__main__&apos;:
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-20-Python-difflib/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-20-Python-difflib/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -1783,7 +1921,7 @@ if __name__ == &apos;__main__&apos;:
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
+      <meta itemprop="name" content="Jack Xia">
     </span>
 
     
@@ -1960,142 +2098,6 @@ print d.make_file(text1_lines, text2_lines)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-06-19-Python-IPy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-06-19-Python-IPy/" itemprop="url">IPy - Python自动化运维</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-19T17:00:00+08:00">
-                2017-06-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
-<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
-<li>安装第三方库: pip install IPy</li>
-</ol>
-<p>Examples:</p>
-<p>```python<br>Examples:</p>
-<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> #!/usr/bin/env, python pip install ipy</p>
-<p> from IPy import IP</p>
-<p> ip_s = raw_input(‘Please input an IP or net-range: ‘)</p>
-<p> ips = IP(ip_s)</p>
-<p> if len(ips) &gt; 1:</p>
-<p>  print(‘net: %s’ % ips.net())</p>
-<p>  print(‘netmask: %s’ % ips.netmask())</p>
-<p>  % ips.broadcast())</p>
-<p>  print(‘reverse address: %s’ % ips.reverseNames()[0])</p>
-<p>  print(‘subnet: %s’ % len(ips))</p>
-<p> else:</p>
-<p>  print(‘reverse address: %s’ % ips.reverseNames()[0])</p>
-<p> print(‘hexadecimal: %s’ % ips.strHex())</p>
-<p> print(‘binary ip: %s’ % ips.strBin())</p>
-<p> print(‘iptype: %s’ % ips.iptype())</p>
-<p>相关教程PDF:</p>
-<p><img src="http://10.1.134.114:55555/laravel-u-editor/dialogs/attachment/fileTypeImag
-es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/1498182828.pdf">Python自动化运维：技术与最佳实践-<br>signed.pdf</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2137,7 +2139,7 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
                alt="Jack Xia" />
           <p class="site-author-name" itemprop="name">Jack Xia</p>
            
-              <p class="site-description motion-element" itemprop="description">为自我完善的意愿编码人生, 以爱促进自我和他人的心智成熟</p>
+              <p class="site-description motion-element" itemprop="description">MIS, Gamification, Education</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -2158,7 +2160,7 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2200,7 +2202,7 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -2302,7 +2304,7 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
 
   <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
 
-
+<script type="text/javascript" src="//cdn.bootcss.com/mermaid/6.0.0/mermaid.min.js"></script>
 
   
 

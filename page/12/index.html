@@ -92,17 +92,16 @@
 
 
 
-
-<meta name="description" content="为自我完善的意愿编码人生, 以爱促进自我和他人的心智成熟">
+<meta name="description" content="MIS, Gamification, Education">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Love Coding &amp; Integrity">
-<meta property="og:url" content="http://blog.todo4team.net/page/12/index.html">
-<meta property="og:site_name" content="Love Coding &amp; Integrity">
-<meta property="og:description" content="为自我完善的意愿编码人生, 以爱促进自我和他人的心智成熟">
+<meta property="og:title" content="Jack Xia">
+<meta property="og:url" content="http://blog.toob.net.cn/page/12/index.html">
+<meta property="og:site_name" content="Jack Xia">
+<meta property="og:description" content="MIS, Gamification, Education">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Love Coding &amp; Integrity">
-<meta name="twitter:description" content="为自我完善的意愿编码人生, 以爱促进自我和他人的心智成熟">
+<meta name="twitter:title" content="Jack Xia">
+<meta name="twitter:description" content="MIS, Gamification, Education">
 
 
 
@@ -130,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.todo4team.net/page/12/"/>
+  <link rel="canonical" href="http://blog.toob.net.cn/page/12/"/>
 
 
 
 
 
-  <title>Love Coding & Integrity</title>
+  <title>Jack Xia</title>
   
 
 
@@ -174,12 +173,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Love Coding & Integrity</span>
+        <span class="site-title">Jack Xia</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle">分享&自我完善, 爱&心智成熟</p>
+        <p class="site-subtitle">笔记</p>
       
   </div>
 
@@ -301,7 +300,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-23-MySQL-MindMap/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-03-24-ITSM-VPN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -310,7 +309,133 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-03-24-ITSM-VPN/" itemprop="url">Linode VPN 服务 搭建笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-24T08:00:00+08:00">
+                2017-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果:"></a>最终效果:</h2><ol>
+<li>百度并下载shadowsocks 客户端, 打开并配置<br><img src="/uploads/ueditor/php/upload/image/20170324/1490327573.png" alt="blob.png"></li>
+<li>使用chrome内核浏览器并安装SwitchyOmega插件配置<br><img src="/uploads/ueditor/php/upload/image/20170324/1490327617.png" alt="blob.png"></li>
+<li>可以用google和Facebook了</li>
+</ol>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程:"></a>过程:</h2><p>买个linode的vps先~然后申请账号并通过官方测速:<br><a href="https://www.linode.com/speedtest" target="_blank" rel="noopener">https://www.linode.com/speedtest</a><br>感觉日本的机房没有想象中那么快,选择了Fremont,然后发现ssh链接不稳定…又换了jp的…</p>
+<h1 id="安装ShadowSocks服务端"><a href="#安装ShadowSocks服务端" class="headerlink" title="安装ShadowSocks服务端"></a>安装ShadowSocks服务端</h1><h2 id="1-查看系统"><a href="#1-查看系统" class="headerlink" title="1. 查看系统"></a>1. 查看系统</h2><p>[root@localhost ~]# cat /etc/issue<br>CentOS release 6.6 (Final)<br>[root@localhost ~]# uname -a<br>Linux localhost.localdomain 2.6.32-042stab106.6 #1 SMP Mon Apr 20 14:48:47 MSK<br>2015 x86_64 x86_64 x86_64 GNU/Linux</p>
+<h2 id="2-安装ShadowSocks"><a href="#2-安装ShadowSocks" class="headerlink" title="2. 安装ShadowSocks"></a>2. 安装ShadowSocks</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install python-setuptools &amp;&amp; easy_install pip</span><br><span class="line">pip install shadowsocks</span><br></pre></td></tr></table></figure>
+<h2 id="3-创建配置文件-etc-shadowsocks-json"><a href="#3-创建配置文件-etc-shadowsocks-json" class="headerlink" title="3. 创建配置文件/etc/shadowsocks.json"></a>3. 创建配置文件/etc/shadowsocks.json</h2><p>[root@localhost /]# touch /etc/shadowsocks.json<br>[root@localhost /]# vi /etc/shadowsocks.json<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">"server"</span>:<span class="string">"138.XX.208.158"</span>,</span><br><span class="line"><span class="attr">"server_port"</span>:<span class="number">443</span>,</span><br><span class="line"><span class="attr">"local_address"</span>: <span class="string">"127.0.0.1"</span>,</span><br><span class="line"><span class="attr">"local_port"</span>:<span class="number">1080</span>,</span><br><span class="line"><span class="attr">"password"</span>:<span class="string">"MyPass"</span>,</span><br><span class="line"><span class="attr">"timeout"</span>:<span class="number">600</span>,</span><br><span class="line"><span class="attr">"method"</span>:<span class="string">"rc4-md5"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>备注：加密方式官方默认使用aes-256-cfb，推荐使用rc4-md5，因为 RC4比AES速度快好几倍。<br>各字段说明：<br> server:服务器IP<br> server_port:服务器端口<br> local_port:本地端端口<br> password:用来加密的密码<br> timeout:超时时间（秒）<br> method:加密方法，可选择 “bf-cfb”, “aes-256-cfb”, “des-cfb”, “rc4″等</p>
+<h2 id="4-使用配置文件在后台运行shadowsocks服务"><a href="#4-使用配置文件在后台运行shadowsocks服务" class="headerlink" title="4. 使用配置文件在后台运行shadowsocks服务"></a>4. 使用配置文件在后台运行shadowsocks服务</h2><p>[root@localhost /]# ssserver -c /etc/shadowsocks.json -d start</p>
+<p>备注：若无配置文件，在后台可以使用一下命令运行：</p>
+<p>[root@localhost /]# ssserver -p 443 -k MyPass -m rc4-md5 -d start</p>
+<h2 id="5-停止服务"><a href="#5-停止服务" class="headerlink" title="5. 停止服务"></a>5. 停止服务</h2><p>[root@localhost /]# ssserver -c /etc/shadowsocks.json -d stop</p>
+<p>部署文档参考:<br><a href="http://blog.csdn.net/cccheer/article/details/60480266" target="_blank" rel="noopener">http://blog.csdn.net/cccheer/article/details/60480266</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-03-23-MySQL-MindMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
     </span>
 
     
@@ -421,7 +546,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-22-Book-21Leadership/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-03-22-Book-21Leadership/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -430,7 +555,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
+      <meta itemprop="name" content="Jack Xia">
     </span>
 
     
@@ -662,7 +787,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-21-Book-IntoManagement/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-03-21-Book-IntoManagement/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -671,7 +796,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
+      <meta itemprop="name" content="Jack Xia">
     </span>
 
     
@@ -812,7 +937,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-20-Book-HedgeFund/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-03-20-Book-HedgeFund/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -821,7 +946,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
+      <meta itemprop="name" content="Jack Xia">
     </span>
 
     
@@ -934,7 +1059,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-17-Book-Outliers/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-03-17-Book-Outliers/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -943,7 +1068,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
+      <meta itemprop="name" content="Jack Xia">
     </span>
 
     
@@ -1049,7 +1174,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-16-Habit-AnandaMandala/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-03-16-Habit-AnandaMandala/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -1058,7 +1183,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
+      <meta itemprop="name" content="Jack Xia">
     </span>
 
     
@@ -1165,7 +1290,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-15-MySQL-Index/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-03-15-MySQL-Index/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -1174,7 +1299,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
+      <meta itemprop="name" content="Jack Xia">
     </span>
 
     
@@ -1309,7 +1434,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-14-Book-10KHours/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-03-14-Book-10KHours/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -1318,7 +1443,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
+      <meta itemprop="name" content="Jack Xia">
     </span>
 
     
@@ -1437,7 +1562,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-13-Book-EffectiveExecutive/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-03-13-Book-EffectiveExecutive/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -1446,7 +1571,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
+      <meta itemprop="name" content="Jack Xia">
     </span>
 
     
@@ -1554,123 +1679,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.todo4team.net/2017-03-10-DesignPatterns-DI&IoC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Love Coding & Integrity">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-03-10-DesignPatterns-DI&IoC/" itemprop="url">实战理解 DI & IoC 设计模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-10T08:00:00+08:00">
-                2017-03-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>摘要: </strong>理解什么是Di/IoC，依赖注入/控制反转。两者说的是一个东西，是当下流行的一种设计模式。大致的意思就是，准备一个盒子(容器)，事先将项目中可能用到的类扔进去，在项目中直接从容器中拿，也就是避免了直接在项目中到处new，造成大量耦合。取而代之的是在项目类里面增设 setDi()和getDi()方法，通过Di同一管理类。<br>详细概念推荐文章： <a href="http://docs.phalconphp.com/en/latest/reference/di.html" target="_blank" rel="noopener">http://docs.phalconphp.com/en/latest/reference/di.html</a><br>中文版： <a href="http://phalcon.5iunix.net/reference/di.html" target="_blank" rel="noopener">http://phalcon.5iunix.net/reference/di.html</a></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Di</span> <span class="keyword">implements</span> \<span class="title">ArrayAccess</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $_bindings = <span class="keyword">array</span>();<span class="comment">//服务列表</span></span><br><span class="line">    <span class="keyword">private</span> $_instances = <span class="keyword">array</span>();<span class="comment">//已经实例化的服务</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//获取服务</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">($name,$params=array<span class="params">()</span>)</span></span>&#123;</span><br><span class="line">        <span class="comment">//先从已经实例化的列表中查找</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;_instances[$name]))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_instances[$name];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//检测有没有注册该服务</span></span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;_bindings[$name]))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        $concrete = <span class="keyword">$this</span>-&gt;_bindings[$name][<span class="string">'class'</span>];<span class="comment">//对象具体注册内容</span></span><br><span class="line">        </span><br><span class="line">        $obj = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//匿名函数方式</span></span><br><span class="line">        <span class="keyword">if</span>($concrete <span class="keyword">instanceof</span> \Closure)&#123;</span><br><span class="line">            $obj = call_user_func_array($concrete,$params);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//字符串方式</span></span><br><span class="line">        <span class="keyword">elseif</span>(is_string($concrete))&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">empty</span>($params))&#123;</span><br><span class="line">                $obj = <span class="keyword">new</span> $concrete;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">//带参数的类实例化，使用反射</span></span><br><span class="line">                $class = <span class="keyword">new</span> \ReflectionClass($concrete);</span><br><span class="line">                $obj = $class-&gt;newInstanceArgs($params);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果是共享服务，则写入_instances列表，下次直接取回</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;_bindings[$name][<span class="string">'shared'</span>] == <span class="keyword">true</span> &amp;&amp; $obj)&#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;_instances[$name] = $obj;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> $obj;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//检测是否已经绑定</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">has</span><span class="params">($name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;_bindings[$name]) <span class="keyword">or</span> <span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;_instances[$name]);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//卸载服务</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">remove</span><span class="params">($name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">unset</span>(<span class="keyword">$this</span>-&gt;_bindings[$name],<span class="keyword">$this</span>-&gt;_instances[$name]);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//设置服务</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">set</span><span class="params">($name,$class)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_registerService($name, $class);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//设置共享服务</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setShared</span><span class="params">($name,$class)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_registerService($name, $class, <span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//注册服务</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">_registerService</span><span class="params">($name,$class,$shared=false)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;remove($name);</span><br><span class="line">        <span class="keyword">if</span>(!($class <span class="keyword">instanceof</span> \Closure) &amp;&amp; is_object($class))&#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;_instances[$name] = $class;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;_bindings[$name] = <span class="keyword">array</span>(<span class="string">"class"</span>=&gt;$class,<span class="string">"shared"</span>=&gt;$shared);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//ArrayAccess接口,检测服务是否存在</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">offsetExists</span><span class="params">($offset)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;has($offset);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//ArrayAccess接口,以$di[$name]方式获取服务</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">offsetGet</span><span class="params">($offset)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;get($offset);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//ArrayAccess接口,以$di[$name]=$value方式注册服务，非共享</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">offsetSet</span><span class="params">($offset, $value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;set($offset,$value);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//ArrayAccess接口,以unset($di[$name])方式卸载服务</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">offsetUnset</span><span class="params">($offset)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;remove($offset);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>演示：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">header(<span class="string">"Content-Type:text/html;charset=utf8"</span>);</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name;</span><br><span class="line">    <span class="keyword">public</span> $age;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($name=<span class="string">""</span>)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;name = $name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span> <span class="string">"di.php"</span>;</span><br><span class="line">$di = <span class="keyword">new</span> Di();</span><br><span class="line"><span class="comment">//匿名函数方式注册一个名为a1的服务</span></span><br><span class="line">$di-&gt;setShared(<span class="string">'a1'</span>,<span class="function"><span class="keyword">function</span><span class="params">($name=<span class="string">""</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> A($name);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//直接以类名方式注册</span></span><br><span class="line">$di-&gt;set(<span class="string">'a2'</span>,<span class="string">'A'</span>);</span><br><span class="line"><span class="comment">//直接传入实例化的对象</span></span><br><span class="line">$di-&gt;set(<span class="string">'a3'</span>,<span class="keyword">new</span> A(<span class="string">"小唐"</span>));</span><br><span class="line"></span><br><span class="line">$a1 = $di-&gt;get(<span class="string">'a1'</span>,<span class="keyword">array</span>(<span class="string">"小李"</span>));</span><br><span class="line"><span class="keyword">echo</span> $a1-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小李</span></span><br><span class="line">$a1_1 = $di-&gt;get(<span class="string">'a1'</span>,<span class="keyword">array</span>(<span class="string">"小王"</span>));</span><br><span class="line"><span class="keyword">echo</span> $a1-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小李</span></span><br><span class="line"><span class="keyword">echo</span> $a1_1-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小李</span></span><br><span class="line"></span><br><span class="line">$a2 = $di-&gt;get(<span class="string">'a2'</span>,<span class="keyword">array</span>(<span class="string">"小张"</span>));</span><br><span class="line"><span class="keyword">echo</span> $a2-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小张</span></span><br><span class="line">$a2_1 = $di-&gt;get(<span class="string">'a2'</span>,<span class="keyword">array</span>(<span class="string">"小徐"</span>));</span><br><span class="line"><span class="keyword">echo</span> $a2-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小张</span></span><br><span class="line"><span class="keyword">echo</span> $a2_1-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小徐</span></span><br><span class="line"></span><br><span class="line">$a3 = $di[<span class="string">'a3'</span>];<span class="comment">//可以直接通过数组方式获取服务对象</span></span><br><span class="line"><span class="keyword">echo</span> $a3-&gt;name.<span class="string">"&lt;br/&gt;"</span>;<span class="comment">//小唐</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//error_reporting(0);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//class Container</span></span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line"><span class="comment">//    public $binds;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//    public $instances;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//    public function bind($abstract, $concrete)</span></span><br><span class="line"><span class="comment">//    &#123;</span></span><br><span class="line"><span class="comment">//        if ($concrete instanceof Closure) &#123;</span></span><br><span class="line"><span class="comment">//            $this-&gt;binds[$abstract] = $concrete;</span></span><br><span class="line"><span class="comment">//        &#125; else &#123;</span></span><br><span class="line"><span class="comment">//            $this-&gt;instances[$abstract] = $concrete;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//    public function make($abstract, $parameters = [])</span></span><br><span class="line"><span class="comment">//    &#123;</span></span><br><span class="line"><span class="comment">//        if (isset($this-&gt;instances[$abstract])) &#123;</span></span><br><span class="line"><span class="comment">//            return $this-&gt;instances[$abstract];</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//        array_unshift($parameters, $this);</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//        return call_user_func_array($this-&gt;binds[$abstract], $parameters);</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//// 创建一个容器（后面称作超级工厂）</span></span><br><span class="line"><span class="comment">//$container = new Container;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//// 向该 超级工厂 添加 超人 的生产脚本</span></span><br><span class="line"><span class="comment">//$container-&gt;bind('superman', function($container, $moduleName) &#123;</span></span><br><span class="line"><span class="comment">//    $container-&gt;name = 'Jack';</span></span><br><span class="line"><span class="comment">//    $moduleName-&gt;name = 'Jack';</span></span><br><span class="line"><span class="comment">//    return new Superman($container-&gt;make($moduleName));</span></span><br><span class="line"><span class="comment">//&#125;);</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//// 向该 超级工厂 添加 超能力模组 的生产脚本</span></span><br><span class="line"><span class="comment">//$container-&gt;bind('xpower', function($container) &#123;</span></span><br><span class="line"><span class="comment">//    $container-&gt;power = '100';</span></span><br><span class="line"><span class="comment">//    return new XPower;</span></span><br><span class="line"><span class="comment">//&#125;);</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//// 同上</span></span><br><span class="line"><span class="comment">//$container-&gt;bind('ultrabomb', function($container) &#123;</span></span><br><span class="line"><span class="comment">//    $container-&gt;power = '10000';</span></span><br><span class="line"><span class="comment">//    return new UltraBomb;</span></span><br><span class="line"><span class="comment">//&#125;);</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//// ******************  华丽丽的分割线  **********************</span></span><br><span class="line"><span class="comment">//// 开始启动生产</span></span><br><span class="line"><span class="comment">//$superman_1 = $container-&gt;make('superman', 'xpower');</span></span><br><span class="line"><span class="comment">//$superman_2 = $container-&gt;make('superman', 'ultrabomb');</span></span><br><span class="line"><span class="comment">//$superman_3 = $container-&gt;make('superman', 'xpower');</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">////var_dump($container-&gt;binds['superman']);</span></span><br></pre></td></tr></table></figure>
-<p>set方式注册的，每次获取的时候都会重新实例化  </p>
-<p>setShared方式的，则只实例化一次，也就是所谓的单例模式</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1712,7 +1720,7 @@
                alt="Jack Xia" />
           <p class="site-author-name" itemprop="name">Jack Xia</p>
            
-              <p class="site-description motion-element" itemprop="description">为自我完善的意愿编码人生, 以爱促进自我和他人的心智成熟</p>
+              <p class="site-description motion-element" itemprop="description">MIS, Gamification, Education</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -1733,7 +1741,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1775,7 +1783,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1877,7 +1885,7 @@
 
   <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
 
-
+<script type="text/javascript" src="//cdn.bootcss.com/mermaid/6.0.0/mermaid.min.js"></script>
 
   
 
