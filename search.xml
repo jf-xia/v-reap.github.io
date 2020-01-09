@@ -873,7 +873,7 @@
   <entry>
     <title><![CDATA[svn迁移到git仓库并保留commit历史记录]]></title>
     <url>%2F%2F2017-03-30-Git-svn2git%2F</url>
-    <content type="text"><![CDATA[最近在做svn迁移到gitlab，由于之前一直是由svn做版本控制。最简单的方式是将svn的内容export出来，然后添加到gitlab即可。但是，如果svn用的时间很长了，而且很多commit，我们希望保存svn commit的信息以便做版本的控制和比较。幸好git提供了相应的解决办法。 1.环境准备： yum install -y git-svn 2.svn账号与git账号映射，users.txt svn账号=git账号名称&#x75;&#x73;&#x65;&#114;&#x6e;&#x61;&#109;&#101;&#64;&#109;&#x61;&#105;&#108;&#46;&#99;&#111;&#109; 3.svn转换为git git svn clone svn://ip端口/projectname –no-metadata –authors-file=users.txt –trunk=trunk projectnamecd projectname 4.添加git仓库 git remote add origin git@xxx.xxx.xxx.xxx:root/projectname.git 5.提交到gitlab git push -u origin master 参考文档：http://blog.163.com/pjt_ren/blog/static/188250602013101102615844/http://www.lovelucy.info/codebase-from-svn-to-git-migration-keep-commit-history.html]]></content>
+    <content type="text"><![CDATA[最近在做svn迁移到gitlab，由于之前一直是由svn做版本控制。最简单的方式是将svn的内容export出来，然后添加到gitlab即可。但是，如果svn用的时间很长了，而且很多commit，我们希望保存svn commit的信息以便做版本的控制和比较。幸好git提供了相应的解决办法。 1.环境准备： yum install -y git-svn 2.svn账号与git账号映射，users.txt svn账号=git账号名称&#117;&#115;&#101;&#114;&#x6e;&#97;&#x6d;&#x65;&#64;&#x6d;&#x61;&#x69;&#108;&#x2e;&#99;&#x6f;&#109; 3.svn转换为git git svn clone svn://ip端口/projectname –no-metadata –authors-file=users.txt –trunk=trunk projectnamecd projectname 4.添加git仓库 git remote add origin git@xxx.xxx.xxx.xxx:root/projectname.git 5.提交到gitlab git push -u origin master 参考文档：http://blog.163.com/pjt_ren/blog/static/188250602013101102615844/http://www.lovelucy.info/codebase-from-svn-to-git-migration-keep-commit-history.html]]></content>
       <tags>
         <tag>运维</tag>
       </tags>
