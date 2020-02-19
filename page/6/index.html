@@ -274,7 +274,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-08-08-OpenSource-SaltDebug/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-10-30-IntegralLifePractice/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -293,7 +293,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-08-08-OpenSource-SaltDebug/" itemprop="url">saltstack  debug的技巧</a></h2>
+                <a class="post-title-link" href="/2017-10-30-IntegralLifePractice/" itemprop="url">生活就像练习 - 肯威尔伯</a></h2>
         
 
         <div class="post-meta">
@@ -305,8 +305,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-08T08:00:00+08:00">
-                2017-08-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-30T08:00:00+08:00">
+                2017-10-30
               </time>
             
 
@@ -342,858 +342,312 @@
       
         
           
-            <p>运行 Salt 一旦 shim 发现 Python 解释器，并且一旦 salt_state.tgz tar 包部署完毕（如果有必要的话），最终就可以执行Salt 命令。和传统的 Salt 运行方式不一样，它不需要以守护进程（daemon）方式运行，而是以本地模式（local mode）方式执行 salt-call 命令，就像它是一个 Minion 一样。输出结果会通过 Master 端的 Salt SSH 客户端收集、解析并展示给用户。我们可以以 trace日志级别来查看运行信息。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost salt]# salt 's*' test.ping --log-level trace</span><br><span class="line">[DEBUG] Reading configuration from /etc/salt/master</span><br><span class="line">[DEBUG] Missing configuration file: /root/.saltrc</span><br><span class="line">[TRACE] None of the required configuration sections, 'logstash_udp_handler'</span><br><span class="line">and 'logstash_zmq_handler', were found the in the configuration. Not loading</span><br><span class="line">the Logstash logging handlers module.</span><br><span class="line">[DEBUG] Configuration file path: /etc/salt/master</span><br><span class="line">[WARNING ] Insecure logging configuration detected! Sensitive data may be</span><br><span class="line">logged.</span><br><span class="line">[DEBUG] Reading configuration from /etc/salt/master</span><br><span class="line">[DEBUG] Missing configuration file: /root/.saltrc</span><br><span class="line">[DEBUG] MasterEvent PUB socket URI:</span><br><span class="line">ipc:///var/run/salt/master/master_event_pub.ipc</span><br><span class="line">[DEBUG] MasterEvent PULL socket URI:</span><br><span class="line">ipc:///var/run/salt/master/master_event_pull.ipc</span><br><span class="line">[DEBUG] Sending event - data = &#123;'_stamp': '2017-08-07T05:54:21.903494'&#125;</span><br><span class="line">[TRACE] get_event() received = &#123;'tag': 'salt/event/new_client', 'data':</span><br><span class="line">&#123;'_stamp': '2017-08-07T05:54:21.903494'&#125;&#125;</span><br><span class="line">[TRACE] func get_cli_event_returns()</span><br><span class="line">[DEBUG] LazyLoaded mysql.get_load</span><br><span class="line">[DEBUG] LazyLoaded config.option</span><br><span class="line">[INFO ] Using default for mysql ssl_key</span><br><span class="line">[INFO ] Using default for mysql ssl_cert</span><br><span class="line">[INFO ] Using default for mysql ssl_ca</span><br><span class="line">[DEBUG] get_iter_returns for jid 20170806225421938741 sent to set(['salt-</span><br><span class="line">master']) will timeout at 22:54:27.014845</span><br><span class="line">[TRACE] get_event() received = &#123;'tag': 'salt/job/20170806225421938741/new',</span><br><span class="line">'data': &#123;'tgt_type': 'glob', 'jid': '20170806225421938741', 'tgt': 's*',</span><br><span class="line">'_stamp': '2017-08-07T05:54:21.938959', 'user': 'root', 'arg': [], 'fun':</span><br><span class="line">'test.ping', 'minions': ['salt-master']&#125;&#125;</span><br><span class="line">[TRACE] get_event() received = &#123;'tag': 'salt/job/20170806225421938741/ret</span><br><span class="line">/salt-master', 'data': &#123;'fun_args': [], 'jid': '20170806225421938741',</span><br><span class="line">'return': True, 'retcode': 0, 'success': True, 'cmd': '_return', '_stamp':</span><br><span class="line">'2017-08-07T05:54:22.062106', 'fun': 'test.ping', 'id': 'salt-master'&#125;&#125;</span><br><span class="line">[DEBUG] jid 20170806225421938741 return from salt-master</span><br><span class="line">[DEBUG] LazyLoaded nested.output</span><br><span class="line">[TRACE] data = &#123;'salt-master': True&#125;</span><br><span class="line">salt-master:</span><br><span class="line"> True</span><br><span class="line">[DEBUG] jid 20170806225421938741 found all minions set(['salt-master'])</span><br><span class="line">[root@localhost salt]#</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-08-02-Habit-16PF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-08-02-Habit-16PF/" itemprop="url">16PF-卡特尔16种人格因素问卷</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T08:00:00+08:00">
-                2017-08-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>卡特尔16pf在线测验:<br><a href="http://www.cnpsy.net/16pf/index3.asp" target="_blank" rel="noopener">http://www.cnpsy.net/16pf/index3.asp</a></p>
-<p>因素A乐群性：高分者外向、热情、乐群；低分者缄默、孤独、内向。<br>因素B聪慧性：高分者聪明、富有才识；低分者迟钝、学识浅薄。<br>因素C稳定性：高分者情绪稳定而成熟；低分者情绪激动不稳定。<br>因素E恃强性：高分者好强固执、支配攻击；低分者谦虚顺从。<br>因素F兴奋性：高分者轻松兴奋、逍遥放纵；低分者严肃审慎、沉默寡言。<br>因素G有恒性：高分者有恒负责、重良心；低分者权宜敷衍、原则性差。<br>因素H敢为性：高分者冒险敢为，少有顾忌，主动性强；低分者害羞、畏缩、退却。<br>因素I敏感性：高分者细心、敏感、好感情用事；低分者粗心、理智、着重实际。<br>因素L怀疑性：高分者怀疑、刚愎、固执己见；低分者真诚、合作、宽容、信赖随和。<br>因素M幻想性：高分者富于想像、狂放不羁；低分者现实、脚踏实地、合乎成规。<br>因素N世故性：高分者精明、圆滑、世故、人情练达、善于处世；低分者坦诚、直率、天真。<br>因素O忧虑性：高分者忧虑抑郁、沮丧悲观、自责、缺乏自信；低分者安详沉着、有自信心。<br>因素Ql实验性：高分者自由开放、批评激进；低分者保守、循规蹈矩、尊重传统。<br>因素Q2独立性：高分者自主、当机立断；低分者依赖、随群附众。<br>因素Q3自律性：高分者知己知彼、自律谨严；低分者不能自制、不守纪律、自我矛盾、松懈、随心所欲。<br>因素Q4紧张性：高分者紧张、有挫折感、常缺乏耐心、心神不定，时常感到疲乏；低分者心平气和、镇静自若、知足常乐。</p>
-<p>16pf问卷测量结果<br>尊敬的Jack先生,您好!欢迎您查看本次测量的结果!<br>请根据下面步骤查看测量结果<br>步骤1 如果下面有漏填题目的提示,请返回补填!如果没有则跳至步骤2</p>
-<p>步骤2 如果上面没有漏填的提示,则测量结果结果如下:</p>
-<p>在乐群性方面，低分者通常表现为：对人冷漠，落落寡合，喜欢吹毛求疵，宁愿独自工作，对事而不对人，不轻易放弃自己的主见，为人做事的标准常常很高。严谨而不苟且。高分者通常表现为：通常和蔼可亲，与人相处，合作与适应的能力特强。喜欢和别人共同工作，参加或组织各种社团活动，不斤斤计较，容易接受别人的批评。萍水相逢也可以一见如故。您属于中间的一类。即:既不是很孤独、冷漠，也不是很外向，热情.教师和推销员多系高A，而物理学家和电机工程师则多系低A。前者需要时时应付人与人之间的复杂情绪或行为问题漏填，而仍然能够保证其乐观的态度。后者则必须极端的冷静严肃与正确才能圆满地完成任务。</p>
-<p>在智慧性方面，您属于聪明，富有才识，善于抽象思考的一类，具体表现为：通常学习能力强，思考敏捷正确，教育，文化水准高，个人心身状态健康。机警者多有高B，高B反映心理机能的正常。专业训练需要高B，但从事例行职务的人如大资源，电话生，家庭主妇等，则因高B而对例行琐务发生厌恶，不能久安其职。</p>
-<p>在稳定性方面，您属于稳定而成熟，能面对现实的一类，具体表现为：高者通常以沉着的态度应付现实各项问题。行动充满魄力。能振奋勇气，维持团队的精神。有时高C也可能由于不能彻底解决许多生活难题漏填，而不得不自我宽解。教师，机器工程师，推销员，救火队队员等，凡需要应付日常生活各种难题者应有高C。但是凡能随心所欲，安排自己工作进度的人，如作家，邮差或清道工等，则虽系低C，尚无大碍。  </p>
-<p>在影响性方面，您属于好强固执，独立积极的一类，具体表现为：通常自视甚高，自以为是。可能非常地武断，而时常驾驭不及他的人和反抗权势者。一般的，领袖以及有地位有成就的人多属高E。救火队员和航空飞行员的因素E高。男人较女人高。</p>
-<p>在活泼性方面，低分者通常表现为：行动拘禁，内省而不轻易发言，较消极，忧郁。有时候可能过分深思熟虑，又近乎骄傲自满。在职责上，他常是认真而可靠的工作人员。高分者通常表现为：活泼，愉快，健谈，对人对事热心而富有感情。但是有时也可能会冲动，以致行为变化莫测。您属于中性的一类，即:既不是很严肃、谨慎、冷静、寡言、行动拘禁，也不是很活泼，愉快，健谈行政主管人员多有高F。竞选人必有高F,才能够获得选民的爱戴，实验技术人员则不必有高F。</p>
-<p>在有恒性方面，您属于持恒负责，做事尽职的一类，具体表现为：通常细心周到，有始有终。是非善恶是他的行为指针。所结交的朋友多是努力苦干的人，而不十分欣赏诙谐有趣的人。各种社团组织的领袖需要高G。业务管理和警察具有极高的因素G。任性纵欲，放火杀人的罪犯，因素G 极低。</p>
-<p>在交际性方面，您属于冒险敢为，少有顾忌的一类，具体表现为：通常不掩饰，不畏缩，有敢做敢为的精神，使他能经历艰辛而保持刚毅的一例。有时可能太粗心大意，忽视细节，遭受无谓的打击与挫折。可能无聊多事，喜欢向异性殷勤卖力。因素H常随年龄而增强。救火队队员和飞行员有高H，事物员多是低H。团队领导人必具有高H。</p>
-<p>在情感性方面，您属于理智的，着重现实，自恃其力的一类，具体表现为：常以客观，坚强，独立的态度处理当前的问题。重视文化修养，可能过分冷酷无情。室内设计师，音乐家，艺人，女人属高I，而工程师，外科医生，统计师等则多低I.</p>
-<p>在怀疑性方面，低分者通常表现为：无猜忌，不与人角逐竞争，顺应合作，善于体贴人。高分者通常表现为：怀疑，不信任别人，与人相处，常常斤斤计较，不顾及到别人的利益。您属于中性的一类，即:既不信赖随和、易与人相处，也不是很怀疑、刚愎、固执己见在团体活动中，低L是以团体福利为前提的忠实分子，因素L过分高者常常成事不足，败事有余。工程师，机工，精神病护理员多是低L，而行政人员和警察常是高L.</p>
-<p>在想象性方面,低分者通常表现为：先要斟酌现实条件，而后决定取舍，不鲁莽从事。在紧要关头时，也能保持镇静，有时可能过分重视现实，为人索然寡趣。高分者通常表现为：忽视生活的细节，只以本身的动机，当时兴趣等主观因素为行为的出发点。可能富有创造力，有时也过分不务实际，近乎冲动。因而容易被人误解及奚落。您属于中性的一类，即:既不是很现实、合乎成规、力求妥善合力，也不是很喜欢幻想、狂放不羁艺术家，作者及从事研究者多有高M。低M多选择需要实际，机警，脚踏实地的工作。</p>
-<p>在世故性方面，低分者通常表现为：思想简单，感情用事。与人无争，与世无杵，自许，心满意足。但有时显得幼稚，粗鲁，笨拙，似乎缺乏教养。高分者通常表现为：处事老练，行为得体。能冷静地分析一切，近乎狡猾。对于一切事物的看法是理智的，客观的。您属于中性的一类，即:既不是很坦白、直率、天真，也不是很精明能干、世故科学家，工程师，飞行员多是高N，牧师神父，护士等多是低N，牧师的因素N不应太高，低N使他不苛求责难，能容忍同情信徒的缺点。</p>
-<p>在忧虑性方面，您属于乐群，沉着，有自信心的一类，具体表现为：常有信心，不轻易动摇，信任自己有应付问题的能力，有安全感，能适应世俗。有时因为缺乏同情，而引发别人的反感与恶意。年老的女招待，低级办事员，以及终生碌碌未尽如意的作家，编辑人等有高O。职业运动员，电机工，救火队员，护士等多是低O。</p>
-<p>在变革性方面，低分者通常表现为：无条件地接受社会中许多相沿已久而有权威性的见解，不愿常是探求新的境界。常常激烈的反对新思想以及一切新的变动。在政治与宗教信仰上，墨守成规，可能被称为老顽固或时代的落伍者。高分者通常表现为：喜欢考验一切现有的理论与实施，而予以新的评价，不轻易判断是非，企图了解较前卫的思想与行为。可能广见多闻。愿意充实自己的生活经验。您属于中性的一类，即:既不是很保守的、尊重传统观念与行为标准，也不是很喜欢自由、批评激进、不拘泥现实行政主管人，前卫的政治家，科学家都必须具有高Q1，护士，牧师神父与许多为首高深教育的技工等则多有低Q1，神经病人的因素Q1也比较低。</p>
-<p>在独立性方面，低分者通常表现为：宁欲与人共同工作，而不愿独立孤行。常常放弃个人的主见而附和取得别人的好感，需要团体的支持以维持其自信心，却并非真正的乐群者。高分者通常表现为：能够自作主张，独自完成自己的工作计划，不依赖别人，也不受社会舆论的约束，同样也无意控制或支配别人，不嫌恶人，但是也不需要别人的好感。您属于中性的一类，即:既不是很依赖、随群附和，也不是很自立自强、当机立断科学家，行政主管人等多有高Q2，低Q2者不能胜任需要随机应变能力的职务。</p>
-<p>在自律性方面，您属于知己知彼，自律谨严的一类，具体表现为：通常言行一致，能够合理的支配自己的感情行动。为人处世，总能保持其自尊心，赢得别人的尊重，有时却不免太固执己见。高Q3者多具有领袖能力的才干，主管人，电机工和生产部门的成功也需要高Q3。</p>
-<p>在紧张性方面，低分者通常表现为：知足常乐，保持内心的平衡。也可能过分疏懒，缺乏进取心。高分者通常表现为：缺乏耐心，心神不安，态度兴奋。时常感觉疲乏，又无法彻底摆脱以求宁静。在社群中，他对人与事都缺乏信心。每日生活战战兢兢，而不能自给。您属于中性的一类，即:既不是很心平气和、闲散宁静，也不是很紧张闲扰、激动挣扎未能在生活或职业中发挥本身才智潜能的人多具有高Q4，如餐店招待，家庭主妇，缺乏生活保障的作业等。</p>
-<p>　　　　　　　　　　　　　　　　　　　　　　　　　　　　　测验日期:2017/8/2</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-27-Book-6QuestionPersuadeEveryone/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-07-27-Book-6QuestionPersuadeEveryone/" itemprop="url">6个问题竟能说服各种人 - 迈克尔.潘塔隆</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-27T08:00:00+08:00">
-                2017-07-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>心理学家迈克尔·潘塔隆博士经过15年潜心研究，将几代顶尖心理学家的研究精华凝缩在这6个万能问题上，通过谈话过程中的反复设问，让对方不自觉地在思维上跟随你，并最终走进一个预设的答案。</p>
-<p>第一问：你为什么想做这件事？（如果是说服自己：我为什么想做这件事？）  </p>
-<p>第二问：你有多想这么做——从1-10选择一个数字，1代表“一点也不想”，10代表“很想”？  </p>
-<p>第三问：你为什么不选择更小的数字？（如果对方选了1，重新问一遍第二个问题，不过稍微换个说法：如果要从1变成2，需要做什么？）  </p>
-<p>第四问：设想一下，如果你做到了，会发生什么好的结果？</p>
-<p>第五问：对你来说，这些好的结果为什么非常重要？</p>
-<p>第六问：接下来你会做什么，如果你想做的话？</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-24-MySQL-DefaultCharacterSet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-07-24-MySQL-DefaultCharacterSet/" itemprop="url">mysql中通过my.cnf设置默认字符集utf-8</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-24T08:00:00+08:00">
-                2017-07-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>/etc/my.cnf</p>
-<p>[client]</p>
-<p>default-character-set=utf8</p>
-<p>[mysql]</p>
-<p>default-character-set=utf8</p>
-<p>[mysqld]</p>
-<p>init_connect=’SET collation_connection = utf8_unicode_ci’</p>
-<p>init_connect=’SET NAMES utf8’</p>
-<p>character-set-server=utf8</p>
-<p>collation-server=utf8_unicode_ci</p>
-<p>skip-character-set-client-handshake</p>
-<p>*注意：在 mysqld 中使用 default-character-set 设置， mysql 启动会报错而无法启动。</p>
-<p>关于utf8字符集，我们国内默认选择：utf8_general_ci而不是utf8_unicode_ci，</p>
-<p>区别在于字符对比上</p>
-<p>请看mysql上面的例子：</p>
-<p>对与general来说 ß = s 是为true的</p>
-<p>但是对于unicode来说 ß = ss 才是为true的，</p>
-<p>其实他们的差别主要在德语和法语上，所以对于我们中国人来说，一般使用general，因为general更快</p>
-<p>如果你对德语和法语的对比有更高的要求，才使用unicode，它比general更准确一些（按照德语和法语的标准来说，在对比或者排序上更准确）</p>
-<p>看看这个文档：<a href="http://dev.mysql.com/doc/refman/5.0/en/charset-unicode-sets.html" target="_blank" rel="noopener">http://dev.mysql.com/doc/refman/5.0/en/charset-unicode-sets.html</a></p>
-<p>另外还有utf8_bin_ci也是比较常用的哦，在字符对比时，unicode和general都不是大小写敏感的，所以如果要求大小写敏感的话，就使用bin</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-21-OpenSource-SaltSlsRepo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-07-21-OpenSource-SaltSlsRepo/" itemprop="url">Saltstack sls 在git上的repo (win & Linux)</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-21T08:00:00+08:00">
-                2017-07-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>测试和学习Saltstack status sls 文件编写时找到的一些现成的案例:</p>
-<p>Saltstack sls for Windows 在git上的repo</p>
-<p><a href="https://github.com/Jianfengxia/salt-winrepo-ng" target="_blank" rel="noopener">https://github.com/Jianfengxia/salt-winrepo-ng</a></p>
-<p>Saltstack sls for Linux 在git上的repo</p>
-<p><a href="https://github.com/Jianfengxia/salt-states/blob/master/salt/php/init.sls" target="_blank" rel="noopener">https://github.com/Jianfengxia/salt-states/blob/master/salt/php/init.sls</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-20-Book-SuggestivePower/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-07-20-Book-SuggestivePower/" itemprop="url">心理暗示力-唤醒最好的自己 - (法) 埃米尔·库埃著</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-20T08:00:00+08:00">
-                2017-07-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="心理暗示的魅力"><a href="#心理暗示的魅力" class="headerlink" title="心理暗示的魅力"></a>心理暗示的魅力</h1><h2 id="做心想事成的自己"><a href="#做心想事成的自己" class="headerlink" title="做心想事成的自己"></a>做心想事成的自己</h2><p>世间有一种法则，叫吸引力法则；因为，宇宙中存在一种法则，叫吸引力法则。——“具有金钱意识的人经常吸引金钱，具有贫穷意识的人总是引来贫穷。通过你的思想、语言和行为，它们将为你所意识到的事物打开道路，无论富有或贫穷，都恰如你所想的状况那样满足你。”</p>
-<h2 id="小心暗示的阴影"><a href="#小心暗示的阴影" class="headerlink" title="小心暗示的阴影"></a>小心暗示的阴影</h2><p>每一个人的意识在自我运转的时候都会产生种种习惯性的思维，这些思维就像是刻刀，在潜意识的木板上留下一条条深深的刻痕。如果这些思维是积极的、向上的、有益的，那么潜意识就会雕刻出一幅精美的、壮阔的、成功的画卷。相反，如果这些思维是消极的、颓废的、灰暗的，那么潜意识中留下的就只能是一块被刻得乱七八糟的木板。</p>
-<p>其实，人生中的种种，生命中的一切一切，财富也好，健康也好，幸福也好，快乐也好，都与暗示力息息相关。积极的暗示就像是太阳，带给我们明媚与美好，消极的暗示则像是阳光下的阴影，让人颓丧与苦痛。但无论是阳光还是阴影，晴天还是阴天，实际上都是我们自己的选择。天堂地狱，不过一念之间，而这一念，源于我们自己！</p>
-<h2 id="激发你强大的气场"><a href="#激发你强大的气场" class="headerlink" title="激发你强大的气场"></a>激发你强大的气场</h2><p>气场是一种生命的特质，是一种通过肢体、语言、行动等表现出的身心状态。</p>
-<p>官场中不怒自威的领导，商场中纵横捭阖的巨擘，职场中如鱼得水的精英，等等，都是气场强大的人。他们被同事认同，被朋友欣赏，被下属爱戴，被旁人艳羡，不是因为其他，正是因为他们内心信念的强大。</p>
-<h2 id="心理暗示和催眠术"><a href="#心理暗示和催眠术" class="headerlink" title="心理暗示和催眠术"></a>心理暗示和催眠术</h2><p>心理暗示力是催眠必不可少的助力！没有心理暗示力的参与，催眠不可能完成，更不可能成功！</p>
-<p>按照催眠程度的不同，也可以划分为三类，即深度催眠、中度催眠和浅度催眠。在浅度催眠状态下，被催眠者能够随意行动，睡意不强，清醒之后能记起催眠过程中的所有事情；中度催眠状态下，被催眠者不能随意行动，睡意较强，清醒之后只记得催眠过程中的部分情况；而深度催眠状态下，被催眠者睡意很强，不能随意行动，清醒之后完全不记得催眠状态下的任何事情。这种状态下，被催眠者完全受催眠师的支配，如果催眠师心存歹意，对病人来说将是一件非常危险的事情。</p>
-<p>研究表明，在催眠状态下，人体会分泌出一种非常奇特的物质，这种物质不仅能够减轻痛苦，还能加快伤口的愈合，相比于人工的麻醉药，这种叫作内咖肽的天然麻醉剂无疑更加有效而实惠。而且在避免认知冲突方面，催眠术的效果也非常好。举个例子来说，如果用蓝色的墨水写一个“红”字，然后询问同一个人写字的墨水是什么颜色的，在未被催眠的状态下，被问者做出回答的时候会犹豫甚至会答错，但在催眠状态下却能毫不犹豫地给出正确答案。</p>
-<h1 id="心理暗示的魔力"><a href="#心理暗示的魔力" class="headerlink" title="心理暗示的魔力"></a>心理暗示的魔力</h1><h2 id="潜意识的美容师"><a href="#潜意识的美容师" class="headerlink" title="潜意识的美容师"></a>潜意识的美容师</h2><p>一个坚信自己很美丽的人，不会懈怠去打扮，相反，他（她）会主动装饰与诠释自己的美丽，并将这份美丽带给周围所有的人，在得到赞美的同时更加坚信自己的美丽，从而进入一个“美丽—化妆—更美丽”的良性循环中。</p>
-<h2 id="音乐疗法"><a href="#音乐疗法" class="headerlink" title="音乐疗法"></a>音乐疗法</h2><p>调查显示，一些特定的、舒缓的、轻快的音乐能够与人体产生一种神奇的频率共振，让人因为恐惧、压力、焦虑等种种原因超负荷的身体渐渐放松下来，让人血压降低、心率恢复正常、呼吸重新变得平稳、代谢再次充满活力。</p>
-<p>除了放松，音乐还有许多神奇的作用，比如，调节大脑的平衡能力、安神醒脑、增强智力等作用。研究表明，不听音乐的人心情指数普遍都偏低，而经常听音乐的人不仅人生态度更加积极，而且寿命也要长很多。</p>
-<h2 id="个人磁场"><a href="#个人磁场" class="headerlink" title="个人磁场"></a>个人磁场</h2><p>如果你想成功，你可以每天早晨面对镜子说：“每一天我生活的每一个方面都在越变越好！”这句话每天要重复说15次以上，坚持一个月，你会发现神奇的效果。你渴望成功的潜意识增强了，身上自信的磁场增强了。</p>
-<h2 id="奇妙的精神脸谱"><a href="#奇妙的精神脸谱" class="headerlink" title="奇妙的精神脸谱"></a>奇妙的精神脸谱</h2><p>心情图谱的画法：</p>
-<p>首先，准备好纸笔，然后在白纸上画出一条横向的直线（当然，你也可以选择纵向，这没什么大不了）。</p>
-<p>直线画好了？很好，让我们接着进行下一步：将直线平均分成十个刻度，用1-10这十个数字分别标记出来。不要告诉我你不会画，这和画数轴没有任何区别，数学课上我们都学过。</p>
-<p>好吧，数轴完成，一切准备工作就绪，最重要的步骤现在开始：像我一样，静下心来想一想，不用想什么美好或者糟糕的事情，那太复杂，我们只需要想一些词汇，确切地说是三类词汇。</p>
-<p>一类是用来描述坏心情的，如忧伤、焦虑、痛苦、愤怒、悲痛、郁闷、烦躁、沮丧等；</p>
-<p>一类是用来描述一般心情的，如平淡、无趣、平静、索然无味、麻木等；</p>
-<p>一类是用来描述好心情的，如高兴、兴奋、满足、幸福、欣慰、感恩、快乐、激动等。</p>
-<p>想好了？不错。下面，和我一起，选出十个词汇，对，就是十个词汇，一个不能多，一个不能少，并且，请注意，这十个词汇必须将上述三大心情类别全部都包括进去。</p>
-<p>选好后，按照坏心情——一般心情——好心情的顺序依次将它们写在数轴的十个刻度上。如1-痛苦，2-焦虑，3-烦闷，4-孤独，5-平静，6-淡定，7-欣慰，8-快乐，9-兴奋，10-幸福。</p>
-<p>写好了？那么，参照这个心情图谱，来衡量一下你自己的心情吧。</p>
-<p>假如你刚刚被公司辞退，内心十分的痛苦，那么你的心情指数毫无疑问是1；假如你婚姻美满、工作轻松、生活优越，满心幸福，那么你的心情指数自然就是10；如果你刚刚被上司表扬，职位得到晋升，既快乐又兴奋，那么你的心情指数则是8.5。</p>
-<p>不要怀疑，事实上，心情图谱虽然很简单，但它却能最直观地表现出一个人的情绪，能最简单地表明一个人的心情特点。</p>
-<p>假如一个人的心情指数总是在相邻的两个数字之间徘徊，不是1就是2，不是9就是10，那么这个人的心情图谱就比较单一，情绪也非常稳定；相应的，假如一个人的心情指数波动非常大，前一刻是2，下一刻就变成了9，前一刻是10，下一刻就变成了1，忽悲忽喜，那么这个人的心情图谱就很细腻很丰富，但他的情绪却又非常的不稳定。</p>
-<p>除此之外，通过心情图谱，我们还能看出许多其他的东西，比如，一个人的心态和人生态度：假如一个人的心情图谱长期偏左，心情指数总是在5之下徘徊，那么这个人必然是一个消极的人；相反，如果长期偏右，则表明这个人非常乐观，心态也十分积极。</p>
-<h1 id="心理暗示的关键"><a href="#心理暗示的关键" class="headerlink" title="心理暗示的关键"></a>心理暗示的关键</h1><h2 id="一蹴而就只是梦"><a href="#一蹴而就只是梦" class="headerlink" title="一蹴而就只是梦"></a>一蹴而就只是梦</h2><p>路要一步一步地走，饭要一口一口地吃，心理暗示也一样。</p>
-<p>暗示影响潜意识，潜意识影响我们的行为，适当的行为能够将理想转化为现实，然而，这一切都需要潜移默化，都需要时间。罗马不是一天建成的，任何目标的实现也不可能一蹴而就，它需要持续关注，需要不断重复。</p>
-<p>对！持续！重复！这两点很重要！</p>
-<p>记住，一蹴而就只是梦！</p>
-<p>记住，告诉自己：“每一天，我生活的每一个方面都在变得越来越好！”</p>
-<h2 id="“吸尘器”必不可少"><a href="#“吸尘器”必不可少" class="headerlink" title="“吸尘器”必不可少"></a>“吸尘器”必不可少</h2><p>举个例子来说，一个人想要创业，想要致富，但他拿不准自己应该走哪条路，应该做什么来创造财富，他担心投资失败，他会设想创业过程中遭遇的种种困难，会迟疑，会犹豫，会放弃，会前怕狼后怕虎，这都没什么，人之常情而已，但一旦他做出了某种决定，比如要开一家理发店，并且已经租好了店面，正在装修，那么，这个时候，再去患得患失就完全没有意义了，这个时候，一切的消极思想都是累赘，是灰尘，应该被清除。只有这样，创业者才可能成功。</p>
-<h2 id="期望毋庸置疑"><a href="#期望毋庸置疑" class="headerlink" title="期望毋庸置疑"></a>期望毋庸置疑</h2><p>心理暗示的规律就是信念！</p>
-<p>相信自己的信念，相信自己的期望，不要怀疑，一丝一毫的怀疑也不能有！</p>
-<p>暗示力是力量之源，而信念则是暗示力之源。</p>
-<p>我们的信念，我们心中的坚持，才是暗示力的核心，是影响潜意识的关键。这是真理！</p>
-<p>你的潜意识，你的暗示力只忠实于你内心最真实的信念，只反应你内心最真实的思想，只回应你心中最真实的期望，所以，不要信口开河，不要随随便便地许诺，如果你真的想成功，真的期望成功，期望健康，期望幸福，期望快乐，那么，就不要去质疑自己的期望，一丝一毫都不可以！</p>
-<p>期望成为亿万富翁？可以！但你要保证你的内心也是这样想的，你要保证你真的想要成为亿万富翁，你要保证你相信自己能够成为亿万富翁。如果你做不到，那么，抱歉，暗示力的神奇作用不会发生在你的身上。我的理论对你来说也只是谬论，而我，并不承认自己是一个骗子。</p>
-<p>期望身体健康？可以！但你要保证你的内心真的对健康充满了渴望，你要保证你真的想要身体健康，你要保证你真的相信自己的身体会健康。如果你做不到，如果你在期望健康的同时还怀疑自己得了这样那样的疾病，还想着种种“不健康的征兆”，那么，抱歉，暗示力不能给你带来健康。</p>
-<p>古今中外，祈祷从来都是最神秘也最常见的“克服困难”的方式，人们在遭遇窘境的时候也常常会选择祷告。这不是迷信，而是心理暗示的一种。</p>
-<p>祷告的时候，人们的思想相对纯粹，祷告者对“神灵”也充满了信任，他们相信神灵能够为他们解决困难，相信神灵能够创造奇迹，不知不觉地，他们的脑海中就会形成一幅问题解决之后的画面，就会出现一些摆脱困境之后才会出现的美好景象，这些景象出现的多了，出现的时间长了，就会形成一种特别的暗示，当潜意识接收到这一暗示的时候，会将它当作真实的情况进行反应，于是，“上帝”就真的显灵了，问题迎刃而解。</p>
-<p>记住这句话：只要我们相信，我们每一个人都是自己的上帝。</p>
-<h2 id="放松的奇效"><a href="#放松的奇效" class="headerlink" title="放松的奇效"></a>放松的奇效</h2><p>例子：明天你要参加高考，你知道自己需要充分而良好的睡眠，你早早地就躺在床上，告诉自己我要睡觉，但最后你却失眠了。</p>
-<p>诸如此类的例子在日常生活中其实有很多，你越想做成某件事就越做不成，你越想找到某件东西就越找不到……这很正常。是的，很正常。你的意志对行动干预得太多了，在意志的强迫命令下，你的大脑和身体会过分紧张，会超负荷运作，紧张疲累又会带来无尽压力，压力过大了，焦躁、不安、疲累等种种负面情绪就会接踵而至，失败、事与愿违也就没什么好奇怪的了。</p>
-<p>当意志力和心理暗示力发生冲突的时候，胜利的通常都是暗示力，但这并不是说意志力在暗示力面前是毫无抵抗力的，也不是说显意识在潜意识面前就甘愿退却。相反，意志力很强大，显意识也很强大，当强大的意志横亘在暗示和潜意识之间的时候，暗示其实很难进入潜意识，而没有暗示的参与，潜意识本身并不会与意志力发生对抗，更不会去争什么。</p>
-<p>暗示力、潜意识发生作用的条件就是没有意识，是放松，是顺其自然。如果你刻意去强调什么，刻意去暗示什么，那么这种暗示其实已经算不上是暗示，而是明示，是命令，是意志了。</p>
-<p>放松有奇效，自我暗示之前先放松，去除压力，效果会出奇的好。</p>
-<p>放松的三种方法：</p>
-<p>方法一：冥想。找一个能让你最舒服的姿势，坐下，然后慢慢地呼吸，对，慢慢地吸气，慢慢地呼气，一次，两次，三次……注意你的呼吸，注意你的心跳，不要太久，一小会儿就好，然后，调整你的身体平衡，让重量均匀的散布到身体的各个部位，然后，轻轻地告诉自己：“放松，放松……”</p>
-<p>好吧，你放松了，对吗？</p>
-<p>方法二：对叶想象法。找一片树叶，柳树叶、杨树叶、梧桐树叶，什么树叶都可以，仔细地观察它，观察它的形状、颜色、脉络，然后闻一闻它的气味，摸一摸它的质地，接着，合上眼睛，想象你进入了一片树林，想象一下你在林中看到了什么，听到了什么，感觉到了什么，闻到了什么，触摸到了什么，在想象的树林中徘徊一阵后，回到你原来的位置，再默默地回味一遍，最后深呼吸十次，缓缓地睁开眼睛。</p>
-<p>然后……你难道还没有放松吗？</p>
-<p>方法三：空明法。这个最简单，平躺在床上，深呼吸一分钟，什么都不要想，在心中默念：“放松，放松”，反复多次，然后，你放松了。</p>
-<h1 id="打开密室的钥匙"><a href="#打开密室的钥匙" class="headerlink" title="打开密室的钥匙"></a>打开密室的钥匙</h1><h2 id="我的地盘我做主"><a href="#我的地盘我做主" class="headerlink" title="我的地盘我做主"></a>我的地盘我做主</h2><p>无谓的攀比，畸形的比较，用别人的标准来衡量自己的价值，这样的行为，就像是将自己的地盘完全交给别人，让别人做主一样，滑稽而可悲。</p>
-<p>我们独一无二，所以，我们不必去仰望，不必去敬畏，不必去羡慕。</p>
-<h2 id="接受真实的自己"><a href="#接受真实的自己" class="headerlink" title="接受真实的自己"></a>接受真实的自己</h2><p>我们总认为自己能力有限，认为自己不够优秀，但实际上我们的能力比自己所认识的强大万倍，我们自身也比自己印象中的优秀千万倍。我们完全可以不断地进行自我肯定，我们完全可以在潜意识中为自己勾勒出一幅又一幅美好的画面。虽然这样的美好看上去很虚妄，它不能让我们拥有超能力，也不能给我们带来财富和权力，但它的神奇却毋庸置疑。因为，它给我们带来了契机！它就像是一个好的导师，引领着我们真正地认识自己，进而接受真正的自己。</p>
-<h2 id="送自己一束玫瑰"><a href="#送自己一束玫瑰" class="headerlink" title="送自己一束玫瑰"></a>送自己一束玫瑰</h2><p>“积极的思考能够带来成功”“我一定能够做到”“假设是一种法则”“拥有坚定的信念比拥有任何才华都更重要”“你怎样看待自己，别人也会怎样看待你”“想最倒霉的事就是最倒霉的人”“想最快乐的事就是最快乐的人”——事实上，这些关于怎样创造幸福、开拓未来、缔造财富、拥抱成功的观点并不是我的独创，它来自于库埃先生，一位令人尊敬的学者，是他第一次揭示了获得成功人生的心理根源。他常告诉人们：“每一天，我生活的每一个方面正在变得越来越好。”这句简单而又蕴含深刻哲理的话，我非常喜欢。</p>
-<h2 id="不要抗拒演讲"><a href="#不要抗拒演讲" class="headerlink" title="不要抗拒演讲"></a>不要抗拒演讲</h2><p>美国著名人际关系学大师、心灵圣经《人性的弱点》的作者戴尔·卡耐基曾经做过一个非常有趣的调查：他询问他的学生，你为什么要来上我的课？你想要从我的课上学到什么？在卡耐基看来，自己得到的答案应该是五花八门、千奇百怪的，然而，事实却和这位大师开了一个不大不小的玩笑：他得到的答案的确很多，但这些答案却惊人的相似！</p>
-<p>“我想要表现自己，但我又害怕表现自己。当我被要求站起来回答问题、自我介绍或者做其他陈述的时候，我不知道自己应该怎么办，我浑身不舒服，我感到不自然，我的大脑仿佛一下子就乱了。我不知道该怎么说话，我不知道该如何去思考，我的注意力无法集中，我不知道自己要表达什么，更不知道应该如何表达。因此，我来了。我想获得自信，我想大大方方地站起来讲话，我想侃侃而谈，我想在社交场合如鱼得水，我想在公众面前思维清晰，我想让自己的话更有说服力，我想让自己的气场变得更加强大。”百分之九十以上的答案，概括起来，便是如此。</p>
-<h1 id="内心的攻防战"><a href="#内心的攻防战" class="headerlink" title="内心的攻防战"></a>内心的攻防战</h1><h2 id="固守内心的城墙"><a href="#固守内心的城墙" class="headerlink" title="固守内心的城墙"></a>固守内心的城墙</h2><p>坚守自己内心的城墙，不受任何消极的外源暗示的影响，让建设性的积极暗示占据自己的内心。</p>
-<h1 id="人生的重塑离不开暗示的帮助"><a href="#人生的重塑离不开暗示的帮助" class="headerlink" title="人生的重塑离不开暗示的帮助"></a>人生的重塑离不开暗示的帮助</h1><h2 id="“想要”激发正能量"><a href="#“想要”激发正能量" class="headerlink" title="“想要”激发正能量"></a>“想要”激发正能量</h2><p>你的潜意识只相信你“想要”的，只顺应你“能”的，你“不想要”的，你“不能”的，它绝对不会给你。换句话说，想要才是硬道理，才能激发正能量。专注于你想要的事物，专注于你想要办成的事情，专注于你想要完成的目标，专注于你想要实现的梦想，只要你能用自己的专注将这些全部都清晰地传达给潜意识，它就会给你回应，帮你实现。</p>
-<p>还是那句话，切记，你“想要”的东西中千万不要包含否定的词汇，否则潜意识肯定会断章取义。</p>
-<p>潜意识的能量就像是一条河，你挖出怎样的航道，它就会怎样流淌；你引导它流向哪里，它就会流向哪里。正如吸引力法则所说的那样，正能量吸引正能量，负能量吸引负能量，积极的思想吸引积极的事物，消极的思想则吸引消极的事物。</p>
-<h2 id="把握主动权，人生不设限"><a href="#把握主动权，人生不设限" class="headerlink" title="把握主动权，人生不设限"></a>把握主动权，人生不设限</h2><p>如果上帝告诉你，你将来肯定能成为一位市长，你肯定不会满足于只当市长，而是希望自己能够成为总统。人就是这样，未知才能带来恐惧，因为未知，因为不知道自己的极限在哪里，才会轻易地说放弃，才会轻易地交出人生的主动权。</p>
-<p>所以，不要迟疑了，牢牢把握人生的主动权吧，这是你天生的权力。什么？你不知道怎样把握？那么，跟着我念：</p>
-<p>我能行！我一定行！</p>
-<p>我相信自己！我爱自己！</p>
-<p>我一定会成功！我一定会幸福！我一定会快乐！我一定会健康！</p>
-<p>多念几遍，每天都念，念的同时不要忘记去展开行动！只要你这样做了，即便是命运女神，也无法将主动权从你的手中抢走。</p>
-<h2 id="榜样的力量很伟大"><a href="#榜样的力量很伟大" class="headerlink" title="榜样的力量很伟大"></a>榜样的力量很伟大</h2><p>因为职业的原因，我曾经出入过许多成功人士的书房或办公室，他们或是政府官员，或是企业家，或是技术精英，或是银行家，他们的办公室和书房布置风格也各有不同，或典雅，或古朴，或简洁，或庄重，或浪漫，或时尚，但他们的书房办公室却有几个共同点，那就是都有一些画像，如著名金融家的画像、杰出政治家的画像；都有一条或几条标语，如“我成功，因为志在要成功”“只有经历过地狱般的折磨，才有征服天堂的力量”。</p>
-<p>陈设自然是普通的陈设，但它们却又不普通，因为它们无时无刻不散发着暗示的力量！</p>
-<h1 id="挥舞暗示的魔棒-游刃人生"><a href="#挥舞暗示的魔棒-游刃人生" class="headerlink" title="挥舞暗示的魔棒 游刃人生"></a>挥舞暗示的魔棒 游刃人生</h1><h2 id="人才是暗示练成的"><a href="#人才是暗示练成的" class="headerlink" title="人才是暗示练成的"></a>人才是暗示练成的</h2><p>许多人说，人的性格来自于遗传，但事实上，调查显示，遗传因素对人性格的影响并不太大，后天的环境，或者说是后天生活环境中，来自周围人和父母的暗示才是决定人的性格的最关键因素。</p>
-<p>所以，无论你是不是有孩子，无论你有没有获得父母的殊荣，都记住这句话：用积极的暗示包裹孩子，让孩子在暗示中健康成长，这是培养人才的最佳方式。</p>
-<h2 id="教育领域的误区"><a href="#教育领域的误区" class="headerlink" title="教育领域的误区"></a>教育领域的误区</h2><p>一块原木，如果你用斧头将它劈成柴火，那么它就只能在锅炉房中燃烧；如果你用雕刀把它雕刻成一尊木雕，那么它就会出现在展卖艺术品的货架上；如果你将它放在原地不管不问，那么它就会在森林中慢慢地腐朽。</p>
-<p>我们的孩子，其实就是一块原木，是成为木雕，还是成为柴火，是走入多彩的人类社会，还是默默地在森林中腐朽，实际上，全部都取决于教育。</p>
-<h2 id="人才需要爱的浇灌"><a href="#人才需要爱的浇灌" class="headerlink" title="人才需要爱的浇灌"></a>人才需要爱的浇灌</h2><p>父母们必须要注意，你可以争吵，但不要当着孩子的面争吵；你可以粗鲁，但在孩子面前请保持优雅；你可以卑微，但请让孩子看到你的高大；你可以胆怯，但不要让孩子看到你的胆怯；你可以抱怨整个世界，但请不要让孩子觉得这个世界是灰暗的；你可以愤怒、悲伤、颓丧，你可以酗酒、抽烟、怒骂，但，还是那句话，不要让你的孩子看到！</p>
-<h2 id="说服是一种技术活儿"><a href="#说服是一种技术活儿" class="headerlink" title="说服是一种技术活儿"></a>说服是一种技术活儿</h2><p>说服是一门技术活儿，暗示的力量想要发挥也需要其他方法的配合，而不断地反问无疑是一个非常不错的方法。假如你不相信或者对此心存疑惑，不妨去试试，试着去改变你朋友、亲人、同事的想法吧，不过，你必须注意一点，你不能心怀恶意，并且，你也没有必要为了试验而付出被讨厌的代价。</p>
-<h2 id="学习成为一个暗示高手"><a href="#学习成为一个暗示高手" class="headerlink" title="学习成为一个暗示高手"></a>学习成为一个暗示高手</h2><p>有一次我去买车，碰到一个非常有意思的销售员，他卖车的时候，从来不主动向客户推荐车型，也从来不说“我觉得您该买……”这样的话。他会将身段放得很低，像个小学生一般请客户指点他，让客户觉得一切都是自己在主导，而这位推销员说的话却很少，只是在关键的时候用请教的口吻提上那么一两句，不知不觉中，客户就按照推销员的期望买了车，而且，客户会非常满意，因为他没有被推销员“牵着鼻子走”，一切都是自己的选择。但，实际上呢？</p>
-<p>一个高明的心理暗示专家，绝不会让被暗示者觉得自己接收了暗示，而是会让被暗示者觉得一切都是自己在做主，很显然，无论是那位委婉的副总裁，还是格莱特以及推销员，都是这样的高手。</p>
-<p>要成为“高手”，你就首先要明白一点：人与人相处的时候，第一行为并不是吸引，而是本能的排斥。所以，要想成为“高手”，你就要先做到让别人不排斥你，你就要懂得人际交往中的三种特殊心态：</p>
-<p>第一，接近心态。</p>
-<p>第二，相似心态。</p>
-<p>第三，互补心态。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-19-Book-MurphysLaw/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-07-19-Book-MurphysLaw/" itemprop="url">墨菲定律 - 爱德华·墨菲</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-19T08:00:00+08:00">
-                2017-07-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>“墨菲定律”（英文：Murphy’s Law）<br>主要内容有四个方面：</p>
+            <p>在创造整合式生活练习时我们问过一些关键问题：</p>
 <ul>
-<li>任何事都没有表面看起来那么简单；</li>
-<li>所有的事都会比你预计的时间长；</li>
-<li>会出错的事总会出错；</li>
-<li>如果你担心某种情况发生，那么它就更有可能发生。</li>
+<li>古代传统中最有效和最关键的练习是什么？ - 这本书中贯穿各种身心的练习，从历史上人们对练习的实践总结开始</li>
+<li>最近有哪些关于练习的新启发？ -读书的习惯倒是没落下，最近新增了晚上跑步1小时（尽管不那么热了，但是户外跑并未恢复），挺喜欢喜悦曼陀罗冥想，不过暂停有一个月了，好久没这么忙过。。</li>
+<li>我们怎样找到一套方法，来联结最多样的洞见和教学法？ 每次只专注养成一个习惯，每月只坚持一个习惯的养成，循序渐进</li>
+<li>我们怎样利用这些知识来促成一生的成长和觉醒？ 去爱是最好的选择，以爱促进自我和他人的心智成熟，所不断坚持的自我完善的意愿</li>
 </ul>
-<p>“墨菲定律”的根本内容是“凡是可能出错的事有很大几率会出错”，指的是任何一个事件，只要具有大于零的机率，就不能够假设它不会发生。</p>
-<p>成立条件：</p>
-<ol>
-<li>事件有大于零的概率；</li>
-<li>样本足够大（比如时间足够长，人数足够多等）</li>
+<p>如果你观察进化的过程，就能发现，不断积累起来的无数细微变化不时地产生着新的特征，并形成全新的事物（比如，从原始的化学混合物中生成的活细胞，或者，早期人类最早创造出来的艺术）。这标志着发展的新阶段、层次或波在四个象限中同时发生：物理和生理的进化（它）、社会经济的发展（它们）、文化的发展（我们）和个体意识的发展（我）。这些阶段是以可辨别的形式呈现出来的。</p>
+<ul>
+<li>身体层面的练习：有氧有在坚持，瑜伽、健身个人不是很喜欢，主要是懒得去健身房（尽管也办卡了）。</li>
+<li>心智层面的练习：读书方面有几个习惯，1.上下班等零散时间听喜马拉雅，大约每天2小时，2.空闲的时候写些笔记，或看看别人的笔记, 3.重复的看一些经典</li>
+<li>心灵层面的练习：冥想做过两种，一种是正念冥想，还有一种是喜悦曼陀罗</li>
+</ul>
+<p>一些摘要：<br>整合式交叉训练的协同作用：一个领域的成功能加快其他领域的发展：同时练习冥想和举重的人，在冥想上进步更快</p>
+<p>潜意识与显意识（顺便推荐：思考，快与慢） - 阴影模块主要影响内在的心理机制，意识到并且承认自己的阴影，就能将更多的亲密和诚实带入人际关系中，释放身体内压抑的能量，使工作更为清晰而有效率，提高付出真诚和道德行动的能力，甚至能改善你的财务。</p>
+<ul>
+<li>你意识到什么——认知；  </li>
+<li>我需要什么——需要；  </li>
+<li>我是谁——自我认同；</li>
+<li>什么对我很重要——价值；  </li>
+<li>我对此感受如何——情商；  </li>
+<li>我觉得生命是美丽——审美；</li>
+<li>什么是正确的事情——道德发展；  </li>
+<li>我们应该怎样交流——人际发展；</li>
+<li>身体怎么做——运动能力；  </li>
+<li>我的终极关怀是什么？——灵性；  </li>
+</ul>
+<blockquote>
+<p>身心主要中心：头部、心脏和丹田<br>丹田是天然的肉体功能——直觉、生命力和能力的中心<br>心脏是感受能力和灵性直觉的中心，也是爱与关注自我和他人能力的中心<br>意识之光通过头部由中心向外照射，让我们有能力看穿幻象，从而从有限或固执的观点中解脱出来。<br>整合灵性深刻进入第一人称的觉醒，同时深化第三人称的冥想也恢复了同第二人称的交流。</p>
+</blockquote>
+<p>观照第三人称的灵性：<br>宇宙观照  物理世界中也能找到灵性。<br>灵修团体仍在灵修中起着重要作用，礼拜或者修习团体可以增加练习的丰富程度和参与的投入程度，团体也能帮助你更注意到你的变化，团体分享的经验比单独的经验更影响你的成长。</p>
+<ul>
+<li>第一人称冥想（静坐）——真我、觉察、存在、心境。  </li>
+<li>第二人称神交（祈祷）——您、所爱者、我的至爱、耶稣、安拉、阿弥陀佛、玛利亚等。</li>
+<li>第三人称关照（自然）——灵性、宇宙、实相、此在、充满、进化等。</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-10-18-Book-CareerCompetitiveness/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-10-18-Book-CareerCompetitiveness/" itemprop="url">职场竞争力 李发文</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-18T08:00:00+08:00">
+                2017-10-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>国庆旅途路上看完了这本书，书里面讲了很多不错的方法，记录下来以后再捉摸：</p>
+<p>Page 2, 《一胜九败》，作者：优衣库创办人柳井正。“23条经营理念”。</p>
+<p>备注：爱迪生说，我尝试了1999次不能制成电灯泡的方法，在第2000次试验的时候终于制成了。在某种程度上讲，对于那些gone forever的事，便放下罢。对于那些没有达成目标的事，说明仍需努力。就比如，我还在努力把自己打包出去，还在尝试各种可以让自己为兴趣工作的方法。</p>
+<p>Page 5, 心近，天涯咫尺；心远，咫尺天涯。</p>
+<p>Page 20: 写邮件时，先放附件，再写邮件，把顺序调整过来就不会漏了。</p>
+<p>Page 39: 德国护手霜“小甘菊”。纪录片《德国工艺》  《NHK纪录片 日本企业长盛不衰的奥秘》</p>
+<p>Page 43: 有时候，负责任比拿薪水更重要，更有价值。</p>
+<p>Page 46: 尝试用自己的语言进行表达。这样的学习和理解过程形象地总结为：贩卖一遍。</p>
+<p>Page 49: 企业能做多大，就看企业家的格局有多大，而企业家的格局有多大，则要看他的心胸有多宽广，气度有多大。</p>
+<p>Page 59: 《20：敏感是训练出来的》</p>
+<p>Page 61: 大数当然只是用于方向和趋势的判断。仅仅记住大数是不够的，还要记住每个项目的关键指标。关键指标，是很多数字赖以存在的基础和基点。例如：计划部门，必须记住物料采购周期、产品生产周期、按时交货单、每个工序标准加工时间等等，依此为参考点，任何与之相关的数字拿来一比，便可以立即判断进度是否异常；若考核业绩的话，一定要记得部门平均业绩，个人平均业绩，最高、最低业绩等；如果是市场部，除了记住一个月的销售指标外，自然要分解到每天，每个片区的销售业绩指标，被问起时，只要看当天业绩和累积大数，自然对销售状况了然于胸了。</p>
+<p>就几句话：“<strong>记大数，略小数，有事没事，琢磨琢磨关键指标，盯紧异常数。</strong>”</p>
+<p>Page 65: 行迹管理法。</p>
+<p>认识学习过程分三个层次：第一，初学习，<strong>单、多点提取知识点</strong>；第二，运用新知识，<strong>将其与已有知识架构相连接</strong>，理解加深，应用面拓宽；第三，新旧知识融合，<strong>重组成新架构，产生新知识</strong>（或创新）。</p>
+<p>Page 66: 元规则的定义。参考《血酬定律》作者吴思。</p>
+<p>Page 70: 80/20 原则。  </p>
+<p>Page 72: 公司员工的管理和培训，千万不能因为订单少或者工作量而有所放松，反而要在没事可做的时候，要更加注重对员工的管理和培训。</p>
+<p>Page 77: 原则上，所有的命令都听直属上司的。如果出现紧急情况下的越级指挥，要接受。但接受命令的人，需要向自己的直属上司汇报。原则上，越级发布了命令的上司，也应该向下属知会和说明。兄弟部门要求和需求，根据自己的判断进行处理和协调。兄弟部门商机的命令和要求，根据自己本职岗位和职责进行判断，如果是属于自己职责范围内的事，则要取得自己直属上司的同意。如果是协助性的工作，则可以根据自己的实际情况进行判断，给予协助，如有必要，可将协助工作的内容和项目的进度及结果，抄送<br>给自己的上司。</p>
+<p>Page 86： 实际上，产品在生产中是由两个流构成的，一个叫实物流，一个叫信息流。</p>
+<p>Page 92: 但我觉得值得。那些比你年轻的毛孩们，跟你一起工作，会让你真切感受到清楚和活力。想一想，还有什么事比有一天他见到你，忽然跟你聊起还记得你当初对他的鼓励、批评或者帮助，他因此怎么思考和成长，更能让你幸福和满足？  </p>
+<p>Page 100: 在制造业哩，有一种技术叫SPC （全称Statistical Process Control，统计制程管制）。他用非常科学的方法，实时监控生产过程中产品质量的随记波动与异常波动，对生产过程的异常趋势提出预警。</p>
+<p>Page 118: 《038：逻辑思考的力量》 《金字塔原理：思考、表达和解决问题的逻辑》</p>
+<p>比如，写东西，要先从结论写起，而后向下分解，写次要的东西，再向下分解，写更详细的过程。</p>
+<p>Page 122: 我将所有文件分类存放，并给每个文件夹编了号，便于记忆；每个文件存储时，都有完整清晰的标题，而且要在后面缀上存储日期，这样便于搜索查询。由此及彼，往后我写邮件会注意标题完整清晰，一看就明白内容讲什么，这样便于收件人和自己检索；别人发给我的邮件，我处理和回应严格执行不过夜的原则，防止拖延和浪费原则；我发文件给别人回签，会在上面附一张表，清晰写上需要对方关注的重点和回签的日期。有些邮件，你要改天回复，所以要回给他你下次给出意见的时间。</p>
+<p>Page 136, <strong>有内在逻辑，能说明问题的数字，才具有意义</strong>。作为管理人员，一定要充分了解对方想了解什么，能切中对方的思路来整理数字，表达图表，否则，即为不合格。作为听众，需要的是清晰明了的结构和逻辑清晰、主次明确、层次分明的分析及论据。</p>
+<p>Page 149: 我们活着来到这个世界，就没打算活着回去。所以，在这有限的时间里，我们应该珍惜生命，珍惜机会，更要珍惜那得之不易的时间。</p>
+<p>Page 165: 《051: 与懒惰拔河》中懒人和死神的对话很经典。</p>
+<p>Page 171: 但一些隐性的东西，如德鲁克所说的对其他员工负有管理责任的人员，即使他回到家里，隐形的责任也支配着他，使其随时处于待命状态。</p>
+<p>Page 192: <strong>一个人真正的价值，体现于他异于常人和常规的思维模式和思考能力</strong>，而不是他傲慢的态度。一个希望自己走的更远，能发挥更大价值的人，应该学会谦逊做人，弘扬做事。这才叫桀骜不驯！  </p>
+<p>Page 197: PCB: Printed Circuit Board，印制电路板。梁志立。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-10-16-Book-ReadReport4Company/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-10-16-Book-ReadReport4Company/" itemprop="url">从报表看企业 数字背后的秘密 张新民</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-16T08:00:00+08:00">
+                2017-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>财务知识学习，财务报表说明的是过去的企业，财务用报表描述了一个企业的经营状况。<br>现金流量表是对资产负债表中货币资金变化情况的展开说明，利润表是对资产负债表中股东权益未分配利润、盈余公积和资本公积项目部分内容的展开说明。</p>
+<h1 id="一、基础分析"><a href="#一、基础分析" class="headerlink" title="一、基础分析"></a>一、基础分析</h1><ol>
+<li>观察资产总规模及其变化。先看看企业的大势，是稳定发展、持续扩张，还是持续萎缩。</li>
+<li>观察资产总规模中揭示的盈利模式信息：经营资产与投资资产各占多少比重？尤其要注意通过合并报表找到母公司向子公司提供的所有资源——找到控制性投资的规模。</li>
+<li>观察主要资产规模的变化及其方向性含义。从流动资产、投资资产到固定资产和无形资产，逐一考察，找出变化的状况及其对盈利的影响。</li>
+<li>重点观察主要不良资产区域。这里所说的不良，是指不能按照预期利用、不能发挥应有效用。主要的不良资产包括闲置的固定资产、包含潜亏因素的投资、周转缓慢的存货和债权，等等。</li>
+<li>观察流动资产对流动负债的保障。不需要计算流动比率。流动资产和流动负债问题的实质是经营中的上下游关系管理问题和短期融资安排以及集团资金管理问题。要观察企业是否有“两头吃”的能力，这关系到判断企业的核心利润能否产生足够的现金流量。</li>
+<li>观察企业负债融资发展的潜力，也就是企业资产对总负债的保障程度。除了看负债率外，银行还通过看“三品”（人品、产品、押品）来决定是否向企业发放贷款。这表明，决定企业融资能力的重要因素不是负债率，而是企业的盈利能力、利润带来现金的能力、企业对贷款是否有其他保障措施等。</li>
 </ol>
-<p>在科学和算法方面，它与英文所谓的“worst-case scenario（最劣情形）”同义，数学上用大O符号来表示。例如，对插入排序来说，最劣情形即是要排序的阵列完全倒置，必须进行 n*(n-1) 次的置换才能完成排序。在实验上，证明了最劣情形不会发生，并不代表比它轻微的情形就不可能，除非能够很有信心的推论事件的概率分布是线型的。</p>
-<p>墨菲定律的原句已经派生出以下的版本：</p>
+<h1 id="二、对企业发展前景的预测"><a href="#二、对企业发展前景的预测" class="headerlink" title="二、对企业发展前景的预测"></a>二、对企业发展前景的预测</h1><h3 id="从企业的经营活动看前景"><a href="#从企业的经营活动看前景" class="headerlink" title="从企业的经营活动看前景"></a>从企业的经营活动看前景</h3><p>经营资产：包括货币资金、商业债权、存货、固定资产和无形资产。 对于债权，看其回收状况；<br>对于存货，主要看其规模、结构、周转、毛利率等； 对于固定资产，可以从规模、结构周转等方面进行分析。<br>综合来看，经营资产对应着核心利润，核心利润对应着经营净现金。<br>要使企业步入良性发展的轨道，就应该不断优化经营资产的结构、减少不良资产占用、及时处置闲置资产、适量增加经营资产的规模、改善经营资产的结构，通过经营资产的合理利用来提高企业产品的市场竞争力和盈利能力，也可进行适当的经营资产置换，增强与其他资产组合后的增值潜力等。 </p>
+<h3 id="从企业的投资活动看前景-重点关注控制性投资"><a href="#从企业的投资活动看前景-重点关注控制性投资" class="headerlink" title="从企业的投资活动看前景 重点关注控制性投资"></a>从企业的投资活动看前景 重点关注控制性投资</h3><p>企业的控制性投资就是被投资者的经营资产。而被投资者的经营资产总规模基本上可以从合并报表与公司数之差中大概看出一些端倪。<br>要使企业步入良性发展的轨道，就应该不断优化投资性资产的结构，及时处置盈利能力较弱的投资性资产，以改善其结构等。 </p>
+<h3 id="从融资、重组、并购等手段看前景"><a href="#从融资、重组、并购等手段看前景" class="headerlink" title="从融资、重组、并购等手段看前景"></a>从融资、重组、并购等手段看前景</h3><p>企业通过融资、重组、并购等手段来加快发展有几种途径：</p>
 <ol>
-<li>别试图教猫唱歌，这样不但不会有结果，还会惹猫不高兴。</li>
-<li>别跟傻瓜吵架，不然旁人会搞不清楚，到底谁是傻瓜。</li>
-<li>不要以为自己很重要，因为没有你，太阳明天还是一样从东方升上来。</li>
-<li>笑一笑，明天未必比今天好。</li>
-<li>好的开始，未必就有好结果；坏的开始，结果往往会更糟。</li>
-<li>你若帮助了一个急需用钱的朋友，他一定会记得你——在他下次急需用钱的时候。</li>
-<li>有能力的——让他做；没能力的──教他做；做不来的──管理他。</li>
-<li>你早到了，会议却取消；你准时到，却还要等；迟到，就是迟了。</li>
-<li>你携伴出游，越不想让人看见，越会遇见熟人。</li>
-<li>你爱上的人，总以为你爱上他是因为：他使你想起你的老情人。</li>
-<li>你最后硬着头皮寄出的情书；寄达对方的时间有多长，你反悔的时间就有多长。</li>
-<li>东西越好，越不中用。</li>
-<li>一种产品保证60天不会出故障，等于保证第61天一定就会坏掉。</li>
-<li>东西久久都派不上用场，就可以丢掉；东西一丢掉，往往就必须要用它。</li>
-<li>你丢掉了东西时，最先去找的地方，往往也是可能找到的最后一个地方。</li>
-<li>你往往会找到不是你正想找的东西。</li>
-<li>你出去买爆米花的时候，银幕上偏偏就出现了精彩镜头。</li>
-<li>另一排总是动的比较快；你换到另一排，你原来站的那一排，就开始动的比较快了；你站的越久，越有可能是站错了排。</li>
-<li>一分钟有多长？ 这要看你是蹲在厕所里面，还是等在厕所外面。</li>
-<li>计划没有变化快。</li>
-<li>欠账总是要还的。</li>
-<li>做恶总是要遭报应的，不是不报，只是时间未到。</li>
-<li>该来的总是要来的。</li>
-<li>明天又是一个新的开始。</li>
-<li>你越是害怕的事物，就越会出现在你的生活中。</li>
-<li>往往等公车太久没来，就走了的人，刚走公车就来了。</li>
-<li>关键时刻掉链子。</li>
-<li>越想要什么就越不能得到什么。</li>
-<li>人出来混，总是要还的。</li>
-<li>怕什么，来什么。</li>
-<li>若想人不知除非己莫为。</li>
-<li>你上班经常带的一样东西（U盘/银行卡/会员卡等等），当有一天你觉得反正天天带都用不上，不带了。而实际可能就在你没带它的那一天，你真的就需要它了。</li>
+<li>增量贷款。这是盈利能力比较强的企业发展的首选融资方式。 </li>
+<li>债转股。债转股有两种情况，一种情况是企业资不抵债，要进行债务重组；另一种情况是以前发行了可转债，在一定条件下可以实行债转股。</li>
+<li>股东增量入资。这是通过股东入现金或非现金（土地使用权、其他公司的股权等）方式支持企业的发展。</li>
+<li>控制权变更、核心人力资源变动等。</li>
+<li>资产置换。不同行业的盈利能力是不一样的，通过资产置换可以达到提高资产盈利能力的目的。</li>
 </ol>
 
           
@@ -1238,7 +692,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-18-IT-Nginx/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-10-09-Book-MathMind4SEer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -1257,7 +711,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-07-18-IT-Nginx/" itemprop="url">web服务器反代域名访问</a></h2>
+                <a class="post-title-link" href="/2017-10-09-Book-MathMind4SEer/" itemprop="url">程序员的数学思维修炼 周颖</a></h2>
         
 
         <div class="post-meta">
@@ -1269,8 +723,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-18T08:00:00+08:00">
-                2017-07-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-09T08:00:00+08:00">
+                2017-10-09
               </time>
             
 
@@ -1306,16 +760,11 @@
       
         
           
-            <p>反向代理及域名绑定操作流程</p>
-<h2 id="一、基础信息："><a href="#一、基础信息：" class="headerlink" title="一、基础信息："></a>一、基础信息：</h2><p>反带服务器XXX 登陆面板</p>
-<h2 id="二、反带配置"><a href="#二、反带配置" class="headerlink" title="二、反带配置"></a>二、反带配置</h2><p>打开&amp;登录<br><img src="/uploads/ueditor/php/upload/image/20170718/1500371844.png" alt="blob.png"></p>
-<p>点击导航栏 扩展模块.<br><img src="/uploads/ueditor/php/upload/image/20170718/1500371853.png" alt="blob.png"></p>
-<p>绑定域名填写域名。反带域名填写反带的服务器<br>如：xx.xxx.xx.com  10.22.22.22:2222</p>
-<p>这样子反向代理就配置好了。接下来是进行域名配置</p>
-<h2 id="三、域名配置"><a href="#三、域名配置" class="headerlink" title="三、域名配置"></a>三、域名配置</h2><p>在浏览器中输入<a href="https://dns.he.net/" target="_blank" rel="noopener">https://dns.he.net/</a><br><img src="/uploads/ueditor/php/upload/image/20170718/1500371902.png" alt="blob.png"><br> 这里输入帐号&amp;登录<br><img src="/uploads/ueditor/php/upload/image/20170718/1500371931.png" alt="blob.png"></p>
-<p>点击v.xxxx.com进入域名解析<br><img src="/uploads/ueditor/php/upload/image/20170718/1500372042.png" alt="blob.png"></p>
-<p>点击上面的New A,新增域名A记录解析</p>
-<p>输入你反带的域名+公网IP<br><img src="/uploads/ueditor/php/upload/image/20170718/1500372087.png" alt="blob.png"></p>
+            <p>包含的实例:</p>
+<p>结绳记事 - <strong>最早的数学</strong>  </p>
+<p>孪生素数、梅森素数 - <strong>神奇的素数（奇数） 常用于密码学等，例如rc4等</strong></p>
+<p>哥德巴赫猜想、阶乘、汉诺塔、斐波那契数列、乘法原理、加法原理、字符编码 - <strong>很多有意思的算法</strong></p>
+<p>密码长度、日历中的数学、心灵感应魔术、约瑟夫环、智叟分牛、百枚钱币鼓士气、庄家的胜率、中奖概率、用概率方法求π值、复利的威力、对折纸张、舍罕王的赏赐、三段论、选言推理、假言推理、关系推理、花盆摆放、残缺棋盘、丢失的线条、田忌赛马、背包问题 - <strong>稳赢的规律，神奇的、违反直觉的计算结果</strong></p>
 
           
         
@@ -1359,7 +808,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-17-Book-ArtThinking/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-09-07-Book-HowToInfluenceOthers/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -1378,7 +827,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-07-17-Book-ArtThinking/" itemprop="url">思考的艺术 - 文森特·赖安·拉吉罗</a></h2>
+                <a class="post-title-link" href="/2017-09-07-Book-HowToInfluenceOthers/" itemprop="url">细节：如何轻松影响他人 - 罗伯特·西奥迪尼</a></h2>
         
 
         <div class="post-meta">
@@ -1390,8 +839,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-17T08:00:00+08:00">
-                2017-07-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-07T08:00:00+08:00">
+                2017-09-07
               </time>
             
 
@@ -1427,8 +876,115 @@
       
         
           
-            <p>思考技能是天赋还是养成的习惯？视野狭窄、缺乏好奇心对思考有什么影响？……针对这类我们很少意识到的问题，本书从阐述思考的概念开始，教你打破思考的局限，克服思考的障碍，学会创造性、批判性地思考问题，并有效地沟通想法，从而传达给读者这样一个重要的理念——思考是一门需要学习且可以习得的艺术。</p>
-<p>在每一章末尾，作者都设置了极具挑战性的练习题，方便读者边学边练，将学到的知识融会贯通。本书最初为大学思考课程设计，因其简单易懂，逐渐被商业、人文、社科、科学等领域广泛采用，是一本兼具科学性与实用性的思考技能训练书。1984年初版后，本书即被美国许多高校选为必修的思考课教材，已修订至第10版。</p>
+            <p>为便于查阅，拷贝辑录52个细节要点作为参考纲要，等需要深入了解时再进行扩展阅读。</p>
+<p>1.向“大众”借力</p>
+<p>  人类的行为会在相当程度上受到周围的人的影响，尤其是那些令他们深深认同的人，这就是“社会认同原理”，也就是从众心理，如果在物业费缴费通知单上标出大多数人都已经按时缴纳完毕，那么拖欠物业费的现象会有相当大程度的改善。</p>
+<p>2.“小众”的反作用力</p>
+<p>  人们总是愿意与自己所属的群体行为保持一致，同时与不愿与之扯上关系的群体划清界限。比如当年黄渤在《疯狂的石头》里一句台词“班尼路，牌子”毁掉了班尼路积攒多年的品牌价值。因而，如果不鼓励某种行为，就把这些行为和受众们不想要的身份联系起来。</p>
+<p>3.非常态VS常态</p>
+<p>  每个人心中的社会规范标准是不一样的，用违背对方的社会规范角度去规劝，更容易获得说服效果。比如，你若有个朋友总是不结婚，你要劝劝他：如果对方也认为“结婚”是很必要的，那么要强调不结婚的坏处；如果对方认为“结婚”没那么大的必要，那么就要强调“结婚”能够带来的好处。</p>
+<p>4.强大的环境暗示</p>
+<p> “破窗理论”是指微小地违背社会规范行为，会对其他行为造成负面的影响。环境中的不良现象如果被放任存在，会诱使人们仿效，甚至变本加厉。改变环境比改变人的想法更容易，所以应对之道是让人们清楚地看到别人在遵守规则。比如在一个单位里，如果多数人桌面是乱的，原来爱干净的人的桌面也容易变得凌乱。如果多数人桌面整洁，原来不太爱干净的人的桌面也会变得更为整洁。环境整洁了，整体工作效率会相应提升。</p>
+<p>5.改个名字，改变一切</p>
+<p>  我们非常重视自己的名字，即便是再嘈杂的环境中，只要有人提到自己的名字，注意力立马就会被吸引过去。在心理学领域叫“鸡尾酒会现象”。所以在和人沟通的时候，清楚而多次地提到对方的名字会让对方更重视，这也是为什么群发祝福短信大家都很讨厌，而点名祝福的短信，再短也会受到欢迎。</p>
+<p>6.如何化敌为友</p>
+<p>  当你希望鼓励大家联手合作的时候，应该把重点放到大家共同的身份上，找到共同点。比如球迷多数都支持自己省份的球队，有时吵得不可开交，但当踢面对国际赛事时，因为同是中国人的共同身份，却都同仇敌忾一致对外。</p>
+<p>7.预测他人的喜好、渴望与需求</p>
+<p>  我们总是高估对某一个人的了解程度，因为一方面对方的喜好随时间在变化，另一方面由于关系固定，导致不再用心挖掘对方的喜好。所以不管是老朋友还是老客户，都别用老眼光去看一个人，有必要不定期安排一些非正式沟通机会，促进彼此的了解。</p>
+<p>8.主动承诺的力量</p>
+<p>  承诺和一致性原理——人们更愿意去履行自己许下的诺言。给团队分配任务的时候，让成员复述一下自己的工作内容，会使任务得到更好的执行；活动邀请信息中让对方回复“好的”、“收到”会使活动出席率更高。</p>
+<p>9.承诺要行动，要公开</p>
+<p>  公开许下某项具体承诺的人更有可能去行动，可以做提示牌、徽章之类的提示物，来提醒他们做出的承诺。在工作中可以把阶段性的工作目标公布出来，对推进工作进程效果更好。</p>
+<p>10.“心安理得”效应</p>
+<p>采取了一个积极行为之后，人会心安理得地松懈下来，不再采取新的积极行动。比如有些朋友气喘吁吁跑了五公里之后，奖励自己一顿啤酒烧烤，导致白跑了。比如有些人昨晚加班了第二天感觉迟到好像不那么严重。“心安理得”效应是应该想办法避免的。</p>
+<p>11.如何为员工鼓劲儿加油</p>
+<p>  “多劳多得”这样的物质激励有效，但是一方面效果不持久，另一方面成本高。多提工作的意义与重要性，谈工作的使命与愿景，对提高员工的工作意愿有显著的效果。在物质激励与精神激励之间要找到一个平衡点，既能保证公平，又能保证团队的效能。</p>
+<p>12.如何避开决策陷阱</p>
+<p>  逐步升级的承诺，会导致投入成本高于收益，导致错误的决策与糟糕的后果，一定要避免。拍卖时，很多竞拍的人因为“逐步升级的承诺”而拍出可怕的高价。这是因为如果人们做出一个承诺，他们可能迫于内心和外部压力，持续做出和承诺相一致的行为，并逐步升级、超过承受能力。解决方案：拍卖时，让一个人做决策，另一个人现场执行。</p>
+<p>13.巧用“执行意向”</p>
+<p>  明确的执行计划更有助于行动，不仅对自己，对对方也同样适用。在说服别人行动时，想办法明确关于此事对方的下一步计划，有助于目标的达成。</p>
+<p>14.推迟一点儿会更好</p>
+<p>  如果你希望别人马上改变某个行为，而你确信会遭到拒绝，那么你就换个方式，让对方答应在未来某个时段做出改变。对于要改变下属的不好行为，最好别要求马上做出改变，给出一段过渡时间效果会更好。</p>
+<p>15.为了将来的自己</p>
+<p>如果触动了人们对“将来的自己”的道德责任感，就可以说服他们去做一些长远上对他们有益的事情。比如告诉人们，要“为60岁退休的你负责”，就能增加他们的储蓄率。还有学习、健身、读书等。</p>
+<p>16.目标设得好，干劲儿会更足</p>
+<p>  把目标中具体的数字变换成浮动性的数字，会更有利于目标达成。</p>
+<p>17.损失规避原则</p>
+<p>  说服对方时，不要只提出一个选项，让对方“接受或拒绝”，而是要提出两个选项，让对方去选择。与此同时，指出如果不这样选的话，他们会失去什么。</p>
+<p>18.如何克服拖延症</p>
+<p>  截止日期越短越能促进人行动，太长则会拖延。安排任务切忌给太长时限，反而更容易延误。</p>
+<p>19.如何留住顾客跟定你</p>
+<p>如何让排队效率更高？等下去。所以在顾客排队的时候，给他们一些事情做，能让顾客更有耐心。比如海底捞在等餐的时候可以玩棋、吃零食、做美甲、擦鞋等等</p>
+<p>20.把潜力变成现实</p>
+<p>  当你想说服客户买你公司的产品，或者面试的时候想要说服对方聘用你时，要先强调你的产品，或者你自己的潜力，然后再说做出过哪些成绩，而不是反过来。先强调潜力能更好地吸引对方的兴趣，然后才有机会展示过去的成绩。</p>
+<p>21.把会议开得更高效</p>
+<p>  会前收集每个人的发言或提问信息，组织会议的人最后发言，提前做好任务清单，安排好座位座次，尽量用桌签指定座位。如果会议的目的是创造合作互助的气氛，那圆桌更好，因为圆桌强调的信息是整体目标和共同利益。如果领导希望团队成员各尽其责，那正方形或长方形桌子更好，因为带角的形状和有主有次的座次安排激发了人们对独特性的追求。</p>
+<p>22.服装的影响力</p>
+<p>  与对方会面，衣着太随意不好，太正式也不好，标准答案是比对方稍微正式一点点。</p>
+<p>23.亮出专家身份</p>
+<p>  强调专业能力能显著提高沟通效果，当然，前提是你真的很专业。</p>
+<p>24.不确定的说服力</p>
+<p>  用斩钉截铁的语气想要去说服人容易被对方误认为骗子或托，语气中带有某种程度的不确定的专家，反而更容易说服人。</p>
+<p>25.中心位置的影响力</p>
+<p>展架上中间位置的货更抢手，人群中中间位置的人显得更权威。</p>
+<p>26.如何激发创意</p>
+<p>  会议的场地选在天花板较高的房间更有利于激发创意，选在天花板较低的房间更有利于解决具体方案和行动计划。</p>
+<p>27.主场还是客场</p>
+<p>  环境设置影响行为，就像NBA往往会有“主场优势”，所以一般大型的会谈、谈判会选在“中立”的地点，比如某酒店的会议厅。</p>
+<p>28.如何让自己变得更强大</p>
+<p>  心理暗示的力量，回忆并写下曾经让自己感觉到强大、有力的时刻，比如某个成就事件，会真的让自己更加强大有力，有自信。开始谈判或面试前几分钟，回忆自己的巅峰时刻，刻意保持开放的身体姿势，会让你体内的力量激素明显上升，你会更自信。</p>
+<p>29.你所需的只是爱</p>
+<p>  只要有“爱”的象征、线索，比如心形的图案，就能激发人们的爱心。如用心形的捐款箱会筹到更多捐款。</p>
+<p>30.完美礼物哪里找</p>
+<p>  送礼之前，想办法摸清楚对方真正想要什么，不要自己瞎猜，因为人们收到自己心愿清单上的礼物会更开心，更喜爱。</p>
+<p>31.为互助留出余地</p>
+<p>  你提供帮助后，在回应对方的感谢时，应该暗示期待他的回报，这样你就为“互助”留下了余地。暗示性回答可以是：没关系，如果是我以后需要帮助，你也会这么做的。</p>
+<p>32.表达感激好处多</p>
+<p>  明确表达感激之情会使给予帮助的人感受到更多的社会价值感，有十分明显的积极影响。</p>
+<p>33.出乎意料与抛砖引玉</p>
+<p>  利用“互惠”心理，你可以率先给别人好处，好处越是出乎别人的意料，就越能放大对方积极正向的回报。</p>
+<p>34.如何获得帮助</p>
+<p>  想要求助的人往往低估了对方愿意帮忙的程度。因为求助的人只看到对方帮忙会花费各种成本（时间、精力、金钱），但是其实对方如果拒绝，同样会产生成本（尴尬、丢面子、内疚等）。所以如果真的需要帮忙，尽管开口。</p>
+<p>35.先下手为强</p>
+<p>  两方谈判的时候，哪一方先出价，最终的价格就会定在这个价格附近，这就是锚点效应。所以在谈判的时候，如果有哪个因素能够可以充当锚点，就率先提出来，不要等着对手说，容易被动。</p>
+<p>36.报价精确一点儿会更好</p>
+<p>  一旦提供精确到各位的数字，会让对方认为你提出的数字是经过深思熟虑的，是有额外意义的，因此更容易达到要求。时间也是一样，如“请把材料在15:37分之前交给我”。</p>
+<p>37.定价末尾数字有玄机</p>
+<p>199元到200元只差1元，但是消费者看上去的效果像是涨了100块一样，消费者更关注左侧的数字，一点改动足以影响客户的购买决定。把跑步机里程设定在9.9公里而不是10公里，能让人有更大动力去完成。</p>
+<p>38.顺序改一改，生意滚滚来</p>
+<p>我们的决定总是受情境影响，当选项变得复杂时，人们的注意力会集中在最先出现的信息上。在不容易算清的时候，人们更喜欢收益在前面、成本在后面的表述顺序，“付279.99元可以观看580小时节目”，就不如“看580小时的节目收费279.99元”。给我们的启发是：销售时，先说服务、再说报价；求职时，先说取得的业绩总数量、再说你的工作年数。</p>
+<p>39.如何事半功倍</p>
+<p>  不必投入资源去为所有顾客都增加一点儿不起眼的优惠，这就好比往热水里加温水，只会降低整体温度。要用这些资源为少数重点客户提供额外诱人的优惠。激励员工时也是一样。</p>
+<p>40.化整为零</p>
+<p>  说服对方答应一个大请求时，可以先化整为零拆出一个小请求，让对方衡量愿意为小请求付出的代价，之后再把大请求提出来，你就可能得到更多。比如你先让人想想，捐助一个失学儿童他愿意付出多少钱，再让他决定，如果要帮助40名失学儿童他愿意捐款多少。</p>
+<p>41.鲜明生动的细节</p>
+<p>有具体的细节更更打动人——真实性：清晰具体的手段更能说服人——价值感。想要说服别人，要引导对方关注形象鲜明的受益对象以及清晰具体的实现手段。，既提供真实性，<br>又提供价值感。</p>
+<p>42.指出机会成本</p>
+<p>  机会成本，指的是人们选择了一个方案，就会损失掉其他方案有可能获得的收益。如果产品优惠，就把机会成本讲得清楚、诱人。促销的一个秘诀是，让顾客具体感知到他们买了你的产品之后的“机会成本”。比如你的产品比对手便宜100元，可以让顾客具体设想一下省下来100元还可以买什么，这会促进他们选择你。</p>
+<p>43.如何激励他人（还有你自己）完成任务</p>
+<p>  将注意力引导到小数字上去。任务的前期关注已经完成度——“你已经完成20%啦”；任务的后期关注还剩多少——“你只剩20%就完成啦”。如果你计划减肥，那开始时，多想想已经减掉了多少，到中后期，多想想还有几斤没减掉。盯着比较小的数字，更能激励自己。</p>
+<p>44.如何提高客户忠诚度</p>
+<p>  人们喜欢少做决策，而不是多做，这一点从聚餐时大家都不爱点菜上就能看出来了。当组织一场活动时，如果参与规则简单灵活，则更容易吸引人前来参与，但完成的人更少；如果参与规则严苛，却更容易使人坚持到底完成任务。给更少的决策空间更利于对方的行动。</p>
+<p>45.如何让一加一大于二</p>
+<p>  人们害怕失去，对失去的担忧更胜过对得到它的渴望。因此激励他人的时候，奖品要分类，分梯度，才能更吸引人的注意，会刺激人们“害怕失去”的感觉，因此效果更好。</p>
+<ol>
+<li><p>退后一步看问题</p>
+<p>人与问题之间的实体距离会影响他们对这个问题难易程度的印象。远一点，问题显得更容易，近一点，显得更难。所以后退一步、站远一点看问题，就觉得没那么棘手了。</p>
+</li>
+</ol>
+<p>47.从他人的错误中汲取教训</p>
+<p> 成功难以归为某一单一因素，但是一个错误就能导致失败；负面信息更容易被记住，更有可能影响决策；旁观者清，看别人犯过的错，更容易看出毛病在哪。所以，与其学习如何才能成功，不如学如何避免失败的决策。</p>
+<p>48.对错误进行管理</p>
+<p>  不怕犯错误，只要及时修正就好。要把有限的资源放在“迅速解决问题”上，而是不是牺牲更大的成本追求“零失误”。</p>
+<p>49.当天就点评</p>
+<p>网购平台的评论中，当评论中没有时间线索的时候，大家更看重负面评论，只要有出现差评，不论还有多少好评，大家都不想买了。但是如果评论中的好评是当天点评的，那么人们更愿意忽视差评而相信好评。</p>
+<p>50.给邮件加点料，让谈判更顺畅</p>
+<p>  让邮件有一些幽默、人情味，更能拉近距离，更容让沟通的事情得以解决。</p>
+<p>51.碰触的魔力</p>
+<p>  碰触能让人跟物件之间产生十分亲密的情感，所以允许潜在顾客摸待售商品会增进好感，当然前提商品摸着要舒服，不能让人难受。</p>
+<p>52.把最好的留到最后</p>
+<p>  人们更容易记住的是体验中的巅峰，与结束时的感受。所以巅峰体验应该尽量放大，结尾的事情考虑周到认真做好，不要让停车场的差评毁掉一次高大上音乐会的体验。如果去旅游，其把预算平均到每一天，不如集中起来做两件有意思的事，尤其是在末尾的时候，不能让最后不愉快影响了对这次旅行的整体印象。</p>
+<p>作者：微尘悦读<br>來源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 
           
         
@@ -1472,7 +1028,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-14-Book-ThinkingFastSlow/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-08-28-Book-GudianMind/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -1491,7 +1047,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-07-14-Book-ThinkingFastSlow/" itemprop="url">思考，快与慢 - 丹尼尔·卡尼曼</a></h2>
+                <a class="post-title-link" href="/2017-08-28-Book-GudianMind/" itemprop="url">拆掉思维里的墙 - 古典</a></h2>
         
 
         <div class="post-meta">
@@ -1503,8 +1059,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-14T08:00:00+08:00">
-                2017-07-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-28T08:00:00+08:00">
+                2017-08-28
               </time>
             
 
@@ -1540,9 +1096,561 @@
       
         
           
-            <p><img src="/uploads/ueditor/php/upload/image/20170714/1499995199.png" alt="blob.png"><br><strong>人类究竟有多理性？——思考，快与慢</strong><br>在书中，卡尼曼会带领我们体验一次思维的终极之旅。他认为，我们的大脑有快与慢两种作决定的方式。常用的无意识的“系统1”依赖情感、记忆和经验迅速作出判断，它见闻广博，使我们能够迅速对眼前的情况作出反应。但系统1也很容易上当，它固守“眼见即为事实”的原则，任由损失厌恶和乐观偏见之类的错觉引导我们作出错误的选择。有意识的“系统2”通过调动注意力来分析和解决问题，并作出决定，它比较慢，不容易出错，但它很懒惰，经常走捷径，直接采纳系统1的直觉型判断结果。<br><img src="/uploads/ueditor/php/upload/image/20170714/1499995930.png" alt="blob.png"><br>为了使读者真切体会到系统1和系统2这两个主角的特点，卡尼曼介绍了很多经典有趣的行为实验，指出我们在什么情况下可以相信自己的直觉，什么时候不能相信；指导我们如何在商场、职场和个人生活中作出更好的选择，以及如何运用不同技巧来避免那些常常使我们陷入麻烦的思维失误。<br>本书将会彻底改变你对思考的看法。</p>
-<p>50 年前，人们以为我们能驾驭自己的思想。但事实上，我们的行为常常受到许多无法看见的因素所影响。我们虽然身处生活这场游戏之中，但对游戏的机制却不理解，偏见常常导致我们追求错误的东西。我们的感知和记忆并不可靠，对于自己心理状态的感知和记忆尤其不可靠。</p>
-<p>关于人类自身还有许多未知之谜，对于自己，我们了解得其实不多。卡尼曼就如思想的拓荒者，他的研究成果为我们认识自我提供了重要的支点。卡尼曼对于人类思考和选择的理解所作出的贡献，无人能出其右。作为历史上最重要的一位心理学家，卡尼曼重塑了认知心理学、理性和因果关系分析，重新诠释了风险，重新阐释了幸福和财富的关系，写就了这部杰作。如果你今年只能读一本书，就读这一本吧。</p>
+            <p>拆掉思维里的墙-摘录</p>
+<p>第一章.你是不是安全感的奴隶<br>【p.023】恐惧的三个层次：第一个层次是恐惧事情本身。<br>第二个恐惧是害怕失去背后的价值。恐惧的第三个层次，也就是真正的恐惧，是你觉得自己没有能力去应对这个失去。<br>【P.024】fuck you! That is me,anyway!恐惧就是这样一个懦夫，当你触及他的底线，接受事情最坏的结果，然后准备和他大干一场的时候<br>，他早就不知道躲到哪里去了。当你找到内心最深的恐惧，把脸转向它，准备作战，恐惧开始烟消云散。<br>【p.028】如果你真的是一个没有安全感的人，你能做的最好的事情，就是在自己最恐惧的地方，无条件的去支持一个人、一些人、一群人。支持别人是这个世界上最安全的<br>事情，它永远不会失败。 IF you’re hurting, you need to help somebody ease their hurt. If<br>you’re in pain, help somebody else’s pain. And when you’re in a mess, you get<br>yourself out of the mess helping somebody out of theirs.<br>安全感是给出来的，不是拿回来的，请你一定要记得。</p>
+<p>第二章.让有趣的生命扑面而来<br>【p.035】乐趣来源于全情投入，而不是投入后的结果，正是因为这样，乐趣可以是无条件的。 难怪有些人总是充满快乐和激情，全情投入。他们在成功的时候收获到成果<br>，在失败的时候收获到智慧，而不管什么时候，他们都收获到过程中的快乐！他们为什么不投入呢？他们有这样一个心智模式：冒险——投入！投入是热爱生命的钥匙。什么是快<br>乐？就是做事情既快，又乐！<br>【p.36】不计较钱多钱少肯认真工作的人，往往觉得只要能从事这份工作，本身就是对他最大的报酬。事实上，当一个人为了工作本身而不是工作后的工资来做事情的时候，<br>他往往能够把工作做到最好，也一定会受到更多的报酬。<br>【38】生命就好像镜子一样，“有趣之人”对生活保持着极高的投入度，全力拥抱，生活也全力拥抱他。“无趣之人”用“没兴趣”把自己和生命隔绝，所以生命也躲开他。<br>Dance like nobody’watching; love like you’ve never been hurt.Sing like<br>nobody’listening;live like it’s heaven on earth.<br>带着关爱而不是期待地投入生活，你会发现能力与乐趣接踵而至。<br>寻找那些不能够被满足的深层兴趣，比如爱好、成长、超越自己，快乐、助人、宁静……它们会让你幸福一辈子。<br>为你的生命找到一个长期的、深层的、不能被满足的乐趣，让这个永恒乐趣带领你穿透生命的无常。</p>
+<p>第三章.心智模式决定我们的命运<br>【47】《周易.系辞上》说：“仁者见之谓之仁，智者见之谓之智，百姓日用而不知，故君子之道鲜矣”简单的说，你永远只能看到真实世界中，你想看到的那一部分。<br>我们给自己创造了一个世界模型，然后根据这个创造出来的世界生活。这是我们大脑工作的原理。<br>【61】道可道，非恒道；名可名，非恒名。——老子<br>（道可以指导、引领我们的思想，规范我们的行为，并不是恒常不变的理论、道理和规律、名称是可以做出详细的命名和界定，并不是恒常不变的解释和命名。）<br>【62】选择不对，努力白费，错误的努力比不努力还要可怕。每个人都需要给自己未来一个大的方向。<br>【63】如果你是金子，你要做的事是找到让自己发光的方法。这已经不是一个三顾茅庐的时代，今天的诸葛亮需要博客、微博和影响力。<br>只有当你全力投入的时候，你才会从工作中获得快乐。<br>【67】混沌-察觉-醒觉-超越四个步骤，是心智模式升级的必经之路。</p>
+<p>第四章.成功学不能学<br>【79】大部分的矛盾与冲突，就是因为双方都在坚持自己的形式，而不是结果。打着爱的旗号来伤人，而且还坚持不懈。佛教中间三毒之一“痴”，就是指这种执著于形式而不<br>是结果的行为。 你今天这样苦苦的坚持，这坚持的背后，是在坚持结果，还只是在坚持形式？<br>【82】很多时候少听成功专家讲的话。所有的创业者多花点时间学习别人是怎么失败的，因为成功的原因有千千万万，失败的原因就一两个点。所以我的建议就是少听成功学讲<br>座，真正的成功学是用心感受的，有一天你就是成功者，你讲任何话都是对的。——马云<br>【84】I gotta keep breathing, Because tomorrow, the sun will rise.Who knows what<br>the tide could bring._《Cast away》<br>【86】You got a dream, you gotta protect it. People can’t do something<br>themselves, they wanna tell you you can’t do it.If you want something,go get<br>it.Period 如果你有一个梦想，那就去捍卫它；如果你有一个目标，那就去争取他。走起来！当你走在人生之路上，没有必要去羡慕那些走在高处的人，<br>也没有必要轻视那些走在你后面的人，因为成功不是生命的高度，成功是生命的速度。成功在你此刻的脚下，成功就是越走越近。<br>【84】从词源上来说，success这个词来自中古英语“succeden”，前面是拉丁文前缀”suc”代表“靠近、接近”，后面是一个代表“走”的词根“ces<br>s”。所以“success”这个词的本义应该是“越走越近”<br>【87】当你疲惫，那就歇息；当你苦恼，那就哭泣；当你快乐，那就小小的忘乎所以。只要你继续前行，你就在成功。因为成功不在前方，成功就在当下，成功就是越走越近。<br>对自己说：成功就是越走越近，那么我现在就很成功。 A good life is one inspired by love and guided by<br>knowledge.——罗素<br>【88】现代社会的三种毒药：消费主义、性自由和成功学。消费主义以品牌为噱头，以时尚为药效，恋物成瘾；性自由以人性为噱头，以性爱为药效，纵欲成瘾；成功学以速成<br>为噱头，以名利为药效，误导急于走捷径的人上人的年轻人投身其中，投机成瘾。<br>我的野心是要证明一个没有野心的人也能得到所谓的成功。不过，我必须立即承认，这只是我即兴想到的一句俏皮话，其实我连这样的野心也没有。——伍迪艾伦 “I<br>would never want to belong to any club that would have someone like me for a<br>member.”</p>
+<p>第五章.如何找到热衷一生的事业<br>【93】年轻的时候你可以一见钟情，但是到了年纪你该两情相悦一段，然后选择和一个人白头偕老。即你需要一见钟情很多人，两情相悦一些人，然后才会白头偕老一个人。<br>【101】不递简历也能入职的八种求职方法：1、职业访谈；2、给名人写信；3、混论坛；4、参加培训与学习；5、加入俱乐部；6、义务工作；7、成为客户；8、自由<br>职业<br>【107】如果生命是旅途，你的眼睛就好像探照灯。你永远只能看到你所在之处的一百米处，一百米开外的地方到底怎么样你并不清楚。你能听到很多传奇和故事，但是无法做<br>确切的计划。在你的视野范围之内，你需要精细的计划；在你听说的范围之内，你需要大方向的规划；而在那些你连听都没有听说过的地方，你需要的是相信。<br>【112】平台、资源、眼界、机会、好老板、失败的经验，这都是未来会升值的潜力生命股票，年轻的时候，即使牺牲点别的什么立即可得的利益，也要购买这些东西，他们会<br>在未来的时间里，增值百倍。 不要为一个水杯约束你真正有价值的生命！（2006年的一次职业规划师的交流会上，我问了在座所有人一个问题，如果一个人手里拿着<br>一个水杯，他下一步最好的选择是什么？ 有人说应该去装水，有人说应该与人分享，有人说应该分析自己，用个好的方式去利用水…… 你的答案是什么？<br>我告诉大家，一个人手里拿着水杯，他应该去做自己想做的事情，跟水杯有什么必然关系？）</p>
+<p>第六章.原来我还可以这样活<br>【136】受害者深深坚信，自己快乐与否、成功与否掌握在他人手中。 对生命屈服有很多种，最可怕的是那种喜欢被奴役。<br>【141】 Life is not fair,get used to it——比尔盖茨<br>【143】学会如何面对不公平，远远比学会如何评价不公平重要。<br>【146】不公平使我们生命中的契机，是生命提供给我们，让自己和世界变得更加美好的领导机会。<br>【147】Imagine You may say I am a dreamer But I am not the only one<br>IF some day you join us The world will be as one_——John Lennon</p>
+<p>第七章.幸福是一种转换力<br>【161】你不妨把自己的梦想想象成一家上市公司的董事会，你和你的父母对于“你”这个公司都有一定的发言权。他们占有一定的股份。他们有权利发言，有权利表达观点，<br>而你也有义务认真倾听、考虑。但记住在关于你人生的董事会上，你永远是最大的股东。<br>【162】 每个人身上有两套系统，社会系统（男人）负责满足外界要求，换回生活需要。而自我系统（女人）负责满足内心需求，把这些东西转换为我们心灵需要的价值，让<br>我们快乐。社会系统总是去做更有用的事情，女人系统总去做更有趣的事情。<br>【164】社会的你其实不喜欢成功，你喜欢的其实是比别人成功。而自我的你其实也不喜欢成功，你喜欢的是成功的过程与希望。<br>【168】我们很听话地长成为一群有脑无心的人，一群有逻辑没情感的人，一群讲高度不讲尊重的人。我们长成为别人要求的样子，并且以此为荣。就这样，我们把自己弄丢了<br>。</p>
+<p>第八章.上天不需要你成功，它只需要你尝试<br>【171】Waiting for life is waiting for<br>death.与其在等待中枯萎，不如在行动中绽放。上帝不需要你成功，他只需要你尝试——特蕾莎<br>【172】当一个人等待与拖延的成本，远远高于他真正开始行动所需要的成本，他就会慢慢陷入越等待越不行动的怪圈。我把这种模式叫“等死模式”。<br>等待成本与穿越成本的计算 一旦你陷入了等死模式，最好的选择就是行动起来！穿越过去。因为你等待的成本，远远高于你穿越的成本。<br>【173】死是一件始终要到来的事情，是一件无论你做什么也不会错过的事情。那你又何必这么急呢？——史铁生<br>【177】只有那种不可抑制想开始的开始，才是有结果的开始；而那种能够等几次就没有了的开始，基本上等于冲动。 There is a staying in<br>my going, there is a going in my staying.——纪伯伦<br>【178】如果你没有一个好的开始，不妨试试看一个坏的开始吧。因为一个坏的开始，总比没有开始强。而完美的开始，则永远都不会到来。</p>
+<p>第九章.成长为自己的样子—给残酷世界的温暖规划<br>【186】钱会让你幸福，钱也会让让你失落。但是记住，工作不是用钱来算的。<br>一旦你开始用金钱来代表成就，用价格来代表爱情，用秤来称感情，生活的幸福被你毁灭，是理所当然。<br>【194】其实我们的生命也是一样，我们的生活也由三个支架组成：自我、家庭与团体和职业。这样的支架支撑着我们的灵魂，它在记录我们的生命。<br>你可以不上班，但是你不能不工作！更不能没有朋友圈。跋.拆掉思维里的墙，看到光<br>【201】面对呼啸而至的时代车轮，我们必须加速奔跑，有时会力不从心，有时会浮躁焦虑，但必须适应，它可以轻易地将每一个落伍的个体远远抛下，甚至碾做尘土，且不偿<br>命。——赫尔曼.黑塞  佛教的一个核心观念是“慈悲”，只有先 “慈爱”，才能去“悲”，而所有的爱，从爱你自己开始，然后爱才会从内心满溢出来，流向那些没<br>有爱的地方，变成对世界痛入骨髓的“悲”。很多宗教的教义都讲同一个道理，比如基督教的“福杯满溢”——所有这些智慧，都告诉你：先好好地爱自己，掌控自己的生活，然<br>后慢慢地爱更多的人。 “Three passions, simple but overwhelmingly strong,have governed<br>my life: the longing for love, the search for knowledge, and unbearable pity<br>for the suffering of mankind.<br>【202】凡走过的都有痕迹。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-08-17-Book-YourLifePossible/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-08-17-Book-YourLifePossible/" itemprop="url">你的生命有什么可能 - 古典 - 影响力、爱、自由、智慧</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T08:00:00+08:00">
+                2017-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>2007年，古典创办新精英生涯，希望帮助30%的青年人：成长，长成为自己的样子。这本《你的生命有什么可能》是他继《拆掉思维里的墙》后，倾三年心力，推出的第二本书。</p>
+<p>本书探讨了以下问题：高竞争的工作、高不可攀的房价和房租、 拥挤的交通、糟糕的空气、不安全的食品……在竭尽全力才能生存的时代，年轻人如何追求自己的梦想？在这样的时代，我们的生命又有什么可能？如何才能越过现实和理想的鸿沟，找到和进入自己希望的人生？如何修炼自己在现实中活得更好的能力？如何在现实之中发展自己的兴趣？如何连接现实和理想？如何面对生命里的苦难、贫穷、不完美或者不公正？如何获得心灵的自由？</p>
+<p>在书中，古典谈到了人生四个永恒的主题：<br>影响力、爱、自由、智慧。<br>即使在这个不那么公平的现实世界里，每个平凡人也都能活出各自的生命可能。<br>本书写给成长中的每一个人，以生涯之学和古典的独特人生体验，带领所有好奇、冒失又热爱生命的读者一起成长。<br>生命是一个打开又收拢的过程，这本书将让我们打破自己心智的障碍，开始自由地思考和行走，然后看到人生的更多可能。<br><img src="/uploads/ueditor/php/upload/image/20170817/1502930596.png" alt="blob.png"><br><img src="/uploads/ueditor/php/upload/image/20170817/1502930678.png" alt="blob.png"><br><img src="/uploads/ueditor/php/upload/image/20170817/1502930704.png" alt="blob.png"><br><img src="/uploads/ueditor/php/upload/image/20170817/1502930749.png" alt="blob.png"><br><img src="/uploads/ueditor/php/upload/image/20170817/1502930769.png" alt="blob.png"><br><img src="/uploads/ueditor/php/upload/image/20170817/1502930799.png" alt="blob.png"></p>
+<p>语句摘录</p>
+<p>序P007<br>如果要把当代年轻人当成一个人，他/她应该是这样的：他的眼睛遥望着5000米外的七色彩虹，心中坚信每个人都平等自由，脚却踩在一片稀巴烂的烂泥之中；他的脑子已经<br>接受了要活出自我的想法，心里却困惑得要死，到底什么才是自己？<br>人生有这么多可能，哪一个才是属于我的？<br>目标有这么多个，哪个背后才是最好的？<br>达成的方式有千百种，到底哪一条路确定能走通？<br>我的想法那么好，家人反对怎么办？<br>有人拼爹怎么办？房子怎么办？</p>
+<p>序P007<br>在这个定不下来的年代，修炼和创造人生反而成为一种最有效的策略—以不变应万变—如果你不知道这世界和你将要去哪儿，最好的策略是先全力炼出一种在哪儿都能活好的能力<br>，在有足够力量和眼界的时候，开始创造自己的人生！<br>今天的人生发展不应该像狙击手，而应该更像导弹—先尽快地发射出去，让自己适应环境的变化，让自己飞得又快又稳；然后每秒都用激光重新定位目标，调整弹道，最后发现目<br>标，一击即中。</p>
+<p>序P007-008<br>把修炼本身变成有趣的经历，当过程值回票价，结果也就不那么患得患失了。</p>
+<p>序P008-009<br>成长，长成为自己的样子<br>为什么是自己的样子？<br>“自己的样子”意味着每个人都有能力创造自己的生命意义，并且实现它。<br>为什么是成长？<br>“成长”意味着这并不是一个“发现”或者“碰见”的过程，成长是一段漫长、艰辛又神奇的经历，随着每个人起点、天赋和目标的不同，这过程会绽放出无数的可能。</p>
+<p>P018<br>只是强调重要性并不会使一件事情变得有趣，过度的强调会适得其反。有趣的事情不一定重要，所以学会让重要的事情变得有趣，才是关键。我们可以理解为什么即使每天告诉学<br>生和员工学习有多重要，每天告诉自己减肥和健康有多重要、改变有多重要，却很少有人回真正有动力去行动。理智带来的驱动力，永远没有情绪发动机—兴趣推动得有力。</p>
+<p>没有了兴趣老师的提醒预习，我们只好等生命任务来临再开始补课—我们在该恋爱的时候学习，在该学习的时候玩，在该工作的时候学习，在该结婚的时候又在工作，专注副业一<br>百年。</p>
+<p>P028<br>有趣是我们为未来做的准备，给未知的未来的存款。有趣是勇敢者的游戏：有趣的事情可能有用，也有可能无用；有趣是投资能力，而不是消费生活。有趣能让我们拥有越来越多<br>的可能，同时也越来越生机勃勃。</p>
+<p>有趣是种活着的、元气淋漓的状态，有趣证明我们还年轻，还在打开新的世界，还在长大，没有长老。</p>
+<p>P033-034<br>将自己的挑战程度和技能控制在图示的通道内，你就能一直保持自己的心流；挑战太高而能力不足会让你感到焦虑（如无法通关的游戏、难度太高的工作），而如果能力太高但挑<br>战太低，自会产生厌倦。所以如果你总能让自己停留在通道中，工作就会像游戏和逛街一样好玩。一开始要提高技能（A），一旦感到厌倦了，就马上提高挑战难度（B）,一直<br>到自己觉得焦虑，然后开始学习新的技能，如此循环。<br>这也是游戏设计的原理：在一开始的时候先让你容易升级，也很容易拿到点数，继而逐渐提高升级的难度，也让你掌握越来越难的操作技能。如果游戏设计得好，你会一直玩下去<br>。只要你对于自己的状态有觉察，同时有足够的挑战和技能学习，让工作像逛街一样其实不难。好的教练通过心流设定学习进度，好的电影通过心流设计剧情和镜头惊喜，好的老<br>师通过心流让课堂不知不觉地进行。而你能做的事情，则是找到自己的心流通道的宽度、斜度以及工作方式。</p>
+<p>P038<br>在每个队生活和自己不满足的背后，都是每个人成长的需求。</p>
+<p>P041<br>用物质填洞的最大的悲剧是：没有人的能力能跑赢欲望，总有一天，你填入了所有东西，却无力地发现，那个空洞还在。物质也许能带来短暂的一次次快乐，但绝非幸福。<br>你占据的东西，也在占据你。</p>
+<p>P42-43<br>席慕蓉《独白》：<br>在一回首间，才忽然发现，原来，我的一生的种种努力，不过只是为了周遭的人都对我满意而已。为了要博得他人的称许与微笑，我战战兢兢地将自己套入所有的模式、所有的桎<br>梏。走到途中，才忽然发现，我只剩下一副模糊的面目，和一条不能回头的路。</p>
+<p>你以为大家都喜欢和离不开你，其实是你离不开他们的喜爱。</p>
+<p>P043<br>“你看，这个地方没做好啊。”<br>“其实，我天生就不是做**的料！”<br>因为手臂上的一个小地方发炎，你不愿意面对，就把整条手臂都剁了下来。<br>你放弃了痛苦，但也放弃了自己。</p>
+<p>P048<br>我们总在自己最有把握的事情上花最多时间，却不太愿意待在最重要却把握不大的部分。</p>
+<p>不冒险其实是最大的冒险。要持续舒服的最好方式是让自己不舒服。</p>
+<p>P049<br>正如每一次新生都伴随着母亲的痛苦，每一种痛苦都是新生的启示，你要学会读懂它。</p>
+<p>P050<br>当成长比成功更重要、过程比结果更重要、价值比价格更重要时，你就拥有了看透却不被看破的心态。这种转变创造出一种更大的智慧：以入世的心态来玩，却以出世的心态来发<br>现价值。这格局孕育着更大的成长速度，成功是成长，失败也成长。成功能让你获得成就，失败能让你获得智慧，智慧又在孕育新的成功。</p>
+<p>P052<br>死亡是人类最好的礼物，当生命有了限度，每个人的价值就会浮现。</p>
+<p>P054<br>如果你觉得非得和别人的价值观一致，不然就活不下去，是因为你有个隐藏价值观叫“他人认同”。</p>
+<p>P056<br>当我们断言这个或那个具有“价值”时，我们是在表达我们的感情，而不是在表达一个即使我们的感情各不相同也仍然是可靠的事实。</p>
+<p>那些告诉你“你的价值观有问题”的人，其实在说：“你的价值观和我不一样。”价值观根本没有标准答案。好的生活，不是对不对，而是值不值。</p>
+<p>P064<br>我们需要明白路标并非终点，目标并非目的，月亮并非手指。我们可以走不同的路，达到最终的目的。</p>
+<p>P073<br>定见的所有修炼，都是为了有一天面对他人的期待时，淡淡地微笑，说一句：<br>谢谢，这很好，当是我有更重要的事情要做。</p>
+<p>P074-075<br>一个人总在推动身边的人去做某事，其实那是他内心未竟的愿望。</p>
+<p>P087<br>对于大部分工作，认真努力就有80分。以大部分人的努力程度之浅，他们根本没有做到80分。如果你只是希望通过找到天赋少付出些努力来超车，你就根本没有资格谈天赋。</p>
+<p>P100<br>当你全心投入，这过程就值回票价，回报只是个惊喜。</p>
+<p>P101<br>等待一个确定的机会才开始投入的人，机会永远等不及你。当下即道场，在任何时候做到极致，看似最笨，往往却是最聪明的。</p>
+<p>P104<br>如果你每一步都希望听到掌声，那么也许你只能永远在自己舒服的小天地玩。只有那些敢于走得更远的人，才知道自己到底有可能到哪儿。</p>
+<p>P105<br>你不能预先把点点滴滴穿在一起；唯有未来回顾时，你才会明白那些点点滴滴是如何穿在一起的。所以你得相信，你现在所体会的东西，将来多少会连接在一块儿。你得信任某个<br>东西，直觉也好，命运也好，生命也好，或者业力。这种做法从来没让我失望，也让我的整个人生不同起来。<br>--乔布斯在斯坦福大学的演讲</p>
+<p>P106<br>真正优秀的人，会认真做好每一件事情—因为他们知道即使老板不为认真发工资，未来也必会给认真发工资。<br>因为你知道有一天，连点成线，功不唐捐。</p>
+<p>P110<br>能整合自身的能力，叫竞争力；<br>能整合团队的能力，叫组织力；<br>能整合公司的能力，叫领导力；<br>能整合行业的能力，就是改变世界的能力。</p>
+<p>P129<br>每个渴望成为独立个体的人，都需要创建自己的定见。定见不诞生于别人的建议之中，而是在自己一次次的试错里。我们不是“找”到自己的样子，而是“成长”为自己的样子。</p>
+<p>后悔没试过和后悔做砸了的量级永远不一样，前者让你更懦弱，后者让你更智慧。</p>
+<p>P136<br>不要向现在的职业最高点方向走，要向未来的职业方向走；不要做现在能兑换价值的事情，要做未来能兑换价值的事情。</p>
+<p>P139<br>原来成功与能力不完全相关—成功不能证明你真的有价值，当龙卷风袭来，猪都会飞；不成功也不能证明你很糟糕，那只是下一个故事的开始—关键是走在路上的状态。我们慢慢<br>明白，成功就是用自己的节奏越走越近。</p>
+<p>P159<br>好的生命，是有事做，有人爱，有问题可想，有选择的自由。</p>
+<p>P162<br>立体的生涯让我们的生命有了更多可能—在更多领域找到那些能够改变的限制，而接纳那些不能改变的限制。我们身处现实的残酷、社会的不公平、人生的不平等，但依然能找出<br>自己的人生发展方向，活出自己更好的可能。</p>
+<p>P170<br>欣赏是总能绕过对方的缺陷，看到真正美丽的部分。</p>
+<p>P219<br>关于梦想，最可悲的不是你暂时没有，而是有一天出现的时候，你却发现自己完全够不着。</p>
+<p>如果你暂时找不到自己清晰的梦想，那么踏踏实实地做好现在这份职业，让自己努力向顶峰走去。在上山途中积累的所有一切都会在梦想出现时刻，转化为自我实现的力量。</p>
+<p>写给愤怒的你：<br>愤怒是好的， 愤怒意味着我们依然生机勃勃，依然没有被现实压倒屈服，依然愿意对世界感到不满，依然认为世界能比现在好。但愤怒也意味着我们把自己幸福的可能性托付于<br>对方。愤怒是因为自己的无力感，没有力量仅凭自己就让生活过好，愤怒同时意味着我们无法真正改变这个世界，因为我们从属于它。<br>比愤怒更加好的态度，我想是善待自己。如果这个世界无法温柔地善待你，你一定要记得温柔地善待自己。如果能够再进一步，就是悲悯。</p>
+<p>写给怕走弯路的你：<br>人生无直线，因为直线从不转弯。而转弯和改变，是人生必经之事。何况，你不走点弯路，怎么知道什么是直线呢？</p>
+<p>写给不完美的你：<br>专注于生命可能的部分，让那部分发挥价值，此生就已足够。<br>“让我有胸怀去接纳不可改变的，有勇气去改变可以改变的，并有智慧区分两者。”</p>
+<p>写给爱自由的你：<br>如果世界没有给我们选项的自由，但我们总有选择的自由。在你暂时无力为别人的错误负责的时候，最好的方式不是指责，这个世界都翻船，重要的是先把自己捞出来。总有人在<br>你生命力犯错，但是只有你在你的生命里负责。</p>
+<p>写给弯弯（他女儿）同样也送给你的话：<br>记得要活得精彩，活得认真，跟自己比。<br>愿你过上我从未看见与理解的生活。<br>愿你的生命有无限可能。</p>
+<p><img src="/uploads/ueditor/php/upload/image/20170817/1502930642.png" alt="你的生命有什么可能2.jpg"><br><img src="/uploads/ueditor/php/upload/image/20170817/1502930637.png" alt="你的生命有什么可能.jpg"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-08-14-IT-WSGI_FastCGI_CGI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-08-14-IT-WSGI_FastCGI_CGI/" itemprop="url">比较 WSGI、FastCGI 和 CGI 的异同</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-14T15:00:00+08:00">
+                2017-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>扩展阅读：<a href="https://www.biaodianfu.com/cgi-fastcgi-wsgi.html" target="_blank" rel="noopener">https://www.biaodianfu.com/cgi-fastcgi-wsgi.html</a> </strong><br><strong>  
+</strong><br><strong>CGI（Common Gateway Interface）</strong>  </p>
+<p>最初，CGI 是在 1993 年由美国国家超级电脑应用中心（NCSA）为 NCSA HTTPd Web 服务器开发的。</p>
+<p>这个 Web 服务器使用了 UNIX shell 环境变量 来保存从 Web 服务器传递出去的参数，然后生成一个运行 CGI<br>的独立进程。CGI的第一个实现是 Perl 写的[1]。</p>
+<p>效率低下：每一个连接 fork 一个进程处理。<br>功能十分有限：CGI只能收到一个请求，输出一个响应。很难在CGI体系去对Web请求的控制，例如：用户认证等。<br>正因为这些问题，在CGI诞生后的很长一段时间，各种Web<br>Server都还是采用API这种强绑定的方式去支持Web开发，其中Apache的mod_php就属于这种方式。所以后面就有大神提出了FastCGI标准。</p>
+<p><strong>FastCGI（Fast Common Gateway Interface）</strong></p>
+<p>FastCGI使用进程/线程池来处理一连串的请求。这些进程/线程由FastCGI服务器管理，而不是Web服务器。<br>当进来一个请求时，Web服务器把环境变量和这个页面请求通过一个Socket长连接传递给FastCGI进程。所以FastCGI有如下的优点：</p>
+<p>性能：通过进程/线程池规避了CGI开辟新的进程的开销。<br>兼容：非常容易改造现有CGI标准的程序。<br>语言无关：FastCGI是一套标准，理论上讲只要能进行标准输出（stdout）的语言都可以作为FastCGI标准的Web后端。<br>下面是一个简单FastCGI后端的伪代码<br>void main(void)<br>{<br>  int count = 0;<br>  while(FCGI_Accept() &gt;= 0) {<br>    printf(“Content-type: text/html\r\n”);<br>    printf(“\r\n”);<br>    printf(“Hello world!\r\n”);<br>    printf(“Request number %d.”, count++);<br>  }<br>  exit(0);<br>}</p>
+<p>Web Server隔离：FastCGI后端和Web Server运行在不同的进程中，后端的任何故障不会导致Web Server挂掉。<br>专利：没有Apache mod_php之类的私有API的知识产权问题。<br>扩展：FastCGI后端和Web Server通过Socket进行通信，两者可以分布式部署并方便进行横向扩展。<br>所以FastCGI一推出就几乎获得了所有主流Web Server的支持，Apache、Lighttpd、IIS、Cherokee……</p>
+<p>But，事情总是还有改进的余地的，FastCGI这套工作模式实际上没有什么太大缺陷，但是有些不安分的Python程序猿觉得，FastCGI标准下写异步的Web服务还是不太方便，如果能够收到请求后CGI端去处理，处理完毕后通过Callback回调来返回结果，那样岂不是很Coooool？！所以WSGI就被创造出来了：</p>
+<p><strong>WSGI（Web Server Gateway Interface）</strong></p>
+<p>Web服务器网关接口（Web Server Gateway Interface，缩写为WSGI）是为Python语言定义的Web服务器和Web应用程序或框架之间的一种简单而通用的接口。</p>
+<p>当Web Server收到一个请求后，可以通过Socket把环境变量和一个Callback回调函数传给后端Web应用，Web应用在完成页面组装后通过Call back把内容返回给Web Server。这样做的优点有很多：</p>
+<p>异步化，通过Callback将Web请求的工作拆解开，可以很方便的在一个线程空间里同时处理多个Web请求。<br>方便进行各种负载均衡和请求转发，不会造成后端Web应用阻塞。<br>Web开发有3P：Perl、Python、PHP。Perl是1987年发布的，Python是1989年，PHP是1995年。CGI标准提出的时候正是Perl如日中天的时候，所以CGI的提出当时也是主要为了解决Perl作为Web编程语言的需求。熟悉正则（regex）的程序员可能知道正则的事实标准叫做pcre（Perl兼容正则表达式，Perl Compatible RegularExpressions），这也从一个侧面体现了Perl作为一个古老的语言在当时对各种业界标准的影响。</p>
+<p>作者：auxten<br>链接：<a href="https://zhuanlan.zhihu.com/p/20054757" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/20054757</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-08-11-OpenSource-SaltReturners/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-08-11-OpenSource-SaltReturners/" itemprop="url">Saltstack Returners模块研究&Salt Master外部Job Cache配置</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-11T15:00:00+08:00">
+                2017-08-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Salt Master外部Job Cache配置<br>Posted on 2014-11-24 in kb</p>
+<p>原文出处: <a href="http://pengyao.org/saltstack-master-external-job-cache.html" target="_blank" rel="noopener">http://pengyao.org/saltstack-master-external-job-cache.html</a> | <a href="http://www.saltstack.cn/kb/saltstack_master_retuner_over_event_system/#saltstack_master_retuner_over_event_system" target="_blank" rel="noopener">http://www.saltstack.cn/kb/saltstack_master_retuner_over_event_system/#saltstack_master_retuner_over_event_system</a><br>作者: pengyao<br>SaltStack 2014.7之前, Minion端的执行结果想存储在外部系统中, 需要借助returner进行配置.<br>而returner的工作方式是由minion端直接连接对应的returner, 在分布式环境中由于网络等限制,该方式并不友好.</p>
+<p>而在Master , Job Cache会以文件的形式存储在Master本地磁盘, 对第三方系统并不友好. 基于此, 之前有分享过 基于Salt Event系统构建Master端returner , 需要启动另外一个进程, 进行监听Salt Event接口, 并将结果存储在第三方系统中.刚好看到2014.7.0中master端增加了 master_job_cache参数, 可以直接外放Job Cache, 就做个测试, 测试下这个功能.</p>
+<p>环境说明</p>
+<p>Salt Version: 2014.7.0<br>OS: CentOS 6.5 X86_64 (with EPEL)<br>本次测试结果将存储在MySQL中, 为了方便测试, 已在Master本地部署了MySQL Server<br>开工</p>
+<p>前置配置</p>
+<p>```shell<br>安装MySQLdb依赖:</p>
+<p>yum -y install MySQL-python<br>配置本次测试需要使用的数据库及用户:</p>
+<h1 id="创建salt数据库"><a href="#创建salt数据库" class="headerlink" title="创建salt数据库"></a>创建salt数据库</h1><p>mysql -e ‘create database salt’</p>
+<h1 id="创建用于连接salt数据库的用户"><a href="#创建用于连接salt数据库的用户" class="headerlink" title="创建用于连接salt数据库的用户"></a>创建用于连接salt数据库的用户</h1><p>mysql -e ‘“grant all on salt.* to salt@localhost identified by “salt_pass’;</p>
+<h1 id="将数据库配置添加至master配置文件中"><a href="#将数据库配置添加至master配置文件中" class="headerlink" title="将数据库配置添加至master配置文件中"></a>将数据库配置添加至master配置文件中</h1><p> mysql.host: ‘localhost’<br> mysql.user: ‘root’<br> mysql.pass: ‘pass’<br>    mysql.db: ‘salt’<br>    mysql.port: 3306<br>    master_job_cache: mysql //省去配置minion</p>
+<p>创建用于存储Job的数据库表结构:</p>
+<p>USE <code>salt</code>;</p>
+<p>--<br>-- Table structure for table <code>jids</code><br>--</p>
+<p>DROP TABLE IF EXISTS <code>jids</code>;<br>CREATE TABLE <code>jids</code> (<br>  <code>jid</code> varchar(255) NOT NULL,<br>  <code>load</code> mediumtext NOT NULL,<br>  UNIQUE KEY <code>jid</code> (<code>jid</code>)<br>) ENGINE=InnoDB DEFAULT CHARSET=utf8;</p>
+<p>--<br>-- Table structure for table <code>salt_returns</code><br>--</p>
+<p>DROP TABLE IF EXISTS <code>salt_returns</code>;<br>CREATE TABLE <code>salt_returns</code> (<br>  <code>fun</code> varchar(50) NOT NULL,<br>  <code>jid</code> varchar(255) NOT NULL,<br>  <code>return</code> mediumtext NOT NULL,<br>  <code>id</code> varchar(255) NOT NULL,<br>  <code>success</code> varchar(10) NOT NULL,<br>  <code>full_ret</code> mediumtext NOT NULL,<br>  <code>alter_time</code> TIMESTAMP DEFAULT CURRENT_TIMESTAMP,<br>  KEY <code>id</code> (<code>id</code>),<br>  KEY <code>jid</code> (<code>jid</code>),<br>  KEY <code>fun</code> (<code>fun</code>)<br>) ENGINE=InnoDB DEFAULT CHARSET=utf8;<br>配置Master</p>
+<p>将MySQL连接权限等信息添加到Salt Master配置文件中:</p>
+<p>echo -e “\n\n# MySQL\nmysql.host: ‘localhost’\nmysql.user: ‘salt’\nmysql.pass:<br>‘salt_pass’\nmysql.db: ‘salt’\nmysql.port: 3306” &gt;&gt; /etc/salt/master<br>配置master_job_cache选项, 以使将Job结果存储在MySQL中:</p>
+<p>echo -e “\n\n# Master Job Cache\nmaster_job_cache: mysql” &gt;&gt; /etc/salt/master<br>重启Salt Master, 以使配置生效:</p>
+<p>service salt-master restart<br>测试</p>
+<p>对主机执行test.ping:</p>
+<p>salt ‘*’ test.ping -v<br>输出结果:</p>
+<p>Executing job with jid 20141120060202308159<br>-——————————————</p>
+<p>minion-01.example.com:<br>    True<br>查询MySQL jids表数据:</p>
+<p>mysql salt -e ‘select * from jids\G’<br>输出结果:</p>
+<p><strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong> 1. row <strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong><br>jid: 20141120060202308159<br>load: {“tgt_type”: “glob”, “jid”: “20141120060202308159”, “cmd”: “publish”,<br>“tgt”: “*”, “kwargs”: {“show_timeout”: false, “show_jid”: false}, “ret”: “”,<br>“user”: “sudo_vagrant”, “arg”: [], “fun”: “test.ping”}<br>查询MySQL salt_returns表数据:</p>
+<p>mysql salt -e ‘select * from salt_returns\G’<br>输出结果:</p>
+<p><strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong> 1. row <strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong><br>fun: test.ping<br>jid: 20141120060202308159<br>return: true<br>id: minion-01.example.com<br>success: 1<br>full_ret: {“fun_args”: [], “jid”: “20141120060202308159”, “return”: true,<br>“retcode”: 0, “success”: true, “cmd”: “_return”, “_stamp”:<br>“2014-11-20T06:02:02.533850”, “fun”: “test.ping”, “id”:<br>“minion-01.example.com”}<br>alter_time: 2014-11-20 06:02:02<br>Job执行结果已经按照之前的配置存储到了MySQL中, 达到预期效果</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-08-11-Book-IntrPhilosophy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-08-11-Book-IntrPhilosophy/" itemprop="url">哲学的故事 - （美）威尔·杜兰特</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-11T08:00:00+08:00">
+                2017-08-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这是一本关于西方哲学的入门书籍，讲述了西方哲学的变迁与继承，可以说是一本西方哲学的编年史。作者以他一贯的朴素、易懂的语言讲述着那些晦涩的理论，予人以启迪和清醒，给人留下深刻难忘的印象。</p>
+<p>当我们学会了怀疑，尤其是怀疑自己的信念和原则时，哲学便产生了</p>
+<p>在这个世界上，只有三件事值得人们去奋斗。这就是正义、真理和美。</p>
+<p>培根，“有一技之长的人蔑视学问，无知的人则仰慕学问，只有聪明的人才善于运用学问，学问本身并不能教人怎样运用它，这种运用学问的智慧只有通过观察才能获得，它是在学问之外和学问之上的。”</p>
+<p>这一位位非常有名的哲学家带给人类的感觉也是不同的，有些是乐观的，有些是悲观的；有些是封建的，有些是开放的；有些是信仰佛神的，有些则是无神论者。他们的认识世界，认识社会的观点都不一样，但都存在着意义，对于某些人来说，亚里士多德的理论更适于他的人生，但对于另一些人来说，柏拉图的思想才更了解他自己内心的想法，每个人都是不一样的，所以哲学也并不存在对与错。而这些有名的哲学家也给了我们一定的启示和一定的信心和力量，所以，让我打开知识的大门，去寻觅和哲理一样美妙的知识吧！</p>
+<p>哲学的魅力，琳琅满目，光华深邃，我们必须更多的琢磨和思考。在这些大师们面前，我们肃穆，我们敬畏，我们仰望，我们沉思，以冀灵魂的洗练与升华。</p>
 
           
         
@@ -1581,7 +1689,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1626,7 +1734,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">136</span>
+                <span class="site-state-item-count">147</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

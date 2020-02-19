@@ -274,7 +274,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-20-Python-difflib/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-04-OpenSource-SaltState/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -293,7 +293,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-06-20-Python-difflib/" itemprop="url">difflib文本内容对比 - Python自动化运维</a></h2>
+                <a class="post-title-link" href="/2017-07-04-OpenSource-SaltState/" itemprop="url">Saltstack之state配置管理</a></h2>
         
 
         <div class="post-meta">
@@ -305,8 +305,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-20T08:00:00+08:00">
-                2017-06-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-04T09:00:00+08:00">
+                2017-07-04
               </time>
             
 
@@ -342,90 +342,503 @@
       
         
           
-            <ol>
+            <h1 id="state模块简介"><a href="#state模块简介" class="headerlink" title="state模块简介"></a><strong>state模块简介</strong></h1><p><strong>state功能</strong><br>state是Saltstack最核心的功能，通过预先定制好的sls（salt state file）文件对被控制主机进行状态管理，支持包括程序包（pkg）、<br>文件（file）、网络配置（network）、系统服务（service）、系统用户（user）等。</p>
+<p><strong>state的定义</strong><br>state是通过sls文件进行描述的，支持YAML语法，定义规则如下：</p>
+<p> $ID: #定义state名称，通常采用与描述对象保存一致的方法，如apache、nginx等<br>$state: #须管理对象的类型</p>
+<pre><code>- $state: states #定制对象的状态
+</code></pre><p>ache: #state名称：apache<br>pkg: #管理对象类型：pkg，进行软件安装（yum、apt）<br> installed #pkg要执行的方法：install，如未安装就进行安装<br>      service: #管理对象类型：service，管理系统守护进程</p>
+<pre><code>   - running #service要执行的方法：running，如未运行就进行启动
+- require: #关键字require，确保apache服务只有在成功安装软件包后才会启动
+  - pkg: apache
+</code></pre><p>注：—关键字说明</p>
+<pre><code>require：在运行此state之前，先运行依赖的state关系检查，可配置多个state依赖对象；
+watch：在检查摸个state发生变化时运行此模块。
+</code></pre><p><strong>state的使用</strong><br>state的入口文件与pillar一样，文件名都是top.sls，但state要求sls文件必须存放在Saltstack<br>base定义的目录下（默认为/srv/salt）。<br>state描述配置<em>.sls支持jinjia模板、grains及pillar引用等，在state的逻辑层次定义完成后，再通过salt ‘</em>‘<br>state.highstate执行生效。</p>
+<p><em>结合grains与pillar，实现一个根据不同操作系统类型部署apache环境的任务*</em>  </p>
+<p><strong>定义pillar</strong><br>【/srv/pillar/top.sls】</p>
+<pre><code>base:
+</code></pre><p>   ‘*’:</p>
+<pre><code>- apache
+</code></pre><p>ls中引用二级配置有两种方式，一种是直接引用，如本例中直接引用apache.sls；另一种是创建apache目录，再引用目录中的init.sls<br>果是一样的。</p>
+<p>rv/pillar/apache.sls】或【/srv/pillar/apache/init.sls】</p>
+<p> pkgs:<br> { % if grains[‘os_family’] == ‘Debian’ % }<br>      apache: apache2<br>      { % elif grains[‘os_family’] == ‘RedHat’ % }<br>      apache: httpd<br>      { % elif grains[‘os’] == ‘Arch’ % }<br>      apache: apache<br>    { % endif % }</p>
+<pre><code>salt &apos;*&apos; saltutil.refresh_pillar #刷新pillar
+salt &apos;*&apos; pillar.data pkgs #获取pkgs信息
+</code></pre><p>ate**<br>salt/top.sls】</p>
+<pre><code>base:
+  &apos;*&apos;:
+ - apache
+</code></pre><p>【/srv/salt/apache.sls】或【/srv/salt/apache/init.sls】</p>
+<pre><code>apache:
+  pkg:
+    - installed
+    - name: {{ pillar['pkgs']['apache'] }} #pillar[&apos;pkgs&apos;][&apos;apache&apos;]引用的是pillar定义的数据
+  service.running:
+    - name: {{ pillar['pkgs']['apache'] }}
+    - require:
+      - pkg: {{ pillar['pkgs']['apache'] }}
+</code></pre><p><strong>执行state</strong></p>
+<pre><code>salt &apos;*&apos; state.highstate
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-03-Python-fabric/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-07-03-Python-fabric/" itemprop="url">fabric实现远程操作和部署 - Python自动化运维</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-03T08:00:00+08:00">
+                2017-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>fabric模块是在paramiko基础上又做了一层封装，操作起来更方便。主要用于多台主机批量执行任务。Fabric用于简化使用SSH的应用程序部署或系统管<br>理任务。它提供的操作包括：执行本地或远程shell命令，上传/下载文件，以及其他辅助功能，如提示用户输入、中止执行等。与前几个包的比较:</p>
+<p>paramiko：方便嵌套系统平台中，擅长远程执行命令，文件传输。</p>
+<p>fabric：方便与shell脚本结合，擅长批量部署，任务管理。</p>
+<p>pexpect：擅长自动交互，比如ssh、ftp、telnet。</p>
+<ol>
 <li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
 <li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
-<li>安装第三方库: pip install difflib</li>
+<li>安装第三方库: pip install fabric</li>
+</ol>
+<p>Examples:</p>
+<p>```python </p>
+<p> #!/usr/bin/env python</p>
+<p> from fabric.api import *</p>
+<p> from fabric.context_managers import *</p>
+<p> from fabric.contrib.console import confirm</p>
+<p>v.user=’root’</p>
+<p> env.gateway=’192.168.1.23’</p>
+<p> env.hosts=[‘192.168.1.21’,’192.168.1.22’]</p>
+<p> env.passwords = {</p>
+<pre><code>&apos;root@192.168.1.21:22&apos;: &apos;SKJh935yft#&apos;,
+</code></pre><p>  ‘root@192.168.1.22:22’: ‘SKJh935yft#’,</p>
+<p>  ‘root@192.168.1.23:22’: ‘KJSD9325hgs’</p>
+<p> }</p>
+<p>h=”/home/install/lnmp0.9.tar.gz”</p>
+<p>/tmp/install”</p>
+<p>ask</p>
+<pre><code>def put_task():
+
+    run(&quot;mkdir -p /tmp/install&quot;)
+
+    with settings(warn_only=True):
+
+        result = put(lpackpath, rpackpath)
+
+    if result.failed and not confirm(&quot;put file failed, Continue[Y/N]?&quot;):
+
+        abort(&quot;Aborting file put task!&quot;)
+
+
+
+@task
+
+def run_task():
+
+    with cd(&quot;/tmp/install&quot;):
+
+        run(&quot;tar -zxvf lnmp0.9.tar.gz&quot;)
+
+        with cd(&quot;lnmp0.9/&quot;):
+
+            run(&quot;./centos.sh&quot;)
+
+
+
+@task
+
+def go():
+
+    put_task()
+
+    run_task()
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-30-Python-paramiko/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-06-30-Python-paramiko/" itemprop="url">paramiko远程连接ssh2 - Python自动化运维</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-30T08:00:00+08:00">
+                2017-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>paramiko是用python语言写的一个模块，遵循SSH2协议，支持以加密和认证的方式，进行远程服务器的连接。</p>
+<p>由于使用的是python这样的能够跨平台运行的语言，所以所有python支持的平台，如Linux, Solaris, BSD, MacOS X,Windows等，paramiko都可以支持，因此，如果需要使用SSH从一个平台连接到另外一个平台，进行一系列的操作时，paramiko是最佳工具之一。  </p>
+<ol>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install paramiko</li>
 </ol>
 <p>Examples:</p>
 <p>```python</p>
-<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> #!/usr/bin/python</p>
-<p> import difflib</p>
-<p> text1 = “””text1:</p>
-<p> This module provides classes and functions for comparing sequences.</p>
-<p> including HTML and context and unified diffs.</p>
-<p> difflib document v7.4</p>
-<p> add string</p>
-<p> “””</p>
-<p> text1_lines = text1.splitlines()</p>
-<p> text2 = “””text2:</p>
-<p> This module provides classes and functions for Comparing sequences.</p>
-<p> including HTML and context and unified diffs.</p>
-<p> difflib document v7.5”””</p>
-<p> text2_lines = text2.splitlines()</p>
-<p> d = difflib.Differ()</p>
-<p>ff = d.compare(text1_lines, text2_lines)</p>
-<p>n’.join(list(diff))</p>
-<p>比较2个文件的不同之处):</p>
-<h1 id="–-coding-utf-8-–-1"><a href="#–-coding-utf-8-–-1" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p>/usr/bin/python</p>
-<p> import difflib</p>
-<p> import sys</p>
-<p> try:</p>
-<pre><code>    textfile1=sys.argv[1]
+<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> #!/usr/bin/env python</p>
+<p> import paramiko</p>
+<p> hostname=’10.1.134.128’</p>
+<p> username=’username’</p>
+<p> password=’password’</p>
+<p> #paramiko.util.log_to_file(‘syslogin.log’)</p>
+<pre><code>ssh=paramiko.SSHClient()
 
-    textfile2=sys.argv[2]
+#ssh.load_system_host_keys()
 
-except Exception,e:
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-    print &quot;Error:&quot;+str(e)
+ssh.connect(hostname=hostname,username=username,password=password)
 
-    print &quot;Usage: simple3.py filename1 filename2&quot;
+stdin,stdout,stderr=ssh.exec_command(&apos;free -m&apos;)
 
-    sys.exit()
+print stdout.read()
 
+ssh.close()
+</code></pre>
+          
+        
+      
+    </div>
 
+    <div>
+      
+    </div>
 
-def readfile(filename):
+    <div>
+      
+    </div>
 
-    try:
+    <div>
+      
+    </div>
 
-        fileHandle = open (filename, &apos;rb&apos; ) 
+    <footer class="post-footer">
+      
 
-        text=fileHandle.read().splitlines()
+      
 
-        fileHandle.close()
+      
 
-        return text
-
-    except IOError as error:
-
-       print(&apos;Read file Error:&apos;+str(error))
-
-       sys.exit()
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
 
 
+    
+      
 
-if textfile1==&quot;&quot; or textfile2==&quot;&quot;:
+  
 
-    print &quot;Usage: simple3.py filename1 filename2&quot;
+  
+  
+  
 
-    sys.exit()
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-29-Python-pexpect/">
 
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
 
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
 
+    
+      <header class="post-header">
 
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-06-29-Python-pexpect/" itemprop="url">pexpect命令行交互(Linux Only) - Python自动化运维</a></h2>
+        
 
-text1_lines = readfile(textfile1) 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-29T08:00:00+08:00">
+                2017-06-29
+              </time>
+            
 
-text2_lines = readfile(textfile2) 
+            
 
+            
+          </span>
 
+          
 
-d = difflib.HtmlDiff()
+          
+            
+          
 
-print d.make_file(text1_lines, text2_lines)
-</code></pre><p>效果图:</p>
-<p><img src="/uploads/ueditor/php/upload/image/20170619/1497861412.png" alt="blob.png"></p>
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Pexpect是一个纯Python模块,可以用来和ssh、ftp、passwd、telnet等命令行命令进行交互使用</p>
+<ol>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install pexpect</li>
+</ol>
+<p>Examples:</p>
+<p>```python<br> from pexpect import pxssh</p>
+<p> import getpass</p>
+<p>y:</p>
+<p>  s = pxssh.pxssh()</p>
+<p>  hostname = raw_input(‘hostname: ‘)</p>
+<p>  username = rawsername: ‘)</p>
+<p>  password = getpass.getpass(‘password: ‘)</p>
+<p>  s.login (hostname, username, password)</p>
+<p>  s.sendline (‘uptime’)  # run a command</p>
+<pre><code>s.prompt()             # match the prompt
+</code></pre><p>  print s.before         # print everything before the prompt.</p>
+<pre><code>    s.sendline (&apos;ls -l&apos;)
+
+    s.prompt()
+
+    print s.before
+
+    s.sendline (&apos;df&apos;)
+
+    s.prompt()
+
+    print s.before
+
+    s.logout()
+
+except pxssh.ExceptionPxssh, e:
+
+    print &quot;pxssh failed on login.&quot;
+
+    print str(e)
+</code></pre><p>Hacker Example: 用Pxssh暴力破解SSH密码:<a href="http://book.51cto.com/art/201601/504626.htm" target="_blank" rel="noopener">http://book.51cto.com/art/201601/504626.htm</a></p>
 
           
         
@@ -469,7 +882,7 @@ print d.make_file(text1_lines, text2_lines)
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-19-Python-IPy/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-28-Python-xlsx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -488,7 +901,7 @@ print d.make_file(text1_lines, text2_lines)
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-06-19-Python-IPy/" itemprop="url">IPy - Python自动化运维</a></h2>
+                <a class="post-title-link" href="/2017-06-28-Python-xlsx/" itemprop="url">xlsxWriter构造xlsx文件 - Python自动化运维</a></h2>
         
 
         <div class="post-meta">
@@ -500,8 +913,605 @@ print d.make_file(text1_lines, text2_lines)
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-19T17:00:00+08:00">
-                2017-06-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-28T08:00:00+08:00">
+                2017-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>xlsxWriter支持多种excle功能；与excel完美兼容；写大文件，速度快且只占用很小的内存空间, 不支持读或者改现有的excel文件</p>
+<ol>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install xlsxwriter</li>
+</ol>
+<p>Examples:</p>
+<p>```python</p>
+<p> #coding: utf-8</p>
+<p> import xlsxwriter</p>
+<p> workbook = xlsxwriter.Workbook(‘E:\python\pyauto\3\XlsxWriter\chart.xlsx’)</p>
+<p> worksheet = workbook.add_worksheet()</p>
+<p>art = workbook.add_chart({‘type’: ‘column’})</p>
+<p>tle = [u’业务名称’,u’星期一’,u’星期二’,u’星期三’,u’星期四’,u’星期五’,u’星期六’,u’星期日’,u’平均流量’]</p>
+<p> buname= [u’业务官网’,u’新闻中心’,u’购物频道’,u’体育频道’,u’亲子频道’]</p>
+<p> data = [</p>
+<pre><code>[150,152,158,149,155,145,148],
+
+[89,88,95,93,98,100,99],
+
+[201,200,198,175,170,198,195],
+
+[75,77,78,78,74,70,79],
+
+[88,85,87,90,93,88,84],
+</code></pre><p> ]</p>
+<p> format=workbook.add_format()</p>
+<p> format.set_border(1)</p>
+<p>rmat_title=workbook.add_format()</p>
+<p>rmat_title.set_border(1)</p>
+<p>itle.set_color(‘#cccccc’)</p>
+<p>itle.set_align(‘center’)</p>
+<p> format_title.set_bold()</p>
+<p> format_ave=workbook.add_format()</p>
+<p> format_ave.set_border(1)</p>
+<p> format_ave.set_num_format(‘0.00’)</p>
+<pre><code>worksheet.write_row(&apos;A1&apos;,title,format_title)
+
+worksheet.write_column(&apos;A2&apos;, buname,format)
+
+worksheet.write_row(&apos;B2&apos;, data[0],format)
+
+worksheet.write_row(&apos;B3&apos;, data[1],format)
+
+worksheet.write_row(&apos;B4&apos;, data[2],format)
+
+worksheet.write_row(&apos;B5&apos;, data[3],format)
+
+worksheet.write_row(&apos;B6&apos;, data[4],format)
+
+# Insert an image.
+
+worksheet.insert_image(&apos;B25&apos;, &apos;E:\\python\\pyauto\\3\\XlsxWriter\\img\\python-logo.png&apos;)
+
+
+
+def chart_series(cur_row):
+
+    worksheet.write_formula(&apos;I&apos;+cur_row, \
+
+     &apos;=AVERAGE(B&apos;+cur_row+&apos;:H&apos;+cur_row+&apos;)&apos;,format_ave)
+
+    chart.add_series({
+
+        &apos;categories&apos;: &apos;=Sheet1!$B$1:$H$1&apos;,
+
+        &apos;values&apos;:     &apos;=Sheet1!$B$&apos;+cur_row+&apos;:$H$&apos;+cur_row,
+
+        &apos;line&apos;:       {&apos;color&apos;: &apos;black&apos;},
+
+        &apos;name&apos;:    &apos;=Sheet1!$A$&apos;+cur_row,
+
+    })
+
+
+
+for row in range(2, 7):
+
+    chart_series(str(row))
+
+
+
+#chart.set_table()
+
+#chart.set_style(30)
+
+chart.set_size({&apos;width&apos;: 577, &apos;height&apos;: 287})
+
+chart.set_title ({&apos;name&apos;: u&apos;业务流量周报图表&apos;})
+
+chart.set_y_axis({&apos;name&apos;: &apos;Mb/s&apos;})
+
+
+
+worksheet.insert_chart(&apos;A8&apos;, chart)
+
+workbook.close()
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-27-Python-scapy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-06-27-Python-scapy/" itemprop="url">scapy交互式数据包处理 - Python自动化运维</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-27T08:00:00+08:00">
+                2017-06-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>scapy是python写的一个功能强大的交互式数据包处理程序，可用来发送、嗅探、解析和伪造网络数据包，常常被用到网络攻击和测试中。它可以代替hping,arpspoof.ARP SK,arping,p0f,甚至是部分nmap,Tcpdump和tshark。</p>
+<ol>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install scapy</li>
+</ol>
+<p>Examples:</p>
+<p>```python</p>
+<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> import os,sys,time,subprocess</p>
+<p> import warnings,logging</p>
+<p> warnings.filterwarnings(“ignore”, category=DeprecationWarning)</p>
+<p> logging.getLogger(“scapy.runtime”).setLevel(logging.ERROR)</p>
+<p>om scapy.all import traceroute</p>
+<p>mains = raw_input(‘Please input one or more IP/domain: ‘)</p>
+<p> target =  domains.split(‘ ‘)</p>
+<pre><code>dport = [80]
+
+if len(target) &gt;= 1 and target[0]!=&apos;&apos;:
+
+    res,unans = traceroute(target,dport=dport,retry=-2)
+
+    res.graph(target=&quot;&gt; test.svg&quot;)
+
+    time.sleep(1)
+
+    subprocess.Popen(&quot;/usr/bin/convert test.svg test.png&quot;, shell=True)
+
+else:
+
+    print &quot;IP/domain number of errors,exit&quot;
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-26-Python-rrdtool/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-06-26-Python-rrdtool/" itemprop="url">rrdtool绘制趋势图 - Python自动化运维</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-26T08:00:00+08:00">
+                2017-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>rrdtool（round robin database）工具为环状数据库的存储格式，round robin是一种处理定量数据以及当前元素指针的技术。rrd<br>tool主要用来跟踪对象的变化情况，生成这些变化的走势图，比如业务的访问流量、系统性能、磁盘利用率等趋势图，很多流行监控平台都使用到rrdtool，比较有名<br>的为Cacti、Ganglia、Monitorix等。更多rrdtool介绍见官网<a href="http://oss.oetiker.ch/rrdtool/。rrdtoo" target="_blank" rel="noopener">http://oss.oetiker.ch/rrdtool/。rrdtoo</a><br>l是一个复杂的工具，涉及较多参数概念，本节主要通过Python的rrdtool模块对rrdtool的几个常用方法进行封装，包括create、fetch、gr<br>aph、info、update等方法，本节对rrdtool的基本知识不展开说明，重点放在Python rrdtool模块的常用方法使用介绍上。</p>
+<ol>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install rrdtool</li>
+</ol>
+<p>Examples:</p>
+<p>第一步　采用create方法创建rrd数据库，参数指定了一个rrd文件、更新频率setp、起始时间–<br>start、数据源DS、数据源类型DST、数据周期定义RRA等，详细源码如下：【/root/xls/create.py】</p>
+<p>```python</p>
+<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> #!/usr/bin/python  </p>
+<p> import rrdtool  </p>
+<p> import time  </p>
+<p>r_time=str(int(time.time()))    #获取当前Linux时间戳作为rrd起始时间  </p>
+<p> #数据写频率–step为300秒(即5分钟一个数据点)  </p>
+<p>d=rrdtool.create(‘Flow.rrd’,’–step’,’300’,’–start’,cur_time,  </p>
+<p>义数据源eth1_in(入流量)、eth1_out(出流量)；类型都为COUNTER(递增)；600秒为心跳值，  </p>
+<p>含义是600秒没有收到值，则会用UNKNOWN代替；0为最小值；最大值用U代替，表示不确定  </p>
+<p>‘DS:eth1_in:COUNTER:600:0:U’,  </p>
+<p>‘DS:eth1_out:COUNTER:600:0:U’,  </p>
+<p>#RRA定义格式为[RRA:CF:xff:steps:rows]，CF定义了AVERAGE、MAX、MIN三种数据合并方式  </p>
+<p>#xff定义为0.5，表示一个CDP中的PDP值如超过一半值为UNKNOWN，则该CDP的值就被标为UNKNOWN  </p>
+<p>#下列前4个RRA的定义说明如下，其他定义与AVERAGE方式相似，区别是存最大值与最小值  </p>
+<h1 id="每隔5分钟-1-300秒-存一次数据的平均值-存600笔，即2-08天"><a href="#每隔5分钟-1-300秒-存一次数据的平均值-存600笔，即2-08天" class="headerlink" title="每隔5分钟(1*300秒)存一次数据的平均值,存600笔，即2.08天"></a>每隔5分钟(1*300秒)存一次数据的平均值,存600笔，即2.08天</h1><pre><code># 每隔30分钟(6*300秒)存一次数据的平均值,存700笔，即14.58天（2周）  
+
+# 每隔2小时(24*300秒)存一次数据的平均值,存775笔，即64.58天（2个月）  
+
+# 每隔24小时(288*300秒)存一次数据的平均值,存797笔，即797天(2年)  
+
+&apos;RRA:AVERAGE:0.5:1:600&apos;,  
+
+&apos;RRA:AVERAGE:0.5:6:700&apos;,  
+</code></pre><p>   ‘RRA:AVERAGE:0.5:24:775’,  </p>
+<p>   ‘RRA:AVERAGE:0.5:288:797’,  </p>
+<p>   ‘RRA:MAX:0.5:1:600’,  </p>
+<p>   ‘RRA:MAX:0.5:6:700’,  </p>
+<p>   ‘RRA:MAX:0.5:24:775’,  </p>
+<p>   ‘RRA:MAX:0.5:444:797’,  </p>
+<p>   ‘RRA:MIN:0.5:1:600’,  </p>
+<pre><code>&apos;RRA:MIN:0.5:6:700&apos;,  
+
+&apos;RRA:MIN:0.5:24:775&apos;,  
+
+&apos;RRA:MIN:0.5:444:797&apos;)  
+</code></pre><p> if rrd:  </p>
+<pre><code>print rrdtool.error()
+</code></pre><p>　采用updatev方法更新rrd数据库，参数指定了当前的Linux时间戳，以及指定eth1_in、eth1_out值（当前网卡的出入流量），网卡流量<br>过psutil模块来获取，如psutil.network_io_counters()[1]为入流量，关于psutil模块的介绍见第1.1。详细源码如下<br>root/xls/update.py】</p>
+<p>加入crontab，并配置5分钟作为采集频率，crontab配置如下：<em>/5 </em> <em> </em> * /usr/bin/python<br>ot/xls/update.py &gt; /dev/null 2&gt;&amp;1</p>
+<h1 id="–-coding-utf-8-–-1"><a href="#–-coding-utf-8-–-1" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> #!/usr/bin/python  </p>
+<p> import rrdtool  </p>
+<p> import time,psutil  </p>
+<p> total_input_trwork_io_counters()[1]    #获取网卡入流量  </p>
+<p> total_output_traffic = psutil.network_io_counters()[0] #获取网卡出流量  </p>
+<p> starttime=int(time.time())    #获取当前Linux时间戳  </p>
+<p> #将获取到的三个数据作为updatev的参数，返回{‘return_value’: 0L}则说明更新成功，反  </p>
+<p> update=rrdtool.updatev(‘/root/xls/Flow.rrd’,’%s:%s:%s’ % r(starttime),str(total_input_traffic),str(total_output_traffic)))  </p>
+<p> print update</p>
+<p>第三步　采用graph方法绘制图表，此示例中关键参数使用了–x-grid定义X轴网格刻度；DEF指定数据源；使用CDEF合并数据；HRULE绘制水平线（告<br>警线）；GPRINT输出最大值、最小值、平均值等。详细源码如下：【/root/xls/graph.py】</p>
+<pre><code># -- coding: utf-8 --
+
+#!/usr/bin/python  
+
+import rrdtool  
+
+import time  
+
+#定义图表上方大标题  
+
+title=&quot;Server network  traffic flow (&quot;+time.strftime(&apos;%Y-%m-%d&apos;,time.localtime(time.time()))+&quot;)&quot;  
+
+#重点解释&quot;--x-grid&quot;,&quot;MINUTE:12:HOUR:1:HOUR:1:0:%H&quot;参数的作用（从左往右进行分解）  
+
+&quot;MINUTE:12&quot; #表示控制每隔12分钟放置一根次要格线  
+
+&quot;HOUR:1&quot;  #表示控制每隔1小时放置一根主要格线  
+
+&quot;HOUR:1&quot; # 表示控制1个小时输出一个label标签  
+
+&quot;0:%H&quot;  #0表示数字对齐格线，%H表示标签以小时显示  
+
+rrdtool.graph( &quot;Flow.png&quot;, &quot;--start&quot;, &quot;-1d&quot;,&quot;--vertical-label=Bytes/s&quot;,
+
+&quot;--x-grid&quot;,&quot;MINUTE:12:HOUR:1:HOUR:1:0:%H&quot;,
+
+ &quot;--width&quot;,&quot;650&quot;,&quot;--height&quot;,&quot;230&quot;,&quot;--title&quot;,title,  
+
+ &quot;DEF:inoctets=Flow.rrd:eth1_in:AVERAGE&quot;,    #指定网卡入流量数据源DS及CF  
+
+ &quot;DEF:outoctets=Flow.rrd:eth1_out:AVERAGE&quot;,    #指定网卡出流量数据源DS及CF  
+
+ &quot;CDEF:total=inoctets,outoctets,+&quot;,    #通过CDEF合并网卡出入流量，得出总流量total  
+
+
+
+&quot;LINE1:total#FF8833:Total traffic&quot;,    #以线条方式绘制总流量  
+
+ &quot;AREA:inoctets#00FF00:In traffic&quot;,    #以面积方式绘制入流量  
+
+ &quot;LINE1:outoctets#0000FF:Out traffic&quot;,    #以线条方式绘制出流量  
+
+ &quot;HRULE:6144#FF0000:Alarm value\\r&quot;,    #绘制水平线，作为告警线，阈值为6.1k  
+
+ &quot;CDEF:inbits=inoctets,8,*&quot;,    #将入流量换算成bit，即*8，计算结果给inbits  
+
+ &quot;CDEF:outbits=outoctets,8,*&quot;,    #将出流量换算成bit，即*8，计算结果给outbits  
+
+&quot;COMMENT:\\r&quot;,                    #在网格下方输出一个换行符  
+
+ &quot;COMMENT:\\r&quot;,  
+
+ &quot;GPRINT:inbits:AVERAGE:Avg In traffic\: %6.2lf %Sbps&quot;,    #绘制入流量平均值  
+
+ &quot;COMMENT:   &quot;,  
+
+ &quot;GPRINT:inbits:MAX:Max In traffic\: %6.2lf %Sbps&quot;,    #绘制入流量最大值  
+
+ &quot;COMMENT:  &quot;,  
+
+ &quot;GPRINT:inbits:MIN:MIN In traffic\: %6.2lf %Sbps\\r&quot;,    #绘制入流量最小值  
+
+ &quot;COMMENT: &quot;,  
+
+ &quot;GPRINT:outbits:AVERAGE:Avg Out traffic\: %6.2lf %Sbps&quot;,    #绘制出流量平均值  
+
+ &quot;COMMENT: &quot;,  
+
+ &quot;GPRINT:outbits:MAX:Max Out traffic\: %6.2lf %Sbps&quot;,    #绘制出流量最大值  
+
+ &quot;COMMENT: &quot;,  
+
+ &quot;GPRINT:outbits:MIN:MIN Out traffic\: %6.2lf %Sbps\\r&quot;)    #绘制出流量最小值
+</code></pre><p>以上代码将生成一个Flow.png文件</p>
+<p>查看rrd文件内容有利于观察数据的结构、更新等情况，rrdtool提供几个常用命令：</p>
+<p>info查看rrd文件的结构信息，如rrdtool info Flow.rrd；</p>
+<p>first查看rrd文件第一个数据的更新时间，如rrdtool first Flow.rrd；</p>
+<p>last查看rrd文件最近一次更新的时间，如rrdtool last Flow.rrd；</p>
+<p>fetch根据指定时间、CF查询rrd文件，如rrdtool fetch Flow.rrd AVERAGE （必须为大写）</p>
+<p><strong>rrdtool参数说明</strong>: <a href="http://bbs.chinaunix.net/thread-2150417-1-1.html和http://oss.oetiker.ch/rrdtool/doc/index.en.html。" target="_blank" rel="noopener">http://bbs.chinaunix.net/thread-2150417-1-1.html和http://oss.oetiker.ch/rrdtool/doc/index.en.html。</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-23-Python-smtplib/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-06-23-Python-smtplib/" itemprop="url">smtplib发送邮件 - Python自动化运维</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-23T08:00:00+08:00">
+                2017-06-23
               </time>
             
 
@@ -540,28 +1550,224 @@ print d.make_file(text1_lines, text2_lines)
             <ol>
 <li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
 <li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
-<li>安装第三方库: pip install IPy</li>
+<li>安装第三方库: pip install smtplib</li>
 </ol>
 <p>Examples:</p>
-<p>```python<br>Examples:</p>
-<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> #!/usr/bin/env, python pip install ipy</p>
-<p> from IPy import IP</p>
-<p> ip_s = raw_input(‘Please input an IP or net-range: ‘)</p>
-<p> ips = IP(ip_s)</p>
-<p> if len(ips) &gt; 1:</p>
-<p>  print(‘net: %s’ % ips.net())</p>
-<p>  print(‘netmask: %s’ % ips.netmask())</p>
-<p>  % ips.broadcast())</p>
-<p>  print(‘reverse address: %s’ % ips.reverseNames()[0])</p>
-<p>  print(‘subnet: %s’ % len(ips))</p>
-<p> else:</p>
-<p>  print(‘reverse address: %s’ % ips.reverseNames()[0])</p>
-<p> print(‘hexadecimal: %s’ % ips.strHex())</p>
-<p> print(‘binary ip: %s’ % ips.strBin())</p>
-<p> print(‘iptype: %s’ % ips.iptype())</p>
-<p>相关教程PDF:</p>
-<p><img src="http://10.1.134.114:55555/laravel-u-editor/dialogs/attachment/fileTypeImag
-es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/1498182828.pdf">Python自动化运维：技术与最佳实践-<br>signed.pdf</a></p>
+<p>```python</p>
+<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> import smtplib</p>
+<p> from email.mime.multipart import MIMEMultipart</p>
+<p> from email.mime.text import MIMEText</p>
+<p> from email.mime.image import MIMEImage</p>
+<p> HOST = “m.xxx.com”</p>
+<p> TO = “jianfeng.xia@xxx.com”</p>
+<p> EmailUser = “Task.system”</p>
+<p> EmailPass = “gta@2017”</p>
+<p> FROM = “Task.system@xxx.com”</p>
+<p>BJECT = u”官网业务服务质量周报”</p>
+<p> def addimg(src,imgid):</p>
+<pre><code>    fp = open(src, &apos;rb&apos;)
+
+
+    msgImage = MIMEImage(fp.read())
+
+
+    fp.close()
+
+
+    msgImage.add_header(&apos;Content-ID&apos;, imgid)
+
+
+    return msgImage
+
+
+
+
+
+msg = MIMEMultipart(&apos;related&apos;)
+
+
+msgtext = MIMEText(&quot;&lt;font color=red&gt;官网业务周平均延时图表:&lt;br&gt;&lt;img src=\&quot;cid:weekly\&quot; border=\&quot;1\&quot;&gt;&lt;br&gt;详细内容见附件。&lt;/font&gt;&quot;,&quot;html&quot;,&quot;utf-8&quot;)
+
+
+msg.attach(msgtext)
+
+
+#msg.attach(addimg(&quot;img/weekly.png&quot;,&quot;weekly&quot;))
+
+
+
+
+
+#attach = MIMEText(open(&quot;doc/week_report.xlsx&quot;, &quot;rb&quot;).read(), &quot;base64&quot;, &quot;utf-8&quot;)
+
+
+#attach[&quot;Content-Type&quot;] = &quot;application/octet-stream&quot;
+
+
+#attach[&quot;Content-Disposition&quot;] = &quot;attachment; filename=\&quot;业务服务质量周报(12周).xlsx\&quot;&quot;.decode(&quot;utf-8&quot;).encode(&quot;gb18030&quot;)
+
+
+#msg.attach(attach)
+
+
+
+
+
+msg[&apos;Subject&apos;] = SUBJECT
+
+
+msg[&apos;From&apos;]=FROM
+
+
+msg[&apos;To&apos;]=TO
+
+
+try:
+
+
+    server = smtplib.SMTP()
+
+
+    server.connect(HOST,&quot;587&quot;)
+
+
+    server.starttls()
+
+
+    server.login(EmailUser, EmailPass)
+
+
+    server.sendmail(FROM, TO, msg.as_string())
+
+
+    server.quit()
+
+
+    print &quot;邮件发送成功！&quot;
+
+
+except Exception, e:  
+
+
+    print &quot;失败：&quot;+str(e)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-22-JS-npm.taobao/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-06-22-JS-npm.taobao/" itemprop="url">nodejs服务部署&搭建&学习&淘宝 NPM 镜像</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-22T15:00:00+08:00">
+                2017-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="使用淘宝-NPM-镜像"><a href="#使用淘宝-NPM-镜像" class="headerlink" title="使用淘宝 NPM 镜像"></a>使用淘宝 NPM 镜像</h2><p>大家都知道国内直接使用 npm 的官方镜像是非常慢的，这里推荐使用淘宝 NPM 镜像。</p>
+<p>淘宝 NPM 镜像是一个完整 npmjs.org 镜像，你可以用此代替官方版本(只读)，同步频率目前为 10分钟 一次以保证尽量与官方服务同步。</p>
+<p>你可以使用淘宝定制的 cnpm (gzip 压缩支持) 命令行工具代替默认的 npm:</p>
+<p> $ npm install -g cnpm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>
+<p>这样就可以使用 cnpm 命令来安装模块了：</p>
+<p> $ cnpm install [name]</p>
+<p>更多信息可以查阅：<a href="http://npm.taobao.org/" target="_blank" rel="noopener">http://npm.taobao.org/</a>。</p>
 
           
         
@@ -605,7 +1811,7 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-19-Python-dnspython/">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-22-Python-pycurl/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Xia">
@@ -624,7 +1830,7 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-06-19-Python-dnspython/" itemprop="url">dnspython - Python自动化运维</a></h2>
+                <a class="post-title-link" href="/2017-06-22-Python-pycurl/" itemprop="url">PycURL模拟用户访问服务器 - Python自动化运维</a></h2>
         
 
         <div class="post-meta">
@@ -636,8 +1842,8 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-19T08:00:00+08:00">
-                2017-06-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-22T08:00:00+08:00">
+                2017-06-22
               </time>
             
 
@@ -673,1092 +1879,43 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
       
         
           
-            <ol>
+            <p>Libcurl 是一个支持FTP，FTPS，HTTP，HTTPS，GOPHER，TELNET，DICT，FILE 和<br>LDAP的客户端URL传输库。libcurl也支持HTTPS认证，HTTP、POST、HTTP<br>PUT、FTP上传，代理，Cookies，基本身份验证，FTP文件断点继传，HTTP代理通道等等。</p>
+<ol>
 <li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
 <li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
-<li>安装第三方库: pip install dnspython</li>
+<li>安装第三方库: pip install pycurl<br>Examples:</li>
 </ol>
-<p>Examples:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># -- coding: utf-8 --</span></span><br><span class="line"> <span class="keyword">import</span> dns.resolver</span><br><span class="line"> </span><br><span class="line"> domain = raw_input(<span class="string">'Please input an domain: '</span>)</span><br><span class="line"></span><br><span class="line"> <span class="comment">#!根据域名获取A地址</span></span><br><span class="line"> A = dns.resolver.query(domain, <span class="string">'A'</span>)</span><br><span class="line">r i <span class="keyword">in</span> A.response.answer:</span><br><span class="line">     <span class="keyword">for</span> j <span class="keyword">in</span> i.items:</span><br><span class="line">         <span class="keyword">print</span> j.address</span><br><span class="line"></span><br><span class="line"> <span class="comment">#!根据域名获取MX地址</span></span><br><span class="line"> MX = dns.resolver.query(domain, <span class="string">'MX'</span>)</span><br><span class="line"> MX:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'MX preference ='</span>, i.preference, <span class="string">'mail exchanger ='</span>, i.exchange</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#!根据域名获取NS地址</span></span><br><span class="line">    ns = dns.resolver.query(domain, <span class="string">'NS'</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> ns.response.answer:</span><br><span class="line">         <span class="keyword">for</span> j <span class="keyword">in</span> i.items:</span><br><span class="line">              <span class="keyword">print</span> j.to_text()</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#!根据域名获取CNAME地址</span></span><br><span class="line">    cname = dns.resolver.query(domain, <span class="string">'CNAME'</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> cname.response.answer:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> i.items:</span><br><span class="line">            <span class="keyword">print</span> j.to_text()</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-13-Book-StructureThinking/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-06-13-Book-StructureThinking/" itemprop="url">结构思考力 - 李忠秋 </a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-13T09:00:00+08:00">
-                2017-06-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>芭芭拉·明托的《金字塔原理》算得上大名鼎鼎，今天阅读的这本《结构思考力》算得上是中国人写的金字塔原理实操手册。本书的核心理念、主要内容均源自于芭芭拉·名托的《金字塔原理》，全书197页，以金字塔原理这一工具的应用为主要框架，但也新增很多内容，从结构化思考的角度，以更通俗的方式教给人们在思考和表达方面的理念和方法。</p>
-<h2 id="一、介绍结构思考力的2w1h"><a href="#一、介绍结构思考力的2w1h" class="headerlink" title="一、介绍结构思考力的2w1h"></a>一、介绍结构思考力的2w1h</h2><p>在介绍结构思考力的时候，作者提出了一个“2w1h”的概念：</p>
-<h3 id="为什么要用结构思考力（why）"><a href="#为什么要用结构思考力（why）" class="headerlink" title="为什么要用结构思考力（why）"></a>为什么要用结构思考力（why）</h3><p>作者认为，结构思考力是组织中所有人必备的基本技能。在我们思考和表达方面，都有一个基本的思路。可以帮助我们:</p>
-<blockquote>
-<p>在解决问题时，迅速抓住主要矛盾，忙而不乱地应付各种问题。<br>在重大决策时，快速理出重点，勇敢科学果断地作出决策。<br>在材料写作时，能够主体明确，结构严谨，层次清晰。<br>在沟通表达时，语言准确，思路清晰，快速终总结说话要点。<br>在对下指导时，能快速确定目标，明确计划，理清核心。</p>
-</blockquote>
-<h3 id="什么是结构化思考方式（what）"><a href="#什么是结构化思考方式（what）" class="headerlink" title="什么是结构化思考方式（what）"></a>什么是结构化思考方式（what）</h3><p>这是一个很好的逻辑框架培训。虽然看起来只是一个简单的先总后分的思考和表达方式，强调先框架后细节，先总结后具体，先结论后原因，先主要后次要。 核心是先总后分的思考脉络，掌握事物的关键本质和问题的关键，从总体到局部的鸟瞰而不拘泥于细节。结构思考力拥有横向和纵向两种思维结构。在思考时既要运用横向结构拆分总体问题，又要运用纵向结构，对某些方面内容进行深入的分析探索。</p>
-<h3 id="如何将结构思考力应用于思考和表达（how）"><a href="#如何将结构思考力应用于思考和表达（how）" class="headerlink" title="如何将结构思考力应用于思考和表达（how）"></a>如何将结构思考力应用于思考和表达（how）</h3><p>作者借用金字塔框架，将结构思考力的应用分成了三大阶段五个步骤。<br>三个阶段分别是基础阶段，构思阶段和演示阶段。<br>五个步骤则是</p>
-<blockquote>
-<p>明确理念打基础<br>基于目标定主题<br>纵向结构分层次<br>横向结构选顺序<br>形象表达作演示</p>
-</blockquote>
-<p>掌握这三大阶段五个步骤，就是结构思考力精髓。</p>
-<h2 id="二、明确理念打基础"><a href="#二、明确理念打基础" class="headerlink" title="二、明确理念打基础"></a>二、明确理念打基础</h2><p>在这个章节中，作者把结构思考力也就是金字塔原理的基本特点，分两个部分进行了详细的介绍。</p>
-<h3 id="1-结构思考的四个基本特点"><a href="#1-结构思考的四个基本特点" class="headerlink" title="1.结构思考的四个基本特点"></a>1.结构思考的四个基本特点</h3><ul>
-<li>结论先行的表达，一次表达只支持一个思想，而且要在开头表达出来。先框架后细节。</li>
-<li>以上统下的论证，在任何层次上的思想都必须是下一层次思想的总结概括。</li>
-<li>归类分组的论据，每一个组的思想必须在同一个范畴之内，使之条理清晰模块化。</li>
-<li>层层递进的逻辑，每一组的思想，按照一定的逻辑顺序进行处置，更容易让对方理解和记忆。</li>
-</ul>
-<h3 id="2-结构化接收信息的三个步骤"><a href="#2-结构化接收信息的三个步骤" class="headerlink" title="2.结构化接收信息的三个步骤"></a>2.结构化接收信息的三个步骤</h3><p>如何清晰的找出别人说话中传递信息的结构，并有效地概括出核心内容呢？这需要自己具备结构化思考的能力，能够从繁杂的信息中识别关键点，理解他人的核心内容并且能总结的条理清楚。为此作者提出了三个步骤:</p>
-<ul>
-<li>第一步，识别信息中的事实理由以及结论，找出信息中哪些是观点类的，哪些是事实描述类的信息，观点类的信息哪些是结论，哪些是理由，并将其区分开来。</li>
-<li>第二步，找出事实与观点的对应关系，并画出结构图。然后，找出这些事实和观点的对立关系，依据事实、理由、结论的对应关系画出金字塔结构图。</li>
-<li>第三步，一句话概括出所有内容。接受信息除了前两步做到<em>听清楚</em>以外，最后还要简单扼要地概括出所有内容，做到说明白。这里作者给出了一个说明白的公式：<blockquote>
-<p>在 基础上，从 ， ， ， ，N个方面，说明了 。。。</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="三、明确目标定主题"><a href="#三、明确目标定主题" class="headerlink" title="三、明确目标定主题"></a>三、明确目标定主题</h2><p>构建有说服力的金字塔结构，一定要先明确目标，设置合适的主题，并以有效的方式（序言）引出主题。作者在明确目标这个部分，提出了一个ABCD目标法来进一步明确目标<br>，很有创意。<br>所谓ABCD目标法，就是把目标分解成ABCD四个要素去分解考虑：</p>
-<blockquote>
-<p>受众（Actor）：接收方是谁<br>条件（Condition）：在什么样的条件下<br>行为（Behavior）：完成什么样的任务或表现出怎样的行为<br>程度（Degree）：达到（实现）什么样的标准或水平</p>
-</blockquote>
-<p>在如何设置主题的部分，作者依然用金字塔原理的方式，主题也要先基于目标确定结论，然后精心包装主题以打动人心。<br>引入主题的时候，需要包含一个讲故事的结构。这需要四个要素：情景，冲突，疑问，回答。简称为SCQA。</p>
-<blockquote>
-<p>情景就是一个大背景。<br>冲突是在这个背景下发生了哪些变化的问题。<br>疑问是如何在这个背景下解决问题。<br>答案就是解决问题方案。</p>
-</blockquote>
-<p>适当的调整是各要素的顺序，可以有效地表达不同情绪，让听众们引发共鸣，让沟通更加有效。</p>
-<h2 id="四、纵向结构分层次"><a href="#四、纵向结构分层次" class="headerlink" title="四、纵向结构分层次"></a>四、纵向结构分层次</h2><p>作者提出来，人们的思维同时具备两种能力，一种是从目标出发沿不同路径分解探求答案的能力，我认为这是一种演绎的能力。另一种则是把各种信息聚合起来得出一个解决方案<br>和结论的能力，我认为这其实是归纳的能力。<br>因此所谓的纵向结构分层次，活学活用归纳和演绎思维方式，分层次搭建框架，聚合总结概括思路，让自己的表达有理有据。<br>归纳和演绎并不是什么新鲜的东西，但作者在这本书里增加了很多新的亮点，比如设想问题，从对方角度出发的新模式，强调要站在对方的角度去设想问题，换位思考，切实找到<br>对方到底关心什么，如何解答对方最容易接受。<br>再比如作者把5w2h思考问题的方法，精简到2w1h的核心问题设想法。强调想清楚说明白的是:</p>
-<blockquote>
-<p>是什么<br>为什么<br>如何做？</p>
-</blockquote>
-<p>从这个框架出发，推导到1-2-3简易结构思考力的模型。所谓123，就是说1个中心思想，2w1h基本框架，3点理由。然后以上统下，结论先行。可以让自己思路清晰呈现。</p>
-<h2 id="五、横向结构选顺序"><a href="#五、横向结构选顺序" class="headerlink" title="五、横向结构选顺序"></a>五、横向结构选顺序</h2><p>在横向结构中关键还是归纳和演绎两种思维方式，帮助自己进行归类分组和逻辑递进。把一组具有共同特点的思想归类分组并概括出结论叫做归纳论证。而对演绎过程的概括，演<br>绎推理过程的层层步骤叫做演绎论证。<br>在司法考试复习以及实际工作中，演绎论证的机会比较多，就是经常使用的三段论大前提，小前提和结论之间的横向分析。比如说:</p>
-<blockquote>
-<p>大前提偷窃犯罪<br>小前提张三偷了别人的东西<br>结论是张三犯了罪</p>
-</blockquote>
-<p>所有的法官判案都离不开三段论。作者在这个部分特别指出了一个关键点——不要把现象和原因混为一谈，或者没有分析原因直接凭借现象作出判断。<br>具体应该使用演绎还是归纳方法进行沟通，其实是根据自己的需要而定的。</p>
-<ul>
-<li>当需要说服对方时，我们应该多使用演绎论证。</li>
-<li>而当对方关注解决实施方案的时候，使用归纳论证的方式可以让人更加容易记住要点。</li>
-</ul>
-<h2 id="六、形象表达做演示"><a href="#六、形象表达做演示" class="headerlink" title="六、形象表达做演示"></a>六、形象表达做演示</h2><p>作者这个章节中，教给人们如何将已经打好的结构，通过类比、引用和整合的方式进行包装，以便让对方更容易记忆并接受自己的观点。其中对我最有启发的一点就是作者强调“每页ppt都是一个金字塔结构”。这是我在很多ppt学习使用教材中没有看到的，在这里作者用结构里的四个基本特点，进行详尽的讲解。</p>
-<ul>
-<li>结论先行。要求在ppt中每一页的标题必须是一个有中心思想的主题句</li>
-<li>以上统下。每页ppt的主题，都是下面要点的概括。</li>
-<li>归类分组。每页ppt的要点，都相互独立，完全穷尽，不遗漏，不交叉。</li>
-<li>逻辑递进。每页ppt的要点，都必须按照一定的逻辑顺序组织。</li>
-</ul>
-<h2 id="七、阅读感受"><a href="#七、阅读感受" class="headerlink" title="七、阅读感受"></a>七、阅读感受</h2><p>这本书切实做好了“身体力行”四个字，在此之前，我一直对结构化思考薄有微词，认为不过是我们小学语文老师教的“总分总”的外国翻译而已，如此推崇这个思考模型有故作玄虚的嫌疑。而且，结论先行的原则可能也更适用于老外们那种直来直去的文化，未必适合我们。<br>但是阅读完这本书以后，我的立场有了180度的大反转，因为我们在学生时代应试或学习拆解课文的总分总技巧，和实际工作沟通中的结论先行本来就是全然不同的两种情境，而结论先行本身是一种沟通技巧和思维方式，却不是一种文化，我们使用结构化思考模式，并非一上来就“告诉你一个坏消息”的生硬，而是一种让对方更清晰准确了解自己意图的坦诚。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>三层次模型</p>
-<h3 id="第一步-理解，隐性思维显性化"><a href="#第一步-理解，隐性思维显性化" class="headerlink" title="第一步:理解，隐性思维显性化"></a>第一步:理解，隐性思维显性化</h3><p>这是基于我们对事物的看法，我们对事物的价值认定，我们潜意识反射的个人观点。在信息大爆炸的当下，在事件繁杂众多的当下，在啰里八嗦讲不清重点的对话当下。我们严重需要清晰重点，简化时间。我们需要识别信息中的事实，清晰自己的观点认准自己的选择；判断事实与观点的对应关系；能用一句话解释清楚所有内容。</p>
-<p>而这个识别概括万能公式，在<strong>_</strong>的基础上，从<strong>_</strong>几个方面说明了<strong>___</strong>。就能够让我们把我们自己的理解观点，呈现出来。</p>
-<h3 id="第二步-重构，显性思维结构化"><a href="#第二步-重构，显性思维结构化" class="headerlink" title="第二步:重构，显性思维结构化"></a>第二步:重构，显性思维结构化</h3><p>把我们已知的内容进行重新排序，这就需要用到我们四个核心原则  </p>
-<ul>
-<li>结论先行:先总后分的立体化思维，先表明结论观点，会让对方清晰了解你要阐述的重点是什么。不会让对方不耐烦，高效节约双方的时间。 </li>
-<li>以上统下:阐述的观点要与论据相互对应，这样更准确，更有说服力更不容易被对方挑战。</li>
-<li>归类分组:通过相应的特性进行分类，会让我们更加记住内容事物的本身，知识管理也好，收纳整理也好，这都需要归类分组。⒈MECE原则相互独立，完全穷尽，可以让我们的梳理更清晰更全面。 ⒉5±2原则，更好的让我们提出观点，提出报告作出总结。因为人的大脑一次性接受的信息量是有限的，7条是我们能接受的临界值，太多会显得的内容繁杂记不住，太少会显得根据不稳定，不牢靠。而3则是稳定结构，任何一个总是能够以三条作出总结，提出报告，提出观点的人，都是有结构思考力的人，因为他有自己的观点，有自己的判断，自己的独立思考。</li>
-<li>逻辑递进:顺序非常重要，它有可以让我们的观点逻辑更加严谨，更有说服力，一般分时间顺序（先后），结构顺序（总分），重要性顺序（主要，次要）这三个。﻿</li>
-</ul>
-<h3 id="第三步-呈现，结构思维形象化"><a href="#第三步-呈现，结构思维形象化" class="headerlink" title="第三步:呈现，结构思维形象化﻿"></a>第三步:呈现，结构思维形象化﻿</h3><p>基于金字塔结构原理制成的结构罗盘，是从四种关系十六个呈现模式来更好地让结构思维形象化。</p>
-<ul>
-<li>流动模式:线性，流程，循环，关联  </li>
-<li>作用模式:对立，合力，平衡，阻碍  </li>
-<li>关系模式:并列，重叠，包含，分割  </li>
-<li>比较模式:成分，排序，序列，关联</li>
-</ul>
-<p>怎样更好的呈现内容，让别人眼前一亮？ 首先我们要做的就是“配关系”，在流动模式，作用模式，关系模式，比较模式中，找到其主要模式，然后“得图示”从这四个模式中找到更好体现内容呈现形式的模式，最后“上包装”:<br>简化（拆，隔，删，突）<br>类比（形象，行为）<br>引用（广告，歌曲，名言，流行语）<br>整合（字母，数字，颜色，部位）</p>
-<p>　第一节 Why——结构思考力的作用非凡 3<br>　　第二节 What——强调“先总后分”的立体化思考方式 .8<br>　　第三节 How——将结构思考力应用于思考和表达 12</p>
-<p>　　第一章 明确理念打基础 20<br>　　第一节 结构思考力的四个基本特点 21<br>　　第二节 结构化接收信息的三个步骤 43<br>　　思考力体操 58</p>
-<p>　　第二章 基于目标定主题 59<br>　　第一节 确定目标——让表达有的放矢 61<br>　　第二节 设定主题——让表达观点明确67<br>　　第三节 设计序言——让表达更吸引人 73<br>　　思考力体操 78</p>
-<p>　　第三章 纵向结构分层次 79<br>　　第一节 自上而下——疑问回答做分解 80<br>　　第二节 自下而上——概括总结做聚合 100<br>　　第三节 上下结合——两种方式不可分 120<br>　　思考力体操 125</p>
-<p>　　第四章 横向结构选顺序 126<br>　　第一节 选择演绎——让说服更有力 129<br>　　第二节 选择归纳——让要点更清晰 141<br>　　第三节 因需而动——两种顺序选其一 170<br>　　思考力体操 172</p>
-<p>　　第五章 形象表达做演示 173<br>　　第一节 卖点包装——让观点容易记 174<br>　　第二节 形象表达——让演示更有效 179<br>　　思考力体操 191</p>
-<p>　　后记 不忘初心，方得始终 192</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-02-Book-SimpleLogic/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-06-02-Book-SimpleLogic/" itemprop="url">简单的逻辑学 - 麦克伦尼</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-02T08:00:00+08:00">
-                2017-06-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>逻辑学的主题是清晰地思考。它既是一门科学，也是一门艺术。逻辑，作为一个整体，是个宽广、深奥、精彩纷呈的领域，《简单的逻辑学》这本书既没有刻板的理论论述也不是正规的教科书，这是一本现实应用的指南，对那些初次接触逻辑的人介绍逻辑的基本原理。《简单的逻辑学》期待造就实践者，而不是理论家。</p>
-<p>我们中国向来就没有逻辑学——中国古代的圣人几乎穷尽了一切真理，但他们偏偏忘记了发明逻辑。</p>
-<p>圣人们也不是忘记了发明，其实他们是不需要发明。他们依靠直觉、顿悟，直抒胸臆地寻找真理，什么推理、论证统统不需要；只要福至心灵，答案往往脱口而出。翻翻四书五经，里面圣人说的全都是答案，一句话顶一万句；这些答案怎么来的，圣人们自己不在意，也没有人关心，后来人只要记住这些标准答案就行了。</p>
-<p>圣人如此，老百姓呢？好像也不需要——他们没有什么需要证明、也没有地方需要说理。中国有三纲五常，谁老大谁说话算数，君要臣死臣不得不死，哪有你有讲理的份？中国老百姓哪怕是打官司也不需要说理，到衙门里面去告状，谁对谁错由官老爷来判。黎鸣先生说过，只有一个讲理的民族才需要逻辑，一个不讲理的民族根本就不需要逻辑。这话听着刺耳，但并不是胡说八道。</p>
-<p>现在怎么样了呢？我不是很清楚，我只知道现在的学校依然不教逻辑学，除非你读的是西方哲学系。</p>
-<p>确实，逻辑和麦当劳一样，是西方的一种发明。和东方人不同，西方有一种理性传统，他们什么都喜欢推理、证明一番，甚至连上帝都需要逻辑证明。中世纪的神学家阿奎那一个人就提出了五种关于上帝的证明。</p>
-<p>推理、论证是一种理性活动，必须有一种方法来作为保证。这种方法最初是由亚里斯多德（这位老先生后来被称为“西方逻辑之父”）发明的，叫做逻辑。从此之后，随着喜欢说理的人越来越多，逻辑这种方法也越来越完善。在这个武库中，不断有新东西添加进来，除了形式逻辑之外，还有数理逻辑、符号逻辑……许多杰出的西方头脑都为此做出了贡献，比如培根，康德，弗雷格，还有罗素。</p>
-<p>和麦当劳不一样的是，喜欢逻辑的人并不多；我也是最近看了一本《简单的逻辑学》才知道这些的。</p>
-<p>这本书的作者是美国逻辑教授麦克伦尼；为了不把我们吓跑，他删繁就简，把逻辑这个大学问说的很简单。</p>
-<p>麦先生说，逻辑的原理很简单。逻辑（主要是指形式逻辑）最基本的规律只有四个。</p>
-<ul>
-<li>第一是同一律:意思是，什么东西就是它本身，不是别的东西，如果用符号表示，就是：A是A。</li>
-<li>第二是矛盾律:就是说互相矛盾的东西不可能同时为真，必有一假：A不是非A。</li>
-<li>第三条叫排中律:和矛盾律相反，就是说互相矛盾的东西不可能同时为假，必有一真：A或者非A。</li>
-<li>还有充足理由律:这个原理是说，天下的事都有存在的原因。毛主席那句关于无缘无故的名言，应用的就是这个原理。</li>
-</ul>
-<p>麦先生还说，逻辑论证的形式也很简单，只有两条——<strong>演绎，归纳。从一般推出个别就是演绎，从个别推出一般就是归纳</strong>。例如，你从所有的乌鸦都是黑的，判断某一只乌鸦是黑的，你就是在演绎推理；你看到一只乌鸦是黑的、又一只乌鸦是黑的……许多只乌鸦是黑的，你判断天下的乌鸦一般黑，你就是在归纳推理。</p>
-<p>麦先生说这是简单逻辑学，看来还真不是谦虚，这里确实没有令人震惊的深奥东西。恐怕有人看了会偷笑，这算什么原理呀？谁不知道A就是A！我没有笑，据我所知，许多人其实并不知道A就是A。我太太就是典型例子。她经常振振有词地说，我是好人，我从来不做坏事；你反对我，你就是坏人。因为不懂逻辑，所以她根本不知道自己是犯了“循环论证”——把结论A当作前提B——的逻辑错误。</p>
-<p>麦先生把逻辑学说得这么简单是为了引诱这些外行。其实逻辑一点也不简单。简单的只是它的原理，而不是它的威力。据说，正是有了这种简单的逻辑，西方才有了哲学，才有了科学，才有了今天独步天下的文明！这是不是真的我不敢妄加评说，但我可以在这里做一个小小的比较。</p>
-<p>我们知道，在事实与真理之间，或者用逻辑的话说，在前提与结论之间有一条很深的鸿沟。如何跨越这条深沟，东西方的古圣人采取了不同的方法。我们的圣人是一跃而过。孔夫子说，学而时习之，不亦说乎？为什么“学而时习之”，就“不亦说乎”？他没有说明，他只是直接说出“说乎”结论。而亚里斯多德的结论是用另外的办法得出的。比如，他说苏格拉底是要死的，为什么要死呢？因为人都是要死的，苏格拉底是人，所以，苏格拉底是要死的。从前提到结论，他没有纵身一跳，而是在深沟上搭了一座“三段论”的逻辑之桥，一步一步走过来的，我们看得见、也学得到。有了他搭的这座桥，我们每个有理性的人，只要愿意，谁都可以一步一步沿着它走向彼岸。相比之下，对孔圣人我们就只有敬仰的份了。他是圣人，可以凌波微步直接跳过来；我们是凡人，不得要领，只能望沟兴叹——既不晓得别人是怎么过的沟，也不晓得自己如何过这个沟。</p>
-<p>把逻辑比作一座桥、当作一种工具，也许本身就不很逻辑。但作为一个门外汉，我确实找不到更逻辑的办法，权且当作是学习麦先生的简单主义的一个尝试吧。确实，在这本薄薄小书里，就如何使用逻辑这个工具，麦先生为我们介绍了一些很有用的要领。</p>
-<p>作为工具，第一个问题就是要用它来干什么？对此，作者说得非常明确，逻辑学的“全部目的”就是一个，找出真相。逻辑本身不是目的，逻辑来源于现实，逻辑要反映现实。换言之，如果你不是为了发现真理，你即使把逻辑搞得滚瓜烂熟也没有意义。逻辑是用来讲理的、论证的。不打算讲理的人、存心骗人的人是不需要学习逻辑的。</p>
-<p>作为工具，还有一个问题就是如何使用。任何一种工具本身都有自己的问题。逻辑也不例外。比如归纳，它虽然可以帮助我们得出结论，但并不能保证这个结论完全正确。前面提到，我们通过观察，可以归纳出“天下乌鸦一般黑”的结论，但这个结论是绝对真理吗？不一定，因为谁都不可能看到所有的乌鸦，只要有一只白乌鸦，你的推论就玩完。</p>
-<p>即使逻辑是完全有效的，依然还是有问题，工具都是双刃的，逻辑可以用来讲正理，也可以用来讲歪理。这本书的作者专门用两章的篇幅，列举了种种讲歪理的谬误。比如，偷换概念，滑坡论证，恶性循环……看过这些谬误之后，我不禁倒抽一口凉气：妈呀！难道我听到的那些振振有词的道理，许多都是没有逻辑的鬼扯？比如，我以前只要看“毫无疑问”，“毋庸讳言”，“不言而喻”，“事实已经证明还将继续证明”……诸如此类的话，就马上肃然起敬、点头称是。现在才知道这种说法是缺乏逻辑的“独断论”，它违背了充足理由律。充足理由律告诉我们，这个世界上没有不言而喻的事情；任何一个观点，都必须提供证明。</p>
-<p>还要说明的是，逻辑这个工具也不是万能的。不管你的逻辑水平有多高，谈情说爱、夫妻吵架时千万要慎用。如果你太太抱怨说：如果不是当初瞎了眼下嫁你，她早就是富婆了。你千万不要反驳她犯了“虚假假设”的逻辑错误，因为爱情是没有逻辑可言的。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-01-IT-500W_PV/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-06-01-IT-500W_PV/" itemprop="url">建设一个能承受500万PV/每天的网站</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-01T08:00:00+08:00">
-                2017-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>你想建设一个能承受500万PV/每天的网站吗？ 500万PV是什么概念？服务器每秒要处理多少个请求才能应对？如果计算呢？  </p>
-<h1 id="PV是什么："><a href="#PV是什么：" class="headerlink" title="PV是什么："></a>PV是什么：</h1><p>PV是page view的简写。PV是指页面的访问次数，每打开或刷新一次页面，就算做一个pv。</p>
-<h1 id="计算模型："><a href="#计算模型：" class="headerlink" title="计算模型："></a>计算模型：</h1><p>每台服务器每秒处理请求的数量=((80%<em>总PV量)/(24小时</em>60分<em>60秒</em>40%)) / 服务器数量 。<br>其中关键的参数是80%、40%。表示一天中有80%的请求发生在一天的40%的时间内。24小时的40%是9.6小时，有80%的请求发生一天的9.6个小时当中（很适合互联网的应用，白天请求多，晚上请求少）。</p>
-<h1 id="简单计算的结果："><a href="#简单计算的结果：" class="headerlink" title="简单计算的结果："></a>简单计算的结果：</h1><p>((80%<em>500万)/(24小时</em>60分<em>60秒</em>40%))/1 = 115.7个请求/秒<br>((80%<em>100万)/(24小时</em>60分<em>60秒</em>40%))/1 = 23.1个请求/秒</p>
-<h1 id="初步结论："><a href="#初步结论：" class="headerlink" title="初步结论："></a>初步结论：</h1><p>现在我们在做压力测试时，就有了标准，如果你的服务器一秒能处理115.7个请求，就可以承受500万PV/每天。如果你的服务器一秒能处理23.1个请求，就可以承受100万PV/每天。</p>
-<h1 id="留足余量："><a href="#留足余量：" class="headerlink" title="留足余量："></a>留足余量：</h1><p>以上请求数量是均匀的分布在白天的9.6个小时中，但实际情况并不会这么均匀的分布，会有高峰有低谷。为了应对高峰时段，应该留一些余地，最少也要x2倍，x3倍也不为过。<br>115.7个请求/秒 <em>2倍=231.4个请求/秒<br>115.7个请求/秒 </em>3倍=347.1个请求/秒<br>23.1个请求/秒 <em>2倍=46.2个请求/秒<br>23.1个请求/秒 </em>3倍=69.3个请求/秒</p>
-<h1 id="最终结论："><a href="#最终结论：" class="headerlink" title="最终结论："></a>最终结论：</h1><p>如果你的服务器一秒能处理231.4–347.1个请求/秒，就可以应对平均500万PV/每天。<br>如果你的服务器一秒能处理46.2–69.3个请求，就可以应对平均100万PV/每天。</p>
-<h1 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h1><p>这里说明每秒N个请求，就是QPS。因为我关心的是应用程序处理业务的能力。</p>
-<h1 id="实际经验："><a href="#实际经验：" class="headerlink" title="实际经验："></a>实际经验：</h1><ol>
-<li>根据实际经验，采用两台常规配置的机架式服务器，配置是很常见的配置，例如一个4核CPU+4G内存+服务器SAS硬盘。</li>
-<li>个人武断的认为在服务器CPU领域Intel的CPU要优于AMD的CPU，有反对的就反对吧，我都说我武断了（请看CPU性能比较），不要太相信AMD的广告，<br>比较CPU性能简单办法就是比价格，不要比频率与核心数，价格相差不多的性能也相差不多。</li>
-<li>硬盘的性能很重要，由其是数据库服务器。一般的服务器都配1.5万转的SAS硬盘，高级一点的可以配SSD固态硬盘，性能会更好。最最最最重要的指标是“随机读写<br>性能”而不是“顺序读写性能”。（本例还是配置最常见的1.5万转的SAS硬盘吧）</li>
-<li>一台服务器跑Tomcat运行j2ee程序,一台服务器跑MySql数据库,程序写的中等水平(这个真的不好量化)，是论坛类型的应用(总有回帖,不太容易做缓存<br>,也无法静态化)。</li>
-<li>以上软硬件情况下，是可以承受100万PV/每天的。(已留有余量应对突然的访问高峰)</li>
-</ol>
-<h1 id="注意机房的网络带宽："><a href="#注意机房的网络带宽：" class="headerlink" title="注意机房的网络带宽："></a>注意机房的网络带宽：</h1><p>有人说以上条件我都满足了，但实际性能还是达不到目标。这时请注意你对外的网络的带宽，在国内服务器便宜但带宽很贵，很可能你在机房是与大家共享一条100M的光纤，实际每个人可分到2M左右带宽。再好一点5M,再好一点双线机房10M独享，这已经很贵了（北京价格）。<br>一天总流量：每个页面20k字节*100万个页面/1024=19531M字节=19G字节，19531M/9.6小时=2034M/小时=578K字节/s如果请求是均匀分布的，需要5M（640K字节）带宽（5Mb=640KB注意大小写，b是位，B是字节，差了8倍），但所有请求不可能是均匀分布的，当有高峰时5M带宽一定不够，X2倍就是10M带宽。10M带宽基本可以满足要求。<br>以上是假设每个页面20k字节，基本不包含图片，要是包含图片就更大了，10M带宽也不能满足要求了。你自已计算吧。</p>
-<h1 id="附：性能测试基本概念"><a href="#附：性能测试基本概念" class="headerlink" title="附：性能测试基本概念"></a>附：性能测试基本概念</h1><hr>
-<p>基本概念：<br>Throughput（吞吐量）：按照常规理解网络吞吐量表示在单位时间内通过网卡数据量之和，其中即包括本机网卡发送出去的数据量也包括本机网卡接收到的数据量。<br>一个100Mb(位)的双工网卡，最大发送数据的速度是12.5M字节/s ， 最大接收数据的速度是12.5M字节/s， 可以 同时 收发 数据。<br>并发用户数：是同时执行操作的用户(线程数)。<br>响应时间：从请求发出到收到响应花费的时间 。<br>QPS - Queries Per Second  每秒处理的查询数（如果是数据库，就相当于读取）<br>TPS - Transactions Per Second  每秒处理的事务数(如果是数据库，就相当于写入、修改)<br>IOPS，每秒磁盘进行的I/O操作次数<br>例如对某个数据库测试，分开两次测QPS与TPS。<br>QPS（读取）值总是高于TPS(写、改)，并且有倍率关系，因为：</p>
-<ol>
-<li>数据库对查询可能有缓存。</li>
-<li>机械硬盘或SSD硬盘的读就是比写快。</li>
-</ol>
-<hr>
-<p>JMeter测试参数说明：<br>Label：每一个测试单元的名字。<br>Samples：表示一个测试单元一共发出了多少个请求。<br>Average：平均响应时间——默认情况下是单个 Request 的平均响应时间，当使用了 Transaction Controller<br>时，也可以以Transaction 为单位显示平均响应时间。，不重要。<br>Median：中位数，也就是 50％ 用户的响应时间，如果把响应时间从小到大顺序排序，那么50％的请求的响应时间在这个范围之内。重要。<br>90% Line：90％ 用户的响应时间，如果把响应时间从小到大顺序排序，那么90％的请求的响应时间在这个范围之内。重要 。<br>Min：最小响应时间，不重要。<br>Max：最大响应时间，出现几率只不过是千分之一甚至万分之一，不重要。<br>Error%：本次测试中出现错误的请求的数量<br>Throughput：吞吐量——默认情况下表示每秒完成的请求数（Request per Second），当使用了 Transaction<br>Controller 时，也可以表示类似 LoadRunner 的 Transaction per Second 数</p>
-<h2 id="KB-Sec：每秒从服务器端接收-到的数据量-只是接收-，相当于LoadRunner中的Throughput-Sec"><a href="#KB-Sec：每秒从服务器端接收-到的数据量-只是接收-，相当于LoadRunner中的Throughput-Sec" class="headerlink" title="KB/Sec：每秒从服务器端接收 到的数据量(只是接收)，相当于LoadRunner中的Throughput/Sec"></a>KB/Sec：每秒从服务器端接收 到的数据量(只是接收)，相当于LoadRunner中的Throughput/Sec</h2><p>loadrunner测试参数说明：<br>响应时间： 取90%值，如果把响应时间从小到大顺序排序，那么90％的请求的响应时间在这个范围之内。重要。<br>每秒点击数 ：hits per Second,每秒钟向服务器提交请求的数量。<br>TPS： Transaction per Second ，每秒事务数，一个事务是指一个客户机向服务器发送请求然后服务器做出反应的过程<br>Throughput（吞吐量）： Loadrunner记录的Throughput是接收到服务器返回的所有字节数之和，与本地发出的字节数无关。<br>Throughput/Sec： 每秒的吞吐量。<br>对于BS架构的一般分析 响应时间、点击率、吞吐量、TPS（每秒事务数）。</p>
-<h2 id="对于CS架构的一般分析-TPS（每秒事务数）"><a href="#对于CS架构的一般分析-TPS（每秒事务数）" class="headerlink" title="对于CS架构的一般分析 TPS（每秒事务数）"></a>对于CS架构的一般分析 TPS（每秒事务数）</h2><p>Apache ab测试参数说明：<br>RPS： Request per Second,每秒处理的请求数</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-05-26-Book-ITIL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-05-26-Book-ITIL/" itemprop="url">ITIL</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-26T08:00:00+08:00">
-                2017-05-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>ITIL即IT基础架构库(Information Technology Infrastructure Library,ITIL，信息技术基础架构库)由英国政府部门CCTA(Central Computing and Telecommunications Agency)在20世纪80年代末制订，现由英国商务部OGC(Office of Government Commerce)负责管理，主要适用于IT服务管理（ITSM）。ITIL为企业的IT服务管理实践提供了一个客观、严谨、可量化的标准和规范。</p>
-<p>ITIL最新版本是V3.0，它包含5个生命周期：</p>
-<ul>
-<li>战略阶段（Service Strategy)</li>
-<li>设计阶段（Service Design)</li>
-<li>转换阶段（Service Transition)</li>
-<li>运营阶段（Service Operation)</li>
-<li>改进阶段（Service Improvement)</li>
-</ul>
-<p><a href="/uploads/ueditor/php/upload/file/20170526/1495792665.pdf">ITIL_V3中文蓝皮书.pdf</a></p>
-<p><a href="/uploads/ueditor/php/upload/file/20170526/1495792666.pdf">翰纬-ITIL+v3白皮书.pdf</a></p>
-<p><img src="/uploads/ueditor/php/upload/image/20170526/1495792595.png" alt="blob.png"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-05-19-Book-ConwayLaw/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-05-19-Book-ConwayLaw/" itemprop="url">康威定律</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-19T08:00:00+08:00">
-                2017-05-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Mike从他的角度归纳这篇论文中的其他一些核心观点，如下：</p>
-<ul>
-<li>第一定律<ul>
-<li>Communication dictates design</li>
-<li>组织沟通方式会通过系统设计表达出来</li>
-</ul>
-</li>
-<li>第二定律<ul>
-<li>There is never enough time to do something right, but there is always enough time to do it over  </li>
-<li>时间再多一件事情也不可能做的完美，但总有时间做完一件事情</li>
-</ul>
-</li>
-<li>第三定律<ul>
-<li>There is a homomorphism from the linear graph of a system to the linear graph of its design organization</li>
-<li>线型系统和线型组织架构间有潜在的异质同态特性</li>
-</ul>
-</li>
-<li>第四定律<ul>
-<li>The structures of large systems tend to disintegrate during development, qualitatively more so than with small systems</li>
-<li>大的系统组织总是比小系统更倾向于分解</li>
-</ul>
-</li>
-</ul>
-<h3 id="人是复杂社会动物"><a href="#人是复杂社会动物" class="headerlink" title="人是复杂社会动物"></a>人是复杂社会动物</h3><ul>
-<li>第一定律<ul>
-<li>Communication dictates design</li>
-<li>组织沟通方式决定系统设计<br>沟通成本 = n(n-1)/2，沟通成本随着项目或者组织的人员增加呈指数级增长。是的，项目管理这个算法的复杂度是O(n^2)。举个例子</li>
-</ul>
-</li>
-<li>5个人的项目组，需要沟通的渠道是 5*(5–1)/2 = 10</li>
-<li>15个人的项目组，需要沟通的渠道是15*(15–1)/2 = 105</li>
-<li>50个人的项目组，需要沟通的渠道是50*(50–1)/2 = 1,225</li>
-<li>150个人的项目组，需要沟通的渠道是150*(150–1)/2 = 11,175</li>
-<li>第二定律:<ul>
-<li>There is never enough time to do something right, but there is always enough time to do it over</li>
-<li>时间再多一件事情也不可能做的完美，但总有时间做完一件事情</li>
-</ul>
-</li>
-<li>第三定律<ul>
-<li>There is a homomorphism from the linear graph of a system to the linear graph of its design organization</li>
-<li>线型系统和线型组织架构间有潜在的异质同态特性</li>
-</ul>
-</li>
-</ul>
-<h3 id="康威定律如何解释微服务的合理性"><a href="#康威定律如何解释微服务的合理性" class="headerlink" title="康威定律如何解释微服务的合理性"></a>康威定律如何解释微服务的合理性</h3><p>了解了康威定律是什么，再来看看他如何在半个世纪前就奠定了微服务架构的理论基础。</p>
-<ul>
-<li>人与人的沟通是非常复杂的，一个人的沟通精力是有限的，所以当问题太复杂需要很多人解决的时候，我们需要做拆分组织来达成对沟通效率的管理</li>
-<li>组织内人与人的沟通方式决定了他们参与的系统设计，管理者可以通过不同的拆分方式带来不同的团队间沟通方式，从而影响系统设计</li>
-<li>如果子系统是内聚的，和外部的沟通边界是明确的，能降低沟通成本，对应的设计也会更合理高效</li>
-<li>复杂的系统需要通过容错弹性的方式持续优化，不要指望一个大而全的设计或架构，好的架构和设计都是慢慢迭代出来的<br>带来的具体的实践建议是：</li>
-<li>我们要用一切手段提升沟通效率，比如slack，github，wiki。能2个人讲清楚的事情，就不要拉更多人，每个人每个系统都有明确的分工，出了问题知道马上找谁，避免踢皮球的问题。</li>
-<li>通过MVP的方式来设计系统，通过不断的迭代来验证优化，系统应该是弹性设计的。</li>
-<li>你想要什么样的系统设计，就架构什么样的团队，能扁平化就扁平化。最好按业务来划分团队，这样能让团队自然的自治内聚，明确的业务边界会减少和外部的沟通成本，每个小团队都对自己的模块的整个生命周期负责，没有边界不清，没有无效的扯皮，inter-operate, not integrate。</li>
-<li>做小而美的团队，人多会带来沟通的成本，让效率下降。亚马逊的Bezos有个逗趣的比喻，如果2个披萨不够一个团队吃的，那么这个团队就太大了。事实上一般一个互联网公司小产品的团队差不多就是7，8人左右（包含前后端测试交互用研等，可能身兼数职）。<br>再对应下衡量微服务的标准，我们很容易会发现他们之间的密切关系：</li>
-<li>分布式服务组成的系统</li>
-<li>按照业务而不是技术来划分组织</li>
-<li>做有生命的产品而不是项目</li>
-<li>Smart endpoints and dumb pipes（我的理解是强服务个体和弱通信）</li>
-<li>自动化运维（DevOps）</li>
-<li>容错</li>
-<li>快速演化</li>
-</ul>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
-<li><a href="http://www.infoq.com/cn/presentations/team-building-implementation-in-distributed-world" target="_blank" rel="noopener">远距离条件下的康威定律——分布式世界中实现团队构建</a>，本文图片来源该ppt截图</li>
-<li><a href="https://en.wikipedia.org/wiki/Conway%27s_law" target="_blank" rel="noopener">Conway‘s Law in wiki</a></li>
-<li><a href="http://www.melconway.com/Home/Conways_Law.html" target="_blank" rel="noopener">Conway’s Law Homepage</a></li>
-</ul>
-<p><img src="/uploads/ueditor/php/upload/image/20170519/1495179187.png" alt="blob.png"><br><img src="/uploads/ueditor/php/upload/image/20170519/1495179911.png" alt="blob.png"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-05-09-Book-LifePsychology/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-05-09-Book-LifePsychology/" itemprop="url">心理学与生活 - 南京大学</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-09T08:00:00+08:00">
-                2017-05-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="记忆的分类"><a href="#记忆的分类" class="headerlink" title="记忆的分类"></a>记忆的分类</h2><ol>
-<li>外显记忆（explicit memory）：需要可以努力去记忆。</li>
-<li>内隐记忆（implicit memory）：不需要意识控制，也不需要意志努力。</li>
-<li>程序性记忆（procedural memory）：一种关于怎么做事情的过程、步骤等具体操作的记忆。</li>
-<li>陈述性记忆（declarative memory）：一种依靠语言描述来进行的记忆。如背单词。</li>
-<li>情景记忆（episodic ）：对过去经验中时间、地点、过程等的记忆。</li>
-<li>语义记忆（semantic memory）：对抽象语言符号的记忆。</li>
-</ol>
-<ul>
-<li>容易忘记：语义记忆，外显记忆，陈述性记忆。难以忘记：情景记忆，程序性记忆，内隐记忆。</li>
-<li>感觉记忆（0.5—4s）；短时记忆（5s—60s）：容易被打扰；长时记忆（大于60s）<br><img src="/uploads/ueditor/php/upload/image/20170508/1494208289.png" alt="blob.png"></li>
-</ul>
-<h2 id="三大学习方式"><a href="#三大学习方式" class="headerlink" title="三大学习方式"></a>三大学习方式</h2><ul>
-<li>经典条件反射（classical conditional reflex）：巴普洛夫的狗。先有刺激再有反应。</li>
-<li>操作性条件反射（operant conditioning reflex）：斯金纳的老鼠。先有反应再有刺激。即行为的结果，增加了行为的频率。</li>
-<li>观察学习（observational learning）：班都拉提出来的。模仿，即看着看着就会了。譬如，谈恋爱。<br><img src="/uploads/ueditor/php/upload/image/20170508/1494208358.png" alt="blob.png"></li>
-</ul>
-<h2 id="你不知道的东西，潜意识知道"><a href="#你不知道的东西，潜意识知道" class="headerlink" title="你不知道的东西，潜意识知道"></a>你不知道的东西，潜意识知道</h2><p>意识和潜意识。通过梦、自由联想和催眠可以进入潜意识。弗洛伊德的精神分析基本假设认为人的行为是受到原始欲望所驱使的，所以归根到底人的行为是由本能驱动的。<br><strong>弗洛伊德人格结构理论：</strong></p>
-<ul>
-<li>本我（id）：原始冲动。按照快乐原则行事。</li>
-<li>自我（ego）：人格中相对理性的一面，它协调者本我和外界之间的关系。以我按照现实原则行事。</li>
-<li>超我（superego）：所有价值观的源泉，是我们后天慢慢习得的一种社会规范和道德。超我就是被内化的道德。按照道德原则行事。<br>本我和超我常常有冲突。自我起到调节两者的作用。调节失败的话就有可能会人格分裂。<br>自我通过部分第压抑本我的冲动，从而避免了和超我之间产生冲突。即自我开启了自我防御机制。<br><img src="/uploads/ueditor/php/upload/image/20170508/1494208396.jpg" alt=""><br><img src="/uploads/ueditor/php/upload/image/20170508/1494208465.png" alt="blob.png"></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-05-08-Book-IntrPsychology/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-05-08-Book-IntrPsychology/" itemprop="url">心理学概论(历史) - 清华大学</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-08T08:00:00+08:00">
-                2017-05-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="http://blog.sina.com.cn/s/blog_6011d5ef0101rr0j.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_6011d5ef0101rr0j.html</a></p>
-<p>著名心理学家艾宾浩斯曾经说过，心理学有一个长期的过去，但是只有一个短暂的历史。</p>
-<p>这句话是什么意思呢？也就是说我们人类对自己心理的关注其实是渊远流传，在我们中国文化里头，就有很多对心的分析、心的判断。洛阳亲友如相问、一片冰心在玉壶，讲得就是自己的心；知我者谓我心忧不知我者谓我何求，讲的也就是我们人类的需求。</p>
-<p>人类的心理活动，甚至上升到了哲学的高度。在中国历史上有一个哲学流派叫心学，它的基本观点就是：<strong>世上无心外之物,世上无心外之理</strong>。</p>
-<p>但是什么是心、心存在何处、心有什么样的表现，这样一个问题难住了人类的科学家几千年，那么心理学的历史到底从何算起呢？</p>
-<p>德国冯特创建第一个心理学实验室。1879年12月。用以研究人类意识活动的基本过程。</p>
-<p>冯特不光创建了第一个心理学实验室，他还招收了很多优秀的学生，这些人都成为各个国家的心理学的领军人物，其中一个是铁钦纳。</p>
-<p>铁钦纳作为冯特的学生，把心理学的实验传统带到了美国，创立完善了结构主义的心理学理论。(在康乃尔大学创建美国第一个心理学实验室)。</p>
-<p>结构主义认为心理学应该研究人类的意识，而人类的意识就是由一块块意识的元素所组成，所以这就是像科学的结构主义理论一样，人类的心理活动也应该从元素研究开始。</p>
-<p>斯坦利霍尔：儿童心理学运动之父和青春期发展理论家</p>
-<p>心理学历史上还有一个非常重要的人物叫威廉•杰姆斯，他是公认的美国心理学的奠基者。</p>
-<p>威廉杰姆斯：美国心理学的奠基者【机能主义】，信奉达尔文主义。认为意识就像一条生命的泉水，源源不断融入到我们的心中。创造了意识流的概念。心理学应该关注各种心理活动存在的原因意义和价值。认为人类的心理活动都是几千万年人类进化选择出来的心理特征和心理特质，这种特质都有它存在的意义。</p>
-<p>威廉•杰姆斯是哈佛大学的心理学教授，他对意识问题也很关注，但他不同意冯特和铁钦纳的观点，他不认为意识只是一些毫无生命的简单的元素和方块，他觉得意识就像一条生命的泉水源源不断融入到我们的心中，所以他创造了一个概念叫意识流。</p>
-<p>作为这个机能主义的奠基人，他觉得心理学家更应该关注各种心理活动它存在的原因意义和价值，他信奉达尔文主义，所以认为所有的人类的心理活动，都是几千万年人类进化选择出来的心理特征和心理特质，而这种心理特质都有它存在的意义，所以我们把以威廉•杰姆斯为首的心理学理论流派叫机能主义流派。</p>
-<p>当机能主义在美国兴起的时候，在欧洲悄然兴起了另外一种心理学的研究理论流派，就是著名的弗洛伊德的精神分析理论。</p>
-<p>弗洛尹德精神分析理论：人类的心理活动主要由无意识的心理活动引起，自由联想，反映心理下意识的欲望和需求。引用一些梦的分析来探索人类的内在的无意识的冲动【欧洲】</p>
-<p>他引用一些梦的分析来探索人类的内在的、无意识的冲动，他也对生活中间人类的口误、人类的一些基本的错误感兴趣。一个学生迟到了，开口就说我恨不得还可以晚点再来，其实就反映了他内在的一些心理的冲动和欲望。</p>
-<p>弗洛伊德是20世纪最有影响的心理学家，不光是对我们心理学影响很大，对人类的哲学、艺术、历史学、社会学、政治学都有非常大的影响，所以有人说弗洛伊德代表了心理学。</p>
-<p>其实这是一种误解，我们现在的心理学，早已经发现弗洛伊德的很多观点和理论其实没有现代科学的证据，而且大部分的证据来自于对病人的分析，所以有很多以偏概全的倾向性。</p>
-<p>弗洛伊德的主要理论包括冰山理论意识、潜意识理论、心理发展阶段理论、心理防御机制。</p>
-<p><img src="/uploads/ueditor/php/upload/image/20170508/1494207483.png" alt="blob.png"><img src="/uploads/ueditor/php/upload/image/20170508/1494207491.png" alt="blob.png"></p>
-<p><img src="/uploads/ueditor/php/upload/image/20170508/1494207506.png" alt="blob.png"><img src="/uploads/ueditor/php/upload/image/20170508/1494207523.png" alt="blob.png"></p>
-<p>当弗洛伊德理论在欧洲大陆兴盛的时候，在美国出现了一种新的心理学理论流派叫做行为主义，其代表任务包括华生和斯金纳。</p>
-<p>华生：认为心理学家应该更多的研究一些可以观察可以测量，可以定义的心理学变量【行为】。行为是人类外显的表现，可以做具体的观察，研究。是人类对外在刺激的一种自发的，自动的反应。行为是可以塑造可以改变的。“任何人如果给以足够的行为塑造，可以让它变成我们所期望的任何其他人”</p>
-<p>行为主义的第二个代表人物叫斯金纳，他认为心理学家不应该花时间去研究不可捉摸的人类意识，我们应该去研究人类的行为，人类行为都是可以通过操作性条件反射加以塑造、加以改变的。</p>
-<p>斯金纳的行为主义，对人类的学习、记忆、教育研究都有很大的促进作用，但他的很多观点、已经过时，因为我们现代心理学发现，人类的思维一定是我们心理活动非常重要的一个方面，我们不可能把人类的思维、意识排除在心理学研究的范围之外。</p>
-<p>在谈到行为主义的时候，我们就不得不介绍一个做出了世界性贡献的中国人，他就是著名的行为主义心理学家郭任远先生。《向本能主义说不》第一次提出来本能的研究，在很大程度上都是循环论证，应该用行为的研究来分析，人类的心理活动。</p>
-<p>无论是弗洛伊德的精神分析理论，还是行为主义的基本理论，都有很大程度的宿命论的意思，放弃了人类的主观的主动精神和自由意志，所以有些心理学家认为我们心理学应该具有更大的人文的精神、人文的情怀。两个代表人物，一个叫罗杰斯，一个叫马斯洛，他们认为我们人类应该有更高级的追求，我们不是简单的对外在环境做出反应、做出适应、做出调整。</p>
-<p>马斯洛是一个著名的人文主义的心理学家，他的基本理论就是认为人类有很多的需求，有些需求是我们基本的生存需求，但是人类也有很多更高级的追求，在基本需求满足以后，我们人类一定会追求高级的心理需求。马斯洛的需求层次理论到底有哪些具体内容呢？</p>
-<p>下面我们看一看马斯洛需求层次结构： 生理的需求physiological needs【本能层次的需要，包括食欲，睡眠，欲望等】；安全的需求security needs【避免对生命构成威胁的需要】；社交的需求social needs【社会需要，包括对友谊，爱情以及隶属关系的需求】；尊重的需求esteemneeds【想被人承认的需要】；自我实现的需求sell-actualization needs【对理想实现，发挥最大潜能的需要；最高境界，人的潜能和理想的最大化】</p>
-<p><img src="/uploads/ueditor/php/upload/image/20170508/1494207594.png" alt="blob.png"></p>
-<p>马斯洛的需求层次的最高境界就是自我实现，指的是人的潜能和理想的最大化，那么这种自我实现在我们中国文化环境下可能是另外一种境界。</p>
-<p>台湾中央研究院的著名心理学家杨国枢先生，就认为我们中国人的自我，其实是国家、家庭和个人的三位一体，是一种整体性的、集体的自我实现。这种自我实现是我们人类追求<br>的最高的境界。</p>
-<p>到底什么样的人能够达到自我实现的境界呢？马斯洛通过对林肯、斯宾诺莎和他周围的很多成功人士的分析和调查总结出来自我实现的人应该具备的一些心理特质。</p>
-<p><img src="/uploads/ueditor/php/upload/image/20170508/1494207626.png" alt="blob.png"></p>
-<p> <img src="/uploads/ueditor/php/upload/image/20170508/1494207678.png" alt="blob.png"></p>
-<p>这些特质包括： </p>
-<ol>
-<li>全面准确的知觉现实 </li>
-<li>接纳自己与他人 </li>
-<li>对人自发坦率和真实 </li>
-<li>以问题为中心而不是以自我为中心 </li>
-<li>具有超然于世和独处的需求</li>
-<li>具有自主性在环境和文化中能保持相对独立性 </li>
-<li>具有永不衰退的鉴赏力 </li>
-<li>具有难以形容的高峰体验 </li>
-<li>对人充满爱心 </li>
-<li>具有深厚的友情 </li>
-<li>具备民主精神 </li>
-<li>区分手段和目的 </li>
-<li>富于创造性 </li>
-<li>处事幽默风趣 </li>
-<li>反对盲目遵从</li>
-</ol>
-<p>为什么心理学有这么多的流派、有这么多的不同的看法和争论，其实它核心的问题就是心理的复杂、心理活动的不可捉摸和心理研究的巨大的挑战。</p>
-<p>心理学和其他任何人类科学一样，都是需要通过不断的发展、不断的升华、不断的总结，真正的掌握我们科学的基本规律。在很多情况下，不同的学派其实是抓住了心理活动的不同的侧面，就像盲人摸象一样，每一个盲人其实只是接触了象的某一个部分、某一个部位、某一种角度，我们心理学的各种流派也是抓住了人类心理活动的不同的角度，不同的方<br>向、不同的方面，整合起来就形成了一个对人心的基本认识基本判断。</p>
-<p>那么心理学未来如何去发展呢，现在看来起码有三大研究领域会产生引人入胜的层出不穷的新的研究、新的发现，我个人认为这三大领域，也许能够代表人类心理学未来的研究重点、研究突破和研究方向。</p>
-<p>第一个领域就是认知神经领域，它是七十年代兴起的认知革命的延续，它借用了生物科学的一些全新的技术，特别是核磁共振技术来研究人类心理活动的脑机制。看一看我们的心理活动，是不是受到了人脑的生物的具体的局限，它的脑区的范围在什么地方，表现又有如何，这些脑科学的革命，对人类的认知科学有巨大的促进作用。认知革命发源于七十年代，主要是用计算机信息技术来分析，了解人类的心理活动的普遍规律，它的一个核心思想，就是我们人脑它是一个黑箱，我们很难知道这个黑箱的具体运作，通过对我们的输入和输出的分析，我们可以推测黑箱的基本运作和基本的研究范式，认知革命借助神经科学技术，它现在正在进行，我们在未来的心理学概论课中会介绍认知的一些新的发现、新的突破和新的证据。</p>
-<p>心理学第二个非常重要的革命，我个人认为是文化革命。在九十年代，美国心理学家开始意识到不是所有人都说英文，不是所有的人都有美国人那样特殊的心理的表现，这些心理学家认为我们应该从社会文化的角度，分析探索人类心理活动的基本规律。文化心理学研究领域的一个著名的代表人物，就是我的导师理查德.尼斯贝特，美国密西根大学心理学的终身教授和美国科学院和文学院双料院士，他和我以及其他同事做了很多文化差异的基本研究，发现东方人和西方人在思维、判断、情绪、认识等各个方面都有非常大的差异。</p>
-<p>其中一个有趣的研究就是让来自世界不同地方的人观察一下鱼缸的活动。下面就请看我当年在美国密西根大学做博士论文时候完成的一个跨文化的比较。</p>
-<p>心理学的未来研究发展值得关注的第三个方向，我个人认为是九十年代末期兴起的积极心理学，积极心理学奠基人马丁•塞利格曼和奇克森特米海伊，他们认为心理学家应该多多关注人类的优点、美德和最佳行为，人类的优势其实是多方面的，我们不光有思维的优势，我们也有情感的优势，我们也有道德的优势，我们还有创造的优势，我们人有追求、有理想，我们人也有同情心、利他心，人不光是一个生物的动物，也是一个社会的动物，更是一个道德的动物。</p>
-<p><img src="/uploads/ueditor/php/upload/image/20170508/1494207873.png" alt="blob.png"></p>
-<p>积极心理学是我们心理学未来发展，非常有前途、有希望的学科，因为我们心理学家是关心人类、共情人类、支持人类，也是希望能够理解人类的学科。</p>
-<p>心理学是一个通人心 、接地气、有追求的、伟大的科学，心理学的历史就是不断升华自己 、提升自己、创造新的自己的一个历史。</p>
+<p>```python</p>
+<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> import os,sys<br> import time<br> import sys<br> import pycurl</p>
+<p> URL=”<a href="http://www.xxx.com" target="_blank" rel="noopener">http://www.xxx.com</a>“</p>
+<p> #URL=”<a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a>“</p>
+<p> #URL=”<a href="http://www.google.com.hk" target="_blank" rel="noopener">http://www.google.com.hk</a>“<br>= pycurl.Curl()<br>setopt(pycurl.URL, URL)</p>
+<p> #连接超时时间,5秒<br> c.setopt(pycurl.CONNECTTIMEOUT, 5)</p>
+<p> #下载超时时间,5秒<br> c.setopt(pycurl.TIMEOUT, 5)<br> c.setopt(pycurl.FORBID_REUSE, 1)<br> c.setopt(pycurl.MAXREDIRS, 1)<br>    c.setopt(pycurl.NOPROGRESS, 1)<br>    c.setopt(pycurl.DNS_CACHE_TIMEOUT,30)<br>    indexfile = open(os.path.dirname(os.path.realpath(<strong>file</strong>))+”/content.txt”, “wb”)<br>    c.setopt(pycurl.WRITEHEADER, indexfile)<br>    c.setopt(pycurl.WRITEDATA, indexfile)<br>    try:<br>        c.perform()<br>    except Exception,e:<br>        print “connecion error:”+str(e)<br>        indexfile.close()<br>        c.close()<br>        sys.exit()</p>
+<pre><code>NAMELOOKUP_TIME =  c.getinfo(c.NAMELOOKUP_TIME)
+CONNECT_TIME =  c.getinfo(c.CONNECT_TIME)
+PRETRANSFER_TIME =   c.getinfo(c.PRETRANSFER_TIME)
+STARTTRANSFER_TIME = c.getinfo(c.STARTTRANSFER_TIME)
+TOTAL_TIME = c.getinfo(c.TOTAL_TIME)
+HTTP_CODE =  c.getinfo(c.HTTP_CODE)
+SIZE_DOWNLOAD =  c.getinfo(c.SIZE_DOWNLOAD)
+HEADER_SIZE = c.getinfo(c.HEADER_SIZE)
+SPEED_DOWNLOAD=c.getinfo(c.SPEED_DOWNLOAD)
+
+print &quot;HTTP Code: %s&quot; %(HTTP_CODE)
+print &quot;DNS time: %.2f ms&quot;%(NAMELOOKUP_TIME*1000)
+print &quot;start connecion time: %.2f ms&quot; %(CONNECT_TIME*1000)
+print &quot;perpare tran time: %.2f ms&quot; %(PRETRANSFER_TIME*1000)
+print &quot;tran start time: %.2f ms&quot; %(STARTTRANSFER_TIME*1000)
+print &quot;tran total time: %.2f ms&quot; %(TOTAL_TIME*1000)
+
+print &quot;download data size: %d bytes/s&quot; %(SIZE_DOWNLOAD)
+print &quot;HTTP head size: %d byte&quot; %(HEADER_SIZE)
+print &quot;avg download speed: %d bytes/s&quot; %(SPEED_DOWNLOAD)
+
+indexfile.close()
+c.close()
+</code></pre><p><img src="/uploads/ueditor/php/upload/image/20170619/1497862725.png" alt="blob.png"></p>
 
           
         
@@ -1797,7 +1954,7 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1842,7 +1999,7 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">136</span>
+                <span class="site-state-item-count">147</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
