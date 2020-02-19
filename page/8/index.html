@@ -43,32 +43,6 @@
 
 
 
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
 
 
 
@@ -178,7 +152,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">笔记</p>
+        <h1 class="site-subtitle" itemprop="description">笔记</h1>
       
   </div>
 
@@ -300,6 +274,178 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-03-Python-fabric/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-07-03-Python-fabric/" itemprop="url">fabric实现远程操作和部署 - Python自动化运维</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-03T08:00:00+08:00">
+                2017-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>fabric模块是在paramiko基础上又做了一层封装，操作起来更方便。主要用于多台主机批量执行任务。Fabric用于简化使用SSH的应用程序部署或系统管<br>理任务。它提供的操作包括：执行本地或远程shell命令，上传/下载文件，以及其他辅助功能，如提示用户输入、中止执行等。与前几个包的比较:</p>
+<p>paramiko：方便嵌套系统平台中，擅长远程执行命令，文件传输。</p>
+<p>fabric：方便与shell脚本结合，擅长批量部署，任务管理。</p>
+<p>pexpect：擅长自动交互，比如ssh、ftp、telnet。</p>
+<ol>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install fabric</li>
+</ol>
+<p>Examples:</p>
+<p>```python </p>
+<p> #!/usr/bin/env python</p>
+<p> from fabric.api import *</p>
+<p> from fabric.context_managers import *</p>
+<p> from fabric.contrib.console import confirm</p>
+<p>v.user=’root’</p>
+<p> env.gateway=’192.168.1.23’</p>
+<p> env.hosts=[‘192.168.1.21’,’192.168.1.22’]</p>
+<p> env.passwords = {</p>
+<pre><code>&apos;root@192.168.1.21:22&apos;: &apos;SKJh935yft#&apos;,
+</code></pre><p>  ‘root@192.168.1.22:22’: ‘SKJh935yft#’,</p>
+<p>  ‘root@192.168.1.23:22’: ‘KJSD9325hgs’</p>
+<p> }</p>
+<p>h=”/home/install/lnmp0.9.tar.gz”</p>
+<p>/tmp/install”</p>
+<p>ask</p>
+<pre><code>def put_task():
+
+    run(&quot;mkdir -p /tmp/install&quot;)
+
+    with settings(warn_only=True):
+
+        result = put(lpackpath, rpackpath)
+
+    if result.failed and not confirm(&quot;put file failed, Continue[Y/N]?&quot;):
+
+        abort(&quot;Aborting file put task!&quot;)
+
+
+
+@task
+
+def run_task():
+
+    with cd(&quot;/tmp/install&quot;):
+
+        run(&quot;tar -zxvf lnmp0.9.tar.gz&quot;)
+
+        with cd(&quot;lnmp0.9/&quot;):
+
+            run(&quot;./centos.sh&quot;)
+
+
+
+@task
+
+def go():
+
+    put_task()
+
+    run_task()
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-30-Python-paramiko/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -317,9 +463,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-06-30-Python-paramiko/" itemprop="url">paramiko远程连接ssh2 - Python自动化运维</a></h1>
+                <a class="post-title-link" href="/2017-06-30-Python-paramiko/" itemprop="url">paramiko远程连接ssh2 - Python自动化运维</a></h2>
         
 
         <div class="post-meta">
@@ -456,9 +602,9 @@ ssh.close()
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-06-29-Python-pexpect/" itemprop="url">pexpect命令行交互(Linux Only) - Python自动化运维</a></h1>
+                <a class="post-title-link" href="/2017-06-29-Python-pexpect/" itemprop="url">pexpect命令行交互(Linux Only) - Python自动化运维</a></h2>
         
 
         <div class="post-meta">
@@ -605,9 +751,9 @@ except pxssh.ExceptionPxssh, e:
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-06-28-Python-xlsx/" itemprop="url">xlsxWriter构造xlsx文件 - Python自动化运维</a></h1>
+                <a class="post-title-link" href="/2017-06-28-Python-xlsx/" itemprop="url">xlsxWriter构造xlsx文件 - Python自动化运维</a></h2>
         
 
         <div class="post-meta">
@@ -813,9 +959,9 @@ workbook.close()
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-06-27-Python-scapy/" itemprop="url">scapy交互式数据包处理 - Python自动化运维</a></h1>
+                <a class="post-title-link" href="/2017-06-27-Python-scapy/" itemprop="url">scapy交互式数据包处理 - Python自动化运维</a></h2>
         
 
         <div class="post-meta">
@@ -954,9 +1100,9 @@ else:
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-06-26-Python-rrdtool/" itemprop="url">rrdtool绘制趋势图 - Python自动化运维</a></h1>
+                <a class="post-title-link" href="/2017-06-26-Python-rrdtool/" itemprop="url">rrdtool绘制趋势图 - Python自动化运维</a></h2>
         
 
         <div class="post-meta">
@@ -1202,9 +1348,9 @@ rrdtool.graph( &quot;Flow.png&quot;, &quot;--start&quot;, &quot;-1d&quot;,&quot;
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-06-23-Python-smtplib/" itemprop="url">smtplib发送邮件 - Python自动化运维</a></h1>
+                <a class="post-title-link" href="/2017-06-23-Python-smtplib/" itemprop="url">smtplib发送邮件 - Python自动化运维</a></h2>
         
 
         <div class="post-meta">
@@ -1416,9 +1562,9 @@ except Exception, e:
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-06-22-JS-npm.taobao/" itemprop="url">nodejs服务部署&搭建&学习&淘宝 NPM 镜像</a></h1>
+                <a class="post-title-link" href="/2017-06-22-JS-npm.taobao/" itemprop="url">nodejs服务部署&搭建&学习&淘宝 NPM 镜像</a></h2>
         
 
         <div class="post-meta">
@@ -1534,9 +1680,9 @@ except Exception, e:
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-06-22-Python-pycurl/" itemprop="url">PycURL模拟用户访问服务器 - Python自动化运维</a></h1>
+                <a class="post-title-link" href="/2017-06-22-Python-pycurl/" itemprop="url">PycURL模拟用户访问服务器 - Python自动化运维</a></h2>
         
 
         <div class="post-meta">
@@ -1682,9 +1828,9 @@ c.close()
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-06-21-Python-filecmp/" itemprop="url">filecmp比较文件夹的内容 - Python自动化运维</a></h1>
+                <a class="post-title-link" href="/2017-06-21-Python-filecmp/" itemprop="url">filecmp比较文件夹的内容 - Python自动化运维</a></h2>
         
 
         <div class="post-meta">
@@ -1903,201 +2049,6 @@ if __name__ == &apos;__main__&apos;:
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-20-Python-difflib/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-06-20-Python-difflib/" itemprop="url">difflib文本内容对比 - Python自动化运维</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-20T08:00:00+08:00">
-                2017-06-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
-<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
-<li>安装第三方库: pip install difflib</li>
-</ol>
-<p>Examples:</p>
-<p>```python</p>
-<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> #!/usr/bin/python</p>
-<p> import difflib</p>
-<p> text1 = “””text1:</p>
-<p> This module provides classes and functions for comparing sequences.</p>
-<p> including HTML and context and unified diffs.</p>
-<p> difflib document v7.4</p>
-<p> add string</p>
-<p> “””</p>
-<p> text1_lines = text1.splitlines()</p>
-<p> text2 = “””text2:</p>
-<p> This module provides classes and functions for Comparing sequences.</p>
-<p> including HTML and context and unified diffs.</p>
-<p> difflib document v7.5”””</p>
-<p> text2_lines = text2.splitlines()</p>
-<p> d = difflib.Differ()</p>
-<p>ff = d.compare(text1_lines, text2_lines)</p>
-<p>n’.join(list(diff))</p>
-<p>比较2个文件的不同之处):</p>
-<h1 id="–-coding-utf-8-–-1"><a href="#–-coding-utf-8-–-1" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p>/usr/bin/python</p>
-<p> import difflib</p>
-<p> import sys</p>
-<p> try:</p>
-<pre><code>    textfile1=sys.argv[1]
-
-    textfile2=sys.argv[2]
-
-except Exception,e:
-
-    print &quot;Error:&quot;+str(e)
-
-    print &quot;Usage: simple3.py filename1 filename2&quot;
-
-    sys.exit()
-
-
-
-def readfile(filename):
-
-    try:
-
-        fileHandle = open (filename, &apos;rb&apos; ) 
-
-        text=fileHandle.read().splitlines()
-
-        fileHandle.close()
-
-        return text
-
-    except IOError as error:
-
-       print(&apos;Read file Error:&apos;+str(error))
-
-       sys.exit()
-
-
-
-if textfile1==&quot;&quot; or textfile2==&quot;&quot;:
-
-    print &quot;Usage: simple3.py filename1 filename2&quot;
-
-    sys.exit()
-
-
-
-
-
-text1_lines = readfile(textfile1) 
-
-text2_lines = readfile(textfile2) 
-
-
-
-d = difflib.HtmlDiff()
-
-print d.make_file(text1_lines, text2_lines)
-</code></pre><p>效果图:</p>
-<p><img src="/uploads/ueditor/php/upload/image/20170619/1497861412.png" alt="blob.png"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2139,15 +2090,15 @@ print d.make_file(text1_lines, text2_lines)
                alt="Jack Xia" />
           <p class="site-author-name" itemprop="name">Jack Xia</p>
            
-              <p class="site-description motion-element" itemprop="description">MIS, Gamification, Education</p>
-          
+              <p class="site-description motion-element" itemprop="description"></p>
+           
         </div>
         <nav class="site-state motion-element">
 
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">135</span>
+                <span class="site-state-item-count">136</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

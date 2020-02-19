@@ -43,32 +43,6 @@
 
 
 
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
 
 
 
@@ -178,7 +152,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">笔记</p>
+        <h1 class="site-subtitle" itemprop="description">笔记</h1>
       
   </div>
 
@@ -300,6 +274,118 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-08-08-OpenSource-SaltDebug/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-08-08-OpenSource-SaltDebug/" itemprop="url">saltstack  debug的技巧</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-08T08:00:00+08:00">
+                2017-08-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>运行 Salt 一旦 shim 发现 Python 解释器，并且一旦 salt_state.tgz tar 包部署完毕（如果有必要的话），最终就可以执行Salt 命令。和传统的 Salt 运行方式不一样，它不需要以守护进程（daemon）方式运行，而是以本地模式（local mode）方式执行 salt-call 命令，就像它是一个 Minion 一样。输出结果会通过 Master 端的 Salt SSH 客户端收集、解析并展示给用户。我们可以以 trace日志级别来查看运行信息。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost salt]# salt 's*' test.ping --log-level trace</span><br><span class="line">[DEBUG] Reading configuration from /etc/salt/master</span><br><span class="line">[DEBUG] Missing configuration file: /root/.saltrc</span><br><span class="line">[TRACE] None of the required configuration sections, 'logstash_udp_handler'</span><br><span class="line">and 'logstash_zmq_handler', were found the in the configuration. Not loading</span><br><span class="line">the Logstash logging handlers module.</span><br><span class="line">[DEBUG] Configuration file path: /etc/salt/master</span><br><span class="line">[WARNING ] Insecure logging configuration detected! Sensitive data may be</span><br><span class="line">logged.</span><br><span class="line">[DEBUG] Reading configuration from /etc/salt/master</span><br><span class="line">[DEBUG] Missing configuration file: /root/.saltrc</span><br><span class="line">[DEBUG] MasterEvent PUB socket URI:</span><br><span class="line">ipc:///var/run/salt/master/master_event_pub.ipc</span><br><span class="line">[DEBUG] MasterEvent PULL socket URI:</span><br><span class="line">ipc:///var/run/salt/master/master_event_pull.ipc</span><br><span class="line">[DEBUG] Sending event - data = &#123;'_stamp': '2017-08-07T05:54:21.903494'&#125;</span><br><span class="line">[TRACE] get_event() received = &#123;'tag': 'salt/event/new_client', 'data':</span><br><span class="line">&#123;'_stamp': '2017-08-07T05:54:21.903494'&#125;&#125;</span><br><span class="line">[TRACE] func get_cli_event_returns()</span><br><span class="line">[DEBUG] LazyLoaded mysql.get_load</span><br><span class="line">[DEBUG] LazyLoaded config.option</span><br><span class="line">[INFO ] Using default for mysql ssl_key</span><br><span class="line">[INFO ] Using default for mysql ssl_cert</span><br><span class="line">[INFO ] Using default for mysql ssl_ca</span><br><span class="line">[DEBUG] get_iter_returns for jid 20170806225421938741 sent to set(['salt-</span><br><span class="line">master']) will timeout at 22:54:27.014845</span><br><span class="line">[TRACE] get_event() received = &#123;'tag': 'salt/job/20170806225421938741/new',</span><br><span class="line">'data': &#123;'tgt_type': 'glob', 'jid': '20170806225421938741', 'tgt': 's*',</span><br><span class="line">'_stamp': '2017-08-07T05:54:21.938959', 'user': 'root', 'arg': [], 'fun':</span><br><span class="line">'test.ping', 'minions': ['salt-master']&#125;&#125;</span><br><span class="line">[TRACE] get_event() received = &#123;'tag': 'salt/job/20170806225421938741/ret</span><br><span class="line">/salt-master', 'data': &#123;'fun_args': [], 'jid': '20170806225421938741',</span><br><span class="line">'return': True, 'retcode': 0, 'success': True, 'cmd': '_return', '_stamp':</span><br><span class="line">'2017-08-07T05:54:22.062106', 'fun': 'test.ping', 'id': 'salt-master'&#125;&#125;</span><br><span class="line">[DEBUG] jid 20170806225421938741 return from salt-master</span><br><span class="line">[DEBUG] LazyLoaded nested.output</span><br><span class="line">[TRACE] data = &#123;'salt-master': True&#125;</span><br><span class="line">salt-master:</span><br><span class="line"> True</span><br><span class="line">[DEBUG] jid 20170806225421938741 found all minions set(['salt-master'])</span><br><span class="line">[root@localhost salt]#</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-08-02-Habit-16PF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -317,9 +403,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-08-02-Habit-16PF/" itemprop="url">16PF-卡特尔16种人格因素问卷</a></h1>
+                <a class="post-title-link" href="/2017-08-02-Habit-16PF/" itemprop="url">16PF-卡特尔16种人格因素问卷</a></h2>
         
 
         <div class="post-meta">
@@ -449,9 +535,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-07-27-Book-6QuestionPersuadeEveryone/" itemprop="url">6个问题竟能说服各种人 - 迈克尔.潘塔隆</a></h1>
+                <a class="post-title-link" href="/2017-07-27-Book-6QuestionPersuadeEveryone/" itemprop="url">6个问题竟能说服各种人 - 迈克尔.潘塔隆</a></h2>
         
 
         <div class="post-meta">
@@ -567,9 +653,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-07-24-MySQL-DefaultCharacterSet/" itemprop="url">mysql中通过my.cnf设置默认字符集utf-8</a></h1>
+                <a class="post-title-link" href="/2017-07-24-MySQL-DefaultCharacterSet/" itemprop="url">mysql中通过my.cnf设置默认字符集utf-8</a></h2>
         
 
         <div class="post-meta">
@@ -699,9 +785,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-07-21-OpenSource-SaltSlsRepo/" itemprop="url">Saltstack sls 在git上的repo (win & Linux)</a></h1>
+                <a class="post-title-link" href="/2017-07-21-OpenSource-SaltSlsRepo/" itemprop="url">Saltstack sls 在git上的repo (win & Linux)</a></h2>
         
 
         <div class="post-meta">
@@ -815,9 +901,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-07-20-Book-SuggestivePower/" itemprop="url">心理暗示力-唤醒最好的自己 - (法) 埃米尔·库埃著</a></h1>
+                <a class="post-title-link" href="/2017-07-20-Book-SuggestivePower/" itemprop="url">心理暗示力-唤醒最好的自己 - (法) 埃米尔·库埃著</a></h2>
         
 
         <div class="post-meta">
@@ -1009,9 +1095,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-07-19-Book-MurphysLaw/" itemprop="url">墨菲定律 - 爱德华·墨菲</a></h1>
+                <a class="post-title-link" href="/2017-07-19-Book-MurphysLaw/" itemprop="url">墨菲定律 - 爱德华·墨菲</a></h2>
         
 
         <div class="post-meta">
@@ -1169,9 +1255,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-07-18-IT-Nginx/" itemprop="url">web服务器反代域名访问</a></h1>
+                <a class="post-title-link" href="/2017-07-18-IT-Nginx/" itemprop="url">web服务器反代域名访问</a></h2>
         
 
         <div class="post-meta">
@@ -1290,9 +1376,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-07-17-Book-ArtThinking/" itemprop="url">思考的艺术 - 文森特·赖安·拉吉罗</a></h1>
+                <a class="post-title-link" href="/2017-07-17-Book-ArtThinking/" itemprop="url">思考的艺术 - 文森特·赖安·拉吉罗</a></h2>
         
 
         <div class="post-meta">
@@ -1403,9 +1489,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-07-14-Book-ThinkingFastSlow/" itemprop="url">思考，快与慢 - 丹尼尔·卡尼曼</a></h1>
+                <a class="post-title-link" href="/2017-07-14-Book-ThinkingFastSlow/" itemprop="url">思考，快与慢 - 丹尼尔·卡尼曼</a></h2>
         
 
         <div class="post-meta">
@@ -1491,119 +1577,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-13-Book-Humanity/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-07-13-Book-Humanity/" itemprop="url">人性(优点和弱点) - 戴尔·卡耐基</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-13T08:00:00+08:00">
-                2017-07-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/uploads/ueditor/php/upload/image/20170713/1499911410.png" alt="blob.png"></p>
-<p><img src="/uploads/ueditor/php/upload/image/20170713/1499911453.jpeg" alt="利用人性的弱点的互联网服务.jpeg"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1645,15 +1618,15 @@
                alt="Jack Xia" />
           <p class="site-author-name" itemprop="name">Jack Xia</p>
            
-              <p class="site-description motion-element" itemprop="description">MIS, Gamification, Education</p>
-          
+              <p class="site-description motion-element" itemprop="description"></p>
+           
         </div>
         <nav class="site-state motion-element">
 
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">135</span>
+                <span class="site-state-item-count">136</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

@@ -43,32 +43,6 @@
 
 
 
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
 
 
 
@@ -178,7 +152,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">笔记</p>
+        <h1 class="site-subtitle" itemprop="description">笔记</h1>
       
   </div>
 
@@ -300,6 +274,201 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-20-Python-difflib/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-06-20-Python-difflib/" itemprop="url">difflib文本内容对比 - Python自动化运维</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-20T08:00:00+08:00">
+                2017-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install difflib</li>
+</ol>
+<p>Examples:</p>
+<p>```python</p>
+<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> #!/usr/bin/python</p>
+<p> import difflib</p>
+<p> text1 = “””text1:</p>
+<p> This module provides classes and functions for comparing sequences.</p>
+<p> including HTML and context and unified diffs.</p>
+<p> difflib document v7.4</p>
+<p> add string</p>
+<p> “””</p>
+<p> text1_lines = text1.splitlines()</p>
+<p> text2 = “””text2:</p>
+<p> This module provides classes and functions for Comparing sequences.</p>
+<p> including HTML and context and unified diffs.</p>
+<p> difflib document v7.5”””</p>
+<p> text2_lines = text2.splitlines()</p>
+<p> d = difflib.Differ()</p>
+<p>ff = d.compare(text1_lines, text2_lines)</p>
+<p>n’.join(list(diff))</p>
+<p>比较2个文件的不同之处):</p>
+<h1 id="–-coding-utf-8-–-1"><a href="#–-coding-utf-8-–-1" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p>/usr/bin/python</p>
+<p> import difflib</p>
+<p> import sys</p>
+<p> try:</p>
+<pre><code>    textfile1=sys.argv[1]
+
+    textfile2=sys.argv[2]
+
+except Exception,e:
+
+    print &quot;Error:&quot;+str(e)
+
+    print &quot;Usage: simple3.py filename1 filename2&quot;
+
+    sys.exit()
+
+
+
+def readfile(filename):
+
+    try:
+
+        fileHandle = open (filename, &apos;rb&apos; ) 
+
+        text=fileHandle.read().splitlines()
+
+        fileHandle.close()
+
+        return text
+
+    except IOError as error:
+
+       print(&apos;Read file Error:&apos;+str(error))
+
+       sys.exit()
+
+
+
+if textfile1==&quot;&quot; or textfile2==&quot;&quot;:
+
+    print &quot;Usage: simple3.py filename1 filename2&quot;
+
+    sys.exit()
+
+
+
+
+
+text1_lines = readfile(textfile1) 
+
+text2_lines = readfile(textfile2) 
+
+
+
+d = difflib.HtmlDiff()
+
+print d.make_file(text1_lines, text2_lines)
+</code></pre><p>效果图:</p>
+<p><img src="/uploads/ueditor/php/upload/image/20170619/1497861412.png" alt="blob.png"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-19-Python-IPy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -317,9 +486,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-06-19-Python-IPy/" itemprop="url">IPy - Python自动化运维</a></h1>
+                <a class="post-title-link" href="/2017-06-19-Python-IPy/" itemprop="url">IPy - Python自动化运维</a></h2>
         
 
         <div class="post-meta">
@@ -453,9 +622,9 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-06-19-Python-dnspython/" itemprop="url">dnspython - Python自动化运维</a></h1>
+                <a class="post-title-link" href="/2017-06-19-Python-dnspython/" itemprop="url">dnspython - Python自动化运维</a></h2>
         
 
         <div class="post-meta">
@@ -571,9 +740,9 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-06-13-Book-StructureThinking/" itemprop="url">结构思考力 - 李忠秋 </a></h1>
+                <a class="post-title-link" href="/2017-06-13-Book-StructureThinking/" itemprop="url">结构思考力 - 李忠秋 </a></h2>
         
 
         <div class="post-meta">
@@ -766,9 +935,9 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-06-02-Book-SimpleLogic/" itemprop="url">简单的逻辑学 - 麦克伦尼</a></h1>
+                <a class="post-title-link" href="/2017-06-02-Book-SimpleLogic/" itemprop="url">简单的逻辑学 - 麦克伦尼</a></h2>
         
 
         <div class="post-meta">
@@ -902,9 +1071,9 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-06-01-IT-500W_PV/" itemprop="url">建设一个能承受500万PV/每天的网站</a></h1>
+                <a class="post-title-link" href="/2017-06-01-IT-500W_PV/" itemprop="url">建设一个能承受500万PV/每天的网站</a></h2>
         
 
         <div class="post-meta">
@@ -1039,9 +1208,9 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-05-26-Book-ITIL/" itemprop="url">ITIL</a></h1>
+                <a class="post-title-link" href="/2017-05-26-Book-ITIL/" itemprop="url">ITIL</a></h2>
         
 
         <div class="post-meta">
@@ -1162,9 +1331,9 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-05-19-Book-ConwayLaw/" itemprop="url">康威定律</a></h1>
+                <a class="post-title-link" href="/2017-05-19-Book-ConwayLaw/" itemprop="url">康威定律</a></h2>
         
 
         <div class="post-meta">
@@ -1341,9 +1510,9 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-05-09-Book-LifePsychology/" itemprop="url">心理学与生活 - 南京大学</a></h1>
+                <a class="post-title-link" href="/2017-05-09-Book-LifePsychology/" itemprop="url">心理学与生活 - 南京大学</a></h2>
         
 
         <div class="post-meta">
@@ -1475,9 +1644,9 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017-05-08-Book-IntrPsychology/" itemprop="url">心理学概论(历史) - 清华大学</a></h1>
+                <a class="post-title-link" href="/2017-05-08-Book-IntrPsychology/" itemprop="url">心理学概论(历史) - 清华大学</a></h2>
         
 
         <div class="post-meta">
@@ -1624,225 +1793,6 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-05-03-Book-FBISpeedReadingPeople/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-05-03-Book-FBISpeedReadingPeople/" itemprop="url">FBI教你读心术 - 乔.纳瓦罗</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-03T08:00:00+08:00">
-                2017-05-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>奇异集团前总裁 杰克‧威尔许:<br> 我把六、七成时间都花费在「人」身上，<br> 但还是有百分之二十五的机率，<br> 会看走眼、用错人。 </p>
-<p><a href="/uploads/ueditor/php/upload/file/20170502/1493697985.pptx">《FBI教你读心术》运用发表.pptx</a></p>
-<p><img src="/uploads/ueditor/php/upload/image/20170502/1493706277.png" alt="blob.png"><img src="/uploads/ueditor/php/upload/image/20170502/1493706286.png" alt="blob.png"><br><img src="/uploads/ueditor/php/upload/image/20170502/1493706296.png" alt="blob.png"><img src="/uploads/ueditor/php/upload/image/20170502/1493706309.png" alt="blob.png"><br><img src="/uploads/ueditor/php/upload/image/20170502/1493706328.png" alt="blob.png"><img src="/uploads/ueditor/php/upload/image/20170502/1493706337.png" alt="blob.png"></p>
-<ol>
-<li>真正的吃惊表情转瞬即逝，超过一秒钟便是假装的;</li>
-<li>撒谎者不像惯常理解的那样会回避对方的眼神，反而更需要眼神交流来判断你是否相信他说的话;</li>
-<li>“你去过她家吗?”“不，我没有去过她家”，对问题的生硬重复是典型的撒谎;</li>
-<li>男性鼻子下方有海绵体，摸鼻子代表想要掩饰某些内容;</li>
-<li>手放在眉骨附近表示羞愧;</li>
-<li>描述一连串发生的事情，编造都是按时间顺序进行的，能否流利准确地进行倒叙是判断对方是否说谎的标准之一;</li>
-<li>叙事时眼球向左下方看，这代表大脑在回忆，所说的是真话;而谎言不需要回忆的过程</li>
-<li>说话时单肩耸动，表示对所说的话极不自信，是说谎的表现;</li>
-<li>人在害怕时会出现生理逃跑反应———血液从四肢回流到腿部(做好逃跑准备)，因此手的体表温度会下降;</li>
-<li>明知故问的时候眉毛微微上扬;</li>
-<li>如果对方对你的质问表示不屑，通常你的质问会是真的;</li>
-<li>假笑眼角是没有皱纹的。</li>
-<li>当面部表情两边不对称的时候，极有可能他们的表情是装出来的;</li>
-<li>摩挲自己的手，是一种自我安慰的表现。当你不相信你自己所说的话，这样使自己安心;</li>
-<li>抿嘴两次，典型的模棱两可;  </li>
-<li>双手抱胸、退一步——肢体 抗 议，说明他的话不可信;</li>
-<li>虚情假意不会有眨眼。</li>
-<li>纵火案犯与强 奸犯在动机上有着惊人的相似性。记住两点，生活会更简单——</li>
-<li>重要的不是他是否撒谎，而是为什么要撒谎。</li>
-<li>真相和快乐不可兼得。</li>
-<li>说谎者在说谎前会眼神飘移 在想好说什么谎后 会眼神肯定 如果你冷静的反驳 说谎者会再次出现眼神飘移。  </li>
-<li>撒谎者面对一个提问，通常会先有点失措，然后借假笑的时间迅速思考，想出一个并不高明的谎言，然后异常坚定地回应。而且，会一直自言自语，越说越多，因为沉默的时候，他觉得别人还在怀疑他。</li>
-</ol>
-<h2 id="第一集："><a href="#第一集：" class="headerlink" title="第一集："></a>第一集：</h2><ol>
-<li>倒叙法：先说正叙，后说倒叙。测试说谎</li>
-<li>眼睛法：看着你有可能是在说谎，想看看你是否相信这个谎言。看左边，回忆，真话。</li>
-<li>要三个人保持秘密的方法就是，其中两个人死了。</li>
-<li>心生恐惧，典型的生理逃跑反应，血液从四肢回流到腿部做好逃跑准备，他的手部首先冰凉。</li>
-<li>你去过她家吗?不，我没有去过她家。 这样生硬的重复是典型的谎言。</li>
-<li>真相和快乐不可兼得。</li>
-<li>说话时单肩耸动，表示对所说的话极不自信，身体和语言的不一致，表明在说谎。</li>
-<li>如果吃惊的表情维持超过1秒，那就是在装，说明他在说谎。真正的吃惊表情转瞬即逝。</li>
-<li>眨眼睛就是真情</li>
-<li>瞳孔放大代表有性欲 哈哈</li>
-<li>男人摸鼻子代表想要掩饰</li>
-<li>手放在眉骨附近代表羞愧</li>
-<li>如果眉毛向下紧，那是真惊讶，如果眉毛上抬，表示其实知道而且在说谎</li>
-</ol>
-<h2 id="第二集："><a href="#第二集：" class="headerlink" title="第二集："></a>第二集：</h2><ol>
-<li>说话时倒退一步，代表对自己所说的观点没有信心。</li>
-<li>人们说谎的时候会摸脖子，这是个经典的动作。</li>
-<li>纵火和强奸有非常大的相关性，它们都是为了自我证明而出现的犯罪行为。</li>
-<li>对人说话时向前伸下巴，代表生气或者愤怒。</li>
-<li>语速快，将物体放在胸前，使自己与人竖起一道屏障，这是焦虑的表现。</li>
-<li>如果可以，选择观察，让别人来问问题，这样能更好地观察而避免分心。</li>
-<li>没有预谋、只有一次、并且无其他暴力行为的强奸行为，一般都是罪犯为了证明自己力量的男性主义崇尚者。</li>
-<li>叙述者做出撇嘴的动作(嘴角两边向下，成一个凸行的弧度)，这是一个经典的泄露内心的表情，就是对自己所说的话没有信心，或者有撒谎的嫌疑。mouth shrug\hands shrug</li>
-<li>不要让事实妨碍真相。(这句话同第一集的那句“真相和快乐不可兼得”一样，太精辟了)</li>
-<li>说话时手掌向外一翻一翻的，代表没有信心或者编造故事。</li>
-<li>吃安定可以减少情绪起伏额</li>
-<li>女性如果看到同胞说自己被强奸而无动于衷的话，那说明她们知道这是在说谎，这个根本没有发生。</li>
-</ol>
-<h2 id="第三集"><a href="#第三集" class="headerlink" title="第三集:"></a>第三集:</h2><ol>
-<li>话语重复，并且声音上扬——撒谎</li>
-<li>在学校里，越受欢迎的孩子，越会撒谎，他们能说会道，隐藏自己的感情。研究by福斯特</li>
-<li>当人的脸部表情两边不对称的时候，极有可能他们表现出来的感情是装出来的。</li>
-<li>对自己描述的情况，会出现某些细节遗忘，但能进行及时纠正，很有可能不是在撒谎。如：回忆高度时把100000英尺改为100500英尺。</li>
-<li>说话缓慢轻柔表明内心极度的悲伤和焦虑。</li>
-<li>如果没有合适的问题，就不可能得到正确的答案。(同上一集的不要让事实妨碍真相，呵呵。)其实还有一句，既是在说假话，又不是在撒谎，那就是当不知道自己说的是假话。</li>
-<li>摩挲自己的双手——自我安慰的状态，当你不相信自己在说什么的时候，就会出现这个动作来使自己安心。</li>
-<li>如果先突然大声说话，然后再用手猛拍桌子，这是对可怕事情反应的手势时间差。如果是真的发火，这两个动作会同时进行。</li>
-<li>在刑事案件中，只有清白的人才敢承认自己和死者有过争执。罪犯是不会承认任何事情的，并且表面上会装得很无辜。</li>
-<li>当真正的凶手看到被害者照片的时候，会表现出恶心、轻蔑甚至是害怕。但绝对不会是吃惊。</li>
-</ol>
-<h2 id="第四集："><a href="#第四集：" class="headerlink" title="第四集："></a>第四集：</h2><ol>
-<li>要是有人要将要实施血腥的罪行，就会出现这样的表情：眉毛朝下皱紧，上眼睑扬起，眼周绷紧。</li>
-<li>(微)表情是无意识的，不是通过选择而做出的，因此是控制不了的。并且和国籍没有关系。</li>
-<li>几乎所有的婚礼上，都交织着香槟和怨恨。</li>
-<li>眉毛上扬并挤在一起，那是害怕担忧和恐惧。</li>
-<li>说话时眨眼睛——隐瞒了什么。</li>
-<li>说话犹豫且重复，没有办法组织好自己该说的话，所以明显是在说谎。</li>
-<li>手指指向一边，眼睛却朝另一边看，说谎的时候就会这样，绞尽脑汁编造事实，肢体则完全跟不上。</li>
-<li>亮出中指(fuck的手势)，这是象征性的还有特定意识的下意识手势，充满敌意。</li>
-</ol>
-<h2 id="第五集："><a href="#第五集：" class="headerlink" title="第五集："></a>第五集：</h2><ol>
-<li>被询问时，咬嘴唇、抓耳朵，这是在提高自己的控制感——焦虑的表现。</li>
-<li>如果事先已经准备好了谎言，会强烈希望快点把谎话说完。也就是反应时差(提问和回答之间的停顿时间)很短很短，甚至不足一秒。</li>
-<li>在痛苦的尽头，总是有欢笑。——拉蒙 德 卡波莫</li>
-<li>鼻孔扩大、嘴唇绷紧——发火了，但还在控制当中。</li>
-<li>叙述时低着头并且抚摸自己的额头，这是羞愧的表现。</li>
-<li>脸颊升高，嘴角下撇，这是悔恨的表现。</li>
-<li>适不适合并不是最关键的，关键在于适应改变的能力。达尔文</li>
-<li>轻微的摇头表示“不”，当我们在说“yes”的时候却言不由衷，就会不小心做这个动作。</li>
-<li>眉毛挑起、皱到一起——害怕。</li>
-</ol>
-<h2 id="第六集："><a href="#第六集：" class="headerlink" title="第六集："></a>第六集：</h2><ol>
-<li>问最关键的问题，而且是在当事人毫无准备的情况下，往往可以得出毫无粉饰的表情，我叫它原生态表情，hoho~</li>
-<li>试探一个人是不是说谎，最简单并且最邪恶的办法就是也扯个谎让他往里跳。</li>
-<li>咧嘴并且嘴角向下：这下玩儿完了。</li>
-<li>说话之后手紧握椅子扶手，对自己的表述不认可。</li>
-<li>抿嘴，试图掩盖。</li>
-<li>自我阉割的恋童癖者说实话……(这条实用性不大)</li>
-<li>吞咽表示强烈的情感。</li>
-<li>摸自己的脸颊靠近耳根部位，紧张。</li>
-</ol>
-<h2 id="第七集："><a href="#第七集：" class="headerlink" title="第七集："></a>第七集：</h2><ol>
-<li>在进行类似指纹调查时，只有罪犯，才会知道指纹不是他们自己的。</li>
-<li>在中东，出场顺序是很讲究的。最重要的人往往最后一个入场。</li>
-<li>“……，我只会说一次!”——经典的强势表述，如果说的是真话，就不需要这样。</li>
-<li>显然，科学和商业无法融合。</li>
-<li>“To my knowledge…”，“就我所知……”——这样的开头，也许意味着事实上知道些什么，从另一个角度上来说，也许坦白一切了已经。</li>
-<li>回答问题时咬紧嘴唇，这是焦虑的体现。</li>
-<li>侦破谎言的关键在于，问对问题。</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1884,15 +1834,15 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
                alt="Jack Xia" />
           <p class="site-author-name" itemprop="name">Jack Xia</p>
            
-              <p class="site-description motion-element" itemprop="description">MIS, Gamification, Education</p>
-          
+              <p class="site-description motion-element" itemprop="description"></p>
+           
         </div>
         <nav class="site-state motion-element">
 
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">135</span>
+                <span class="site-state-item-count">136</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
