@@ -274,6 +274,726 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-27-Book-6QuestionPersuadeEveryone/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-07-27-Book-6QuestionPersuadeEveryone/" itemprop="url">6个问题竟能说服各种人 - 迈克尔.潘塔隆</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-27T08:00:00+08:00">
+                2017-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>心理学家迈克尔·潘塔隆博士经过15年潜心研究，将几代顶尖心理学家的研究精华凝缩在这6个万能问题上，通过谈话过程中的反复设问，让对方不自觉地在思维上跟随你，并最终走进一个预设的答案。</p>
+<p>第一问：你为什么想做这件事？（如果是说服自己：我为什么想做这件事？）  </p>
+<p>第二问：你有多想这么做——从1-10选择一个数字，1代表“一点也不想”，10代表“很想”？  </p>
+<p>第三问：你为什么不选择更小的数字？（如果对方选了1，重新问一遍第二个问题，不过稍微换个说法：如果要从1变成2，需要做什么？）  </p>
+<p>第四问：设想一下，如果你做到了，会发生什么好的结果？</p>
+<p>第五问：对你来说，这些好的结果为什么非常重要？</p>
+<p>第六问：接下来你会做什么，如果你想做的话？</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-24-MySQL-DefaultCharacterSet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-07-24-MySQL-DefaultCharacterSet/" itemprop="url">mysql中通过my.cnf设置默认字符集utf-8</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-24T08:00:00+08:00">
+                2017-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>/etc/my.cnf</p>
+<p>[client]</p>
+<p>default-character-set=utf8</p>
+<p>[mysql]</p>
+<p>default-character-set=utf8</p>
+<p>[mysqld]</p>
+<p>init_connect=’SET collation_connection = utf8_unicode_ci’</p>
+<p>init_connect=’SET NAMES utf8’</p>
+<p>character-set-server=utf8</p>
+<p>collation-server=utf8_unicode_ci</p>
+<p>skip-character-set-client-handshake</p>
+<p>*注意：在 mysqld 中使用 default-character-set 设置， mysql 启动会报错而无法启动。</p>
+<p>关于utf8字符集，我们国内默认选择：utf8_general_ci而不是utf8_unicode_ci，</p>
+<p>区别在于字符对比上</p>
+<p>请看mysql上面的例子：</p>
+<p>对与general来说 ß = s 是为true的</p>
+<p>但是对于unicode来说 ß = ss 才是为true的，</p>
+<p>其实他们的差别主要在德语和法语上，所以对于我们中国人来说，一般使用general，因为general更快</p>
+<p>如果你对德语和法语的对比有更高的要求，才使用unicode，它比general更准确一些（按照德语和法语的标准来说，在对比或者排序上更准确）</p>
+<p>看看这个文档：<a href="http://dev.mysql.com/doc/refman/5.0/en/charset-unicode-sets.html" target="_blank" rel="noopener">http://dev.mysql.com/doc/refman/5.0/en/charset-unicode-sets.html</a></p>
+<p>另外还有utf8_bin_ci也是比较常用的哦，在字符对比时，unicode和general都不是大小写敏感的，所以如果要求大小写敏感的话，就使用bin</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-21-OpenSource-SaltSlsRepo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-07-21-OpenSource-SaltSlsRepo/" itemprop="url">Saltstack sls 在git上的repo (win & Linux)</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-21T08:00:00+08:00">
+                2017-07-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>测试和学习Saltstack status sls 文件编写时找到的一些现成的案例:</p>
+<p>Saltstack sls for Windows 在git上的repo</p>
+<p><a href="https://github.com/Jianfengxia/salt-winrepo-ng" target="_blank" rel="noopener">https://github.com/Jianfengxia/salt-winrepo-ng</a></p>
+<p>Saltstack sls for Linux 在git上的repo</p>
+<p><a href="https://github.com/Jianfengxia/salt-states/blob/master/salt/php/init.sls" target="_blank" rel="noopener">https://github.com/Jianfengxia/salt-states/blob/master/salt/php/init.sls</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-20-Book-SuggestivePower/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-07-20-Book-SuggestivePower/" itemprop="url">心理暗示力-唤醒最好的自己 - (法) 埃米尔·库埃著</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-20T08:00:00+08:00">
+                2017-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="心理暗示的魅力"><a href="#心理暗示的魅力" class="headerlink" title="心理暗示的魅力"></a>心理暗示的魅力</h1><h2 id="做心想事成的自己"><a href="#做心想事成的自己" class="headerlink" title="做心想事成的自己"></a>做心想事成的自己</h2><p>世间有一种法则，叫吸引力法则；因为，宇宙中存在一种法则，叫吸引力法则。——“具有金钱意识的人经常吸引金钱，具有贫穷意识的人总是引来贫穷。通过你的思想、语言和行为，它们将为你所意识到的事物打开道路，无论富有或贫穷，都恰如你所想的状况那样满足你。”</p>
+<h2 id="小心暗示的阴影"><a href="#小心暗示的阴影" class="headerlink" title="小心暗示的阴影"></a>小心暗示的阴影</h2><p>每一个人的意识在自我运转的时候都会产生种种习惯性的思维，这些思维就像是刻刀，在潜意识的木板上留下一条条深深的刻痕。如果这些思维是积极的、向上的、有益的，那么潜意识就会雕刻出一幅精美的、壮阔的、成功的画卷。相反，如果这些思维是消极的、颓废的、灰暗的，那么潜意识中留下的就只能是一块被刻得乱七八糟的木板。</p>
+<p>其实，人生中的种种，生命中的一切一切，财富也好，健康也好，幸福也好，快乐也好，都与暗示力息息相关。积极的暗示就像是太阳，带给我们明媚与美好，消极的暗示则像是阳光下的阴影，让人颓丧与苦痛。但无论是阳光还是阴影，晴天还是阴天，实际上都是我们自己的选择。天堂地狱，不过一念之间，而这一念，源于我们自己！</p>
+<h2 id="激发你强大的气场"><a href="#激发你强大的气场" class="headerlink" title="激发你强大的气场"></a>激发你强大的气场</h2><p>气场是一种生命的特质，是一种通过肢体、语言、行动等表现出的身心状态。</p>
+<p>官场中不怒自威的领导，商场中纵横捭阖的巨擘，职场中如鱼得水的精英，等等，都是气场强大的人。他们被同事认同，被朋友欣赏，被下属爱戴，被旁人艳羡，不是因为其他，正是因为他们内心信念的强大。</p>
+<h2 id="心理暗示和催眠术"><a href="#心理暗示和催眠术" class="headerlink" title="心理暗示和催眠术"></a>心理暗示和催眠术</h2><p>心理暗示力是催眠必不可少的助力！没有心理暗示力的参与，催眠不可能完成，更不可能成功！</p>
+<p>按照催眠程度的不同，也可以划分为三类，即深度催眠、中度催眠和浅度催眠。在浅度催眠状态下，被催眠者能够随意行动，睡意不强，清醒之后能记起催眠过程中的所有事情；中度催眠状态下，被催眠者不能随意行动，睡意较强，清醒之后只记得催眠过程中的部分情况；而深度催眠状态下，被催眠者睡意很强，不能随意行动，清醒之后完全不记得催眠状态下的任何事情。这种状态下，被催眠者完全受催眠师的支配，如果催眠师心存歹意，对病人来说将是一件非常危险的事情。</p>
+<p>研究表明，在催眠状态下，人体会分泌出一种非常奇特的物质，这种物质不仅能够减轻痛苦，还能加快伤口的愈合，相比于人工的麻醉药，这种叫作内咖肽的天然麻醉剂无疑更加有效而实惠。而且在避免认知冲突方面，催眠术的效果也非常好。举个例子来说，如果用蓝色的墨水写一个“红”字，然后询问同一个人写字的墨水是什么颜色的，在未被催眠的状态下，被问者做出回答的时候会犹豫甚至会答错，但在催眠状态下却能毫不犹豫地给出正确答案。</p>
+<h1 id="心理暗示的魔力"><a href="#心理暗示的魔力" class="headerlink" title="心理暗示的魔力"></a>心理暗示的魔力</h1><h2 id="潜意识的美容师"><a href="#潜意识的美容师" class="headerlink" title="潜意识的美容师"></a>潜意识的美容师</h2><p>一个坚信自己很美丽的人，不会懈怠去打扮，相反，他（她）会主动装饰与诠释自己的美丽，并将这份美丽带给周围所有的人，在得到赞美的同时更加坚信自己的美丽，从而进入一个“美丽—化妆—更美丽”的良性循环中。</p>
+<h2 id="音乐疗法"><a href="#音乐疗法" class="headerlink" title="音乐疗法"></a>音乐疗法</h2><p>调查显示，一些特定的、舒缓的、轻快的音乐能够与人体产生一种神奇的频率共振，让人因为恐惧、压力、焦虑等种种原因超负荷的身体渐渐放松下来，让人血压降低、心率恢复正常、呼吸重新变得平稳、代谢再次充满活力。</p>
+<p>除了放松，音乐还有许多神奇的作用，比如，调节大脑的平衡能力、安神醒脑、增强智力等作用。研究表明，不听音乐的人心情指数普遍都偏低，而经常听音乐的人不仅人生态度更加积极，而且寿命也要长很多。</p>
+<h2 id="个人磁场"><a href="#个人磁场" class="headerlink" title="个人磁场"></a>个人磁场</h2><p>如果你想成功，你可以每天早晨面对镜子说：“每一天我生活的每一个方面都在越变越好！”这句话每天要重复说15次以上，坚持一个月，你会发现神奇的效果。你渴望成功的潜意识增强了，身上自信的磁场增强了。</p>
+<h2 id="奇妙的精神脸谱"><a href="#奇妙的精神脸谱" class="headerlink" title="奇妙的精神脸谱"></a>奇妙的精神脸谱</h2><p>心情图谱的画法：</p>
+<p>首先，准备好纸笔，然后在白纸上画出一条横向的直线（当然，你也可以选择纵向，这没什么大不了）。</p>
+<p>直线画好了？很好，让我们接着进行下一步：将直线平均分成十个刻度，用1-10这十个数字分别标记出来。不要告诉我你不会画，这和画数轴没有任何区别，数学课上我们都学过。</p>
+<p>好吧，数轴完成，一切准备工作就绪，最重要的步骤现在开始：像我一样，静下心来想一想，不用想什么美好或者糟糕的事情，那太复杂，我们只需要想一些词汇，确切地说是三类词汇。</p>
+<p>一类是用来描述坏心情的，如忧伤、焦虑、痛苦、愤怒、悲痛、郁闷、烦躁、沮丧等；</p>
+<p>一类是用来描述一般心情的，如平淡、无趣、平静、索然无味、麻木等；</p>
+<p>一类是用来描述好心情的，如高兴、兴奋、满足、幸福、欣慰、感恩、快乐、激动等。</p>
+<p>想好了？不错。下面，和我一起，选出十个词汇，对，就是十个词汇，一个不能多，一个不能少，并且，请注意，这十个词汇必须将上述三大心情类别全部都包括进去。</p>
+<p>选好后，按照坏心情——一般心情——好心情的顺序依次将它们写在数轴的十个刻度上。如1-痛苦，2-焦虑，3-烦闷，4-孤独，5-平静，6-淡定，7-欣慰，8-快乐，9-兴奋，10-幸福。</p>
+<p>写好了？那么，参照这个心情图谱，来衡量一下你自己的心情吧。</p>
+<p>假如你刚刚被公司辞退，内心十分的痛苦，那么你的心情指数毫无疑问是1；假如你婚姻美满、工作轻松、生活优越，满心幸福，那么你的心情指数自然就是10；如果你刚刚被上司表扬，职位得到晋升，既快乐又兴奋，那么你的心情指数则是8.5。</p>
+<p>不要怀疑，事实上，心情图谱虽然很简单，但它却能最直观地表现出一个人的情绪，能最简单地表明一个人的心情特点。</p>
+<p>假如一个人的心情指数总是在相邻的两个数字之间徘徊，不是1就是2，不是9就是10，那么这个人的心情图谱就比较单一，情绪也非常稳定；相应的，假如一个人的心情指数波动非常大，前一刻是2，下一刻就变成了9，前一刻是10，下一刻就变成了1，忽悲忽喜，那么这个人的心情图谱就很细腻很丰富，但他的情绪却又非常的不稳定。</p>
+<p>除此之外，通过心情图谱，我们还能看出许多其他的东西，比如，一个人的心态和人生态度：假如一个人的心情图谱长期偏左，心情指数总是在5之下徘徊，那么这个人必然是一个消极的人；相反，如果长期偏右，则表明这个人非常乐观，心态也十分积极。</p>
+<h1 id="心理暗示的关键"><a href="#心理暗示的关键" class="headerlink" title="心理暗示的关键"></a>心理暗示的关键</h1><h2 id="一蹴而就只是梦"><a href="#一蹴而就只是梦" class="headerlink" title="一蹴而就只是梦"></a>一蹴而就只是梦</h2><p>路要一步一步地走，饭要一口一口地吃，心理暗示也一样。</p>
+<p>暗示影响潜意识，潜意识影响我们的行为，适当的行为能够将理想转化为现实，然而，这一切都需要潜移默化，都需要时间。罗马不是一天建成的，任何目标的实现也不可能一蹴而就，它需要持续关注，需要不断重复。</p>
+<p>对！持续！重复！这两点很重要！</p>
+<p>记住，一蹴而就只是梦！</p>
+<p>记住，告诉自己：“每一天，我生活的每一个方面都在变得越来越好！”</p>
+<h2 id="“吸尘器”必不可少"><a href="#“吸尘器”必不可少" class="headerlink" title="“吸尘器”必不可少"></a>“吸尘器”必不可少</h2><p>举个例子来说，一个人想要创业，想要致富，但他拿不准自己应该走哪条路，应该做什么来创造财富，他担心投资失败，他会设想创业过程中遭遇的种种困难，会迟疑，会犹豫，会放弃，会前怕狼后怕虎，这都没什么，人之常情而已，但一旦他做出了某种决定，比如要开一家理发店，并且已经租好了店面，正在装修，那么，这个时候，再去患得患失就完全没有意义了，这个时候，一切的消极思想都是累赘，是灰尘，应该被清除。只有这样，创业者才可能成功。</p>
+<h2 id="期望毋庸置疑"><a href="#期望毋庸置疑" class="headerlink" title="期望毋庸置疑"></a>期望毋庸置疑</h2><p>心理暗示的规律就是信念！</p>
+<p>相信自己的信念，相信自己的期望，不要怀疑，一丝一毫的怀疑也不能有！</p>
+<p>暗示力是力量之源，而信念则是暗示力之源。</p>
+<p>我们的信念，我们心中的坚持，才是暗示力的核心，是影响潜意识的关键。这是真理！</p>
+<p>你的潜意识，你的暗示力只忠实于你内心最真实的信念，只反应你内心最真实的思想，只回应你心中最真实的期望，所以，不要信口开河，不要随随便便地许诺，如果你真的想成功，真的期望成功，期望健康，期望幸福，期望快乐，那么，就不要去质疑自己的期望，一丝一毫都不可以！</p>
+<p>期望成为亿万富翁？可以！但你要保证你的内心也是这样想的，你要保证你真的想要成为亿万富翁，你要保证你相信自己能够成为亿万富翁。如果你做不到，那么，抱歉，暗示力的神奇作用不会发生在你的身上。我的理论对你来说也只是谬论，而我，并不承认自己是一个骗子。</p>
+<p>期望身体健康？可以！但你要保证你的内心真的对健康充满了渴望，你要保证你真的想要身体健康，你要保证你真的相信自己的身体会健康。如果你做不到，如果你在期望健康的同时还怀疑自己得了这样那样的疾病，还想着种种“不健康的征兆”，那么，抱歉，暗示力不能给你带来健康。</p>
+<p>古今中外，祈祷从来都是最神秘也最常见的“克服困难”的方式，人们在遭遇窘境的时候也常常会选择祷告。这不是迷信，而是心理暗示的一种。</p>
+<p>祷告的时候，人们的思想相对纯粹，祷告者对“神灵”也充满了信任，他们相信神灵能够为他们解决困难，相信神灵能够创造奇迹，不知不觉地，他们的脑海中就会形成一幅问题解决之后的画面，就会出现一些摆脱困境之后才会出现的美好景象，这些景象出现的多了，出现的时间长了，就会形成一种特别的暗示，当潜意识接收到这一暗示的时候，会将它当作真实的情况进行反应，于是，“上帝”就真的显灵了，问题迎刃而解。</p>
+<p>记住这句话：只要我们相信，我们每一个人都是自己的上帝。</p>
+<h2 id="放松的奇效"><a href="#放松的奇效" class="headerlink" title="放松的奇效"></a>放松的奇效</h2><p>例子：明天你要参加高考，你知道自己需要充分而良好的睡眠，你早早地就躺在床上，告诉自己我要睡觉，但最后你却失眠了。</p>
+<p>诸如此类的例子在日常生活中其实有很多，你越想做成某件事就越做不成，你越想找到某件东西就越找不到……这很正常。是的，很正常。你的意志对行动干预得太多了，在意志的强迫命令下，你的大脑和身体会过分紧张，会超负荷运作，紧张疲累又会带来无尽压力，压力过大了，焦躁、不安、疲累等种种负面情绪就会接踵而至，失败、事与愿违也就没什么好奇怪的了。</p>
+<p>当意志力和心理暗示力发生冲突的时候，胜利的通常都是暗示力，但这并不是说意志力在暗示力面前是毫无抵抗力的，也不是说显意识在潜意识面前就甘愿退却。相反，意志力很强大，显意识也很强大，当强大的意志横亘在暗示和潜意识之间的时候，暗示其实很难进入潜意识，而没有暗示的参与，潜意识本身并不会与意志力发生对抗，更不会去争什么。</p>
+<p>暗示力、潜意识发生作用的条件就是没有意识，是放松，是顺其自然。如果你刻意去强调什么，刻意去暗示什么，那么这种暗示其实已经算不上是暗示，而是明示，是命令，是意志了。</p>
+<p>放松有奇效，自我暗示之前先放松，去除压力，效果会出奇的好。</p>
+<p>放松的三种方法：</p>
+<p>方法一：冥想。找一个能让你最舒服的姿势，坐下，然后慢慢地呼吸，对，慢慢地吸气，慢慢地呼气，一次，两次，三次……注意你的呼吸，注意你的心跳，不要太久，一小会儿就好，然后，调整你的身体平衡，让重量均匀的散布到身体的各个部位，然后，轻轻地告诉自己：“放松，放松……”</p>
+<p>好吧，你放松了，对吗？</p>
+<p>方法二：对叶想象法。找一片树叶，柳树叶、杨树叶、梧桐树叶，什么树叶都可以，仔细地观察它，观察它的形状、颜色、脉络，然后闻一闻它的气味，摸一摸它的质地，接着，合上眼睛，想象你进入了一片树林，想象一下你在林中看到了什么，听到了什么，感觉到了什么，闻到了什么，触摸到了什么，在想象的树林中徘徊一阵后，回到你原来的位置，再默默地回味一遍，最后深呼吸十次，缓缓地睁开眼睛。</p>
+<p>然后……你难道还没有放松吗？</p>
+<p>方法三：空明法。这个最简单，平躺在床上，深呼吸一分钟，什么都不要想，在心中默念：“放松，放松”，反复多次，然后，你放松了。</p>
+<h1 id="打开密室的钥匙"><a href="#打开密室的钥匙" class="headerlink" title="打开密室的钥匙"></a>打开密室的钥匙</h1><h2 id="我的地盘我做主"><a href="#我的地盘我做主" class="headerlink" title="我的地盘我做主"></a>我的地盘我做主</h2><p>无谓的攀比，畸形的比较，用别人的标准来衡量自己的价值，这样的行为，就像是将自己的地盘完全交给别人，让别人做主一样，滑稽而可悲。</p>
+<p>我们独一无二，所以，我们不必去仰望，不必去敬畏，不必去羡慕。</p>
+<h2 id="接受真实的自己"><a href="#接受真实的自己" class="headerlink" title="接受真实的自己"></a>接受真实的自己</h2><p>我们总认为自己能力有限，认为自己不够优秀，但实际上我们的能力比自己所认识的强大万倍，我们自身也比自己印象中的优秀千万倍。我们完全可以不断地进行自我肯定，我们完全可以在潜意识中为自己勾勒出一幅又一幅美好的画面。虽然这样的美好看上去很虚妄，它不能让我们拥有超能力，也不能给我们带来财富和权力，但它的神奇却毋庸置疑。因为，它给我们带来了契机！它就像是一个好的导师，引领着我们真正地认识自己，进而接受真正的自己。</p>
+<h2 id="送自己一束玫瑰"><a href="#送自己一束玫瑰" class="headerlink" title="送自己一束玫瑰"></a>送自己一束玫瑰</h2><p>“积极的思考能够带来成功”“我一定能够做到”“假设是一种法则”“拥有坚定的信念比拥有任何才华都更重要”“你怎样看待自己，别人也会怎样看待你”“想最倒霉的事就是最倒霉的人”“想最快乐的事就是最快乐的人”——事实上，这些关于怎样创造幸福、开拓未来、缔造财富、拥抱成功的观点并不是我的独创，它来自于库埃先生，一位令人尊敬的学者，是他第一次揭示了获得成功人生的心理根源。他常告诉人们：“每一天，我生活的每一个方面正在变得越来越好。”这句简单而又蕴含深刻哲理的话，我非常喜欢。</p>
+<h2 id="不要抗拒演讲"><a href="#不要抗拒演讲" class="headerlink" title="不要抗拒演讲"></a>不要抗拒演讲</h2><p>美国著名人际关系学大师、心灵圣经《人性的弱点》的作者戴尔·卡耐基曾经做过一个非常有趣的调查：他询问他的学生，你为什么要来上我的课？你想要从我的课上学到什么？在卡耐基看来，自己得到的答案应该是五花八门、千奇百怪的，然而，事实却和这位大师开了一个不大不小的玩笑：他得到的答案的确很多，但这些答案却惊人的相似！</p>
+<p>“我想要表现自己，但我又害怕表现自己。当我被要求站起来回答问题、自我介绍或者做其他陈述的时候，我不知道自己应该怎么办，我浑身不舒服，我感到不自然，我的大脑仿佛一下子就乱了。我不知道该怎么说话，我不知道该如何去思考，我的注意力无法集中，我不知道自己要表达什么，更不知道应该如何表达。因此，我来了。我想获得自信，我想大大方方地站起来讲话，我想侃侃而谈，我想在社交场合如鱼得水，我想在公众面前思维清晰，我想让自己的话更有说服力，我想让自己的气场变得更加强大。”百分之九十以上的答案，概括起来，便是如此。</p>
+<h1 id="内心的攻防战"><a href="#内心的攻防战" class="headerlink" title="内心的攻防战"></a>内心的攻防战</h1><h2 id="固守内心的城墙"><a href="#固守内心的城墙" class="headerlink" title="固守内心的城墙"></a>固守内心的城墙</h2><p>坚守自己内心的城墙，不受任何消极的外源暗示的影响，让建设性的积极暗示占据自己的内心。</p>
+<h1 id="人生的重塑离不开暗示的帮助"><a href="#人生的重塑离不开暗示的帮助" class="headerlink" title="人生的重塑离不开暗示的帮助"></a>人生的重塑离不开暗示的帮助</h1><h2 id="“想要”激发正能量"><a href="#“想要”激发正能量" class="headerlink" title="“想要”激发正能量"></a>“想要”激发正能量</h2><p>你的潜意识只相信你“想要”的，只顺应你“能”的，你“不想要”的，你“不能”的，它绝对不会给你。换句话说，想要才是硬道理，才能激发正能量。专注于你想要的事物，专注于你想要办成的事情，专注于你想要完成的目标，专注于你想要实现的梦想，只要你能用自己的专注将这些全部都清晰地传达给潜意识，它就会给你回应，帮你实现。</p>
+<p>还是那句话，切记，你“想要”的东西中千万不要包含否定的词汇，否则潜意识肯定会断章取义。</p>
+<p>潜意识的能量就像是一条河，你挖出怎样的航道，它就会怎样流淌；你引导它流向哪里，它就会流向哪里。正如吸引力法则所说的那样，正能量吸引正能量，负能量吸引负能量，积极的思想吸引积极的事物，消极的思想则吸引消极的事物。</p>
+<h2 id="把握主动权，人生不设限"><a href="#把握主动权，人生不设限" class="headerlink" title="把握主动权，人生不设限"></a>把握主动权，人生不设限</h2><p>如果上帝告诉你，你将来肯定能成为一位市长，你肯定不会满足于只当市长，而是希望自己能够成为总统。人就是这样，未知才能带来恐惧，因为未知，因为不知道自己的极限在哪里，才会轻易地说放弃，才会轻易地交出人生的主动权。</p>
+<p>所以，不要迟疑了，牢牢把握人生的主动权吧，这是你天生的权力。什么？你不知道怎样把握？那么，跟着我念：</p>
+<p>我能行！我一定行！</p>
+<p>我相信自己！我爱自己！</p>
+<p>我一定会成功！我一定会幸福！我一定会快乐！我一定会健康！</p>
+<p>多念几遍，每天都念，念的同时不要忘记去展开行动！只要你这样做了，即便是命运女神，也无法将主动权从你的手中抢走。</p>
+<h2 id="榜样的力量很伟大"><a href="#榜样的力量很伟大" class="headerlink" title="榜样的力量很伟大"></a>榜样的力量很伟大</h2><p>因为职业的原因，我曾经出入过许多成功人士的书房或办公室，他们或是政府官员，或是企业家，或是技术精英，或是银行家，他们的办公室和书房布置风格也各有不同，或典雅，或古朴，或简洁，或庄重，或浪漫，或时尚，但他们的书房办公室却有几个共同点，那就是都有一些画像，如著名金融家的画像、杰出政治家的画像；都有一条或几条标语，如“我成功，因为志在要成功”“只有经历过地狱般的折磨，才有征服天堂的力量”。</p>
+<p>陈设自然是普通的陈设，但它们却又不普通，因为它们无时无刻不散发着暗示的力量！</p>
+<h1 id="挥舞暗示的魔棒-游刃人生"><a href="#挥舞暗示的魔棒-游刃人生" class="headerlink" title="挥舞暗示的魔棒 游刃人生"></a>挥舞暗示的魔棒 游刃人生</h1><h2 id="人才是暗示练成的"><a href="#人才是暗示练成的" class="headerlink" title="人才是暗示练成的"></a>人才是暗示练成的</h2><p>许多人说，人的性格来自于遗传，但事实上，调查显示，遗传因素对人性格的影响并不太大，后天的环境，或者说是后天生活环境中，来自周围人和父母的暗示才是决定人的性格的最关键因素。</p>
+<p>所以，无论你是不是有孩子，无论你有没有获得父母的殊荣，都记住这句话：用积极的暗示包裹孩子，让孩子在暗示中健康成长，这是培养人才的最佳方式。</p>
+<h2 id="教育领域的误区"><a href="#教育领域的误区" class="headerlink" title="教育领域的误区"></a>教育领域的误区</h2><p>一块原木，如果你用斧头将它劈成柴火，那么它就只能在锅炉房中燃烧；如果你用雕刀把它雕刻成一尊木雕，那么它就会出现在展卖艺术品的货架上；如果你将它放在原地不管不问，那么它就会在森林中慢慢地腐朽。</p>
+<p>我们的孩子，其实就是一块原木，是成为木雕，还是成为柴火，是走入多彩的人类社会，还是默默地在森林中腐朽，实际上，全部都取决于教育。</p>
+<h2 id="人才需要爱的浇灌"><a href="#人才需要爱的浇灌" class="headerlink" title="人才需要爱的浇灌"></a>人才需要爱的浇灌</h2><p>父母们必须要注意，你可以争吵，但不要当着孩子的面争吵；你可以粗鲁，但在孩子面前请保持优雅；你可以卑微，但请让孩子看到你的高大；你可以胆怯，但不要让孩子看到你的胆怯；你可以抱怨整个世界，但请不要让孩子觉得这个世界是灰暗的；你可以愤怒、悲伤、颓丧，你可以酗酒、抽烟、怒骂，但，还是那句话，不要让你的孩子看到！</p>
+<h2 id="说服是一种技术活儿"><a href="#说服是一种技术活儿" class="headerlink" title="说服是一种技术活儿"></a>说服是一种技术活儿</h2><p>说服是一门技术活儿，暗示的力量想要发挥也需要其他方法的配合，而不断地反问无疑是一个非常不错的方法。假如你不相信或者对此心存疑惑，不妨去试试，试着去改变你朋友、亲人、同事的想法吧，不过，你必须注意一点，你不能心怀恶意，并且，你也没有必要为了试验而付出被讨厌的代价。</p>
+<h2 id="学习成为一个暗示高手"><a href="#学习成为一个暗示高手" class="headerlink" title="学习成为一个暗示高手"></a>学习成为一个暗示高手</h2><p>有一次我去买车，碰到一个非常有意思的销售员，他卖车的时候，从来不主动向客户推荐车型，也从来不说“我觉得您该买……”这样的话。他会将身段放得很低，像个小学生一般请客户指点他，让客户觉得一切都是自己在主导，而这位推销员说的话却很少，只是在关键的时候用请教的口吻提上那么一两句，不知不觉中，客户就按照推销员的期望买了车，而且，客户会非常满意，因为他没有被推销员“牵着鼻子走”，一切都是自己的选择。但，实际上呢？</p>
+<p>一个高明的心理暗示专家，绝不会让被暗示者觉得自己接收了暗示，而是会让被暗示者觉得一切都是自己在做主，很显然，无论是那位委婉的副总裁，还是格莱特以及推销员，都是这样的高手。</p>
+<p>要成为“高手”，你就首先要明白一点：人与人相处的时候，第一行为并不是吸引，而是本能的排斥。所以，要想成为“高手”，你就要先做到让别人不排斥你，你就要懂得人际交往中的三种特殊心态：</p>
+<p>第一，接近心态。</p>
+<p>第二，相似心态。</p>
+<p>第三，互补心态。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-19-Book-MurphysLaw/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-07-19-Book-MurphysLaw/" itemprop="url">墨菲定律 - 爱德华·墨菲</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-19T08:00:00+08:00">
+                2017-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>“墨菲定律”（英文：Murphy’s Law）<br>主要内容有四个方面：</p>
+<ul>
+<li>任何事都没有表面看起来那么简单；</li>
+<li>所有的事都会比你预计的时间长；</li>
+<li>会出错的事总会出错；</li>
+<li>如果你担心某种情况发生，那么它就更有可能发生。</li>
+</ul>
+<p>“墨菲定律”的根本内容是“凡是可能出错的事有很大几率会出错”，指的是任何一个事件，只要具有大于零的机率，就不能够假设它不会发生。</p>
+<p>成立条件：</p>
+<ol>
+<li>事件有大于零的概率；</li>
+<li>样本足够大（比如时间足够长，人数足够多等）</li>
+</ol>
+<p>在科学和算法方面，它与英文所谓的“worst-case scenario（最劣情形）”同义，数学上用大O符号来表示。例如，对插入排序来说，最劣情形即是要排序的阵列完全倒置，必须进行 n*(n-1) 次的置换才能完成排序。在实验上，证明了最劣情形不会发生，并不代表比它轻微的情形就不可能，除非能够很有信心的推论事件的概率分布是线型的。</p>
+<p>墨菲定律的原句已经派生出以下的版本：</p>
+<ol>
+<li>别试图教猫唱歌，这样不但不会有结果，还会惹猫不高兴。</li>
+<li>别跟傻瓜吵架，不然旁人会搞不清楚，到底谁是傻瓜。</li>
+<li>不要以为自己很重要，因为没有你，太阳明天还是一样从东方升上来。</li>
+<li>笑一笑，明天未必比今天好。</li>
+<li>好的开始，未必就有好结果；坏的开始，结果往往会更糟。</li>
+<li>你若帮助了一个急需用钱的朋友，他一定会记得你——在他下次急需用钱的时候。</li>
+<li>有能力的——让他做；没能力的──教他做；做不来的──管理他。</li>
+<li>你早到了，会议却取消；你准时到，却还要等；迟到，就是迟了。</li>
+<li>你携伴出游，越不想让人看见，越会遇见熟人。</li>
+<li>你爱上的人，总以为你爱上他是因为：他使你想起你的老情人。</li>
+<li>你最后硬着头皮寄出的情书；寄达对方的时间有多长，你反悔的时间就有多长。</li>
+<li>东西越好，越不中用。</li>
+<li>一种产品保证60天不会出故障，等于保证第61天一定就会坏掉。</li>
+<li>东西久久都派不上用场，就可以丢掉；东西一丢掉，往往就必须要用它。</li>
+<li>你丢掉了东西时，最先去找的地方，往往也是可能找到的最后一个地方。</li>
+<li>你往往会找到不是你正想找的东西。</li>
+<li>你出去买爆米花的时候，银幕上偏偏就出现了精彩镜头。</li>
+<li>另一排总是动的比较快；你换到另一排，你原来站的那一排，就开始动的比较快了；你站的越久，越有可能是站错了排。</li>
+<li>一分钟有多长？ 这要看你是蹲在厕所里面，还是等在厕所外面。</li>
+<li>计划没有变化快。</li>
+<li>欠账总是要还的。</li>
+<li>做恶总是要遭报应的，不是不报，只是时间未到。</li>
+<li>该来的总是要来的。</li>
+<li>明天又是一个新的开始。</li>
+<li>你越是害怕的事物，就越会出现在你的生活中。</li>
+<li>往往等公车太久没来，就走了的人，刚走公车就来了。</li>
+<li>关键时刻掉链子。</li>
+<li>越想要什么就越不能得到什么。</li>
+<li>人出来混，总是要还的。</li>
+<li>怕什么，来什么。</li>
+<li>若想人不知除非己莫为。</li>
+<li>你上班经常带的一样东西（U盘/银行卡/会员卡等等），当有一天你觉得反正天天带都用不上，不带了。而实际可能就在你没带它的那一天，你真的就需要它了。</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-18-IT-Nginx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -838,630 +1558,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-11-Book-TheRoadLessTraveled4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-07-11-Book-TheRoadLessTraveled4/" itemprop="url">少有人走的路4：心灵地图 - 托马斯·摩尔</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T08:00:00+08:00">
-                2017-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>20世纪人类最大的病痛是“心灵的沦丧”。心灵沦丧的我们物质越来越丰富，却越来越感觉不到幸福；相处的技巧越学越多，婚姻关系却越来越难搞；经历的事情越来越多，感动却越来越少。针对当下的种种问题，本书提供了一种新的解决方式。它无需高深的哲理，更与医学技术无涉，你只需要重新审视日常生活，就能找回久违的快乐与满足。其实，精心挑选的一束鲜花、浆洗得干干净净散发着香味儿的桌布，这些微末细节都可以滋养干涸已久的心灵，让我们从中获得满足与幸福。</p>
-<p>人的一生有许多追求和目的，这是我们人生的动力。许多人在生活中遭受惨败，不是因为他们的追求和目标错误，而是不能用合理的方法去达到自己的目标。  </p>
-<p>我们可以运用一些工具来使自己能合理地达到自己的目的，这是现代社会人生活的一套积极的“纪律”；也是人们生活的基本原则：  </p>
-<ol>
-<li>不逞一时之快; </li>
-<li>承担责任; </li>
-<li>忠于真相; </li>
-<li>保持平衡。</li>
-</ol>
-<p>这些纪律使我们处理问题更为合理；是几种解决我们生活中的痛苦和让我们寻求到快乐的工具。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-10-Book-TheRoadLessTraveled3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-07-10-Book-TheRoadLessTraveled3/" itemprop="url">少有人走的路3:与心灵对话 -M·斯科特·派克</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-10T08:00:00+08:00">
-                2017-07-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>如果说《少有人走的路》讲的是心智成熟的旅程，《少有人走的路2》讲的是勇敢地面对谎言，那么这本《少有人走的路3:与心灵对话》讲的则是：人生错综复杂。每个人都必须走自己的路。生活中没有自助手册，没有公式，没有现成的答案，某个人的正确之路，对另一个人却可能是错误的。《少有人走的路3:与心灵对话》将告诉你，人生错综复杂，我们应为生活的神奇和丰富而欢喜，而不应为人生的变化而沮丧。生活是什么？生活是在你已经规划好的事情之外所发生的一切。所以，我们应该对变化充满感激！</p>
-<p><img src="/uploads/ueditor/php/upload/image/20170710/1499649551.png" alt="blob.png"></p>
-<ol>
-<li>自律:<ol>
-<li>推迟满足感</li>
-<li>承担责任</li>
-<li>尊重事实</li>
-<li>保持平衡</li>
-</ol>
-</li>
-<li>爱:<ol>
-<li>爱是自律的原动力</li>
-<li>爱与不爱的区别取决于 人的意识思维和潜意识思维的目标一致性</li>
-<li>爱是长期渐进的过程,爱是自我完善,意味着心智不断成熟</li>
-<li>爱自己,爱他人 - 强化自我成长的力量, 才能成为他人力量的源泉,她意味着持续努力,超越自我界限  </li>
-</ol>
-</li>
-<li>成长与信仰:<ol>
-<li>信仰 - 对于世界的规律和本质的特定看法和信念</li>
-<li>认知 - </li>
-<li>成长是实践在认知上不断深化的结果</li>
-<li>对认知的不断深入与实践是成长的直接体现  </li>
-</ol>
-</li>
-<li>神奇的力量:<ol>
-<li>言行、梦、灵感 - 潜意识的对话</li>
-<li>神奇的潜意识</li>
-<li>好运的奇迹 - 潜意识的智慧</li>
-<li>心里疾病 - 意识抗拒潜意识的结果  </li>
-</ol>
-</li>
-</ol>
-<p>小结：心智成熟的标志，就是潜意识与意识的统一，在潜意识的‘树根’的基础上，让意识萌生出丰硕的果实。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-07-OpenSource-SaltHalite/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-07-07-OpenSource-SaltHalite/" itemprop="url">saltstack web开源组件halite</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-07T13:00:00+08:00">
-                2017-07-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>官方文挡: <a href="https://docs.saltstack.com/en/latest/topics/tutorials/halite.html" target="_blank" rel="noopener">https://docs.saltstack.com/en/latest/topics/tutorials/halite.html</a></p>
-<p>安装步骤:<br>1.克隆地址: Git clone <a href="https://github.com/saltstack/halite" target="_blank" rel="noopener">https://github.com/saltstack/halite</a><br>2.生成index.html文件: ./halite/halite/genindex.py -C<br>3.安装salt-api:  yum install salt-api<br>4.配置master文件 /etc/salt/master</p>
-<p> rest_cherrypy:<br>  host: 0.0.0.0<br>  port: 8080<br>  debug: true<br>ic: /ui/<br> /ui/halite/h<br>    external_auth :                      – 开启扩展认证系统<br>       pam :                              – 使用 pam 作为扩展的认证系统<br>         coocla :                          – 需要进行认证的系统用户名</p>
-<pre><code>- . *                          -- 认证通过后可以使用任何模块
-- &apos;@runner&apos;                    -- 认证通过后可以使用 runner
-</code></pre><p>5.配置Halite设置,需要在/etc/salt/master中配置halite的设置，halite支持CherryPy,Paste,Gevent<br>6.重启master $ /etc/init.d/salt-master restart<br>7.添加登陆用户 $ useradd admin  $ echo admin|passwd –stdin admin<br>启动 $ python server_bottle.py -d -C -l debug -s cherrypy<br>8.打开<a href="http://ip:8080/app，通过admin/admin登陆即可" target="_blank" rel="noopener">http://ip:8080/app，通过admin/admin登陆即可</a></p>
-<p>效果图:<br><img src="/uploads/ueditor/php/upload/image/20170706/1499304373.png" alt="blob.png"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-06-OpenSource-SaltGrainsPillar/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-07-06-OpenSource-SaltGrainsPillar/" itemprop="url">saltstack grains 与 pillar比较</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-06T10:00:00+08:00">
-                2017-07-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>saltstack中有pillar和grains的概念，获得pillar数据和grains数据的命令差不多。获取pillar数据的命令：<br>salt ‘*’ pillar.data nginx  </p>
-<p>获得grains数据的命令：<br>salt ‘*’ grains.item nginx  </p>
-<p>尽管看上去差不多，但是两者还是有本质区别的，<br>pillar数据是存储在master端的，而在客户端有缓存，通常pillar数据是一些配置信息，pillar数据可以通过salt ‘*’<br>saltutil.refresh_pillar来刷新pillar数据。</p>
-<p>而grains数据通常是minion端的一些特性数据，比如操作系统类型，磁盘，内存信息等，他是存储在minion端的，缓存在master端的。</p>
-<p>名称存储位置数据类型数据采集更新方式应用<br>Grains<br>Minion端<br>静态数据<br>Minion启动时采集，也可以使用saltutil.sync_grains进行刷新。<br>存在Minion基本数据。比如用于匹配Minion，自身数据可以用来做资产管理等。<br>Pillar<br>Master端<br>动态数据<br>在Master端定义，指定给对应的Minion。可以使用saltutil.refresh_pillar刷新。<br>存储Master指定的数据，只有指定的Minion可以看到。用于敏感数据保存。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-06-OpenSource-SaltGrains/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-07-06-OpenSource-SaltGrains/" itemprop="url">saltstack grains 示例</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-06T08:00:00+08:00">
-                2017-07-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>GRAINS 组件是saltstack中非常重要的一个组件，其主要用于记录Minion的一些静态信息，如比：CPU、内存、磁盘、网络等。grains信息是每<br>次客户端启动后自动上报给master的，一旦这些静态信息发生改变需要重启minion 或者 重新同步下 grains。除此之外我们还可以自定义Grains的<br>一些信息。自定义的方法有三种：1、通过Minion配置文件定义；2、通过Grains相关模块定义；3、通过python脚本定义。</p>
-<p>1.查看Grains相关的命令及用法(sys.list_functions or sys.doc) salt ‘<em>‘ sys.list_functions grains<br><img src="/uploads/ueditor/php/upload/image/20170706/1499305756.png" alt="blob.png"><br>2.获取主机item信息(grains.ls or grains.items) salt ‘</em>‘ grains.items<br><img src="/uploads/ueditor/php/upload/image/20170706/1499305728.png" alt="blob.png"><br>3.根据Grains的分组应用,筛选win系统 salt -G ‘os:Windows’  test.ping<br><img src="/uploads/ueditor/php/upload/image/20170706/1499305854.png" alt="blob.png"><br>4.通过Grains模块定义Grains<br><img src="/uploads/ueditor/php/upload/image/20170706/1499305927.png" alt="blob.png"><br>5.使用自定义python脚本获取grains信息 - 获取主机系统时间</p>
-<p>默认自定义脚本需要存放在master的/srv/salt/_grains目录下，这里使用mkdir -p创建即可。这里一个获取系统时间的脚本内容如下：</p>
-<p>[root@saltmaster _grains]# cat get_time.py</p>
-<p>#!/usr/bin/env python</p>
-<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="coding=utf-8"></a>coding=utf-8</h1><p>from datetime import datetime<br>def get_server_time():<br> grains = {}<br> grains[‘server_time’] = datetime.now().strftime(‘%Y-%m-%d %H:%M:%S’)<br> return grains<br>使用sync_grains命令同步脚本到minion主机上去，并通过grains.item命令获取相关信息即可，如下：</p>
-<p>[root@saltmaster _grains]# salt ‘<em>‘ saltutil.sync_grains<br>serverb.pod0.example.com:<br> - grains.get_time<br>irora200:<br> - grains.get_time<br>[root@saltmaster _grains]# salt ‘</em>‘ grains.item server_time<br>serverb.pod0.example.com:<br> -———<br> server_time:<br>  2014-04-02 23:53:23<br>irora200:<br> -———<br> server_time:<br>  2014-04-02 15:53:23<br>执行同步命令后，自定义脚本会上传到minion的/var/cache/salt/minion/extmods/grains目录下。</p>
-<p>[root@irora200 grains]# ls<br>get_time.py  get_time.pyc<br>[root@irora200 grains]# pwd<br>/var/cache/salt/minion/extmods/grains</p>
-<p>进阶: 使用grains搭建自动监控工具 <a href="http://rfyiamcool.blog.51cto.com/1030776/1266437/" target="_blank" rel="noopener">http://rfyiamcool.blog.51cto.com/1030776/1266437/</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1506,7 +1607,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">149</span>
+                <span class="site-state-item-count">154</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1519,7 +1620,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

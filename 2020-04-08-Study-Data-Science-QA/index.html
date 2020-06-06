@@ -1,0 +1,1530 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Notes,Study,AI," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+<meta name="description" content="The purpose of this repo is two fold:  To help you (data science practitioners) prepare for data science related interviews To introduce to people who don’t know but want to learn some basic data scie">
+<meta name="keywords" content="Notes,Study,AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Data Science Question and Answer">
+<meta property="og:url" content="http://blog.toob.net.cn/2020-04-08-Study-Data-Science-QA/index.html">
+<meta property="og:site_name" content="Jack Xia">
+<meta property="og:description" content="The purpose of this repo is two fold:  To help you (data science practitioners) prepare for data science related interviews To introduce to people who don’t know but want to learn some basic data scie">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/sql-join.PNG">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/workflow.png">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/cv.png">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/l1l2.png">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/bagging.png">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/stacking.jpg">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/collaborative_filtering.gif">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/lr.png">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/knn.png">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/svm.png">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/tree.gif">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/mlp.jpg">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/cnn.jpg">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/rnn.jpeg">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/lstm.png">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/clustering.png">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/pca.gif">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/autoencoder.png">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/gan.jpg">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/w2v.png">
+<meta property="og:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/cron-job.PNG">
+<meta property="og:updated_time" content="2020-04-15T02:09:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Data Science Question and Answer">
+<meta name="twitter:description" content="The purpose of this repo is two fold:  To help you (data science practitioners) prepare for data science related interviews To introduce to people who don’t know but want to learn some basic data scie">
+<meta name="twitter:image" content="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/sql-join.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.toob.net.cn/2020-04-08-Study-Data-Science-QA/"/>
+
+
+
+
+
+  <title>Data Science Question and Answer | Jack Xia</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jack Xia</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">笔记</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2020-04-08-Study-Data-Science-QA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Data Science Question and Answer</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-09T08:00:00+08:00">
+                2020-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>The purpose of this repo is two fold:</p>
+<ul>
+<li>To help you (data science practitioners) prepare for data science related interviews</li>
+<li>To introduce to people who don’t know but want to learn some basic data science concepts</li>
+</ul>
+<p>The focus is on the knowledge breadth so this is more of a quick reference rather than an in-depth study material. If you want to learn a specific topic in detail please refer to other content or reach out and I’d love to point you to materials I found useful.</p>
+<p>I might add some topics from time to time but hey, this should also be a community effort, right? Any pull request is welcome!</p>
+<p>Here are the categorizes:</p>
+<ul>
+<li><a href="#resume">Resume</a></li>
+<li><a href="#sql">SQL</a></li>
+<li><a href="#tools-and-framework">Tools and Framework</a></li>
+<li><a href="#statistics-and-ml-in-general">Statistics and ML In General</a></li>
+<li><a href="#supervised-learning">Supervised Learning</a></li>
+<li><a href="#unsupervised-learning">Unsupervised Learning</a></li>
+<li><a href="#reinforcement-learning">Reinforcement Learning</a></li>
+<li><a href="#natural-language-processing">Natural Language Processing</a></li>
+<li><a href="#system">System</a></li>
+</ul>
+<h2 id="Resume"><a href="#Resume" class="headerlink" title="Resume"></a>Resume</h2><p>The only advice I can give about resume is to indicate your past data science / machine learning projects in a specific, <strong>quantifiable</strong> way. Consider the following two statements:</p>
+<blockquote>
+<p>Trained a machine learning system</p>
+</blockquote>
+<p>and</p>
+<blockquote>
+<p>Designed and deployed a deep learning model to recognize objects using Keras, Tensorflow, and Node.js. The model has 1/30 model size, 1/3 training time, 1/5 inference time, and 2x faster convergence compared with traditional neural networks (e.g, ResNet)</p>
+</blockquote>
+<p>The second is much better because it quantifies your contribution and also highlights specific technologies you used (and therefore have expertise in). This would require you to log what you’ve done during experiments. But don’t exaggerate.</p>
+<p>Spend some time going over your resume / past projects to make sure you explain them well.</p>
+<h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><ul>
+<li><a href="#difference-between-joins">Difference between joins</a></li>
+</ul>
+<h3 id="Difference-between-joins"><a href="#Difference-between-joins" class="headerlink" title="Difference between joins"></a>Difference between joins</h3><ul>
+<li><strong>(INNER) JOIN</strong>: Returns records that have matching values in both tables</li>
+<li><strong>LEFT (OUTER) JOIN</strong>: Return all records from the left table, and the matched records from the right table</li>
+<li><strong>RIGHT (OUTER) JOIN</strong>: Return all records from the right table, and the matched records from the left table</li>
+<li><strong>FULL (OUTER) JOIN</strong>: Return all records when there is a match in either left or right table</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/sql-join.PNG" alt="link"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h2 id="Tools-and-Framework"><a href="#Tools-and-Framework" class="headerlink" title="Tools and Framework"></a>Tools and Framework</h2><p>The resources here are only meant to help you brush up on the topis rather than making you an expert.</p>
+<ul>
+<li><a href="#spark">Spark</a></li>
+</ul>
+<h3 id="Spark"><a href="#Spark" class="headerlink" title="Spark"></a>Spark</h3><p>Using PySpark API.</p>
+<ul>
+<li>The best resource is of course <a href="https://spark.apache.org/docs/latest/" target="_blank" rel="noopener">Spark’s documentation</a>. Take a thorough review of the topics</li>
+<li>If you are really time constrained, scan the Spark’s documentation and check <a href="https://s3.amazonaws.com/assets.datacamp.com/blog_assets/PySpark_Cheat_Sheet_Python.pdf" target="_blank" rel="noopener">PySpark cheat sheet</a> for the basics</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h2 id="Statistics-and-ML-In-General"><a href="#Statistics-and-ML-In-General" class="headerlink" title="Statistics and ML In General"></a>Statistics and ML In General</h2><ul>
+<li><a href="#resume">Resume</a></li>
+<li><a href="#sql">SQL</a><ul>
+<li><a href="#difference-between-joins">Difference between joins</a></li>
+</ul>
+</li>
+<li><a href="#tools-and-framework">Tools and Framework</a><ul>
+<li><a href="#spark">Spark</a></li>
+</ul>
+</li>
+<li><a href="#statistics-and-ml-in-general">Statistics and ML In General</a><ul>
+<li><a href="#project-workflow">Project Workflow</a></li>
+<li><a href="#cross-validation">Cross Validation</a></li>
+<li><a href="#feature-importance">Feature Importance</a></li>
+<li><a href="#mean-squared-error-vs-mean-absolute-error">Mean Squared Error vs. Mean Absolute Error</a></li>
+<li><a href="#l1-vs-l2-regularization">L1 vs L2 regularization</a></li>
+<li><a href="#correlation-vs-covariance">Correlation vs Covariance</a></li>
+<li><a href="#would-adding-more-data-address-underfitting">Would adding more data address underfitting</a></li>
+<li><a href="#activation-function">Activation Function</a></li>
+<li><a href="#bagging">Bagging</a></li>
+<li><a href="#stacking">Stacking</a></li>
+<li><a href="#generative-vs-discriminative">Generative vs discriminative</a></li>
+<li><a href="#parametric-vs-nonparametric">Parametric vs Nonparametric</a></li>
+<li><a href="#recommender-system">Recommender System</a></li>
+</ul>
+</li>
+<li><a href="#supervised-learning">Supervised Learning</a><ul>
+<li><a href="#linear-regression">Linear regression</a></li>
+<li><a href="#logistic-regression">Logistic regression</a></li>
+<li><a href="#naive-bayes">Naive Bayes</a></li>
+<li><a href="#knn">KNN</a></li>
+<li><a href="#svm">SVM</a></li>
+<li><a href="#decision-tree">Decision tree</a></li>
+<li><a href="#random-forest">Random forest</a></li>
+<li><a href="#boosting-tree">Boosting Tree</a></li>
+<li><a href="#mlp">MLP</a></li>
+<li><a href="#cnn">CNN</a></li>
+<li><a href="#rnn-and-lstm">RNN and LSTM</a></li>
+</ul>
+</li>
+<li><a href="#unsupervised-learning">Unsupervised Learning</a><ul>
+<li><a href="#clustering">Clustering</a></li>
+<li><a href="#principal-component-analysis">Principal Component Analysis</a></li>
+<li><a href="#autoencoder">Autoencoder</a></li>
+<li><a href="#generative-adversarial-network">Generative Adversarial Network</a></li>
+</ul>
+</li>
+<li><a href="#reinforcement-learning">Reinforcement Learning</a></li>
+<li><a href="#natural-language-processing">Natural Language Processing</a><ul>
+<li><a href="#tokenization">Tokenization</a></li>
+<li><a href="#stemming-and-lemmatization">Stemming and lemmatization</a></li>
+<li><a href="#n-gram">N gram</a></li>
+<li><a href="#bag-of-words">Bag of Words</a></li>
+<li><a href="#word2vec">word2vec</a></li>
+</ul>
+</li>
+<li><a href="#system">System</a><ul>
+<li><a href="#cron-job">Cron job</a></li>
+<li><a href="#linux">Linux</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="Project-Workflow"><a href="#Project-Workflow" class="headerlink" title="Project Workflow"></a>Project Workflow</h3><p>Given a data science / machine learning project, what steps should we follow? Here’s<br>how I would tackle it:</p>
+<ul>
+<li><strong>Specify business objective.</strong> Are we trying to win more customers, achieve higher satisfaction, or gain more revenues?</li>
+<li><strong>Define problem.</strong> What is the specific gap in your ideal world and the real one that requires machine learning to fill? Ask questions that can be addressed using your data and predictive modeling (ML algorithms).</li>
+<li><strong>Create a common sense baseline.</strong> But before you resort to ML, set up a baseline to solve the problem as if you know zero data science. You may be amazed at how effective this baseline is. It can be as simple as recommending the top N popular items or other rule-based logic. This baseline can also server as a good benchmark for ML algorithms.</li>
+<li><strong>Review ML literatures.</strong> To avoid reinventing the wheel and get inspired on what techniques / algorithms are good at addressing the questions using our data.</li>
+<li><strong>Set up a single-number metric.</strong> What it means to be successful - high accuracy, lower error, or bigger AUC - and how do you measure it? The metric has to align with high-level goals, most often the success of your business. Set up a single-number against which all models are measured.</li>
+<li><strong>Do exploratory data analysis (EDA).</strong> Play with the data to get a general idea of data type, distribution, variable correlation, facets etc. This step would involve a lot of plotting.</li>
+<li><strong>Partition data.</strong> Validation set should be large enough to detect differences between the models you are training; test set should be large enough to indicate the overall performance of the final model; training set, needless to say, the larger the merrier.</li>
+<li><strong>Preprocess.</strong> This would include data integration, cleaning, transformation, reduction, discretization and more.</li>
+<li><strong>Engineer features.</strong> Coming up with features is difficult, time-consuming, requires expert knowledge. Applied machine learning is basically feature engineering. This step usually involves feature selection and creation, using domain knowledge. Can be minimal for deep learning projects.</li>
+<li><strong>Develop models.</strong> Choose which algorithm to use, what hyperparameters to tune, which architecture to use etc.</li>
+<li><strong>Ensemble.</strong> Ensemble can usually boost performance, depending on the correlations of the models/features. So it’s always a good idea to try out. But be open-minded about making tradeoff - some ensemble are too complex/slow to put into production.</li>
+<li><strong>Deploy model.</strong> Deploy models into production for inference.</li>
+<li><strong>Monitor model.</strong> Monitor model performance, and collect feedbacks.</li>
+<li><strong>Iterate.</strong> Iterate the previous steps. Data science tends to be an iterative process, with new and improved models being developed over time.</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/workflow.png" alt="link"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Cross-Validation"><a href="#Cross-Validation" class="headerlink" title="Cross Validation"></a>Cross Validation</h3><p>Cross-validation is a technique to evaluate predictive models by partitioning the original sample into a training set to train the model, and a validation set to evaluate it. For example, a k-fold cross validation divides the data into k folds (or partitions), trains on each k-1 fold, and evaluate on the remaining 1 fold. This results to k models/evaluations, which can be averaged to get a overall model performance.</p>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/cv.png" alt="link"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Feature-Importance"><a href="#Feature-Importance" class="headerlink" title="Feature Importance"></a>Feature Importance</h3><ul>
+<li>In linear models, feature importance can be calculated by the scale of the coefficients</li>
+<li>In tree-based methods (such as random forest), important features are likely to appear closer to the root of the tree.  We can get a feature’s importance for random forest by computing the averaging depth at which it appears across all trees in the forest.</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Mean-Squared-Error-vs-Mean-Absolute-Error"><a href="#Mean-Squared-Error-vs-Mean-Absolute-Error" class="headerlink" title="Mean Squared Error vs. Mean Absolute Error"></a>Mean Squared Error vs. Mean Absolute Error</h3><ul>
+<li><strong>Similarity</strong>: both measure the average model prediction error; range from 0 to infinity; the lower the better</li>
+<li>Mean Squared Error (MSE) gives higher weights to large error (e.g., being off by 10 just MORE THAN TWICE as bad as being off by 5), whereas Mean Absolute Error (MAE) assign equal weights (being off by 10 is just twice as bad as being off by 5)</li>
+<li>MSE is continuously differentiable, MAE is not (where y_pred == y_true)</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="L1-vs-L2-regularization"><a href="#L1-vs-L2-regularization" class="headerlink" title="L1 vs L2 regularization"></a>L1 vs L2 regularization</h3><ul>
+<li><strong>Similarity</strong>: both L1 and L2 regularization <strong>prevent overfitting</strong> by shrinking (imposing a penalty) on the coefficients</li>
+<li><strong>Difference</strong>: L2 (Ridge) shrinks all the coefficient by the same proportions but eliminates none, while L1 (Lasso) can shrink some coefficients to zero, performing variable selection.</li>
+<li><strong>Which to choose</strong>: If all the features are correlated with the label, ridge outperforms lasso, as the coefficients are never zero in ridge. If only a subset of features are correlated with the label, lasso outperforms ridge as in lasso model some coefficient can be shrunken to zero.</li>
+<li>In Graph (a), the black square represents the feasible region of the L1 regularization while graph (b) represents the feasible region for L2 regularization. The contours in the plots represent different loss values (for the unconstrained regression model ). The feasible point that minimizes the loss is more likely to happen on the coordinates on graph (a) than on graph (b) since graph (a) is more <strong>angular</strong>.  This effect amplifies when your number of coefficients increases, i.e. from 2 to 200. The implication of this is that the L1 regularization gives you sparse estimates. Namely, in a high dimensional space, you got mostly zeros and a small number of non-zero coefficients.</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/l1l2.png" alt="link"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Correlation-vs-Covariance"><a href="#Correlation-vs-Covariance" class="headerlink" title="Correlation vs Covariance"></a>Correlation vs Covariance</h3><ul>
+<li>Both determine the relationship and measure the dependency between two random variables</li>
+<li>Correlation is when the change in one item may result in the change in the another item, while covariance is when two items vary together (joint variability)</li>
+<li>Covariance is nothing but a measure of correlation. On the contrary, correlation refers to the scaled form of covariance</li>
+<li>Range: correlation is between -1 and +1, while covariance lies between negative infinity and infinity.</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Would-adding-more-data-address-underfitting"><a href="#Would-adding-more-data-address-underfitting" class="headerlink" title="Would adding more data address underfitting"></a>Would adding more data address underfitting</h3><p>Underfitting happens when a model is not complex enough to learn well from the data. It is the problem of model rather than data size. So a potential way to address underfitting is to increase the model complexity (e.g., to add higher order coefficients for linear model, increase depth for tree-based methods, add more layers / number of neurons for neural networks etc.)</p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Activation-Function"><a href="#Activation-Function" class="headerlink" title="Activation Function"></a>Activation Function</h3><p>For neural networks</p>
+<ul>
+<li>Non-linearity: ReLU is often used. Use Leaky ReLU (a small positive gradient for negative input, say, <code>y = 0.01x</code> when x &lt; 0) to address dead ReLU issue</li>
+<li>Multi-class: softmax</li>
+<li>Binary: sigmoid</li>
+<li>Regression: linear</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Bagging"><a href="#Bagging" class="headerlink" title="Bagging"></a>Bagging</h3><p>To address overfitting, we can use an ensemble method called bagging (bootstrap aggregating),<br>which reduces the variance of the meta learning algorithm. Bagging can be applied<br>to decision tree or other algorithms.</p>
+<p>Here is a <a href="http://scikit-learn.org/stable/auto_examples/ensemble/plot_bias_variance.html#sphx-glr-auto-examples-ensemble-plot-bias-variance-py" target="_blank" rel="noopener">great illustration</a> of a single estimator vs. bagging.</p>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/bagging.png" alt="link"></p>
+<ul>
+<li>Bagging is when samlping is performed <em>with</em> replacement. When sampling is performed <em>without</em> replacement, it’s called pasting.</li>
+<li>Bagging is popular due to its boost for performance, but also due to that individual learners can be trained in parallel and scale well</li>
+<li>Ensemble methods work best when the learners are as independent from one another as possible</li>
+<li>Voting: soft voting (predict probability and average over all individual learners) often works better than hard voting</li>
+<li>out-of-bag instances can act validation set for bagging</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Stacking"><a href="#Stacking" class="headerlink" title="Stacking"></a>Stacking</h3><ul>
+<li>Instead of using trivial functions (such as hard voting) to aggregate the predictions from individual learners, train a model to perform this aggregation</li>
+<li>First split the training set into two subsets: the first subset is used to train the learners in the first layer</li>
+<li>Next the first layer learners are used to make predictions (meta features) on the second subset, and those predictions are used to train another models (to obtain the weigts of different learners) in the second layer</li>
+<li>We can train multiple models in the second layer, but this entails subsetting the original dataset into 3 parts</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/stacking.jpg" alt="stacking"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Generative-vs-discriminative"><a href="#Generative-vs-discriminative" class="headerlink" title="Generative vs discriminative"></a>Generative vs discriminative</h3><ul>
+<li>Discriminative algorithms model <em>p(y|x; w)</em>, that is, given the dataset and learned<br>parameter, what is the probability of y belonging to a specific class. A discriminative algorithm<br>doesn’t care about how the data was generated, it simply categorizes a given example</li>
+<li>Generative algorithms try to model <em>p(x|y)</em>, that is, the distribution of features given<br>that it belongs to a certain class. A generative algorithm models how the data was<br>generated.</li>
+</ul>
+<blockquote>
+<p>Given a training set, an algorithm like logistic regression or<br>the perceptron algorithm (basically) tries to find a straight line—that is, a<br>decision boundary—that separates the elephants and dogs. Then, to classify<br>a new animal as either an elephant or a dog, it checks on which side of the<br>decision boundary it falls, and makes its prediction accordingly.</p>
+<p>Here’s a different approach. First, looking at elephants, we can build a<br>model of what elephants look like. Then, looking at dogs, we can build a<br>separate model of what dogs look like. Finally, to classify a new animal, we<br>can match the new animal against the elephant model, and match it against<br>the dog model, to see whether the new animal looks more like the elephants<br>or more like the dogs we had seen in the training set.</p>
+</blockquote>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Parametric-vs-Nonparametric"><a href="#Parametric-vs-Nonparametric" class="headerlink" title="Parametric vs Nonparametric"></a>Parametric vs Nonparametric</h3><ul>
+<li>A learning model that summarizes data with a set of parameters of fixed size (independent of the number of training examples) is called a parametric model.</li>
+<li>A model where the number of parameters is not determined prior to training. Nonparametric does not mean that they have no parameters. On the contrary, nonparametric models (can) become more and more complex with an increasing amount of data.</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Recommender-System"><a href="#Recommender-System" class="headerlink" title="Recommender System"></a>Recommender System</h3><ul>
+<li>I put recommend system here since technically it falls neither under supervised nor unsupervised learning</li>
+<li>A recommender system seeks to predict the ‘rating’ or ‘preference’ a user would give to items and then recommend items accordingly</li>
+<li>Content based recommender systems recommends items similar to those a given user has liked in the past, based on either explicit (ratings, like/dislike button) or implicit (viewed/finished an article) feedbacks. Content based recommenders work solely with the past interactions of a given user and do not take other users into consideration.</li>
+<li>Collaborative filtering is based on past interactions of the whole user base. There are two Collaborative filtering approaches: <strong>item-based</strong> or <strong>user-based</strong><ul>
+<li>item-based: for user u, a score for an unrated item is produced by combining the ratings of users similar to u.</li>
+<li>user-based:  a rating (u, i) is produced by looking at the set of items similar to i (interaction similarity), then the ratings by u of similar items are combined into a predicted rating</li>
+</ul>
+</li>
+<li>In recommender systems traditionally matrix factorization methods are used, although we recently there are also deep learning based methods</li>
+<li>Cold start and sparse matrix can be issues for recommender systems</li>
+<li>Widely used in movies, news, research articles, products, social tags, music, etc.</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/collaborative_filtering.gif" alt="cf"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h2 id="Supervised-Learning"><a href="#Supervised-Learning" class="headerlink" title="Supervised Learning"></a>Supervised Learning</h2><ul>
+<li><a href="#linear-regression">Linear regression</a></li>
+<li><a href="#logistic-regression">Logistic regression</a></li>
+<li><a href="#naive-bayes">Naive Bayes</a></li>
+<li><a href="#knn">KNN</a></li>
+<li><a href="#svm">SVM</a></li>
+<li><a href="#decision-tree">Decision tree</a></li>
+<li><a href="#random-forest">Random forest</a></li>
+<li><a href="#boosting-tree">Boosting Tree</a></li>
+<li><a href="#mlp">MLP</a></li>
+<li><a href="#cnn">CNN</a></li>
+<li><a href="#rnn-and-lstm">RNN and LSTM</a></li>
+</ul>
+<h3 id="Linear-regression"><a href="#Linear-regression" class="headerlink" title="Linear regression"></a>Linear regression</h3><ul>
+<li>How to learn the parameter: minimize the cost function</li>
+<li>How to minimize cost function: gradient descent</li>
+<li>Regularization:<ul>
+<li>L1 (Lasso): can shrink certain coef to zero, thus performing feature selection</li>
+<li>L2 (Ridge): shrink all coef with the same proportion; almost always outperforms L1</li>
+<li>Elastic Net: combined L1 and L2 priors as regularizer</li>
+</ul>
+</li>
+<li>Assumes linear relationship between features and the label</li>
+<li>Can add polynomial and interaction features to add non-linearity</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/lr.png" alt="lr"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Logistic-regression"><a href="#Logistic-regression" class="headerlink" title="Logistic regression"></a>Logistic regression</h3><ul>
+<li>Generalized linear model (GLM) for binary classification problems</li>
+<li>Apply the sigmoid function to the output of linear models, squeezing the target<br>to range [0, 1]</li>
+<li>Threshold to make prediction: usually if the output &gt; .5, prediction 1; otherwise prediction 0</li>
+<li>A special case of softmax function, which deals with multi-class problems</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Naive-Bayes"><a href="#Naive-Bayes" class="headerlink" title="Naive Bayes"></a>Naive Bayes</h3><ul>
+<li>Naive Bayes (NB) is a supervised learning algorithm based on applying <a href="https://en.wikipedia.org/wiki/Bayes%27_theorem" target="_blank" rel="noopener">Bayes’ theorem</a></li>
+<li>It is called naive because it builds the naive assumption that each feature<br>are independent of each other</li>
+<li>NB can make different assumptions (i.e., data distributions, such as Gaussian,<br>Multinomial, Bernoulli)</li>
+<li>Despite the over-simplified assumptions, NB classifier works quite well in real-world<br>applications, especially for text classification (e.g., spam filtering)</li>
+<li>NB can be extremely fast compared to more sophisticated methods</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="KNN"><a href="#KNN" class="headerlink" title="KNN"></a>KNN</h3><ul>
+<li>Given a data point, we compute the K nearest data points (neighbors) using certain<br>distance metric (e.g., Euclidean metric). For classification, we take the majority label<br>of neighbors; for regression, we take the mean of the label values.</li>
+<li>Note for KNN we don’t train a model; we simply compute during<br>inference time. This can be computationally expensive since each of the test example<br>need to be compared with every training example to see how close they are.</li>
+<li>There are approximation methods can have faster inference time by<br>partitioning the training data into regions (e.g., <a href="https://github.com/spotify/annoy" target="_blank" rel="noopener">annoy</a>)</li>
+<li>When K equals 1 or other small number the model is prone to overfitting (high variance), while<br>when K equals number of data points or other large number the model is prone to underfitting (high bias)</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/knn.png" alt="KNN"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h3><ul>
+<li>Can perform linear, nonlinear, or outlier detection (unsupervised)</li>
+<li>Large margin classifier: using SVM we not only have a decision boundary, but want the boundary<br>to be as far from the closest training point as possible</li>
+<li>The closest training examples are called support vectors, since they are the points<br>based on which the decision boundary is drawn</li>
+<li>SVMs are sensitive to feature scaling</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/svm.png" alt="svm"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Decision-tree"><a href="#Decision-tree" class="headerlink" title="Decision tree"></a>Decision tree</h3><ul>
+<li>Non-parametric, supervised learning algorithms</li>
+<li>Given the training data, a decision tree algorithm divides the feature space into<br>regions. For inference, we first see which<br>region does the test data point fall in, and take the mean label values (regression)<br>or the majority label value (classification).</li>
+<li><strong>Construction</strong>: top-down, chooses a variable to split the data such that the<br>target variables within each region are as homogeneous as possible. Two common<br>metrics: gini impurity or information gain, won’t matter much in practice.</li>
+<li>Advantage: simply to understand &amp; interpret, mirrors human decision making</li>
+<li>Disadvantage:<ul>
+<li>can overfit easily (and generalize poorly) if we don’t limit the depth of the tree</li>
+<li>can be non-robust: A small change in the training data can lead to a totally different tree</li>
+<li>instability: sensitive to training set rotation due to its orthogonal decision boundaries</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/tree.gif" alt="decision tree"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Random-forest"><a href="#Random-forest" class="headerlink" title="Random forest"></a>Random forest</h3><p>Random forest improves bagging further by adding some randomness. In random forest,<br>only a subset of features are selected at random to construct a tree (while often not subsample instances).<br>The benefit is that random forest <strong>decorrelates</strong> the trees.</p>
+<p>For example, suppose we have a dataset. There is one very predicative feature, and a couple<br>of moderately predicative features. In bagging trees, most of the trees<br>will use this very predicative feature in the top split, and therefore making most of the trees<br>look similar, <strong>and highly correlated</strong>. Averaging many highly correlated results won’t lead<br>to a large reduction in variance compared with uncorrelated results.<br>In random forest for each split we only consider a subset of the features and therefore<br>reduce the variance even further by introducing more uncorrelated trees.</p>
+<p>I wrote a <a href="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/bag-rf-var.ipynb" target="_blank" rel="noopener">notebook</a> to illustrate this point.</p>
+<p>In practice, tuning random forest entails having a large number of trees (the more the better, but<br>always consider computation constraint). Also, <code>min_samples_leaf</code> (The minimum number of<br>samples at the leaf node)to control the tree size and overfitting. Always cross validate the parameters.</p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Boosting-Tree"><a href="#Boosting-Tree" class="headerlink" title="Boosting Tree"></a>Boosting Tree</h3><p><strong>How it works</strong></p>
+<p>Boosting builds on weak learners, and in an iterative fashion. In each iteration,<br>a new learner is added, while all existing learners are kept unchanged. All learners<br>are weighted based on their performance (e.g., accuracy), and after a weak learner<br>is added, the data are re-weighted: examples that are misclassified gain more weights,<br>while examples that are correctly classified lose weights. Thus, future weak learners<br>focus more on examples that previous weak learners misclassified.</p>
+<p><strong>Difference from random forest (RF)</strong></p>
+<ul>
+<li>RF grows trees <strong>in parallel</strong>, while Boosting is sequential</li>
+<li>RF reduces variance, while Boosting reduces errors by reducing bias</li>
+</ul>
+<p><strong>XGBoost (Extreme Gradient Boosting)</strong></p>
+<blockquote>
+<p>XGBoost uses a more regularized model formalization to control overfitting, which gives it better performance</p>
+</blockquote>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="MLP"><a href="#MLP" class="headerlink" title="MLP"></a>MLP</h3><p>A feedforward neural network of multiple layers. In each layer we<br>can have multiple neurons, and each of the neuron in the next layer is a linear/nonlinear<br>combination of the all the neurons in the previous layer. In order to train the network<br>we back propagate the errors layer by layer. In theory MLP can approximate any functions.</p>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/mlp.jpg" alt="mlp"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h3><p>The Conv layer is the building block of a Convolutional Network. The Conv layer consists<br>of a set of learnable filters (such as 5 <em> 5 </em> 3, width <em> height </em> depth). During the forward<br>pass, we slide (or more precisely, convolve) the filter across the input and compute the dot<br>product. Learning again happens when the network back propagate the error layer by layer.</p>
+<p>Initial layers capture low-level features such as angle and edges, while later<br>layers learn a combination of the low-level features and in the previous layers<br>and can therefore represent higher level feature, such as shape and object parts.</p>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/cnn.jpg" alt="CNN"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="RNN-and-LSTM"><a href="#RNN-and-LSTM" class="headerlink" title="RNN and LSTM"></a>RNN and LSTM</h3><p>RNN is another paradigm of neural network where we have difference layers of cells,<br>and each cell not only takes as input the cell from the previous layer, but also the previous<br>cell within the same layer. This gives RNN the power to model sequence.</p>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/rnn.jpeg" alt="RNN"></p>
+<p>This seems great, but in practice RNN barely works due to exploding/vanishing gradient, which<br>is cause by a series of multiplication of the same matrix. To solve this, we can use<br>a variation of RNN, called long short-term memory (LSTM), which is capable of learning<br>long-term dependencies.</p>
+<p>The math behind LSTM can be pretty complicated, but intuitively LSTM introduce</p>
+<ul>
+<li>input gate</li>
+<li>output gate</li>
+<li>forget gate</li>
+<li>memory cell (internal state)</li>
+</ul>
+<p>LSTM resembles human memory: it forgets old stuff (old internal state <em> forget gate)<br>and learns from new input (input node </em> input gate)</p>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/lstm.png" alt="lstm"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h2 id="Unsupervised-Learning"><a href="#Unsupervised-Learning" class="headerlink" title="Unsupervised Learning"></a>Unsupervised Learning</h2><ul>
+<li><a href="#clustering">Clustering</a></li>
+<li><a href="#principal-component-analysis">Principal Component Analysis</a></li>
+<li><a href="#autoencoder">Autoencoder</a></li>
+<li><a href="#generative-adversarial-network">Generative Adversarial Network</a></li>
+</ul>
+<h3 id="Clustering"><a href="#Clustering" class="headerlink" title="Clustering"></a>Clustering</h3><ul>
+<li>Clustering is a unsupervised learning algorithm that groups data in such<br>a way that data points in the same group are more similar to each other than to<br>those from other groups</li>
+<li>Similarity is usually defined using a distance measure (e.g, Euclidean, Cosine, Jaccard, etc.)</li>
+<li>The goal is usually to discover the underlying structure within the data (usually high dimensional)</li>
+<li>The most common clustering algorithm is K-means, where we define K (the number of clusters)<br>and the algorithm iteratively finds the cluster each data point belongs to</li>
+</ul>
+<p><a href="http://scikit-learn.org/stable/modules/clustering.html" target="_blank" rel="noopener">scikit-learn</a> implements many clustering algorithms. Below is a comparison adopted from its page.</p>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/clustering.png" alt="clustering"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Principal-Component-Analysis"><a href="#Principal-Component-Analysis" class="headerlink" title="Principal Component Analysis"></a>Principal Component Analysis</h3><ul>
+<li>Principal Component Analysis (PCA) is a dimension reduction technique that projects<br>the data into a lower dimensional space</li>
+<li>PCA uses Singular Value Decomposition (SVD), which is a matrix factorization method<br>that decomposes a matrix into three smaller matrices (more details of SVD <a href="https://en.wikipedia.org/wiki/Singular-value_decomposition" target="_blank" rel="noopener">here</a>)</li>
+<li>PCA finds top N principal components, which are dimensions along which the data vary<br>(spread out) the most. Intuitively, the more spread out the data along a specific dimension,<br>the more information is contained, thus the more important this dimension is for the<br>pattern recognition of the dataset</li>
+<li>PCA can be used as pre-step for data visualization: reducing high dimensional data<br>into 2D or 3D. An alternative dimensionality reduction technique is <a href="https://lvdmaaten.github.io/tsne/" target="_blank" rel="noopener">t-SNE</a></li>
+</ul>
+<p>Here is a visual explanation of PCA</p>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/pca.gif" alt="pca"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Autoencoder"><a href="#Autoencoder" class="headerlink" title="Autoencoder"></a>Autoencoder</h3><ul>
+<li>The aim of an autoencoder is to learn a representation (encoding) for a set of data</li>
+<li>An autoencoder always consists of two parts, the encoder and the decoder. The encoder would find a lower dimension representation (latent variable) of the original input, while the decoder is used to reconstruct from the lower-dimension vector such that the distance between the original and reconstruction is minimized</li>
+<li>Can be used for data denoising and dimensionality reduction</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/autoencoder.png" alt="link"></p>
+<h3 id="Generative-Adversarial-Network"><a href="#Generative-Adversarial-Network" class="headerlink" title="Generative Adversarial Network"></a>Generative Adversarial Network</h3><ul>
+<li>Generative Adversarial Network (GAN) is an unsupervised learning algorithm that also has supervised flavor: using supervised loss as part of training</li>
+<li>GAN typically has two major components: the <strong>generator</strong> and the <strong>discriminator</strong>. The generator tries to generate “fake” data (e.g, images or sentences) that fool the discriminator into thinking that they’re real, while the discriminator tries to distinguish between real and generated data. It’s a fight between the two players thus the name adversarial, and this fight drives both sides to improve until “fake” data are indistinguishable from the real data</li>
+<li>How does it work, intuitively<ul>
+<li>The generator takes a <strong>random</strong> input and generates a sample of data</li>
+<li>The discriminator then either takes the generated sample or a real data sample, and tries to predict whether the input is real or generated (i.e., solving a binary classification problem)</li>
+<li>Given a truth score range of [0, 1], ideally the we’d love to see discriminator give low score to generated data but high score to real data. On the other hand, we also wanna see the generated data fool the discriminator. And this paradox drives both sides become stronger</li>
+</ul>
+</li>
+<li>How does it work, from a training perspective<ul>
+<li>Without training, the generator creates ‘garbage’ data only while the discriminator is too ‘innocent’ to tell the difference between fake and real data</li>
+<li>Usually we would first train the discriminator with both real (label 1) and generated data (label 0) for N epochs so it would have a good judgement of what is real vs. fake</li>
+<li>Then we <strong>set the discriminator non-trainable</strong>, and train the generator. Even though the discriminator is non-trainable at this stage, we still use it as a classifier so that <strong>error signals can be back propagated and therefore enable the generator to learn</strong></li>
+<li>The above two steps would continue in turn until both sides cannot be improved further</li>
+</ul>
+</li>
+<li>Here are some <a href="https://github.com/soumith/ganhacks" target="_blank" rel="noopener">tips and tricks to make GANs work</a></li>
+<li>One Caveat is that the <strong>adversarial part is only auxiliary: The end goal of using GAN is to generate data that even experts cannot tell if it’s real or fake</strong></li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/gan.jpg" alt="gan"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h2 id="Reinforcement-Learning"><a href="#Reinforcement-Learning" class="headerlink" title="Reinforcement Learning"></a>Reinforcement Learning</h2><p>[TODO]</p>
+<h2 id="Natural-Language-Processing"><a href="#Natural-Language-Processing" class="headerlink" title="Natural Language Processing"></a>Natural Language Processing</h2><ul>
+<li><a href="#tokenization">Tokenization</a></li>
+<li><a href="#stemming-and-lemmatization">Stemming and lemmatization</a></li>
+<li><a href="#ngram">N-gram</a></li>
+<li><a href="#bag-of-words">Bag of Words</a></li>
+<li><a href="#word2vec">word2vec</a></li>
+</ul>
+<h3 id="Tokenization"><a href="#Tokenization" class="headerlink" title="Tokenization"></a>Tokenization</h3><ul>
+<li>Tokenization is the process of converting a sequence of characters into a sequence of tokens</li>
+<li>Consider this example: <code>The quick brown fox jumped over the lazy dog</code>. In this case each word (separated by space) would be a token</li>
+<li>Sometimes tokenization doesn’t have a definitive answer. For instance, <code>O&#39;Neill</code> can be tokenized to <code>o</code> and <code>neill</code>, <code>oneill</code>, or <code>o&#39;neill</code>.</li>
+<li>In some cases tokenization requires language-specific knowledge. For example, it doesn’t make sense to tokenize <code>aren&#39;t</code> into <code>aren</code> and <code>t</code></li>
+<li>For a more detailed treatment of tokenization please check <a href="https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html" target="_blank" rel="noopener">here</a></li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Stemming-and-lemmatization"><a href="#Stemming-and-lemmatization" class="headerlink" title="Stemming and lemmatization"></a>Stemming and lemmatization</h3><ul>
+<li>The goal of both stemming and lemmatization is to reduce inflectional forms and sometimes derivationally related forms of a word to a common base form</li>
+<li>Stemming usually refers to a crude heuristic process that chops off the ends of words</li>
+<li>Lemmatization usually refers to doing things properly with the use of a vocabulary and morphological analysis of words</li>
+<li>If confronted with the token <code>saw</code>, stemming might return just <code>s</code>, whereas lemmatization would attempt to return either <code>see</code> or <code>saw</code> depending on whether the use of the token was as a verb or a noun</li>
+<li>For a more detailed treatment please check <a href="https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html" target="_blank" rel="noopener">here</a></li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="N-gram"><a href="#N-gram" class="headerlink" title="N gram"></a>N gram</h3><ul>
+<li>n-gram is a contiguous sequence of n items from a given sample of text or speech</li>
+<li>An n-gram of size 1 is referred to as a “unigram”; size 2 is a “bigram” size 3 is a “trigram”. Larger sizes are sometimes referred to by the value of n in modern language, e.g., “four-gram”, “five-gram”, and so on.</li>
+<li>Consider this example: <code>The quick brown fox jumped over the lazy dog.</code><ul>
+<li>bigram would be <code>the quick</code>, <code>quick brown</code>, <code>brown fox</code>, …, i.e, every two consecutive words (or tokens)</li>
+<li>trigram would be <code>the quick brown</code>, <code>quick brown fox</code>, <code>brown fox jumped</code>, …, i.e., every three consecutive words (or tokens)</li>
+</ul>
+</li>
+<li>ngram model models sequence, i.e., predicts next word (n) given previous words (1, 2, 3, …, n-1)</li>
+<li>multiple gram (bigram and above) captures <strong>context</strong></li>
+<li>to choose n in n-gram requires experiments and making tradeoff between stability of the estimate against its appropriateness. Rule of thumb: trigram is a common choice with large training corpora (millions of words), whereas a bigram is often used with smaller ones.</li>
+<li>n-gram can be used as features for machine learning and downstream NLP tasks</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Bag-of-Words"><a href="#Bag-of-Words" class="headerlink" title="Bag of Words"></a>Bag of Words</h3><ul>
+<li>Why? Machine learning models cannot work with raw text directly; rather, they take numerical values as input.</li>
+<li>Bag of words (BoW) builds a <strong>vocabulary</strong> of all the unique words in our dataset, and associate a unique index to each word in the vocabulary</li>
+<li>It is called a “bag” of words, because it is a representation that completely ignores the order of words</li>
+<li>Consider this example of two sentences: (1) <code>John likes to watch movies, especially horor movies.</code>, (2) <code>Mary likes movies too.</code> We would first build a vocabulary of unique words (all lower cases and ignoring punctuations): <code>[john, likes, to, watch, movies, especially, horor, mary, too]</code>. Then we can represent each sentence using term frequency, i.e, the number of times a term appears. So (1) would be <code>[1, 1, 1, 1, 2, 1, 1, 0, 0]</code>, and (2) would be <code>[0, 1, 0, 0, 1, 0, 0, 1, 1]</code></li>
+<li>A common alternative to the use of dictionaries is the <a href="https://en.wikipedia.org/wiki/Feature_hashing" target="_blank" rel="noopener">hashing trick</a>, where words are directly mapped to indices with a hashing function</li>
+<li>As the vocabulary grows bigger (tens of thousand), the vector to represent short sentences / document becomes sparse (almost all zeros)</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="word2vec"><a href="#word2vec" class="headerlink" title="word2vec"></a>word2vec</h3><ul>
+<li>Shallow, two-layer neural networks that are trained to construct linguistic context of words</li>
+<li>Takes as input a large corpus, and produce a vector space, typically of several hundred<br>dimension, and each word in the corpus is assigned a vector in the space</li>
+<li>The key idea is <strong>context</strong>: words that occur often in the same context should have same/opposite<br>meanings.</li>
+<li>Two flavors<ul>
+<li>continuous bag of words (CBOW): the model predicts the current word given a window of surrounding context words</li>
+<li>skip gram: predicts the surrounding context words using the current word</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/w2v.png" alt="link"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h2 id="System"><a href="#System" class="headerlink" title="System"></a>System</h2><ul>
+<li><a href="#cron-job">Cron job</a></li>
+<li><a href="#linux">Linux</a></li>
+</ul>
+<h3 id="Cron-job"><a href="#Cron-job" class="headerlink" title="Cron job"></a>Cron job</h3><p>The software utility <strong>cron</strong> is a <strong>time-based job scheduler</strong> in Unix-like computer operating systems. People who set up and maintain software environments use cron to schedule jobs (commands or shell scripts) to run periodically at fixed times, dates, or intervals. It typically automates system maintenance or administration – though its general-purpose nature makes it useful for things like downloading files from the Internet and downloading email at regular intervals.</p>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/cron-job.PNG" alt="link"></p>
+<p>Tools:</p>
+<ul>
+<li><a href="https://airflow.apache.org/" target="_blank" rel="noopener">Apache Airflow</a></li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><p>Using <strong>Ubuntu</strong> as an example.</p>
+<ul>
+<li>Become root: <code>sudo su</code></li>
+<li>Install package: <code>sudo apt-get install &lt;package&gt;</code></li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<p>Confession: some images are adopted from the internet without proper credit. If you are the author and this would be an issue for you, please let me know.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Notes/" rel="tag"># Notes</a>
+          
+            <a href="/tags/Study/" rel="tag"># Study</a>
+          
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020-03-29-Study-AI-Code-Lv1/" rel="next" title="AI Code Level 1">
+                <i class="fa fa-chevron-left"></i> AI Code Level 1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020-05-05-Study-NQG-Paper-List/" rel="prev" title="Must-read papers for Neural Question Generation">
+                Must-read papers for Neural Question Generation <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Jack Xia" />
+          <p class="site-author-name" itemprop="name">Jack Xia</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">154</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Resume"><span class="nav-number">1.</span> <span class="nav-text">Resume</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL"><span class="nav-number">2.</span> <span class="nav-text">SQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Difference-between-joins"><span class="nav-number">2.1.</span> <span class="nav-text">Difference between joins</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tools-and-Framework"><span class="nav-number">3.</span> <span class="nav-text">Tools and Framework</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spark"><span class="nav-number">3.1.</span> <span class="nav-text">Spark</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Statistics-and-ML-In-General"><span class="nav-number">4.</span> <span class="nav-text">Statistics and ML In General</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Project-Workflow"><span class="nav-number">4.1.</span> <span class="nav-text">Project Workflow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cross-Validation"><span class="nav-number">4.2.</span> <span class="nav-text">Cross Validation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature-Importance"><span class="nav-number">4.3.</span> <span class="nav-text">Feature Importance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mean-Squared-Error-vs-Mean-Absolute-Error"><span class="nav-number">4.4.</span> <span class="nav-text">Mean Squared Error vs. Mean Absolute Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#L1-vs-L2-regularization"><span class="nav-number">4.5.</span> <span class="nav-text">L1 vs L2 regularization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Correlation-vs-Covariance"><span class="nav-number">4.6.</span> <span class="nav-text">Correlation vs Covariance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Would-adding-more-data-address-underfitting"><span class="nav-number">4.7.</span> <span class="nav-text">Would adding more data address underfitting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Activation-Function"><span class="nav-number">4.8.</span> <span class="nav-text">Activation Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bagging"><span class="nav-number">4.9.</span> <span class="nav-text">Bagging</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stacking"><span class="nav-number">4.10.</span> <span class="nav-text">Stacking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generative-vs-discriminative"><span class="nav-number">4.11.</span> <span class="nav-text">Generative vs discriminative</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parametric-vs-Nonparametric"><span class="nav-number">4.12.</span> <span class="nav-text">Parametric vs Nonparametric</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Recommender-System"><span class="nav-number">4.13.</span> <span class="nav-text">Recommender System</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Supervised-Learning"><span class="nav-number">5.</span> <span class="nav-text">Supervised Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linear-regression"><span class="nav-number">5.1.</span> <span class="nav-text">Linear regression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Logistic-regression"><span class="nav-number">5.2.</span> <span class="nav-text">Logistic regression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Naive-Bayes"><span class="nav-number">5.3.</span> <span class="nav-text">Naive Bayes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KNN"><span class="nav-number">5.4.</span> <span class="nav-text">KNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SVM"><span class="nav-number">5.5.</span> <span class="nav-text">SVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Decision-tree"><span class="nav-number">5.6.</span> <span class="nav-text">Decision tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Random-forest"><span class="nav-number">5.7.</span> <span class="nav-text">Random forest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boosting-Tree"><span class="nav-number">5.8.</span> <span class="nav-text">Boosting Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MLP"><span class="nav-number">5.9.</span> <span class="nav-text">MLP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CNN"><span class="nav-number">5.10.</span> <span class="nav-text">CNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RNN-and-LSTM"><span class="nav-number">5.11.</span> <span class="nav-text">RNN and LSTM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unsupervised-Learning"><span class="nav-number">6.</span> <span class="nav-text">Unsupervised Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Clustering"><span class="nav-number">6.1.</span> <span class="nav-text">Clustering</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Principal-Component-Analysis"><span class="nav-number">6.2.</span> <span class="nav-text">Principal Component Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Autoencoder"><span class="nav-number">6.3.</span> <span class="nav-text">Autoencoder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generative-Adversarial-Network"><span class="nav-number">6.4.</span> <span class="nav-text">Generative Adversarial Network</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reinforcement-Learning"><span class="nav-number">7.</span> <span class="nav-text">Reinforcement Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Natural-Language-Processing"><span class="nav-number">8.</span> <span class="nav-text">Natural Language Processing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tokenization"><span class="nav-number">8.1.</span> <span class="nav-text">Tokenization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stemming-and-lemmatization"><span class="nav-number">8.2.</span> <span class="nav-text">Stemming and lemmatization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#N-gram"><span class="nav-number">8.3.</span> <span class="nav-text">N gram</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bag-of-Words"><span class="nav-number">8.4.</span> <span class="nav-text">Bag of Words</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#word2vec"><span class="nav-number">8.5.</span> <span class="nav-text">word2vec</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#System"><span class="nav-number">9.</span> <span class="nav-text">System</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cron-job"><span class="nav-number">9.1.</span> <span class="nav-text">Cron job</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux"><span class="nav-number">9.2.</span> <span class="nav-text">Linux</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack Xia</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mermaid/6.0.0/mermaid.min.js"></script>
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

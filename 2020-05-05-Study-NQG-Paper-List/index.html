@@ -1,0 +1,1436 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Notes,Study,AI," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+<meta name="description" content="A summary of must-read papers for Neural Question Generation (NQG)  Contributed by Liangming Pan and Yuxi Xie.  Content Content Survey papers Models Basic Seq2Seq Models Encoding Answers Linguistic Fe">
+<meta name="keywords" content="Notes,Study,AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Must-read papers for Neural Question Generation">
+<meta property="og:url" content="http://blog.toob.net.cn/2020-05-05-Study-NQG-Paper-List/index.html">
+<meta property="og:site_name" content="Jack Xia">
+<meta property="og:description" content="A summary of must-read papers for Neural Question Generation (NQG)  Contributed by Liangming Pan and Yuxi Xie.  Content Content Survey papers Models Basic Seq2Seq Models Encoding Answers Linguistic Fe">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-08-25T02:09:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Must-read papers for Neural Question Generation">
+<meta name="twitter:description" content="A summary of must-read papers for Neural Question Generation (NQG)  Contributed by Liangming Pan and Yuxi Xie.  Content Content Survey papers Models Basic Seq2Seq Models Encoding Answers Linguistic Fe">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.toob.net.cn/2020-05-05-Study-NQG-Paper-List/"/>
+
+
+
+
+
+  <title>Must-read papers for Neural Question Generation | Jack Xia</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jack Xia</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">笔记</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2020-05-05-Study-NQG-Paper-List/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Must-read papers for Neural Question Generation</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-05T08:00:00+08:00">
+                2020-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>A summary of must-read papers for Neural Question Generation (NQG)</p>
+<ul>
+<li>Contributed by <strong><a href="http://www.liangmingpan.com" target="_blank" rel="noopener">Liangming Pan</a></strong> and <strong><a href="https://yuxixie.github.io/" target="_blank" rel="noopener">Yuxi Xie</a></strong>.</li>
+</ul>
+<h2 id="Content"><a href="#Content" class="headerlink" title="Content"></a><a href="#content">Content</a></h2><ul>
+<li><a href="#content">Content</a></li>
+<li><a href="#survey-papers">Survey papers</a></li>
+<li><a href="#models">Models</a><ul>
+<li><a href="#basic-seq2seq-models">Basic Seq2Seq Models</a></li>
+<li><a href="#encoding-answers">Encoding Answers</a></li>
+<li><a href="#linguistic-features">Linguistic Features</a></li>
+<li><a href="#question-specific-rewards">Question-specific Rewards</a></li>
+<li><a href="#content-selection">Content Selection</a></li>
+<li><a href="#question-type-modeling">Question Type Modeling</a></li>
+<li><a href="#encode-wider-contexts">Encode Wider Contexts</a></li>
+<li><a href="#other-directions">Other Directions</a></li>
+</ul>
+</li>
+<li><a href="#applications">Applications</a><ul>
+<li><a href="#difficulty-controllable-qg">Difficulty Controllable QG</a></li>
+<li><a href="#conversational-qg">Conversational QG</a></li>
+<li><a href="#asking-special-questions">Asking special questions</a></li>
+<li><a href="#answer-unaware-qg">Answer-unaware QG</a></li>
+<li><a href="#unanswerable-qg">Unanswerable QG</a></li>
+<li><a href="#combining-qa-and-qg">Combining QA and QG</a></li>
+<li><a href="#qg-from-knowledge-graphs">QG from knowledge graphs</a></li>
+<li><a href="#visual-question-generation">Visual Question Generation</a></li>
+<li><a href="#distractor-generation">Distractor Generation</a></li>
+<li><a href="#cross-lingual-qg">Cross-lingual QG</a></li>
+</ul>
+</li>
+<li><a href="#evaluation">Evaluation</a></li>
+<li><a href="#resources">Resources</a></li>
+</ul>
+<h2 id="Survey-papers"><a href="#Survey-papers" class="headerlink" title="Survey papers"></a><a href="#content">Survey papers</a></h2><ol>
+<li><p><strong>Recent Advances in Neural Question Generation.</strong> arxiv, 2018. <a href="https://arxiv.org/pdf/1905.08949.pdf" target="_blank" rel="noopener">paper</a></p>
+<p> <em>Liangming Pan, Wenqiang Lei, Tat-Seng Chua, Min-Yen Kan.</em> </p>
+</li>
+</ol>
+<h2 id="Models"><a href="#Models" class="headerlink" title="Models"></a><a href="#content">Models</a></h2><h3 id="Basic-Seq2Seq-Models"><a href="#Basic-Seq2Seq-Models" class="headerlink" title="Basic Seq2Seq Models"></a><a href="#basic-models">Basic Seq2Seq Models</a></h3><p>Basic Seq2Seq models with attention to generate questions. </p>
+<ol>
+<li><p><strong>Learning to ask: Neural question generation for reading comprehension.</strong> ACL, 2017. <a href="https://www.aclweb.org/anthology/P17-1123.pdf" target="_blank" rel="noopener">paper</a></p>
+<p> <em>Xinya Du, Junru Shao, Claire Cardie.</em></p>
+</li>
+<li><p><strong>Neural question generation from text: A preliminary study.</strong> NLPCC, 2017. <a href="https://www.researchgate.net/profile/Franco_Scarselli/publication/4202380_A_new_model_for_earning_in_raph_domains/links/0c9605188cd580504f000000.pdf" target="_blank" rel="noopener">paper</a></p>
+<p> <em>Qingyu Zhou, Nan Yang, Furu Wei, Chuanqi Tan, Hangbo Bao, Ming Zhou.</em></p>
+</li>
+<li><p><strong>Machine comprehension by text-to-text neural question generation.</strong> Rep4NLP@ACL, 2017. <a href="https://arxiv.org/pdf/1705.02012.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Xingdi Yuan, Tong Wang, Çaglar Gülçehre, Alessandro Sordoni, Philip Bachman, Saizheng Zhang, Sandeep Subramanian, Adam Trischler</em></p>
+</li>
+</ol>
+<h3 id="Encoding-Answers"><a href="#Encoding-Answers" class="headerlink" title="Encoding Answers"></a><a href="#answer-encoding">Encoding Answers</a></h3><p>Applying various techniques to encode the answer information thus allowing for better quality answer-focused questions. </p>
+<ol>
+<li><p><strong>Answer-focused and Position-aware Neural Question Generation.</strong> EMNLP, 2018. <a href="https://www.aclweb.org/anthology/D18-1427" target="_blank" rel="noopener">paper</a></p>
+<p><em>Xingwu Sun, Jing Liu, Yajuan Lyu, Wei He, Yanjun Ma, Shi Wang</em></p>
+</li>
+<li><p><strong>Improving Neural Question Generation Using Answer Separation.</strong> AAAI, 2019. <a href="https://arxiv.org/pdf/1809.02393.pdf" target="_blank" rel="noopener">paper</a> <a href="https://github.com/yanghoonkim/NQG_ASs2s" target="_blank" rel="noopener">code</a></p>
+<p> <em>Yanghoon Kim, Hwanhee Lee, Joongbo Shin, Kyomin Jung.</em></p>
+</li>
+<li><p><strong>Improving Question Generation with Sentence-level Semantic Matching and Answer Position Inferring.</strong> AAAI, 2020. <a href="https://arxiv.org/pdf/1912.00879.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Xiyao Ma, Qile Zhu, Yanlin Zhou, Xiaolin Li, Dapeng Wu</em></p>
+</li>
+</ol>
+<h3 id="Linguistic-Features"><a href="#Linguistic-Features" class="headerlink" title="Linguistic Features"></a><a href="#linguistic-features">Linguistic Features</a></h3><p>Improve QG by incorporating various linguistic features into the QG process. </p>
+<ol>
+<li><p><strong>Neural Generation of Diverse Questions using Answer Focus, Contextual and Linguistic Features.</strong> INLG, 2018. <a href="https://arxiv.org/pdf/1809.02637.pdf" target="_blank" rel="noopener">paper</a></p>
+<p> <em>Vrindavan Harrison, Marilyn Walker</em></p>
+</li>
+<li><p><strong>Automatic Question Generation using Relative Pronouns and Adverbs.</strong> ACL, 2018. <a href="https://www.aclweb.org/anthology/P18-3022" target="_blank" rel="noopener">paper</a></p>
+<p><em>Payal Khullar, Konigari Rachna, Mukul Hase, Manish Shrivastava</em> </p>
+</li>
+<li><p><strong>Learning to Generate Questions by Learning What not to Generate.</strong> WWW, 2019. <a href="https://arxiv.org/pdf/1902.10418.pdf" target="_blank" rel="noopener">paper</a> <a href="https://github.com/BangLiu/QG" target="_blank" rel="noopener">code</a></p>
+<p> <em>Bang Liu, Mingjun Zhao, Di Niu, Kunfeng Lai, Yancheng He, Haojie Wei, Yu Xu.</em></p>
+</li>
+<li><p><strong>Improving Neural Question Generation using World Knowledge.</strong> arXiv, 2019. <a href="https://arxiv.org/pdf/1909.03716.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Deepak Gupta, Kaheer Suleman, Mahmoud Adada, Andrew McNamara, Justin Harris</em></p>
+</li>
+</ol>
+<h3 id="Question-specific-Rewards"><a href="#Question-specific-Rewards" class="headerlink" title="Question-specific Rewards"></a><a href="#RL-rewards">Question-specific Rewards</a></h3><p>Improving the training via combining supervised and reinforcement learning to maximize question-specific rewards</p>
+<ol>
+<li><p><strong>Teaching Machines to Ask Questions.</strong> IJCAI, 2018. <a href="https://www.ijcai.org/proceedings/2018/0632.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Kaichun Yao, Libo Zhang, Tiejian Luo, Lili Tao, Yanjun Wu</em></p>
+</li>
+<li><p><strong>Reinforcement Learning Based Graph-to-Sequence Model for Natural Question Generation</strong> arxiv, 2019. <a href="https://arxiv.org/pdf/1908.04942.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Yu Chen, Lingfei Wu, Mohammed J. Zaki</em></p>
+</li>
+<li><p><strong>Natural Question Generation with Reinforcement Learning Based Graph-to-Sequence Model</strong> NeurIPS Workshop, 2019. <a href="https://arxiv.org/pdf/1910.08832.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Yu Chen, Lingfei Wu, Mohammed J. Zaki</em></p>
+</li>
+<li><p><strong>Putting the Horse Before the Cart:A Generator-Evaluator Framework for Question Generation from Text</strong> CoNLL, 2019. <a href="https://arxiv.org/pdf/1808.04961.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Vishwajeet Kumar, Ganesh Ramakrishnan, Yuan-Fang Li</em></p>
+</li>
+<li><p><strong>Addressing Semantic Drift in Question Generation for Semi-Supervised Question Answering</strong> EMNLP, 2019. <a href="https://arxiv.org/pdf/1909.06356.pdf" target="_blank" rel="noopener">paper</a> <a href="https://github.com/ZhangShiyue/QGforQA" target="_blank" rel="noopener">code</a></p>
+<p><em>Shiyue Zhang, Mohit Bansal</em></p>
+</li>
+</ol>
+<h3 id="Content-Selection"><a href="#Content-Selection" class="headerlink" title="Content Selection"></a><a href="#content-selection">Content Selection</a></h3><p>Improve QG by considering how to select question-worthy contents (content selection) before asking a question. </p>
+<ol>
+<li><p><strong>Identifying Where to Focus in Reading Comprehension for Neural Question Generation.</strong> EMNLP, 2017. <a href="https://www.aclweb.org/anthology/D17-1219.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Xinya Du, Claire Cardie</em></p>
+</li>
+<li><p><strong>Answer-based Adversarial Training for Generating Clarification Questions.</strong> NAACL, 2019. <a href="https://arxiv.org/pdf/1904.02281.pdf" target="_blank" rel="noopener">paper</a> <a href="https://github.com/raosudha89/clarification_question_generation_pytorch" target="_blank" rel="noopener">code</a></p>
+<p><em>Rao S, Daumé III H.</em></p>
+</li>
+<li><p><strong>Learning to Generate Questions by Learning What not to Generate.</strong> WWW, 2019. <a href="https://arxiv.org/pdf/1902.10418.pdf" target="_blank" rel="noopener">paper</a> <a href="https://github.com/BangLiu/QG" target="_blank" rel="noopener">code</a></p>
+<p> <em>Bang Liu, Mingjun Zhao, Di Niu, Kunfeng Lai, Yancheng He, Haojie Wei, Yu Xu.</em></p>
+</li>
+<li><p><strong>Improving Question Generation With to the Point Context.</strong> EMNLP, 2019. <a href="https://arxiv.org/pdf/1910.06036.pdf" target="_blank" rel="noopener">paper</a></p>
+<p> <em>Jingjing Li, Yifan Gao, Lidong Bing, Irwin King, Michael R. Lyu.</em></p>
+</li>
+<li><p><strong>Weak Supervision Enhanced Generative Network for Question Generation.</strong> IJCAI, 2019. <a href="https://arxiv.org/pdf/1907.00607v1" target="_blank" rel="noopener">paper</a></p>
+<p><em>Yutong Wang, Jiyuan Zheng, Qijiong Liu, Zhou Zhao, Jun Xiao, Yueting Zhuang</em></p>
+</li>
+<li><p><strong>A Multi-Agent Communication Framework for Question-Worthy Phrase Extraction and Question Generation.</strong> AAAI, 2019. <a href="https://www.aaai.org/ojs/index.php/AAAI/article/view/4700/4578" target="_blank" rel="noopener">paper</a></p>
+<p><em>Siyuan Wang, Zhongyu Wei, Zhihao Fan, Yang Liu, Xuanjing Huang</em></p>
+</li>
+<li><p><strong>Mixture Content Selection for Diverse Sequence Generation.</strong> EMNLP, 2019. <a href="https://arxiv.org/pdf/1909.01953.pdf" target="_blank" rel="noopener">paper</a> <a href="https://github.com/clovaai/FocusSeq2Seq" target="_blank" rel="noopener">code</a></p>
+<p><em>Jaemin Cho, Minjoon Seo, Hannaneh Hajishirzi</em></p>
+</li>
+<li><p><strong>Asking Questions the Human Way: Scalable Question-Answer Generation from Text Corpus.</strong> WWW, 2020. <a href="https://arxiv.org/pdf/2002.00748.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Bang Liu, Haojie Wei, Di Niu, Haolan Chen, Yancheng He</em></p>
+</li>
+</ol>
+<h3 id="Question-Type-Modeling"><a href="#Question-Type-Modeling" class="headerlink" title="Question Type Modeling"></a><a href="#question-type-modeling">Question Type Modeling</a></h3><p>Improve QG by explicitly modeling question types or interrogative words. </p>
+<ol>
+<li><p><strong>Question Generation for Question Answering.</strong> EMNLP,2017. <a href="https://www.aclweb.org/anthology/D17-1090" target="_blank" rel="noopener">paper</a></p>
+<p><em>Nan Duan, Duyu Tang, Peng Chen, Ming Zhou</em></p>
+</li>
+<li><p><strong>Answer-focused and Position-aware Neural Question Generation.</strong> EMNLP, 2018. <a href="https://www.aclweb.org/anthology/D18-1427" target="_blank" rel="noopener">paper</a></p>
+<p><em>Xingwu Sun, Jing Liu, Yajuan Lyu, Wei He, Yanjun Ma, Shi Wang</em></p>
+</li>
+<li><p><strong>Let Me Know What to Ask: Interrogative-Word-Aware Question Generation</strong> EMNLP Workshop, 2019. <a href="https://arxiv.org/pdf/1910.13794.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Junmo Kang, Haritz Puerto San Roman, Sung-Hyon Myaeng</em></p>
+</li>
+<li><p><strong>Question-type Driven Question Generation</strong> EMNLP, 2019. <a href="https://arxiv.org/pdf/1909.00140.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Wenjie Zhou, Minghua Zhang, Yunfang Wu</em></p>
+</li>
+</ol>
+<h3 id="Encode-Wider-Contexts"><a href="#Encode-Wider-Contexts" class="headerlink" title="Encode Wider Contexts"></a><a href="#encode-wider-contexts">Encode Wider Contexts</a></h3><p>Improve QG by incorporating wider contexts in the input passage. </p>
+<ol>
+<li><p><strong>Harvesting paragraph-level question-answer pairs from wikipedia.</strong> ACL, 2018. <a href="https://arxiv.org/pdf/1805.05942.pdf" target="_blank" rel="noopener">paper</a> <a href="https://github.com/xinyadu/HarvestingQA" target="_blank" rel="noopener">code&amp;dataset</a></p>
+<p> <em>Xinya Du, Claire Cardie</em></p>
+</li>
+<li><p><strong>Leveraging Context Information for Natural Question Generation</strong> ACL, 2018. <a href="https://www.aclweb.org/anthology/N18-2090" target="_blank" rel="noopener">paper</a> <a href="https://github.com/freesunshine0316/MPQG" target="_blank" rel="noopener">code</a></p>
+<p><em>Linfeng Song, Zhiguo Wang, Wael Hamza, Yue Zhang, Daniel Gildea</em></p>
+</li>
+<li><p><strong>Paragraph-level Neural Question Generation with Maxout Pointer and Gated Self-attention Networks.</strong> EMNLP, 2018. <a href="https://www.aclweb.org/anthology/D18-1424.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Yao Zhao, Xiaochuan Ni, Yuanyuan Ding, Qifa Ke</em></p>
+</li>
+<li><p><strong>Capturing Greater Context for Question Generation</strong> AAAI, 2020. <a href="https://arxiv.org/pdf/1910.10274.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Luu Anh Tuan, Darsh J Shah, Regina Barzilay</em></p>
+</li>
+</ol>
+<h3 id="Other-Directions"><a href="#Other-Directions" class="headerlink" title="Other Directions"></a><a href="#other-model">Other Directions</a></h3><ol>
+<li><p><strong>Generating Question-Answer Hierarchies.</strong> ACL, 2019. <a href="https://arxiv.org/pdf/1906.02622.pdf" target="_blank" rel="noopener">paper</a> <a href="http://squash.cs.umass.edu/" target="_blank" rel="noopener">code</a></p>
+<p><em>Kalpesh Krishna and Mohit Iyyer.</em></p>
+</li>
+<li><p><strong>Unified Language Model Pre-training for Natural Language Understanding and Generation.</strong> NeurIPS, 2019. <a href="https://arxiv.org/pdf/1905.03197.pdf" target="_blank" rel="noopener">paper</a> <a href="https://github.com/microsoft/unilm" target="_blank" rel="noopener">code</a></p>
+<p><em>Li Dong, Nan Yang, Wenhui Wang, Furu Wei, Xiaodong Liu, Yu Wang, Jianfeng Gao, Ming Zhou, Hsiao-Wuen Hon</em></p>
+</li>
+<li><p><strong>Can You Unpack That? Learning to Rewrite Questions-in-Context.</strong> EMNLP, 2019. <a href="https://www.aclweb.org/anthology/D19-1605.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Ahmed Elgohary, Denis Peskov, Jordan L. Boyd-Graber</em></p>
+</li>
+<li><p><strong>Sequential Copying Networks.</strong> AAAI, 2018. <a href="https://arxiv.org/pdf/1807.02301.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Qingyu Zhou, Nan Yang, Furu Wei, Ming Zhou</em></p>
+</li>
+<li><p><strong>Let’s Ask Again: Refine Network for Automatic Question Generation.</strong> EMNLP, 2019. <a href="https://www.aclweb.org/anthology/D19-1326.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Preksha Nema, Akash Kumar Mohankumar, Mitesh M. Khapra, Balaji Vasan Srinivasan, Balaraman Ravindran</em></p>
+</li>
+</ol>
+<h2 id="Applications"><a href="#Applications" class="headerlink" title="Applications"></a><a href="#applications">Applications</a></h2><h3 id="Difficulty-Controllable-QG"><a href="#Difficulty-Controllable-QG" class="headerlink" title="Difficulty Controllable QG"></a><a href="#difficulty-controllable-QG">Difficulty Controllable QG</a></h3><p>Endowing the model with the ability to control the difficulty of the generated questions. </p>
+<ol>
+<li><p><strong>Easy-to-Hard: Leveraging Simple Questions for Complex Question Generation.</strong> arxiv, 2019. <a href="https://arxiv.org/pdf/1912.02367.pdf" target="_blank" rel="noopener">paper</a></p>
+<p> <em>Jie Zhao, Xiang Deng, Huan Sun.</em></p>
+</li>
+<li><p><strong>Difficulty Controllable Generation of Reading Comprehension Questions.</strong> IJCAI, 2019. <a href="https://www.ijcai.org/proceedings/2019/0690.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Yifan Gao, Lidong Bing, Wang Chen, Michael R. Lyu, Irwin King</em> </p>
+</li>
+<li><p><strong>Difficulty-controllable Multi-hop Question Generation From Knowledge Graphs.</strong> ISWC, 2019. <a href="https://arxiv.org/pdf/1807.03586.pdf" target="_blank" rel="noopener">paper</a>  <a href="https://github.com/liyuanfang/mhqg" target="_blank" rel="noopener">code&amp;dataset</a></p>
+<p><em>Vishwajeet Kumar, Yuncheng Hua, Ganesh Ramakrishnan, Guilin Qi, Lianli Gao, Yuan-Fang Li</em></p>
+</li>
+</ol>
+<h3 id="Conversational-QG"><a href="#Conversational-QG" class="headerlink" title="Conversational QG"></a><a href="#conversational-QG">Conversational QG</a></h3><p>Learning to generate a series of coherent questions grounded in a question answering style conversation. </p>
+<ol>
+<li><p><strong>Learning to Ask Questions in Open-domain Conversational Systems with Typed Decoders.</strong> ACL, 2018. <a href="https://arxiv.org/pdf/1805.04843.pdf" target="_blank" rel="noopener">paper</a> <a href="https://github.com/victorywys/Learning2Ask_TypedDecoder" target="_blank" rel="noopener">code</a> <a href="http://coai.cs.tsinghua.edu.cn/hml/dataset/" target="_blank" rel="noopener">dataset</a></p>
+<p><em>Yansen Wang, Chenyi Liu, Minlie Huang, Liqiang Nie</em></p>
+</li>
+<li><p><strong>Interconnected Question Generation with Coreference Alignment and Conversation Flow Modeling.</strong> ACL, 2019. <a href="https://arxiv.org/pdf/1906.06893.pdf" target="_blank" rel="noopener">paper</a> <a href="https://github.com/Evan-Gao/conversational-QG" target="_blank" rel="noopener">code</a></p>
+<p><em>Yifan Gao, Piji Li, Irwin King, Michael R. Lyu</em></p>
+</li>
+<li><p><strong>Reinforced Dynamic Reasoning for Conversational Question Generation.</strong> ACL, 2019. <a href="https://www.aclweb.org/anthology/P19-1203" target="_blank" rel="noopener">paper</a> <a href="https://github.com/ZJULearning/ReDR" target="_blank" rel="noopener">code</a> <a href="https://stanfordnlp.github.io/coqa/" target="_blank" rel="noopener">dataset</a></p>
+<p><em>Boyuan Pan, Hao Li, Ziyu Yao, Deng Cai, Huan Sun</em></p>
+</li>
+<li><p><strong>Towards Answer-unaware Conversational Question Generation.</strong> ACL Workshop, 2019. <a href="https://www.aclweb.org/anthology/D19-5809.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Mao Nakanishi, Tetsunori Kobayashi, Yoshihiko Hayashi</em></p>
+</li>
+<li><p><strong>What Should I Ask? Using Conversationally Informative Rewards for Goal-oriented Visual Dialog.</strong> ACL, 2019. <a href="https://www.aclweb.org/anthology/P19-1646.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Pushkar Shukla, Carlos Elmadjian, Richika Sharan, Vivek Kulkarni, Matthew Turk, William Yang Wang</em></p>
+</li>
+<li><p><strong>Visual Dialogue State Tracking for Question Generation.</strong> AAAI, 2020. <a href="https://arxiv.org/pdf/1911.07928.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Wei Pang, Xiaojie Wang</em></p>
+</li>
+</ol>
+<h3 id="Asking-special-questions"><a href="#Asking-special-questions" class="headerlink" title="Asking special questions"></a><a href="#asking-special-questions">Asking special questions</a></h3><p>This direction focuses on exploring how to ask special types of questions, such as mathematical questions, open-ended questions, non-factoid questions, and clarification questions. </p>
+<ol>
+<li><p><strong>Are You Asking the Right Questions? Teaching Machines to Ask Clarification Questions.</strong> ACL Workshop, 2017. <a href="https://www.aclweb.org/anthology/P17-3006.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Sudha Rao</em></p>
+</li>
+<li><p><strong>Automatic Opinion Question Generation.</strong> ICNLG, 2018. <a href="https://www.aclweb.org/anthology/W18-6518.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Yllias Chali, Tina Baghaee</em> </p>
+</li>
+<li><p><strong>A Multi-language Platform for Generating Algebraic Mathematical Word Problems.</strong> arxiv, 2019. <a href="https://arxiv.org/pdf/1912.01110.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Vijini Liyanage, Surangika Ranathunga</em></p>
+</li>
+<li><p><strong>Interpretation of Natural Language Rules in Conversational Machine Reading.</strong> EMNLP, 2018. <a href="https://arxiv.org/pdf/1809.01494.pdf" target="_blank" rel="noopener">paper</a> <a href="https://sharc-data.github.io/" target="_blank" rel="noopener">dataset</a></p>
+<p><em>Marzieh Saeidi, Max Bartolo, Patrick Lewis, Sameer Singh, Tim Rocktäschel, Mike Sheldon, Guillaume Bouchard, Sebastian Riedel</em></p>
+</li>
+<li><p><strong>Asking the Crowd: Question Analysis, Evaluation and Generation for Open Discussion on Online Forums.</strong> ACL, 2019. <a href="https://www.aclweb.org/anthology/P19-1497.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Zi Chai, Xinyu Xing, Xiaojun Wan, Bo Huang</em></p>
+</li>
+<li><p><strong>Conclusion-Supplement Answer Generation for Non-Factoid Questions.</strong> AAAI, 2020. <a href="https://arxiv.org/pdf/1912.00864.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Makoto Nakatsuji, Sohei Okui</em></p>
+</li>
+<li><p><strong>Answer-based Adversarial Training for Generating Clarification Questions.</strong> NAACL, 2019. <a href="https://arxiv.org/pdf/1904.02281.pdf" target="_blank" rel="noopener">paper</a> <a href="https://github.com/raosudha89/clarification_question_generation_pytorch" target="_blank" rel="noopener">code</a></p>
+<p><em>Rao S, Daumé III H.</em></p>
+</li>
+<li><p><strong>Distant Supervised Why-Question Generation with Passage Self-Matching Attention.</strong> IJCNN, 2019. <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=8851781" target="_blank" rel="noopener">paper</a></p>
+<p><em>Jiaxin Hu, Zhixu Li, Renshou Wu, Hongling Wang, An Liu, Jiajie Xu, Pengpeng Zhao, Lei Zhao</em></p>
+</li>
+</ol>
+<h3 id="Answer-unaware-QG"><a href="#Answer-unaware-QG" class="headerlink" title="Answer-unaware QG"></a><a href="#answer-unaware-QG">Answer-unaware QG</a></h3><p>In answer-unaware QG, the model does not require the target answer as an input to serve as the focus of asking. Therefore, the model should automatically identify question-worthy parts within the passage to ask. </p>
+<ol>
+<li><p><strong>Learning to ask: Neural question generation for reading comprehension.</strong> ACL, 2017. <a href="https://www.aclweb.org/anthology/P17-1123.pdf" target="_blank" rel="noopener">paper</a></p>
+<p> <em>Xinya Du, Junru Shao, Claire Cardie.</em></p>
+</li>
+<li><p><strong>Neural Models for Key Phrase Extraction and Question Generation.</strong> ACL Workshop, 2018. <a href="https://www.aclweb.org/anthology/W18-2609.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Sandeep Subramanian, Tong Wang, Xingdi Yuan, Saizheng Zhang, Adam Trischler, Yoshua Bengio</em></p>
+</li>
+<li><p><strong>Self-Attention Architectures for Answer-Agnostic Neural Question Generation.</strong> ACL, 2019. <a href="https://www.aclweb.org/anthology/P19-1604.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Thomas Scialom, Benjamin Piwowarski, Jacopo Staiano.</em></p>
+</li>
+</ol>
+<h3 id="Unanswerable-QG"><a href="#Unanswerable-QG" class="headerlink" title="Unanswerable QG"></a><a href="#unanswerable-QG">Unanswerable QG</a></h3><p>Learning to generate questions that cannot be answered by the input passage. </p>
+<ol>
+<li><p><strong>Learning to Ask Unanswerable Questions for Machine Reading Comprehension.</strong> ACL, 2019. <a href="https://www.aclweb.org/anthology/P19-1415.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Haichao Zhu, Li Dong, Furu Wei, Wenhui Wang, Bing Qin, Ting Liu</em></p>
+</li>
+</ol>
+<h3 id="Combining-QA-and-QG"><a href="#Combining-QA-and-QG" class="headerlink" title="Combining QA and QG"></a><a href="#Combining-QA-and-QG">Combining QA and QG</a></h3><p>This direction investigate how to combine the task of QA and QG by multi-task learning or joint training. </p>
+<ol>
+<li><p><strong>Question Generation for Question Answering.</strong> EMNLP,2017. <a href="https://www.aclweb.org/anthology/D17-1090" target="_blank" rel="noopener">paper</a></p>
+<p><em>Nan Duan, Duyu Tang, Peng Chen, Ming Zhou</em></p>
+</li>
+<li><p><strong>Learning to Collaborate for Question Answering and Asking.</strong> NAACL, 2018. <a href="https://www.aclweb.org/anthology/N18-1141" target="_blank" rel="noopener">paper</a></p>
+<p><em>Duyu Tang, Nan Duan, Zhao Yan, Zhirui Zhang, Yibo Sun, Shujie Liu, Yuanhua Lv, Ming Zhou</em></p>
+</li>
+<li><p><strong>Generating Highly Relevant Questions.</strong> EMNLP, 2019. <a href="https://arxiv.org/abs/1910.03401" target="_blank" rel="noopener">paper</a></p>
+<p><em>Jiazuo Qiu, Deyi Xiong</em></p>
+</li>
+<li><p><strong>Learning to Answer by Learning to Ask: Getting the Best of GPT-2 and BERT Worlds.</strong> arxiv, 2019. <a href="https://arxiv.org/pdf/1911.02365.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Tassilo Klein, Moin Nabi</em></p>
+</li>
+<li><p><strong>Triple-Joint Modeling for Question Generation Using Cross-Task Autoencoder.</strong> NLPCC, 2019. <a href="https://link.springer.com/chapter/10.1007/978-3-030-32236-6_26" target="_blank" rel="noopener">paper</a></p>
+<p><em>Hongling Wang, Renshou Wu, Zhixu Li, Zhongqing Wang, Zhigang Chen, Guodong Zhou</em></p>
+</li>
+<li><p><strong>Addressing Semantic Drift in Question Generation for Semi-Supervised Question Answering</strong> EMNLP, 2019. <a href="https://arxiv.org/pdf/1909.06356.pdf" target="_blank" rel="noopener">paper</a> <a href="https://github.com/ZhangShiyue/QGforQA" target="_blank" rel="noopener">code</a></p>
+<p><em>Shiyue Zhang, Mohit Bansal</em></p>
+</li>
+<li><p><strong>Synthetic QA Corpora Generation with Roundtrip Consistency</strong> ACL, 2019. <a href="https://arxiv.org/pdf/1906.05416.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Chris Alberti, Daniel Andor, Emily Pitler, Jacob Devlin, Michael Collins</em></p>
+</li>
+</ol>
+<h3 id="QG-from-knowledge-graphs"><a href="#QG-from-knowledge-graphs" class="headerlink" title="QG from knowledge graphs"></a><a href="#QG-from-knowledge-graphs">QG from knowledge graphs</a></h3><p>This direction is about generating questions from a knowledge graph. </p>
+<ol>
+<li><p><strong>Generating Factoid Questions With Recurrent Neural Networks: The 30M Factoid Question-Answer Corpus.</strong> ACL, 2016. <a href="https://arxiv.org/pdf/1603.06807.pdf" target="_blank" rel="noopener">paper</a> <a href="https://www.agarciaduran.org" target="_blank" rel="noopener">dataset</a></p>
+<p><em>Iulian Vlad Serban, Alberto García-Durán, Çaglar Gülçehre, Sungjin Ahn, Sarath Chandar, Aaron C. Courville, Yoshua Bengio</em></p>
+</li>
+<li><p><strong>Generating Natural Language Question-Answer Pairs from a Knowledge Graph Using a RNN Based Question Generation Model.</strong> ACL, 2017. <a href="https://www.aclweb.org/anthology/E17-1036/" target="_blank" rel="noopener">paper</a></p>
+<p><em>Mitesh M. Khapra, Dinesh Raghu, Sachindra Joshi, Sathish Reddy</em></p>
+</li>
+<li><p><strong>Knowledge Questions from Knowledge Graphs.</strong> ICTIR, 2017. <a href="https://arxiv.org/pdf/1610.09935.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Dominic Seyler, Mohamed Yahya, Klaus Berberich.</em></p>
+</li>
+<li><p><strong>Zero-Shot Question Generation from Knowledge Graphs for Unseen Predicates and Entity Types.</strong> NAACL, 2018. <a href="https://arxiv.org/pdf/1802.06842.pdf" target="_blank" rel="noopener">paper</a> <a href="https://github.com/NAACL2018Anonymous/submission" target="_blank" rel="noopener">code</a></p>
+<p><em>Hady Elsahar, Christophe Gravier, Frederique Laforest.</em></p>
+</li>
+<li><p><strong>A Neural Question Generation System Based on Knowledge Base</strong> NLPCC, 2018. <a href="https://link.springer.com/chapter/10.1007/978-3-319-99495-6_12" target="_blank" rel="noopener">paper</a></p>
+<p><em>Hao Wang, Xiaodong Zhang, Houfeng Wang</em></p>
+</li>
+<li><p><strong>Formal Query Generation for Question Answering over Knowledge Bases.</strong> ESWC, 2018. <a href="https://link.springer.com/chapter/10.1007/978-3-319-93417-4_46" target="_blank" rel="noopener">paper</a></p>
+<p><em>Hamid Zafar, Giulio Napolitano, Jens Lehmann</em></p>
+</li>
+<li><p><strong>Generating Questions for Knowledge Bases via Incorporating Diversified Contexts and Answer-Aware Loss.</strong> EMNLP, 2019. <a href="https://www.aclweb.org/anthology/D19-1247.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Cao Liu, Kang Liu, Shizhu He, Zaiqing Nie, Jun Zhao</em></p>
+</li>
+<li><p><strong>Difficulty-controllable Multi-hop Question Generation From Knowledge Graphs.</strong> ISWC, 2019. <a href="https://arxiv.org/pdf/1807.03586.pdf" target="_blank" rel="noopener">paper</a>  <a href="https://github.com/liyuanfang/mhqg" target="_blank" rel="noopener">code&amp;dataset</a></p>
+<p><em>Vishwajeet Kumar, Yuncheng Hua, Ganesh Ramakrishnan, Guilin Qi, Lianli Gao, Yuan-Fang Li</em></p>
+</li>
+<li><p><strong>How Question Generation Can Help Question Answering over Knowledge Base.</strong> NLPCC, 2019. <a href="http://tcci.ccf.org.cn/conference/2019/papers/183.pdf" target="_blank" rel="noopener">paper</a></p>
+<p> <em>Sen Hu, Lei Zou, Zhanxing Zhu</em></p>
+</li>
+</ol>
+<h3 id="Visual-Question-Generation"><a href="#Visual-Question-Generation" class="headerlink" title="Visual Question Generation"></a><a href="#visual-question-generation">Visual Question Generation</a></h3><p>Asking questions based on visual inputs (usually an image). </p>
+<ol>
+<li><p><strong>Generating Natural Questions About an Image</strong> ACL, 2016. <a href="https://arxiv.org/pdf/1603.06059.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Nasrin Mostafazadeh, Ishan Misra, Jacob Devlin, Margaret Mitchell, Xiaodong He, Lucy Vanderwende</em></p>
+</li>
+<li><p><strong>Creativity: Generating Diverse Questions Using Variational Autoencoders</strong> CVPR,2017. <a href="https://arxiv.org/pdf/1704.03493.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Unnat Jain, Ziyu Zhang, Alexander G. Schwing</em></p>
+</li>
+<li><p><strong>Automatic Generation of Grounded Visual Questions</strong> IJCAI, 2017. <a href="https://www.ijcai.org/proceedings/2017/0592.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Shijie Zhang, Lizhen Qu, Shaodi You, Zhenglu Yang, Jiawan Zhang</em></p>
+</li>
+<li><p><strong>A Reinforcement Learning Framework for Natural Question Generation using Bi-discriminators</strong> COLING, 2018. <a href="https://www.aclweb.org/anthology/C18-1150.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Zhihao Fan, Zhongyu Wei, Siyuan Wang, Yang Liu, Xuanjing Huang</em></p>
+</li>
+<li><p><strong>Customized Image Narrative Generation via Interactive Visual Question Generation and Answering</strong> CVPR, 2018. <a href="https://arxiv.org/pdf/1805.00460.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Andrew Shin, Yoshitaka Ushiku, Tatsuya Harada</em></p>
+</li>
+<li><p><strong>Multimodal Differential Network for Visual Question Generation</strong> EMNLP, 2018. <a href="https://www.aclweb.org/anthology/D18-1434.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Badri Narayana Patro, Sandeep Kumar, Vinod Kumar Kurmi, Vinay P. Namboodiri</em></p>
+</li>
+<li><p><strong>A Question Type Driven Framework to Diversify Visual Question Generation</strong> IJCAI, 2018. <a href="http://www.sdspeople.fudan.edu.cn/zywei/paper/fan-ijcai2018.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Zhihao Fan, Zhongyu Wei, Piji Li, Yanyan Lan, Xuanjing Huang</em></p>
+</li>
+<li><p><strong>Visual Question Generation as Dual Task of Visual Question Answering.</strong> CVPR, 2018. <a href="http://openaccess.thecvf.com/content_cvpr_2018/papers/Li_Visual_Question_Generation_CVPR_2018_paper.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Yikang Li, Nan Duan, Bolei Zhou, Xiao Chu, Wanli Ouyang, Xiaogang Wang, Ming Zhou</em> </p>
+</li>
+<li><p><strong>Two can play this Game: Visual Dialog with Discriminative Question Generation and Answering.</strong> CVPR, 2018. <a href="https://arxiv.org/pdf/1803.11186.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Unnat Jain, Svetlana Lazebnik, Alexander Schwing</em></p>
+</li>
+<li><p><strong>Information Maximizing Visual Question Generation.</strong> CVPR, 2019. <a href="https://arxiv.org/pdf/1903.11207.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Ranjay Krishna, Michael Bernstein, Li Fei-Fei</em></p>
+</li>
+<li><p><strong>What Should I Ask? Using Conversationally Informative Rewards for Goal-oriented Visual Dialog.</strong> ACL, 2019. <a href="https://www.aclweb.org/anthology/P19-1646.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Pushkar Shukla, Carlos Elmadjian, Richika Sharan, Vivek Kulkarni, Matthew Turk, William Yang Wang</em></p>
+</li>
+</ol>
+<h3 id="Distractor-Generation"><a href="#Distractor-Generation" class="headerlink" title="Distractor Generation"></a><a href="#distractor-generation">Distractor Generation</a></h3><p>Learning to generate distractors for multi-choice questions. </p>
+<ol>
+<li><p><strong>Generating Questions and Multiple-Choice Answers using Semantic Analysis of Texts.</strong> COLING, 2016. <a href="https://www.aclweb.org/anthology/C16-1107.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Jun Araki, Dheeraj Rajagopal, Sreecharan Sankaranarayanan, Susan Holm, Yukari Yamakawa, Teruko Mitamura</em></p>
+</li>
+<li><p><strong>Distractor Generation for Multiple Choice Questions Using Learning to Rank.</strong> NAACL Workshop, 2018. <a href="https://www.aclweb.org/anthology/W18-0533.pdf" target="_blank" rel="noopener">paper</a> <a href="https://github.com/harrylclc/LTR-DG" target="_blank" rel="noopener">code</a></p>
+<p><em>Chen Liang, Xiao Yang, Neisarg Dave, Drew Wham, Bart Pursel, C. Lee Giles</em></p>
+</li>
+<li><p><strong>Generating Distractors for Reading Comprehension Questions from Real Examinations.</strong> AAAI, 2019. <a href="https://arxiv.org/pdf/1809.02768.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Yifan Gao, Lidong Bing, Piji Li, Irwin King, Michael R. Lyu</em></p>
+</li>
+</ol>
+<h3 id="Cross-lingual-QG"><a href="#Cross-lingual-QG" class="headerlink" title="Cross-lingual QG"></a><a href="#cross-lingual-QG">Cross-lingual QG</a></h3><p>Building cross-lingual models to generate questions in low-resource languages. </p>
+<ol>
+<li><p><strong>Cross-Lingual Training for Automatic Question Generation.</strong> ACL, 2019. <a href="https://arxiv.org/pdf/1906.02525.pdf" target="_blank" rel="noopener">paper</a> <a href="https://www.cse.iitb.ac.in/~ganesh/HiQuAD/clqg/" target="_blank" rel="noopener">dataset</a></p>
+<p><em>Vishwajeet Kumar, Nitish Joshi, Arijit Mukherjee, Ganesh Ramakrishnan, Preethi Jyothi</em></p>
+</li>
+<li><p><strong>Cross-Lingual Natural Language Generation via Pre-Training.</strong> AAAI, 2020. <a href="https://arxiv.org/pdf/1909.10481.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Zewen Chi, Li Dong, Furu Wei, Wenhui Wang, Xian-Ling Mao, Heyan Huang</em></p>
+</li>
+</ol>
+<h2 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a><a href="#evaluation">Evaluation</a></h2><p>This direction investigates the mechanism behind question asking, and how to evaluate the quality of generated questions. </p>
+<ol>
+<li><p><strong>Question Asking as Program Generation.</strong> NeurIPS, 2017. <a href="https://arxiv.org/pdf/1711.06351.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Anselm Rothe, Brenden M. Lake, Todd M. Gureckis.</em></p>
+</li>
+<li><p><strong>Towards a Better Metric for Evaluating Question Generation Systems.</strong> EMNLP, 2018. <a href="https://www.aclweb.org/anthology/D18-1429/" target="_blank" rel="noopener">paper</a></p>
+<p><em>Preksha Nema, Mitesh M. Khapra.</em></p>
+</li>
+<li><p><strong>Evaluating Rewards for Question Generation Models.</strong> NAACL, 2019. <a href="https://arxiv.org/pdf/1902.11049.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Tom Hosking and Sebastian Riedel.</em></p>
+</li>
+</ol>
+<h2 id="Resources"><a href="#Resources" class="headerlink" title="Resources"></a><a href="#resources">Resources</a></h2><p>QG-specific datasets and toolkits. </p>
+<ol>
+<li><p><strong>LearningQ: A Large-Scale Dataset for Educational Question Generation.</strong> ICWSM, 2018. <a href="https://yangjiera.github.io/works/icwsm2018.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Guanliang Chen, Jie Yang, Claudia Hauff, Geert-Jan Houben.</em></p>
+</li>
+<li><p><strong>ParaQG: A System for Generating Questions and Answers from Paragraphs.</strong> EMNLP Demo, 2019. <a href="https://arxiv.org/pdf/1909.01642.pdf" target="_blank" rel="noopener">paper</a></p>
+<p><em>Vishwajeet Kumar, Sivaanandh Muneeswaran, Ganesh Ramakrishnan, Yuan-Fang Li.</em></p>
+</li>
+<li><p><strong>How to Ask Better Questions? A Large-Scale Multi-Domain Dataset for Rewriting Ill-Formed Questions.</strong> AAAI, 2020. <a href="https://arxiv.org/pdf/1911.09247.pdf" target="_blank" rel="noopener">paper</a> <a href="https://github.com/ZeweiChu/MQR" target="_blank" rel="noopener">code</a></p>
+<p><em>Zewei Chu, Mingda Chen, Jing Chen, Miaosen Wang, Kevin Gimpel, Manaal Faruqui, Xiance Si.</em></p>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Notes/" rel="tag"># Notes</a>
+          
+            <a href="/tags/Study/" rel="tag"># Study</a>
+          
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020-04-08-Study-Data-Science-QA/" rel="next" title="Data Science Question and Answer">
+                <i class="fa fa-chevron-left"></i> Data Science Question and Answer
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020-04-18-Study-E-Commerce-Notes/" rel="prev" title="E-Commerce 2017">
+                E-Commerce 2017 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Jack Xia" />
+          <p class="site-author-name" itemprop="name">Jack Xia</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">154</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Content"><span class="nav-number">1.</span> <span class="nav-text">Content</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Survey-papers"><span class="nav-number">2.</span> <span class="nav-text">Survey papers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Models"><span class="nav-number">3.</span> <span class="nav-text">Models</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-Seq2Seq-Models"><span class="nav-number">3.1.</span> <span class="nav-text">Basic Seq2Seq Models</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Encoding-Answers"><span class="nav-number">3.2.</span> <span class="nav-text">Encoding Answers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linguistic-Features"><span class="nav-number">3.3.</span> <span class="nav-text">Linguistic Features</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-specific-Rewards"><span class="nav-number">3.4.</span> <span class="nav-text">Question-specific Rewards</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Content-Selection"><span class="nav-number">3.5.</span> <span class="nav-text">Content Selection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-Type-Modeling"><span class="nav-number">3.6.</span> <span class="nav-text">Question Type Modeling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Encode-Wider-Contexts"><span class="nav-number">3.7.</span> <span class="nav-text">Encode Wider Contexts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other-Directions"><span class="nav-number">3.8.</span> <span class="nav-text">Other Directions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Applications"><span class="nav-number">4.</span> <span class="nav-text">Applications</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Difficulty-Controllable-QG"><span class="nav-number">4.1.</span> <span class="nav-text">Difficulty Controllable QG</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conversational-QG"><span class="nav-number">4.2.</span> <span class="nav-text">Conversational QG</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Asking-special-questions"><span class="nav-number">4.3.</span> <span class="nav-text">Asking special questions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Answer-unaware-QG"><span class="nav-number">4.4.</span> <span class="nav-text">Answer-unaware QG</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unanswerable-QG"><span class="nav-number">4.5.</span> <span class="nav-text">Unanswerable QG</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Combining-QA-and-QG"><span class="nav-number">4.6.</span> <span class="nav-text">Combining QA and QG</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QG-from-knowledge-graphs"><span class="nav-number">4.7.</span> <span class="nav-text">QG from knowledge graphs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual-Question-Generation"><span class="nav-number">4.8.</span> <span class="nav-text">Visual Question Generation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Distractor-Generation"><span class="nav-number">4.9.</span> <span class="nav-text">Distractor Generation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cross-lingual-QG"><span class="nav-number">4.10.</span> <span class="nav-text">Cross-lingual QG</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evaluation"><span class="nav-number">5.</span> <span class="nav-text">Evaluation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Resources"><span class="nav-number">6.</span> <span class="nav-text">Resources</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack Xia</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mermaid/6.0.0/mermaid.min.js"></script>
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
