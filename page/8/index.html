@@ -274,6 +274,250 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-08-08-OpenSource-SaltDebug/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-08-08-OpenSource-SaltDebug/" itemprop="url">saltstack  debug的技巧</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-08T08:00:00+08:00">
+                2017-08-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>运行 Salt 一旦 shim 发现 Python 解释器，并且一旦 salt_state.tgz tar 包部署完毕（如果有必要的话），最终就可以执行Salt 命令。和传统的 Salt 运行方式不一样，它不需要以守护进程（daemon）方式运行，而是以本地模式（local mode）方式执行 salt-call 命令，就像它是一个 Minion 一样。输出结果会通过 Master 端的 Salt SSH 客户端收集、解析并展示给用户。我们可以以 trace日志级别来查看运行信息。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost salt]# salt 's*' test.ping --log-level trace</span><br><span class="line">[DEBUG] Reading configuration from /etc/salt/master</span><br><span class="line">[DEBUG] Missing configuration file: /root/.saltrc</span><br><span class="line">[TRACE] None of the required configuration sections, 'logstash_udp_handler'</span><br><span class="line">and 'logstash_zmq_handler', were found the in the configuration. Not loading</span><br><span class="line">the Logstash logging handlers module.</span><br><span class="line">[DEBUG] Configuration file path: /etc/salt/master</span><br><span class="line">[WARNING ] Insecure logging configuration detected! Sensitive data may be</span><br><span class="line">logged.</span><br><span class="line">[DEBUG] Reading configuration from /etc/salt/master</span><br><span class="line">[DEBUG] Missing configuration file: /root/.saltrc</span><br><span class="line">[DEBUG] MasterEvent PUB socket URI:</span><br><span class="line">ipc:///var/run/salt/master/master_event_pub.ipc</span><br><span class="line">[DEBUG] MasterEvent PULL socket URI:</span><br><span class="line">ipc:///var/run/salt/master/master_event_pull.ipc</span><br><span class="line">[DEBUG] Sending event - data = &#123;'_stamp': '2017-08-07T05:54:21.903494'&#125;</span><br><span class="line">[TRACE] get_event() received = &#123;'tag': 'salt/event/new_client', 'data':</span><br><span class="line">&#123;'_stamp': '2017-08-07T05:54:21.903494'&#125;&#125;</span><br><span class="line">[TRACE] func get_cli_event_returns()</span><br><span class="line">[DEBUG] LazyLoaded mysql.get_load</span><br><span class="line">[DEBUG] LazyLoaded config.option</span><br><span class="line">[INFO ] Using default for mysql ssl_key</span><br><span class="line">[INFO ] Using default for mysql ssl_cert</span><br><span class="line">[INFO ] Using default for mysql ssl_ca</span><br><span class="line">[DEBUG] get_iter_returns for jid 20170806225421938741 sent to set(['salt-</span><br><span class="line">master']) will timeout at 22:54:27.014845</span><br><span class="line">[TRACE] get_event() received = &#123;'tag': 'salt/job/20170806225421938741/new',</span><br><span class="line">'data': &#123;'tgt_type': 'glob', 'jid': '20170806225421938741', 'tgt': 's*',</span><br><span class="line">'_stamp': '2017-08-07T05:54:21.938959', 'user': 'root', 'arg': [], 'fun':</span><br><span class="line">'test.ping', 'minions': ['salt-master']&#125;&#125;</span><br><span class="line">[TRACE] get_event() received = &#123;'tag': 'salt/job/20170806225421938741/ret</span><br><span class="line">/salt-master', 'data': &#123;'fun_args': [], 'jid': '20170806225421938741',</span><br><span class="line">'return': True, 'retcode': 0, 'success': True, 'cmd': '_return', '_stamp':</span><br><span class="line">'2017-08-07T05:54:22.062106', 'fun': 'test.ping', 'id': 'salt-master'&#125;&#125;</span><br><span class="line">[DEBUG] jid 20170806225421938741 return from salt-master</span><br><span class="line">[DEBUG] LazyLoaded nested.output</span><br><span class="line">[TRACE] data = &#123;'salt-master': True&#125;</span><br><span class="line">salt-master:</span><br><span class="line"> True</span><br><span class="line">[DEBUG] jid 20170806225421938741 found all minions set(['salt-master'])</span><br><span class="line">[root@localhost salt]#</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-08-02-Habit-16PF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-08-02-Habit-16PF/" itemprop="url">16PF-卡特尔16种人格因素问卷</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T08:00:00+08:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>卡特尔16pf在线测验:<br><a href="http://www.cnpsy.net/16pf/index3.asp" target="_blank" rel="noopener">http://www.cnpsy.net/16pf/index3.asp</a></p>
+<p>因素A乐群性：高分者外向、热情、乐群；低分者缄默、孤独、内向。<br>因素B聪慧性：高分者聪明、富有才识；低分者迟钝、学识浅薄。<br>因素C稳定性：高分者情绪稳定而成熟；低分者情绪激动不稳定。<br>因素E恃强性：高分者好强固执、支配攻击；低分者谦虚顺从。<br>因素F兴奋性：高分者轻松兴奋、逍遥放纵；低分者严肃审慎、沉默寡言。<br>因素G有恒性：高分者有恒负责、重良心；低分者权宜敷衍、原则性差。<br>因素H敢为性：高分者冒险敢为，少有顾忌，主动性强；低分者害羞、畏缩、退却。<br>因素I敏感性：高分者细心、敏感、好感情用事；低分者粗心、理智、着重实际。<br>因素L怀疑性：高分者怀疑、刚愎、固执己见；低分者真诚、合作、宽容、信赖随和。<br>因素M幻想性：高分者富于想像、狂放不羁；低分者现实、脚踏实地、合乎成规。<br>因素N世故性：高分者精明、圆滑、世故、人情练达、善于处世；低分者坦诚、直率、天真。<br>因素O忧虑性：高分者忧虑抑郁、沮丧悲观、自责、缺乏自信；低分者安详沉着、有自信心。<br>因素Ql实验性：高分者自由开放、批评激进；低分者保守、循规蹈矩、尊重传统。<br>因素Q2独立性：高分者自主、当机立断；低分者依赖、随群附众。<br>因素Q3自律性：高分者知己知彼、自律谨严；低分者不能自制、不守纪律、自我矛盾、松懈、随心所欲。<br>因素Q4紧张性：高分者紧张、有挫折感、常缺乏耐心、心神不定，时常感到疲乏；低分者心平气和、镇静自若、知足常乐。</p>
+<p>16pf问卷测量结果<br>尊敬的Jack先生,您好!欢迎您查看本次测量的结果!<br>请根据下面步骤查看测量结果<br>步骤1 如果下面有漏填题目的提示,请返回补填!如果没有则跳至步骤2</p>
+<p>步骤2 如果上面没有漏填的提示,则测量结果结果如下:</p>
+<p>在乐群性方面，低分者通常表现为：对人冷漠，落落寡合，喜欢吹毛求疵，宁愿独自工作，对事而不对人，不轻易放弃自己的主见，为人做事的标准常常很高。严谨而不苟且。高分者通常表现为：通常和蔼可亲，与人相处，合作与适应的能力特强。喜欢和别人共同工作，参加或组织各种社团活动，不斤斤计较，容易接受别人的批评。萍水相逢也可以一见如故。您属于中间的一类。即:既不是很孤独、冷漠，也不是很外向，热情.教师和推销员多系高A，而物理学家和电机工程师则多系低A。前者需要时时应付人与人之间的复杂情绪或行为问题漏填，而仍然能够保证其乐观的态度。后者则必须极端的冷静严肃与正确才能圆满地完成任务。</p>
+<p>在智慧性方面，您属于聪明，富有才识，善于抽象思考的一类，具体表现为：通常学习能力强，思考敏捷正确，教育，文化水准高，个人心身状态健康。机警者多有高B，高B反映心理机能的正常。专业训练需要高B，但从事例行职务的人如大资源，电话生，家庭主妇等，则因高B而对例行琐务发生厌恶，不能久安其职。</p>
+<p>在稳定性方面，您属于稳定而成熟，能面对现实的一类，具体表现为：高者通常以沉着的态度应付现实各项问题。行动充满魄力。能振奋勇气，维持团队的精神。有时高C也可能由于不能彻底解决许多生活难题漏填，而不得不自我宽解。教师，机器工程师，推销员，救火队队员等，凡需要应付日常生活各种难题者应有高C。但是凡能随心所欲，安排自己工作进度的人，如作家，邮差或清道工等，则虽系低C，尚无大碍。  </p>
+<p>在影响性方面，您属于好强固执，独立积极的一类，具体表现为：通常自视甚高，自以为是。可能非常地武断，而时常驾驭不及他的人和反抗权势者。一般的，领袖以及有地位有成就的人多属高E。救火队员和航空飞行员的因素E高。男人较女人高。</p>
+<p>在活泼性方面，低分者通常表现为：行动拘禁，内省而不轻易发言，较消极，忧郁。有时候可能过分深思熟虑，又近乎骄傲自满。在职责上，他常是认真而可靠的工作人员。高分者通常表现为：活泼，愉快，健谈，对人对事热心而富有感情。但是有时也可能会冲动，以致行为变化莫测。您属于中性的一类，即:既不是很严肃、谨慎、冷静、寡言、行动拘禁，也不是很活泼，愉快，健谈行政主管人员多有高F。竞选人必有高F,才能够获得选民的爱戴，实验技术人员则不必有高F。</p>
+<p>在有恒性方面，您属于持恒负责，做事尽职的一类，具体表现为：通常细心周到，有始有终。是非善恶是他的行为指针。所结交的朋友多是努力苦干的人，而不十分欣赏诙谐有趣的人。各种社团组织的领袖需要高G。业务管理和警察具有极高的因素G。任性纵欲，放火杀人的罪犯，因素G 极低。</p>
+<p>在交际性方面，您属于冒险敢为，少有顾忌的一类，具体表现为：通常不掩饰，不畏缩，有敢做敢为的精神，使他能经历艰辛而保持刚毅的一例。有时可能太粗心大意，忽视细节，遭受无谓的打击与挫折。可能无聊多事，喜欢向异性殷勤卖力。因素H常随年龄而增强。救火队队员和飞行员有高H，事物员多是低H。团队领导人必具有高H。</p>
+<p>在情感性方面，您属于理智的，着重现实，自恃其力的一类，具体表现为：常以客观，坚强，独立的态度处理当前的问题。重视文化修养，可能过分冷酷无情。室内设计师，音乐家，艺人，女人属高I，而工程师，外科医生，统计师等则多低I.</p>
+<p>在怀疑性方面，低分者通常表现为：无猜忌，不与人角逐竞争，顺应合作，善于体贴人。高分者通常表现为：怀疑，不信任别人，与人相处，常常斤斤计较，不顾及到别人的利益。您属于中性的一类，即:既不信赖随和、易与人相处，也不是很怀疑、刚愎、固执己见在团体活动中，低L是以团体福利为前提的忠实分子，因素L过分高者常常成事不足，败事有余。工程师，机工，精神病护理员多是低L，而行政人员和警察常是高L.</p>
+<p>在想象性方面,低分者通常表现为：先要斟酌现实条件，而后决定取舍，不鲁莽从事。在紧要关头时，也能保持镇静，有时可能过分重视现实，为人索然寡趣。高分者通常表现为：忽视生活的细节，只以本身的动机，当时兴趣等主观因素为行为的出发点。可能富有创造力，有时也过分不务实际，近乎冲动。因而容易被人误解及奚落。您属于中性的一类，即:既不是很现实、合乎成规、力求妥善合力，也不是很喜欢幻想、狂放不羁艺术家，作者及从事研究者多有高M。低M多选择需要实际，机警，脚踏实地的工作。</p>
+<p>在世故性方面，低分者通常表现为：思想简单，感情用事。与人无争，与世无杵，自许，心满意足。但有时显得幼稚，粗鲁，笨拙，似乎缺乏教养。高分者通常表现为：处事老练，行为得体。能冷静地分析一切，近乎狡猾。对于一切事物的看法是理智的，客观的。您属于中性的一类，即:既不是很坦白、直率、天真，也不是很精明能干、世故科学家，工程师，飞行员多是高N，牧师神父，护士等多是低N，牧师的因素N不应太高，低N使他不苛求责难，能容忍同情信徒的缺点。</p>
+<p>在忧虑性方面，您属于乐群，沉着，有自信心的一类，具体表现为：常有信心，不轻易动摇，信任自己有应付问题的能力，有安全感，能适应世俗。有时因为缺乏同情，而引发别人的反感与恶意。年老的女招待，低级办事员，以及终生碌碌未尽如意的作家，编辑人等有高O。职业运动员，电机工，救火队员，护士等多是低O。</p>
+<p>在变革性方面，低分者通常表现为：无条件地接受社会中许多相沿已久而有权威性的见解，不愿常是探求新的境界。常常激烈的反对新思想以及一切新的变动。在政治与宗教信仰上，墨守成规，可能被称为老顽固或时代的落伍者。高分者通常表现为：喜欢考验一切现有的理论与实施，而予以新的评价，不轻易判断是非，企图了解较前卫的思想与行为。可能广见多闻。愿意充实自己的生活经验。您属于中性的一类，即:既不是很保守的、尊重传统观念与行为标准，也不是很喜欢自由、批评激进、不拘泥现实行政主管人，前卫的政治家，科学家都必须具有高Q1，护士，牧师神父与许多为首高深教育的技工等则多有低Q1，神经病人的因素Q1也比较低。</p>
+<p>在独立性方面，低分者通常表现为：宁欲与人共同工作，而不愿独立孤行。常常放弃个人的主见而附和取得别人的好感，需要团体的支持以维持其自信心，却并非真正的乐群者。高分者通常表现为：能够自作主张，独自完成自己的工作计划，不依赖别人，也不受社会舆论的约束，同样也无意控制或支配别人，不嫌恶人，但是也不需要别人的好感。您属于中性的一类，即:既不是很依赖、随群附和，也不是很自立自强、当机立断科学家，行政主管人等多有高Q2，低Q2者不能胜任需要随机应变能力的职务。</p>
+<p>在自律性方面，您属于知己知彼，自律谨严的一类，具体表现为：通常言行一致，能够合理的支配自己的感情行动。为人处世，总能保持其自尊心，赢得别人的尊重，有时却不免太固执己见。高Q3者多具有领袖能力的才干，主管人，电机工和生产部门的成功也需要高Q3。</p>
+<p>在紧张性方面，低分者通常表现为：知足常乐，保持内心的平衡。也可能过分疏懒，缺乏进取心。高分者通常表现为：缺乏耐心，心神不安，态度兴奋。时常感觉疲乏，又无法彻底摆脱以求宁静。在社群中，他对人与事都缺乏信心。每日生活战战兢兢，而不能自给。您属于中性的一类，即:既不是很心平气和、闲散宁静，也不是很紧张闲扰、激动挣扎未能在生活或职业中发挥本身才智潜能的人多具有高Q4，如餐店招待，家庭主妇，缺乏生活保障的作业等。</p>
+<p>　　　　　　　　　　　　　　　　　　　　　　　　　　　　　测验日期:2017/8/2</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-27-Book-6QuestionPersuadeEveryone/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1333,231 +1577,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-13-Book-Humanity/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-07-13-Book-Humanity/" itemprop="url">人性(优点和弱点) - 戴尔·卡耐基</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-13T08:00:00+08:00">
-                2017-07-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/uploads/ueditor/php/upload/image/20170713/1499911410.png" alt="blob.png"></p>
-<p><img src="/uploads/ueditor/php/upload/image/20170713/1499911453.jpeg" alt="利用人性的弱点的互联网服务.jpeg"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-07-12-Book-SelfControl/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-07-12-Book-SelfControl/" itemprop="url">自控力 - 斯坦福大学公开课</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-12T08:00:00+08:00">
-                2017-07-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/uploads/ueditor/php/upload/image/20170711/1499735434.png" alt="blob.png"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1607,7 +1626,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">154</span>
+                <span class="site-state-item-count">156</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1620,7 +1639,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
