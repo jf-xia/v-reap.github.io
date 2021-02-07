@@ -1,0 +1,1932 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Notes,Study,Lecture," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+<meta name="description" content="Metadata Metadata Fundamentals  Metadata Benefits   Robustness - leading to stability  Common Structure - leading to repeatability  Consistency of approach - leading to e”ciency  Interoperability - le">
+<meta name="keywords" content="Notes,Study,Lecture">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Semantic data archi">
+<meta property="og:url" content="http://blog.toob.net.cn/2020-09-16-Study-SemanticDataArchi/index.html">
+<meta property="og:site_name" content="Jack Xia">
+<meta property="og:description" content="Metadata Metadata Fundamentals  Metadata Benefits   Robustness - leading to stability  Common Structure - leading to repeatability  Consistency of approach - leading to e”ciency  Interoperability - le">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-09-08T04:09:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Semantic data archi">
+<meta name="twitter:description" content="Metadata Metadata Fundamentals  Metadata Benefits   Robustness - leading to stability  Common Structure - leading to repeatability  Consistency of approach - leading to e”ciency  Interoperability - le">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.toob.net.cn/2020-09-16-Study-SemanticDataArchi/"/>
+
+
+
+
+
+  <title>Semantic data archi | Jack Xia</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jack Xia</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">笔记</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2020-09-16-Study-SemanticDataArchi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Semantic data archi</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-05T08:00:00+08:00">
+                2020-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Metadata"><a href="#Metadata" class="headerlink" title="Metadata"></a>Metadata</h2><ul>
+<li><p>Metadata Fundamentals</p>
+<ul>
+<li>Metadata Benefits</li>
+</ul>
+</li>
+<li><p>Robustness - leading to stability</p>
+</li>
+<li><p>Common Structure - leading to repeatability</p>
+</li>
+<li><p>Consistency of approach - leading to e”ciency</p>
+</li>
+<li><p>Interoperability - leading to sharing</p>
+<ul>
+<li>Metadata Qualities</li>
+</ul>
+</li>
+<li><p>Accurate, Timely, Consistent, Accessible</p>
+</li>
+<li><p>Metadata Models</p>
+<ul>
+<li>Descriptive Metadata (internal view)</li>
+</ul>
+</li>
+<li><p>about the content itself - used for discovery and identi!cation and including such information as title, author, and keywords</p>
+<ul>
+<li>Structural Metadata (external view )</li>
+</ul>
+</li>
+<li><p>about the content form and functions (format, size…)</p>
+<ul>
+<li>Administrative Metadata (management view )</li>
+</ul>
+</li>
+<li><p>enables better content management with such information as when and how the resource was created, rights, archiving, etc</p>
+<ul>
+<li>Relationship Metadata (context view)</li>
+</ul>
+</li>
+<li><p>How it is related to other resources</p>
+</li>
+<li>Metadata Examples</li>
+<li>Dublin Core</li>
+<li>Levels of Resource Description<ul>
+<li>Work</li>
+<li>Expression</li>
+<li>Manifestation</li>
+<li>Item</li>
+</ul>
+</li>
+<li><p>Metadata Capabilities</p>
+<ul>
+<li>Search</li>
+</ul>
+</li>
+<li><p>The ability to determine the similarity of information assets to a target concept or concepts</p>
+<ul>
+<li>Discover</li>
+</ul>
+</li>
+<li><p>Find existing databases, content stores, applications, social networks and other external data sources that may hold information of interest to the enterprise</p>
+<ul>
+<li>Model</li>
+</ul>
+</li>
+<li><p>Represent critical metadata describing information assets in a way that can be understood and communicated readily</p>
+<ul>
+<li>Pro!le</li>
+</ul>
+</li>
+<li><p>Assess the “shape” of information assets to better understand levels of quality and to further inform and enhance information models.</p>
+<ul>
+<li>Identify</li>
+</ul>
+</li>
+<li><p>Discern or establish identi!ers for information assets that make the information !ndable by people, systems and other functions</p>
+<ul>
+<li>Value</li>
+</ul>
+</li>
+<li><p>Provide insight about information assets that will assist people and systems in understanding the assets’ potential value or risk to the enterprise</p>
+<ul>
+<li>Abstract</li>
+</ul>
+</li>
+<li><p>Enable consumers of information assets to understand the meaning of information assets in a way that does not require them to have detailed knowledge of the underlying physical and technical implementation detailsCase Study - Discovery</p>
+</li>
+<li>Case Study - Discovery</li>
+<li><p>Controlled Vocabulaires use case</p>
+<ul>
+<li>Description of di#erent dimensions of an entity</li>
+</ul>
+</li>
+<li><p>places, temporal periods, subjects , themes, topics, functions, audience, communities</p>
+<ul>
+<li>Term Recommendation</li>
+</ul>
+</li>
+<li><p>search for New York, the recommender: New York (the city) or New York (the state)</p>
+<ul>
+<li>Semantic Enrichment/Inferencing by use of reasoners (eg broader/narrower relationships)</li>
+<li>Navigation of information by traversing conceptual spaces linking to resources</li>
+<li>Query enrichment by injecting alternative labels or synonyms or more specialised terms</li>
+</ul>
+</li>
+<li><p>A controlled vocabulary is a collection of terms that are:</p>
+<ul>
+<li>Accepted: The term must adhere to community practices</li>
+<li>De!ned: The terms are precisely characterised</li>
+</ul>
+</li>
+<li><p>Typically, this means the terms have rigorous de!nitions</p>
+<ul>
+<li>Managed: In general, there will be a body of experts that create and maintain the controlled vocabulary</li>
+</ul>
+</li>
+<li><p>Maintenance will involve periodic review, addition of new terms, modi!cation of terms, and occasionally deprecation of termsExamples Vocab</p>
+</li>
+<li>Metadata Interoperability</li>
+<li>Identilers and Syntax</li>
+<li><p>FAIR Principles</p>
+<ul>
+<li>Findable</li>
+</ul>
+</li>
+<li><p>The first step in (re)using data is to find them</p>
+</li>
+<li><p>Metadata and data should be easy to find for both humans and computers</p>
+</li>
+<li><p>Machine-readable metadata are essential for automatic discovery of datasets and services</p>
+</li>
+<li><p>F1 - (Meta)data are assigned a globally unique and persistent identi!er</p>
+</li>
+<li><p>F2 - Data are described with rich metadata (defined by R1 below)</p>
+</li>
+<li><p>F3 - Metadata clearly and explicitly include the identi!er of the data they describe</p>
+</li>
+<li><p>F4 - (Meta)data are registered or indexed in a searchable resource</p>
+<ul>
+<li>Accessible</li>
+</ul>
+</li>
+<li><p>Once the user !nds the required data, they need to know how can they be accessed, possibly including authentication and authorisation</p>
+</li>
+<li><p>A1, - (Meta)data are retrievable by their identi!er using a standardised communications protocol</p>
+</li>
+<li><p>A1.1 - The protocol is open, free, and universally implementable</p>
+</li>
+<li><p>A1.2- The protocol allows for an authentication and authorisation procedure, where necessary</p>
+</li>
+<li><p>A2. Metadata are accessible, even when the data are no longer available</p>
+<ul>
+<li>Interoperable</li>
+</ul>
+</li>
+<li><p>The data usually need to be integrated with other data</p>
+</li>
+<li><p>In addition, the data need to interoperate with applications or work%ows for analysis, storage, and processing</p>
+</li>
+<li><p>I1 - (Meta)data use a formal, accessible, shared, and broadly applicable language for knowledge representation</p>
+</li>
+<li><p>I2 - (Meta)data use vocabularies that follow FAIR principles</p>
+</li>
+<li><p>I3 - (Meta)data include quali!ed references to other (meta)data</p>
+<ul>
+<li>Reusable</li>
+</ul>
+</li>
+<li><p>The ultimate goal of FAIR is to optimise the reuse of data</p>
+</li>
+<li><p>To achieve this, metadata and data should be well-described so that they can be replicated and/or combined in di#erent settings</p>
+</li>
+<li><p>R1 - (Meta)data are richly described with a plurality of accurate and relevant attributes</p>
+</li>
+<li><p>R1.1 - (Meta)data are released with a clear and accessible data usage license</p>
+</li>
+<li><p>R1.2 - (Meta)data are associated with detailed provenance</p>
+</li>
+<li><p>R1.3 - (Meta)data meet domain-relevant community standards</p>
+</li>
+<li>Case Studies</li>
+<li>Airlines</li>
+<li>Record Keeping<ul>
+<li>can be proven to be genuine</li>
+<li>are accurate and can be trusted</li>
+<li>are complete and unaltered</li>
+<li>are secure from unauthorised access, alteration and deletion</li>
+<li>are !ndable and readable</li>
+<li>are related to other relevant records</li>
+</ul>
+</li>
+<li>HK Map Service</li>
+<li>Metadata Standards Process<ul>
+<li>International standards (eg ISO)</li>
+<li>National Standards (NISO, Standards Australia)</li>
+<li>Individual Membership (eg IETF)</li>
+<li>Consortium (eg W3C, OASIS)</li>
+<li>Industry Groups (eg HL7)</li>
+<li>Community groups</li>
+</ul>
+</li>
+<li>Case Study - ODRL</li>
+</ul>
+<h2 id="Enterprise-Information-Architecture"><a href="#Enterprise-Information-Architecture" class="headerlink" title="Enterprise Information Architecture"></a>Enterprise Information Architecture</h2><ul>
+<li>Enterprise Information Management <ul>
+<li>Information architecture covers the EA activities that guide information assets and their sources, structure, classification, associations, uses and investments toward desired business outcomes  </li>
+<li>Treat information as a <strong>strategic asset</strong> - monetising data directly, focus information governance increasingly on the IoT, metadata and master data in order to capture value and minimise risk </li>
+<li>Make <strong>technology-agnostic</strong> information architecture decisions - identify where big data architectures complement, extend or replace others in your information landscape </li>
+<li>Stay ahead of <strong>digital disruptions</strong>  - accelerate the ideation process,  stay in front of the disruptive impacts caused by advanced machine learning, IoT, big data and advanced analytics </li>
+<li>Plan for the <strong>potential usage</strong> of new information sources - connecting people to content, collect, manage and analyse rich, real-time data source, consumer sentiment, customer behaviour </li>
+<li>Enabling <strong>innovation</strong> - when information architecture and data science disciplines are combined with data science, you can solve old burning issues in radically new ways</li>
+</ul>
+</li>
+<li><p>Enterprise Architecture </p>
+<ul>
+<li>Domains </li>
+</ul>
+</li>
+<li><p>The Business Architecture defines the business strategy, governance, organisation, capabilities and key business processes </p>
+</li>
+<li><p>The Information Architecture describes the structure of an organisation’s logical and physical information/data assets and data management resources and processes </p>
+</li>
+<li><p>The Application Architecture provides a blueprint for the individual application systems to be deployed, their interactions, and their relationships to the core business systems of the organisation </p>
+</li>
+<li><p>The Technology Architecture describes the IT infrastructure, middleware, networks, and communications capabilities that are required to support the deployment of business, data, and application services</p>
+<ul>
+<li>Concepts and Design Strategy </li>
+</ul>
+</li>
+<li><p>Architecture Artefact - Documents, Drawings, Models, Roadmaps, Requirements… </p>
+</li>
+<li><p>Current State (As Is/Baseline) </p>
+</li>
+<li><p>Target State (Future) </p>
+</li>
+<li><p>Capability Assessment </p>
+<ul>
+<li><p>Ratings Scale </p>
+</li>
+<li><p>Business/Tech Fit </p>
+</li>
+<li><p>Classifications (security) </p>
+</li>
+<li><p>People, Process, Information, Technology </p>
+</li>
+</ul>
+</li>
+<li><p>Lifecycle Management</p>
+<ul>
+<li>Business Capabilities </li>
+<li>Information Reference Model </li>
+<li>Information Dissemination Model </li>
+</ul>
+</li>
+<li>Enterprise Roadmap <ul>
+<li>A roadmap is a graphical representation that is used to illustrate the milestones and deliverables required to manage change from the current state to the future state over a specific period </li>
+<li>Series of Initiatives (activities) </li>
+<li>Managed as a Program to deliver uplift in capability</li>
+</ul>
+</li>
+<li><p>Enterprise Frameworks Views</p>
+<ul>
+<li>Object Mgt Group (OMG) Model Driven Architecture (MDA) - Conceptual, Logical, Implementable (rows) </li>
+<li>Reference Model for Open Distributed Processing (RM-ODP) - Enterprise, Information, Computation, Engineering, Technology (columns) </li>
+<li>The Open Group Architecture Framework (TOGAF) - Archiecture Artefacts</li>
+</ul>
+</li>
+<li><p>The Open Group Architecture Framework (TOGAF) </p>
+</li>
+<li><p>The Architecture Development Method (ADM) provides a tested and repeatable process for developing architectures </p>
+</li>
+<li><p>Phased approach </p>
+</li>
+<li><p>Requirements Driven </p>
+</li>
+<li><p>Principle-based</p>
+</li>
+<li><p>TOGAF Phases and Iteration</p>
+<ul>
+<li>Phase C: Information Systems Architectures </li>
+</ul>
+</li>
+<li><p>Data Architecture </p>
+</li>
+<li><p>Application Architecture </p>
+<ul>
+<li>TOGAF process </li>
+</ul>
+</li>
+<li><p>Defines the Inputs required </p>
+</li>
+<li><p>Defines the steps to develop the EIA </p>
+</li>
+<li><p>Defines the Outputs</p>
+</li>
+<li><p>TOGAF - Info Systems Arch</p>
+<ul>
+<li>(1) Defines the Inputs required </li>
+</ul>
+</li>
+<li><p>Organisational Model for Enterprise Architecture  </p>
+</li>
+<li><p>Tailored Architecture Framework  </p>
+</li>
+<li><p>Data principles </p>
+</li>
+<li><p>Statement of Architecture Work </p>
+</li>
+<li><p>Architecture Vision </p>
+</li>
+<li><p>Draft Architecture Definition Document  </p>
+</li>
+<li><p>Draft Architecture Requirements Specification  </p>
+</li>
+<li><p>Business Architecture components of an Architecture Roadmap </p>
+<ul>
+<li>(2) Defines the steps to develop the EIA </li>
+</ul>
+</li>
+<li><p>Select Reference Models, Viewpoints, and Tools  </p>
+</li>
+<li><p>Determine Overall Modeling Process  </p>
+</li>
+<li><p>Identify Required Diagrams  </p>
+</li>
+<li><p>Develop Baseline Data Architecture Description  </p>
+</li>
+<li><p>Develop Target Data Architecture Description </p>
+</li>
+<li><p>Perform Gap Analysis  </p>
+</li>
+<li><p>Define Candidate Roadmap Components </p>
+</li>
+<li><p>Resolve Impacts Across the Architecture Landscape  </p>
+</li>
+<li><p>Conduct Formal Stakeholder Review </p>
+</li>
+<li><p>Finalise the Data Architecture and create Architecture Definition Doc </p>
+<ul>
+<li>(3) Defines the Outputs </li>
+</ul>
+</li>
+<li><p>Refined and updated versions of the Architecture Vision phase deliverables  </p>
+</li>
+<li><p>Draft Architecture Definition Document  </p>
+</li>
+<li><p>Draft Architecture Requirements Specification  </p>
+</li>
+<li><p>Data Architecture components of an Architecture Roadmap  </p>
+</li>
+<li><p>Catalogs </p>
+</li>
+<li><p>Data Entity/Data Component catalog  </p>
+</li>
+<li><p>Matrices (Relationships) </p>
+</li>
+<li><p>Data Entity/Business Function matrix </p>
+</li>
+<li><p>Application/Data matrix  </p>
+</li>
+<li><p>Diagrams </p>
+</li>
+<li><p>Conceptual Data diagram  </p>
+</li>
+<li><p>Logical Data diagram </p>
+</li>
+<li><p>Data Dissemination diagram </p>
+</li>
+<li><p>Data Security diagram </p>
+</li>
+<li><p>Data Migration diagram </p>
+</li>
+<li><p>Data Lifecycle diagram</p>
+</li>
+<li><p>Solution Architecture Document</p>
+<ul>
+<li>Introduction </li>
+<li>Document Overview </li>
+<li>Architectural Drivers </li>
+<li>Business Architecture </li>
+<li>Information Architecture </li>
+</ul>
+</li>
+<li><p>Conceptual Data Model </p>
+</li>
+<li><p>Logical Data Model </p>
+</li>
+<li><p>Metadata </p>
+<ul>
+<li><p>Reference and Master Data</p>
+</li>
+<li><p>Terminology </p>
+</li>
+<li><p>Identification </p>
+</li>
+</ul>
+</li>
+<li><p>Data Analytics &amp; Reporting </p>
+<ul>
+<li><p>Target Reporting Solution </p>
+</li>
+<li><p>Vendor Reporting Solution </p>
+</li>
+<li><p>Data Sources </p>
+</li>
+</ul>
+</li>
+<li><p>Data Governance </p>
+<ul>
+<li><p>Information Custodian </p>
+</li>
+<li><p>Information Security Classification </p>
+</li>
+<li><p>Privacy Impact Statement (PIA) </p>
+</li>
+</ul>
+</li>
+<li><p>Information Management and Archiving </p>
+<ul>
+<li><p>Data Retention and Disposal </p>
+</li>
+<li><p>Data Archiving Activities </p>
+</li>
+<li><p>Data Migration Handling</p>
+</li>
+<li>Application Architecture </li>
+<li>Integration Architecture </li>
+<li>Technology Architecture </li>
+<li>Security Architecture  </li>
+<li>Business Continuity </li>
+<li>Operational Concerns</li>
+</ul>
+</li>
+<li><p>Case Study </p>
+<ul>
+<li>eHealth </li>
+<li>Logical Data ModelLogical Entity</li>
+<li>Information Governance</li>
+</ul>
+</li>
+<li><p>Information Custodian</p>
+</li>
+<li><p>Information Security Classification</p>
+</li>
+<li><p>Privacy Impace Statement</p>
+</li>
+<li><p>Enterprise Data Modeling </p>
+<ul>
+<li>Unified Modeling Language (UML) </li>
+</ul>
+</li>
+<li><p>Object Management Group (OMG) Unified Modelling Language (UML) </p>
+</li>
+<li><p>Expressive visual modelling following the Object-Oriented paradigm </p>
+<ul>
+<li><p>Express entity semantics, behaviour and relationships </p>
+</li>
+<li><p>Independent from any encoding syntax </p>
+</li>
+<li><p>Comprehensive (conceptual to implementable) </p>
+</li>
+</ul>
+</li>
+<li><p>Follows Key Object-Oriented Concepts </p>
+<ul>
+<li><p>Abstraction - identification and representation of the concept </p>
+</li>
+<li><p>Encapsulation - packaging representation (data+behaviour) as they appear in the real world </p>
+</li>
+<li><p>Organisation - involves relating and reuse of representations</p>
+</li>
+<li>Classes, Associations, Notation </li>
+</ul>
+</li>
+<li><p>Representations of Classes (entities) and their instances (objects) </p>
+</li>
+<li><p>Associations (relationships) and their instances (links)  </p>
+</li>
+<li><p>UML Class Diagrams </p>
+<ul>
+<li><p>Well defined representational construct of conceptual entity </p>
+</li>
+<li><p>Structural characteristics captured via attributes </p>
+</li>
+<li><p>Behavioural characteristics captured via operations </p>
+</li>
+</ul>
+</li>
+<li><p>UML Object Diagrams </p>
+<ul>
+<li>Instances of a Class</li>
+<li>Class Diagrams Notation</li>
+</ul>
+</li>
+<li><p>Diagram is solid-outline rectangle with three compartments </p>
+<ul>
+<li><p>Name of the Class - Abstract (italic name) </p>
+</li>
+<li><p>Attributes </p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Structural features (data typed) </li>
+</ul>
+<ul>
+<li><p>What the entity knows about itself </p>
+<ul>
+<li>Operations </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Behavioural and dynamic features </li>
+</ul>
+<ul>
+<li><p>What the entity may perform </p>
+</li>
+<li><p>Visibility - + (public) # (protected) - (private)</p>
+<ul>
+<li>Associations and links</li>
+</ul>
+</li>
+<li><p>Associations define relationships between Classes </p>
+</li>
+<li><p>Association specific types </p>
+<ul>
+<li><p>Aggregations - specify whole-part relationships - Course ‘has-a’ Student </p>
+</li>
+<li><p>Compositions -  strong component relationships - Course ‘contains-a’ Session - the part cannot exist without the whole </p>
+</li>
+<li><p>Generalisations - specify inheritance relationships - Student ‘is-a-kind-of’ Person </p>
+</li>
+</ul>
+</li>
+<li><p>Links - instance of associations between objects</p>
+<ul>
+<li>Association Notation</li>
+</ul>
+</li>
+<li><p>Associations are lines between classes </p>
+<ul>
+<li><p>Name (middle) </p>
+</li>
+<li><p>Role names (ends) </p>
+</li>
+<li><p>Arrows for navigation (may be circular) </p>
+</li>
+<li><p>Cardinality multiplicity (eg 1, 1..0, 0..*) </p>
+</li>
+<li><p>Aggregations with HOLLOW diamond head </p>
+</li>
+<li><p>Compositions with FILLED diamond head </p>
+</li>
+</ul>
+</li>
+<li><p>Inheritance structures </p>
+<ul>
+<li>Line connecting specialised classes with hollow triangle pointing to the generalised class</li>
+<li>UML Stereotypes</li>
+</ul>
+</li>
+<li><p>Stereotypes extend the vocabulary of UML to create new model elements, derived from existing ones </p>
+<ul>
+<li>But have specific properties that are suitable for a particular domain or otherwise specialised usage </li>
+</ul>
+</li>
+<li><p>Stereotype is added to element within guillemets “«  »”</p>
+<ul>
+<li>Identifying Classes</li>
+</ul>
+</li>
+<li><p>Software tools help in the graphicL notation but there are no easy methodologies to define the actual classes in a model </p>
+</li>
+<li><p>Identify Noun phrases from your Domain model </p>
+<ul>
+<li><p>Look for descriptions, parties, places, things, roles, and events, to decompose classes </p>
+</li>
+<li><p>What properties (attributes) does each contain </p>
+</li>
+</ul>
+</li>
+<li><p>Purpose is a chief determinant (and context) - “Employee can fly a plane” </p>
+</li>
+<li><p>Relationships - “A Medicine has an Active Ingredient” </p>
+</li>
+<li><p>Class/Type hierarchy - Look for inheritance of attributes</p>
+<ul>
+<li>XML Mapping </li>
+</ul>
+</li>
+<li><p>Case Study </p>
+<ul>
+<li>OASIS UBL</li>
+</ul>
+</li>
+<li><p>OASIS Universal Business Language Version2.3 </p>
+<ul>
+<li><p><a href="http://docs.oasis-open.org/ubl/UBL-2.3.html" target="_blank" rel="noopener">http://docs.oasis-open.org/ubl/UBL-2.3.html</a> </p>
+</li>
+<li><p>Also published as ISO/IEC 19845:2015 </p>
+</li>
+</ul>
+</li>
+<li><p>UBL is a suite of structured business objects and associated semantics expressed as reusable data components and common business documents </p>
+<ul>
+<li><p>A library of schemas for reusable data components such as Address, Item, and Payment </p>
+</li>
+<li><p>A set of schemas for common business documents such as Order, Despatch Advice, and Invoice that are constructed from the UBL library components</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Data-Architecture"><a href="#Data-Architecture" class="headerlink" title="Data Architecture"></a>Data Architecture</h2><ul>
+<li>Data Management Functions<ul>
+<li>Data Architecture</li>
+<li>Data Modeling and Design</li>
+<li>Data Dtorage and Operations</li>
+<li>Data Security</li>
+<li>Data Intergration and Interoperability</li>
+<li>Document and Content Management</li>
+<li>Reference and Master Data</li>
+<li>Data Warehousing and Business Intelligence</li>
+<li>Metadata</li>
+<li>Data Quality</li>
+</ul>
+</li>
+<li><p>Data Architecture</p>
+<ul>
+<li>Data Architecture is the complete “information blueprint” for an Enterprise Information Architecture</li>
+</ul>
+</li>
+<li><p>Establish the current state of data in the organisation</p>
+</li>
+<li><p>Create the future/target state</p>
+</li>
+<li><p>Define the Roadmap of initiatives (to get from current to target)</p>
+<ul>
+<li>Align Data Architecture with enterprise strategy</li>
+</ul>
+</li>
+<li><p>Enterprise, Business, Application, Security, Integration…</p>
+<ul>
+<li>Integrate with Enterprise architecture Roadmaps</li>
+<li>Express Data Principles and strategic Data requirements</li>
+<li>Outline high-level integrated designs</li>
+</ul>
+</li>
+<li><p>Interoperability with data services</p>
+<ul>
+<li>Assurance of data services</li>
+</ul>
+</li>
+<li><p>Adherence to standards, policy, industry practices</p>
+</li>
+<li><p>Regulations and Privacy</p>
+</li>
+<li>Data Governance<ul>
+<li>Data Governance lets us take ownership of our information as a team where everyone clearly understands their role &amp; the data they are responsible for </li>
+<li>Data Governance de!nes expectations, sets authority, &amp; monitors &amp; veri!es performance </li>
+<li>Data Governance identi!es what business must do to achieve &amp; sustain known quality </li>
+<li>Data Governance includes principles &amp; processes, standards &amp; rules, roles &amp; responsibilities </li>
+<li>Data Stewardship enables Data Management to be e”ective across the company </li>
+<li>Data Stewardship is a key organisational capability for the sustainment of Data Quality </li>
+<li>Data Stewardship is implemented by the Data Steward “Subject Matter Expert” </li>
+<li>The Data Steward is accountable for Data Quality &amp; the monitoring of Data Governance standards for their area of responsibility </li>
+</ul>
+</li>
+<li>Data Gov Activities<ul>
+<li>Data Strategy</li>
+<li>Data Policies</li>
+<li>Data Architecture</li>
+<li>Data Standards and Procedures</li>
+<li>Regulatory Compliance</li>
+<li>Issue Management</li>
+<li>Data Management Projects</li>
+<li>Data Management Services</li>
+<li>Data Asset Valuation</li>
+<li>Communication and Promotion</li>
+</ul>
+</li>
+<li><p>Data Quality</p>
+<ul>
+<li>Assessment Dimensions</li>
+</ul>
+</li>
+<li><p>Completeness covers the expectation that all mandatory and, where applicable, conditional elements are used</p>
+<ul>
+<li>elements, optional elements provided, empty elements</li>
+</ul>
+</li>
+<li><p>Accuracy implies that metadata values re#ect the nature and content of the record and are not merely default values</p>
+<ul>
+<li>Matching subjects, metadata transformations/mappings</li>
+</ul>
+</li>
+<li><p>Consistency - Application of common values and standards to elements</p>
+<ul>
+<li>Inconsistent text values, consistent identi!ers, close relation from description to source, consistent vocabulary use across elements</li>
+</ul>
+</li>
+<li><p>Timeliness can be determined by the currency of metadata in relation to actions performed on the metadata record</p>
+</li>
+<li><p>Data Modeling and Design</p>
+<ul>
+<li>Modeling allows the capture and communication of Data Architecture entities, vocabularies, relationships, and reference/master data</li>
+<li>Information Model is used to manage models at a Conceptual and Logical level and their relationships</li>
+</ul>
+</li>
+<li><p>Classes and Associations in UML</p>
+<ul>
+<li>Data Model is used to manage models in more depth with a formal data element framework with a focus on the elements</li>
+</ul>
+</li>
+<li><p>Data Element Models and Meta-Models</p>
+<ul>
+<li>Reference Model</li>
+</ul>
+</li>
+<li><p>Information/data models designed to be instantiated by speci!c domains (not used ‘as is’)</p>
+<ul>
+<li>NOTE: Information and Data Models definitions are sometimes used interchangeably</li>
+<li>Data Models will need to be encoded into machine-readable format</li>
+</ul>
+</li>
+<li><p>Standardisation of Data Element Definitions</p>
+<ul>
+<li>ISO/IEC 11179</li>
+<li>Conceptual Framework</li>
+</ul>
+</li>
+<li><p>Data element</p>
+</li>
+<li><p>Data element concept</p>
+</li>
+<li><p>Object Class</p>
+</li>
+<li><p>Property</p>
+</li>
+<li><p>Value domains</p>
+</li>
+<li><p>Classification schemes</p>
+<ul>
+<li>Classification</li>
+<li>Registry Framework and Basic Attributes</li>
+</ul>
+</li>
+<li><p>Name - The label assigned to the data element </p>
+</li>
+<li><p>Identi!er - The unique identi!er assigned to the data element </p>
+</li>
+<li><p>Language - The language in which the data element is speci!ed </p>
+</li>
+<li><p>Registration Authority - The entity authorised to register the data element </p>
+</li>
+<li><p>Version - The version of the data element </p>
+</li>
+<li><p>Definition - A statement that clearly represents the concept and essential nature of the data element</p>
+</li>
+<li><p>Obligation - Indicates if the data element is required to be present </p>
+</li>
+<li><p>Datatype - Indicates the type of data that can be represented in the value of the data element </p>
+</li>
+<li><p>Maximum Occurrence - Indicates any limit to the repeatability of the data element </p>
+</li>
+<li><p>Comment - A remark concerning the application of the data element</p>
+<ul>
+<li>Data Definitions</li>
+</ul>
+</li>
+<li><p>shall be:</p>
+<ul>
+<li><p>Unique &amp; Singular (no “and/or”)</p>
+</li>
+<li><p>State the essential meaning of the concept (not its negative)</p>
+</li>
+<li><p>Precise and unambiguous</p>
+</li>
+<li><p>Stand alone</p>
+</li>
+<li><p>Be expressed without embedding rationale, functional usage, domain or procedural information</p>
+</li>
+<li><p>Use consistent terminology and structure for related de!nitions</p>
+</li>
+</ul>
+</li>
+<li><p>Data Definition Syntax</p>
+<ul>
+<li><p>The name of…</p>
+</li>
+<li><p>The code that represents…</p>
+</li>
+<li><p>The text that describes…</p>
+</li>
+<li><p>The measure of the…</p>
+</li>
+<li><p>The number assigned by…</p>
+</li>
+<li><p>The identi!er of the…</p>
+</li>
+<li><p>The sum of…</p>
+</li>
+<li><p>The capacity (quantity) of…</p>
+</li>
+<li>Naming and Registration</li>
+</ul>
+</li>
+<li><p>A key aspect of Part 5 is the trisection of data element naming inferred from the Framework Model</p>
+<ul>
+<li><p>The “Object Class” is a set of concepts, abstractions or things that can be identi!ed within clear boundaries and meanings</p>
+</li>
+<li><p>The “Property” is a characteristic feature shared by all the instances of an object class </p>
+</li>
+<li><p>The “Representation” describes how the data is represented, meaning the data type and its value range </p>
+</li>
+</ul>
+</li>
+<li><p>Unique Identifiers consist of three parts</p>
+<ul>
+<li><p>Registration Authority Identifier</p>
+</li>
+<li><p>Data Identifier</p>
+</li>
+<li><p>Version Identifier</p>
+</li>
+</ul>
+</li>
+<li><p>Value Domain</p>
+<ul>
+<li>The Value Domain provides the valid values and representation for the concept defined by a data element</li>
+<li>The VD can be enumerated (ie express all the permissible values) or speci!ed by a description  (eg range of values for age)</li>
+<li>Enumerated value domains must express values and meanings</li>
+<li>VD needs to express the form of the data (eg date YYYYMMDD) and data type (eg integers) and units (eg currency)</li>
+<li>If VD speci!es a Classi!cation (or terminology) then the version should be included</li>
+<li>VD is critical for data exchange interoperability</li>
+</ul>
+</li>
+<li><p>Forms the basis of Compliance to data standards</p>
+</li>
+<li>Data Element<ul>
+<li>Data Element = Data Element Concept + Value Domain</li>
+<li>DEC = Concept/Semantics</li>
+<li>VD = Representation</li>
+<li>There maybe multiple Value Domains per Data Element Concept</li>
+<li>The persons height in cm</li>
+<li>The persons height in inches</li>
+<li>Data Element should describe one concept only</li>
+<li>The components DE = (DEC = OC + P) + (VD + C) help break down the key areas</li>
+<li>And by following the 11179 Part 4 rules (concise definitions)</li>
+</ul>
+</li>
+<li>Case Study<ul>
+<li>Data Element Definitions</li>
+<li>Registries</li>
+</ul>
+</li>
+</ul>
+<h3 id="ISO-11179-Data-Element"><a href="#ISO-11179-Data-Element" class="headerlink" title="ISO 11179 Data Element"></a>ISO 11179 Data Element</h3><p>4.1 Requirements</p>
+<ul>
+<li>A data definition shall:</li>
+<li>be stated in the singular</li>
+<li>state what the concept is, not only what it is not</li>
+<li>be stated as a descriptive phrase or sentence(s)</li>
+<li>contain only commonly understood abbreviations</li>
+<li>be expressed without embedding definitions of other data or underlying concepts </li>
+</ul>
+<p>4.2 Recommendations</p>
+<ul>
+<li>A data definition should:a)</li>
+<li>state the essential meaning of the concept </li>
+<li>be precise and unambiguous</li>
+<li>be concise </li>
+<li>be able to stand alone</li>
+<li>be expressed without embedding rationale, functional usage, or procedural information </li>
+<li>avoid circular reasoning </li>
+<li>use the same terminology and consistent logical structure for related definitions</li>
+<li>be appropriate for the type of metadata item being defined</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Notes/" rel="tag"># Notes</a>
+          
+            <a href="/tags/Study/" rel="tag"># Study</a>
+          
+            <a href="/tags/Lecture/" rel="tag"># Lecture</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020-09-05-Study-ecomTechIntroduction/" rel="next" title="E-commerce technologies Lecture Notes">
+                <i class="fa fa-chevron-left"></i> E-commerce technologies Lecture Notes
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020-10-03-Book-SemanticDataArchi/" rel="prev" title="SEMANTIC WEB ARCHITECTURES">
+                SEMANTIC WEB ARCHITECTURES <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Jack Xia" />
+          <p class="site-author-name" itemprop="name">Jack Xia</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">161</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Metadata"><span class="nav-number">1.</span> <span class="nav-text">Metadata</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Enterprise-Information-Architecture"><span class="nav-number">2.</span> <span class="nav-text">Enterprise Information Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Architecture"><span class="nav-number">3.</span> <span class="nav-text">Data Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ISO-11179-Data-Element"><span class="nav-number">3.1.</span> <span class="nav-text">ISO 11179 Data Element</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack Xia</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mermaid/6.0.0/mermaid.min.js"></script>
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

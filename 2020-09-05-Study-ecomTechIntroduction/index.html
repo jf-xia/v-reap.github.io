@@ -1,0 +1,2002 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Notes,Study,Lecture," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+<meta name="description" content="Introduction Lecture NotesNotes and some ideas/questions  Key technologies Internet Infrastructure Technologies Project Management and Development Life Cycle Web Design, Implementation and Testing Mob">
+<meta name="keywords" content="Notes,Study,Lecture">
+<meta property="og:type" content="article">
+<meta property="og:title" content="E-commerce technologies Lecture Notes">
+<meta property="og:url" content="http://blog.toob.net.cn/2020-09-05-Study-ecomTechIntroduction/index.html">
+<meta property="og:site_name" content="Jack Xia">
+<meta property="og:description" content="Introduction Lecture NotesNotes and some ideas/questions  Key technologies Internet Infrastructure Technologies Project Management and Development Life Cycle Web Design, Implementation and Testing Mob">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-09-05T13:09:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="E-commerce technologies Lecture Notes">
+<meta name="twitter:description" content="Introduction Lecture NotesNotes and some ideas/questions  Key technologies Internet Infrastructure Technologies Project Management and Development Life Cycle Web Design, Implementation and Testing Mob">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.toob.net.cn/2020-09-05-Study-ecomTechIntroduction/"/>
+
+
+
+
+
+  <title>E-commerce technologies Lecture Notes | Jack Xia</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jack Xia</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">笔记</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2020-09-05-Study-ecomTechIntroduction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">E-commerce technologies Lecture Notes</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-05T08:00:00+08:00">
+                2020-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Introduction-Lecture-Notes"><a href="#Introduction-Lecture-Notes" class="headerlink" title="Introduction Lecture Notes"></a>Introduction Lecture Notes</h2><p>Notes and some ideas/questions</p>
+<ul>
+<li>Key technologies<ol>
+<li>Internet Infrastructure Technologies</li>
+<li>Project Management and Development Life Cycle</li>
+<li>Web Design, Implementation and Testing</li>
+<li>Mobile and IoT computing services and applications</li>
+<li>Computational Intelligence and Machine Learning</li>
+</ol>
+</li>
+<li>Comprehensive framework<ol>
+<li>Fundamentals of E-Commerce Security</li>
+<li>Electronic Payment Systems</li>
+<li>E-Financial Services</li>
+<li>Building Smart Cities: an Information System Approach</li>
+<li>E-Commerce and Data Science</li>
+</ol>
+</li>
+<li>E-commerce-centric world for me<ol>
+<li>Case study<ol>
+<li>the purpose of Puma’s content management system</li>
+<li>Alibaba Singles’ Day 2019</li>
+</ol>
+</li>
+<li>Understanding E-commerce: Organizing Themes<ol>
+<li>Technology - some of my projects<ol>
+<li><a href="https://www.topbuy.com.au/" target="_blank" rel="noopener">Magento</a></li>
+<li>B2C shopfiy ERP</li>
+<li><a href="https://github.com/v-reap/EWP_OMS" target="_blank" rel="noopener">EWP_OMS</a></li>
+<li><a href="https://github.com/v-reap/tbm" target="_blank" rel="noopener">Task System</a></li>
+<li>Scratch, Scratchjr</li>
+<li><a href="https://www.mycartoon.net.cn/" target="_blank" rel="noopener">A educational Game for coding</a></li>
+<li>CRM</li>
+</ol>
+</li>
+<li>Business<ol>
+<li>CRM, ERP, OA and etc..</li>
+<li>Business Process Management / Analysis</li>
+<li>Financial management system</li>
+<li>Business intelligence system</li>
+<li>Knowledge Management System</li>
+</ol>
+</li>
+<li>Society<ol>
+<li>Organizational culture and training System</li>
+<li>SNS Self-media on Facebook, Wechat and etc.</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Critical thinking and research skills<ol>
+<li>Current E-Commerce trends<ol>
+<li>social technologies, consumer-generated content, and services - negative impacts</li>
+<li>Mobile first Design</li>
+<li>5G, Broadband and wireless</li>
+<li>self-media</li>
+<li>E-Commerce and data science</li>
+<li>AR, VR, XR and AI - Covid-19</li>
+</ol>
+</li>
+<li>New Strategy for Traditional commerce:<ol>
+<li>Passive consumer - consumer to consumer values</li>
+<li>Sales-force driven - Boundary conditions for financial regulation and laws</li>
+<li>Fixed prices - vary business models</li>
+<li>Information asymmetry - <a href="https://www.sciencedirect.com/science/article/abs/pii/S0301421516301835" target="_blank" rel="noopener">Innovation and technology transfer through global value chains</a></li>
+</ol>
+</li>
+<li>features of current E-Commerce technology<ol>
+<li>Ubiquity - MIS, vary platform</li>
+<li>Global reach - trends or not? China &amp; US</li>
+<li>Universal standards - IT infrastructure(www, Visa, Cloud..), many Open Source project</li>
+<li>Information richness - Google, Blog, CMS. How Managerial Behavior and Organization Design?</li>
+<li>Interactivity - SNS, how about Information Security</li>
+<li>Information density - problem in NLP, visual search?</li>
+<li>Personalization/customization - tag consumers in CRM for analysis, products Recommendation, etc..</li>
+<li>Social technology - changing consumer purchasing decision</li>
+</ol>
+</li>
+<li>Types of E-Commerce<ol>
+<li>which type for Intellectual property (e.g. Trademark, patent)?</li>
+<li>B2B? B2G? G2B? B2G2B?</li>
+</ol>
+</li>
+<li>Others<ol>
+<li>Potential limitations on the growth of B2C E-Commerce</li>
+<li>PredicOons/QuesOons/Challenges for the future</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="Mobile-Technology-amp-E-Commerce"><a href="#Mobile-Technology-amp-E-Commerce" class="headerlink" title="Mobile Technology &amp; E-Commerce"></a>Mobile Technology &amp; E-Commerce</h2><ol>
+<li>Basic Principle of Mobile Technology</li>
+<li>difference: FDMA TDMA CDMA</li>
+<li>Fundamental Mobility: Cellphones<ol>
+<li>How Mobile Phone Works?</li>
+<li>What is 5G?</li>
+<li>5G vs. 4G</li>
+</ol>
+</li>
+<li>Issues with mobile access to E-Commerce Web sites</li>
+<li>M-Commerce vs E-Commerce<ul>
+<li>attributes differ</li>
+<li>Ubiquity</li>
+<li>Convenience</li>
+<li>Interactivity</li>
+<li>Personalization</li>
+<li>Localization</li>
+</ul>
+</li>
+<li>Services and applications<ul>
+<li>Mobile ticketing</li>
+<li>Mobile money transfer</li>
+<li>Content purchase and delivery</li>
+<li>Information services</li>
+<li>Mobile banking</li>
+<li>Mobile browsing</li>
+<li>Mobile purchase</li>
+<li>Mobile marketing and advertising</li>
+</ul>
+</li>
+<li>Our approach to M-Commerce</li>
+<li>Common options for mobile Web site development</li>
+<li>Responsive design</li>
+<li>Other Enabling TechnologyBeyond WiFior Mobile Network</li>
+</ol>
+<h2 id="Internet-and-E-Commerce-Security"><a href="#Internet-and-E-Commerce-Security" class="headerlink" title="Internet and E-Commerce Security"></a>Internet and E-Commerce Security</h2><ol>
+<li>Learning Objectives<ul>
+<li>Understand the scope of e-commerce crime and security problems, the key dimensions of e-commerce security, and the tension between security and other values.</li>
+<li>Identify the key security threats in the e-commerce environment.</li>
+<li>Describe how technology helps secure Internet communications channels and protect networks, servers, and clients.</li>
+<li>Appreciate the importance of policies, procedures, and laws in creating security.</li>
+<li>Identify the major e-commerce payment systems in use today.</li>
+<li>Describe the features and functionality of electronic billing presentment and payment systems.</li>
+</ul>
+</li>
+<li>What is Good E-commerce Security?<ul>
+<li>To achieve highest degree of security, one needs:</li>
+<li>New technologies</li>
+<li>Organizational policies and procedures</li>
+<li>Industry standards and government laws</li>
+<li>Other factors</li>
+<li>Cost of security versus potential loss</li>
+<li>Security often breaks at weakest link</li>
+</ul>
+</li>
+<li>The E-Commerce Security Environment<ol>
+<li>Laws and Industry Standards</li>
+<li>Organizational Policies and Procedures</li>
+<li>Technology Solutions</li>
+<li>Data</li>
+</ol>
+</li>
+<li>Customer and Merchant perspectives on the different dimensions of E-Commerce security <a href="https://en.wikipedia.org/wiki/Information_security" target="_blank" rel="noopener">link</a><ol>
+<li>Integrity</li>
+<li>Nonrepudiation</li>
+<li>Authenticity</li>
+<li>Confidentiality</li>
+<li>Privacy</li>
+<li>Availability</li>
+</ol>
+</li>
+<li>The tension between security and other values<ol>
+<li>Security vs. ease of use</li>
+<li>Security vs. desire of individuals to act anonymously</li>
+</ol>
+</li>
+<li>Basic E-Commerce Security Issues and landscape<ol>
+<li>E- Commerce Security Requirements (4A + N)<ul>
+<li>Authentication (SSL certificate)<ul>
+<li>Process to verify (assure) the real identity of an individual, computer, computer program, or E-Commerce Web site</li>
+</ul>
+</li>
+<li>Authorization<ul>
+<li>Process of determining what the authenticated entity is allowed to access and what operations it is allowed to perform</li>
+</ul>
+</li>
+<li>Auditing</li>
+<li>Availability</li>
+<li>Nonrepudiation (E-Mail?)<ul>
+<li>Assurance that online customers or trading partners cannot falsely deny (repudiate) their purchase or transaction8</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Risk - The probability that a vulnerability will be known and used</li>
+<li>Social engineering - A type of nontechnical attack that uses some plan or stories to trick users into revealing information or performing an action that compromises a computer or network</li>
+<li>Spam - The electronic equivalent of junk mail or calls</li>
+</ol>
+</li>
+<li>Threats and solutions for the E-Commerce of today<ol>
+<li>Threats<ol>
+<li>Money thefts</li>
+<li>Identity thefts</li>
+<li>Malware</li>
+</ol>
+</li>
+<li>Solutions<ol>
+<li>Authentication</li>
+<li>Intrusion checking</li>
+<li>Firewalls</li>
+<li>Education</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Security threats in the E-Commerce environment<ol>
+<li>Three key points of vulnerability<ul>
+<li>Client</li>
+<li>Server</li>
+<li>Communications pipeline (network channels)</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>Vulnerable Points in an E-commerce Transaction<ol>
+<li>DOS attack</li>
+<li>SQL injection</li>
+<li>Customer List Hack</li>
+<li>Web Beacons</li>
+<li>Wifi listening wire tap</li>
+<li>security breach</li>
+</ol>
+</li>
+<li>Most common security threats<ol>
+<li>Malicious code<ol>
+<li>Viruses</li>
+<li>Worms</li>
+<li>Ransomeware</li>
+<li>Trojan horses</li>
+<li>Backdoors</li>
+<li>Bots, botnets</li>
+</ol>
+</li>
+<li>Unwanted programs<ol>
+<li>Browser parasites - Monitor and change user’s browser</li>
+<li>Adware - Used to call pop-up ads</li>
+<li>Spyware - Tracks user’s keystrokes, emails, IMs etc</li>
+</ol>
+</li>
+<li>Phishing<ol>
+<li>Deceptive online attempt to obtain confidential information</li>
+<li>Social engineering, e-mail scams, spoofing legitimate Web sites</li>
+<li>Used for identity fraud and theft</li>
+</ol>
+</li>
+<li>Hacking and cybervandalism<ol>
+<li>Hackers vs. crackers</li>
+<li>Cybervandalism: intentionally disrupting, defacing, destroying Web site</li>
+<li>Hacktivism</li>
+</ol>
+</li>
+<li>Data Breach<ol>
+<li>Organization loses control over corporate information to outsiders</li>
+<li>Over 1,575 breaches in 2017, 45% increase over 2016</li>
+<li>Yahoo and Equifax two of the most notorious; Facebook breach in 2018 exposed personal information of 30 million accounts (Yahoo was found to have data breach of some 3 billions accounts, as announced in September 2019!).</li>
+<li>Leading causes<ol>
+<li>Hacking</li>
+<li>Unauthorized access</li>
+<li>Employee error/negligence</li>
+</ol>
+</li>
+<li>World’s most famous case (2013):<ol>
+<li>Global Surveillance Disclosuresby Edward Snowden and Wikileak</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Credit card fraud/theft<ol>
+<li>Fear of stolen credit card information deters online purchases</li>
+<li>Hackers target corporate servers; use data to establish credit under false identity</li>
+<li>Online companies at higher risk than offline</li>
+</ol>
+</li>
+<li>Spoofing - misrepresenting self by using fake e-mail address (don’t lose your address book!)</li>
+<li>Pharming: spoofing a Web site - Redirecting a URL to a new, fake Web site</li>
+<li>Spam/junk Websites - Offer collection of advertisements for other sites, which may contain malicious code</li>
+<li>Denial of service (DoS) attack - Hackers flood site with useless traffic to overwhelm network</li>
+<li>Distributed denial of service (DDoS) attack - Hackers use multiple computers to attack target network</li>
+<li>Sniffing - Eavesdropping program that monitors information traveling over a network (to get to “weak spots”)</li>
+<li>Insider jobs<ol>
+<li>Single largest financial threat</li>
+<li>Poorly designed security policy and server / client software</li>
+</ol>
+</li>
+<li>Social Network Issues<ol>
+<li>Social networks an environment for: - Viruses, site takeovers, identity fraud, malware-loaded apps, click hijacking, phishing, spam</li>
+<li>Manual sharing scams - Sharing of files that link to malicious sites</li>
+<li>Fake offerings, fake Like buttons, and fake apps</li>
+</ol>
+</li>
+<li>Mobile Platform Issues</li>
+<li>Cloud Security Issues<ul>
+<li>DDOS attacks</li>
+<li>Infrastructure scanning</li>
+<li>Lower-tech phishing attacks yield passwords and access</li>
+<li>Use of cloud storage to connect linked accounts</li>
+<li>Lack of encryption and strong security procedures</li>
+</ul>
+</li>
+<li>IoT Security Issues<ul>
+<li>Challenging environment to protect</li>
+<li>Vast quantity  of inter connected links</li>
+<li>Near identical devices with long service lives</li>
+<li>Many devices have no upgrade features</li>
+<li>Little visibility into workings, data, or security</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>The Information Assurance Model and Defense Objectives<ol>
+<li>CIA security triad (CIA triad)</li>
+<li>Three security concepts important to information on the Internet:<ol>
+<li>confidentiality - Assurance of data privacy and accuracy; keeping private or sensitive information from being disclosed to unauthorized individuals, entities, or processes</li>
+<li>integrity - Assurance that stored data has not been modified without authorization; a message that was sent is the same message as that which was received</li>
+<li>availability - Assurance that access to data, the website, or other EC data service is timely, available, reliable, and restricted to authorized users</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Technology Solutions<ul>
+<li>Protecting Internet communications - Cryptography</li>
+<li>Securing channels of communication - SSL, TLS, VPNs, Wi-Fi <a href="http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html" target="_blank" rel="noopener">Link</a></li>
+<li>Protecting networks - Firewalls, proxy servers, Intrusion Detection System (IDS)</li>
+<li>Protecting servers and clients - OS security, anti-virus software</li>
+</ul>
+</li>
+<li>Tools available to achieve E-Commerce security<ol>
+<li>Firewalls</li>
+<li>Encryption</li>
+<li>Network Security</li>
+<li>Virtual Private Networks</li>
+<li>Authentication Procedures</li>
+<li>Proxy Servers</li>
+<li>Anti-Virus Software</li>
+<li>Automated Software Updates</li>
+<li>Intrustion Detection/Precention</li>
+</ol>
+</li>
+<li>Basic Concept of User Authentication<ol>
+<li>Something you know … - Password, PIN, OTP</li>
+<li>Something you have … - token, Physical key</li>
+<li>Something you are … - Fingerprint, voice, retina, iris</li>
+<li>Best to use two or three of the above (that is why we now have 2 Factors Authentication (2FA)</li>
+</ol>
+</li>
+<li>Encryption<ul>
+<li>Transforms data into cipher text readable only by sender and receiver</li>
+<li>Secures stored information and information transmission</li>
+<li>Provides 4 of 6 key dimensions of E-Commerce security:<ul>
+<li>Authentication</li>
+<li>Confidentiality</li>
+<li>Message integrity</li>
+<li>Nonrepudiation</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Symmetric Key Cryptography<ul>
+<li>Sender and receiver use same digital key to encrypt and decrypt message</li>
+<li>Requires different set of keys for each transaction</li>
+<li>Strength of encryption - Length of binary key used to encrypt data</li>
+<li>Data Encryption Standard (DES, 1977) - Triple DES Encryption Algorithm, 56-bit encryption key, 64 bits/block</li>
+<li>Advanced Encryption Standard (AES, 2000)<ul>
+<li>Most widely used symmetric key algorithm</li>
+<li>Uses 128-, 192-, and 256-bit encryption keys, 128-bits/block</li>
+</ul>
+</li>
+<li>Other standards use keys with up to 2,048 bits</li>
+</ul>
+</li>
+<li>Public key encryption<ul>
+<li>Uses two mathematically related digital keys<ul>
+<li>Public key (widely disseminated)</li>
+<li>Private key (kept secret by owner)</li>
+</ul>
+</li>
+<li>Both keys used to encrypt and decrypt message</li>
+<li>Once key used to encrypt message, same key cannot be used to decrypt message</li>
+<li>Sender uses recipient’s public key to encrypt message; recipient uses his/her private key to decrypt it</li>
+</ul>
+</li>
+<li>Public key encryption using Digital Signatures and Hash Digests <a href="https://blog.csdn.net/zxbzxb333/article/details/50922986" target="_blank" rel="noopener">Digital Signatures</a><ul>
+<li>Hash function: - Mathematical algorithm (e.g. MD5 and SHA-1) that produces fixed-length number called message or hash digest</li>
+<li>Sender applies hash function to the message and then encryptsthe message  AND the hash digest withrecipient’s public key</li>
+<li>Sender then encryptsthe whole packagewith sender’s private key—creating digital signature—for authenticity, nonrepudiation</li>
+<li>Recipient first uses sender’s public key to authenticatethe message and then the recipient’s private key to decryptthe hash digestand the message</li>
+</ul>
+</li>
+<li>Digital Envelopes<ul>
+<li>Addresses weaknesses of:<ul>
+<li>Public key encryption - Computationally slow, decreased transmission speed, increased processing time</li>
+<li>Symmetric key encryption - Insecure transmission lines</li>
+</ul>
+</li>
+<li>Uses symmetric key encryption to encrypt document (much more efficient computationally)</li>
+<li>Uses public key encryption to encrypt and send symmetric key</li>
+</ul>
+</li>
+<li>Digital Certificates and Public Key Infrastructure (PKI)<ul>
+<li>Digital certificate includes:<ul>
+<li>Name of subject/company</li>
+<li>Subject’s public key</li>
+<li>Digital certificate serial number</li>
+<li>Expiration date, issuance date</li>
+<li>Digital signature of certification authority (trusted third party institution) that issues certificate</li>
+</ul>
+</li>
+<li>Public Key Infrastructure (PKI):<ul>
+<li>CAs and digital certificate procedures that are accepted by all parties</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Limits to encryption solutions<ul>
+<li>Doesn’t protect storage of private key<ul>
+<li>PKI not effective against insiders, employees</li>
+<li>Protection of private keys by individuals may be haphazard</li>
+</ul>
+</li>
+<li>No guarantee that verifying computer of merchant is secure</li>
+<li>CAs are unregulated, self-selecting organizations</li>
+</ul>
+</li>
+<li>Securing channels of communication <a href="http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html" target="_blank" rel="noopener">link</a><ul>
+<li>Secure Sockets Layer (SSL) / Transport Layer Security (TLS): - Establishes a secure, negotiated client-server session in which URL of requested document, along with contents, is encrypted</li>
+<li>S-HTTP: - Provides a secure message-oriented communications protocol designed for use in conjunction with HTTP</li>
+<li>Virtual Private Network (VPN): - Allows remote users to securely access internal network via the Internet, using Point-to-Point Tunneling Protocol (PPTP)</li>
+</ul>
+</li>
+<li>Protecting networks<ul>
+<li>Firewall<ul>
+<li>Hardware or software that filters packets</li>
+<li>Prevents some packets from entering the network based on security policy</li>
+<li>Two main methods:</li>
+<li>Packet filters</li>
+<li>Application gateways</li>
+</ul>
+</li>
+<li>Proxy servers (proxies)<ul>
+<li>Software servers that handle all communications originating from or being sent to the Internet</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Protecting servers and clients<ul>
+<li>Operating system security enhancements - Upgrades, patches</li>
+<li>Anti-virus software<ul>
+<li>Easiest and least expensive way to prevent threats to system integrity</li>
+<li>Requires daily updates</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Management policies, business procedures, and public laws<ol>
+<li>Worldwide, companies spend more than $81 billionon security hardware, software, services</li>
+<li>Managing risk includes:<ul>
+<li>Technology</li>
+<li>Effective management policies</li>
+<li>Public laws and active enforcement</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>A Security Plan: Management Policies<ul>
+<li>Risk assessment</li>
+<li>Security policy</li>
+<li>Implementation plan<ul>
+<li>Security organization</li>
+<li>Access controls</li>
+<li>Authentication procedures, including biometrics</li>
+<li>Authorization policies, authorization management systems</li>
+</ul>
+</li>
+<li>Security audit</li>
+</ul>
+</li>
+<li>Developing an E-Commerce security plan<ol>
+<li>Perform a risk assessment</li>
+<li>Develop a security policy</li>
+<li>Develop an implementation plan</li>
+<li>Create a security organization</li>
+<li>Perform a seurity audit</li>
+</ol>
+</li>
+</ol>
+<h2 id="E-Commerce-Payment-Systems"><a href="#E-Commerce-Payment-Systems" class="headerlink" title="E-Commerce Payment Systems"></a>E-Commerce Payment Systems</h2><ol>
+<li>Security, trust, and E-Commerce<ul>
+<li>E-Commerce (by definition) means transfer of value which can be :<ul>
+<li>Resources</li>
+<li>Information</li>
+<li>Payments</li>
+<li>Entertainment ……</li>
+</ul>
+</li>
+<li>All of these types of value are desirable and therefore subject to theft</li>
+<li>Perhaps, none more than payments(which drives commerce)</li>
+<li>It is all about MONEY</li>
+</ul>
+</li>
+<li>Payment system stakeholders’priorities<ul>
+<li>Consumers - Low -risk, low-cost, refutable, convenience, reliability</li>
+<li>Merchants - Low -risk, low-cost, irrefutable, secure, reliable</li>
+<li>Financial intermediaries - Secure, low-risk, maximizing profit</li>
+<li>Government regulators - Security, trust, protecting participants and enforcing reporting</li>
+</ul>
+</li>
+<li>Types of payment systems<ul>
+<li>Cash<ul>
+<li>Most common form of payment in terms of number of transactions (changing quickly)</li>
+<li>Instantly convertible into other forms of value without intermediation</li>
+</ul>
+</li>
+<li>Cheque transfer<ul>
+<li>Second most common payment form in the United States in terms of number of transactions; costly and slowly diminishing in most part of the world</li>
+</ul>
+</li>
+<li>Credit card<ul>
+<li>Credit card associations</li>
+<li>Issuing banks</li>
+<li>Processing centers</li>
+</ul>
+</li>
+<li>Stored Value<ul>
+<li>Funds deposited into account, from which funds are paid out or withdrawn as needed, e.g., debit cards, gift certificates, Octopus etc</li>
+<li>Peer-to-peer payment systems (e.g. Payme.com)</li>
+</ul>
+</li>
+<li>Accumulating Balance<ul>
+<li>Accounts that accumulate expenditures and to which consumers make periodic payments</li>
+<li>E.g., utility, phone, standing accounts of trusted businesses</li>
+<li>Often either with a large deposit, or prepaid</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Dimensions of payment systems<ol>
+<li>todo</li>
+</ol>
+</li>
+<li>B2C payment systems<ul>
+<li>Credit cards</li>
+<li>Financial cybermediaries</li>
+<li>Electronic checks</li>
+<li>Electronic Bill Presentment and Payment</li>
+<li>Smart cards</li>
+<li>Mobile Payment</li>
+</ul>
+</li>
+<li>How an online credit transaction works<ol>
+<li>todo</li>
+</ol>
+</li>
+<li>E-Commerce payment systems<ul>
+<li>Credit cards</li>
+<li>Debit cards</li>
+<li>Limitations of online credit card payment<ul>
+<li>Security, merchant risk</li>
+<li>Cost</li>
+<li>Social equity</li>
+</ul>
+</li>
+<li>Digital wallets<ul>
+<li>Emulates functionality of wallet by authenticating consumer, storing and transferring value, and securing payment process from consumer to merchant</li>
+<li>Early efforts to popularize failed</li>
+</ul>
+</li>
+<li>Digital cash<ul>
+<li>Value storage and exchange using tokens</li>
+<li>Most early examples have disappeared; protocols and practices too complex</li>
+</ul>
+</li>
+<li>Digital checking:<ul>
+<li>Extends functionality of existing checking accounts for use online</li>
+</ul>
+</li>
+<li>Online stored value systems<ul>
+<li>Based on value stored in a consumer’s bank, checking, or credit card account</li>
+<li>PayPal, AliPay, WeChat Pay</li>
+<li>Smart cards<ul>
+<li>Contact—use card reader</li>
+<li>Contactless<ul>
+<li>e.g., EZPass, Octopus card (Hong Kong)</li>
+<li>Radio Frequency ID (RFID)</li>
+<li>Near Field Communications (NFC)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Smart cards<ul>
+<li>Smart card – plastic card (the size of a credit card) that contains an embedded chip on which digital information can be stored and updated</li>
+<li>Debit cards are an implementation</li>
+<li>EMV Credit Card (Chip Card)<ul>
+<li>EuroCard, Master and Visa</li>
+<li>Usually used with PIN</li>
+<li>73.6% of all CC are EMV transactions (ref: EMVCoQ4 2018)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Financial cybermediaries<ul>
+<li>Financial cybermediary– Internet-based company that makes it easy for one person to pay another person or organization over the Internet<ul>
+<li>PayPal (www.paypal.com) is the most well-known</li>
+<li>AliPay(www.Alipay.com)</li>
+<li>WechatPay(pay.wechat.com)</li>
+<li>Octopus (www.octopus.com.hk)</li>
+<li>Obopay(www.obopay.com)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>B2B payment systems<ul>
+<li>Business customers…<ul>
+<li>Make large purchases</li>
+<li>Will not pay with credit card or financial cybermediary</li>
+<li>Use financial EDI (Electronic Data Interchange) (but on its way out!)</li>
+<li>Pay for many purchases at once (perhaps the end of the month)</li>
+<li>Likely that cloud-based payment gateway (or other Internet-based technology) will eventually take over completely!</li>
+<li>FPS (if local in Hong Kong)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>What Next?<ul>
+<li>They are attempts to export existing payment systems that work in traditional commerce to E-Commerce</li>
+<li>Sometimes problemswith existing payment systems are magnifiedwhen moved to the online world (e.g. credit card theft)</li>
+<li>What is needed is a payment/financial system designed for the online world</li>
+<li>These are defined as cybercurrenciesor digital currency</li>
+</ul>
+</li>
+</ol>
+<h2 id="Blockchain-amp-Cybercurrency"><a href="#Blockchain-amp-Cybercurrency" class="headerlink" title="Blockchain &amp; Cybercurrency"></a>Blockchain &amp; Cybercurrency</h2><ol>
+<li>Token money<ul>
+<li>Represented by a physical object (token)such as a banknote, coin, traveler’s check, etc.</li>
+<li>Without that token the value is lost</li>
+<li>No intermediary is required for spending</li>
+<li>But requires faith in the issuer, usually a government or a bank</li>
+</ul>
+</li>
+<li>Notational money<ul>
+<li>Represented by a notation/entry in a ledger, passbook, or database (e.g., a bank account)</li>
+<li>Notational money cannot be lost (in theory)</li>
+<li>Requires an intermediary (bank or clearing house) for spending</li>
+<li>Requires faith in the maintainerof the ledg</li>
+</ul>
+</li>
+<li>Hybrid money<ul>
+<li>Requires botha tokenanda ledgeraccount (e.g., personal check, stored value card, gift card, etc.)</li>
+<li>Can be lostandrequires faithin the issuer</li>
+<li>Requires an intermediary(bank or clearing house) for spending</li>
+</ul>
+</li>
+<li>Virtual money (?)<ul>
+<li>No token</li>
+<li>No ledger</li>
+<li>No issuer, no government backing (or supervision)</li>
+<li>No intermediary required for spendingBUT</li>
+<li>Is this even possible?</li>
+<li>Who creates the money? Why is it money?</li>
+<li>Without a token or ledger, how do you know how much you have? What is its value?</li>
+<li>How do you know the spender is the owner?</li>
+<li>What prevents spending the same money more than one time?</li>
+</ul>
+</li>
+<li>Digital money<ul>
+<li>The money is just a string of bytes (data)stored on a device(computer, mobile phone, etc.)</li>
+<li>Device failuremeans the money/value is gone</li>
+<li>Device intrusionmeans the money can be stolen(just like any other data)</li>
+<li>Good reason to backup devices (trust?)</li>
+</ul>
+</li>
+<li>Cybercurrency<ul>
+<li>An Internet-based form of currencyor medium of exchange disFnct from physical (such as banknotes and coins) that exhibits properFes similar tophysical currencies, but allows for instantaneous transacFons and borderless transfer-of-ownership (Wikipedia)</li>
+<li>The most influenFal cybercurrency by far at this Fmeis Bitcoin</li>
+<li>The key technology behind Bitcoin is Blockchain</li>
+</ul>
+</li>
+<li>What is Bitcoin?<ul>
+<li>Designed for the “online society”using Internet technologies and ideas</li>
+<li>Decentralized and independent of national currencies</li>
+<li>Excellent for anonymous transactions(like hard currency but unlike credit cards)</li>
+<li>Excellent for E-Commerce –online exchange, no specific currency, micro-payments, etc.</li>
+<li>Easily convertible to national currencies(only when the market trust still exists)</li>
+<li>Important to distinguish the difference between Blockchaintechnology and Bitcoin–Bitcoinis an important example application of Blockchain.</li>
+</ul>
+</li>
+<li>Blockchain Analogy: Land Deeds<ul>
+<li>Land ownershipis defined by a “chain of title,” a sequence of deeds leading from the original owner to the present owner</li>
+<li>Deeds are recorded in the Land Registry</li>
+<li>Ownershipis established by searching the Registry</li>
+<li>The Land Registry is, in effect, a ledger holder</li>
+<li>If the Registry is altered, ownership can be lost</li>
+<li>Double-sellingis prevented by timestamps</li>
+</ul>
+</li>
+<li>A distributed registry<ul>
+<li>Suppose all deeds are made available to thousands of nodeson a decentralized public network?</li>
+<li>Ifthe deeds are genuineandthe network members agree on the chain of title, thenwe can tell who owns a piece of property</li>
+<li>Ask the network and count the responses –if a majoritysay that someone is the owner, then they are</li>
+<li>There must be enough honest members that false responses cannot dominate (or give them a reward for being honest)</li>
+<li>The registry is not(by definition) under a centralized control</li>
+</ul>
+</li>
+<li>The 5 elements of Bitcoin<ul>
+<li>Currency–send units of value, convertible, divisible (challenged by  its volatility)</li>
+<li>Commodity–scarcity stores wealth, market fluctuates with speculation  (limited to 21 million, we are closed to the limit)</li>
+<li>Brand–marketing message, commodity and sharing knowledge</li>
+<li>Protocol–decentralized trust via distributed ledger</li>
+<li>Technology–blockchain</li>
+</ul>
+</li>
+<li>How do you get Bitcoin?<ul>
+<li>Sell something</li>
+<li>Salary (?)</li>
+<li>Use a Bitcoinexchange (including BitcoinATMs)</li>
+<li>Bitcoin “mining”</li>
+<li>There will never be more than 21 million BTC (2<em>50</em>210,000); divisible  into units as small as 1/100 millionth of a BTC (micropayments)</li>
+</ul>
+</li>
+<li>Bitcoinand encryption technologies<ul>
+<li>Hash functions –one wayhashing using SHA-256 which produces 256 bit  hashes</li>
+<li>Public-private key (asymmetric) encryption</li>
+<li>Everyone has a public-private key pair</li>
+<li>Ensures end-to-end security, non-repudiation, etc.</li>
+<li>Digital signatures</li>
+<li>All ofthese technologies are mature and trusted</li>
+</ul>
+</li>
+<li>Bitcoin Characteristics<ul>
+<li>No physical object, not even a character string; “Bitcoin” refers to  the protocol, “bitcoin” refers to the value</li>
+<li>“a chain of digitally signed transaction records leading from the  original owner to the current owner” –similar tothe chain of land deeds</li>
+<li>Transaction records contain</li>
+<li>Hashes that are difficultto break and</li>
+<li>Virtual owner IDs (addresses)</li>
+<li>There is noBitcoinregistry, nocentral authority</li>
+<li>Bitcoinblockchainsare broadcast to everyone; anyone can verify them  (crowdsourcing)</li>
+</ul>
+</li>
+<li>Bitcoinprotocol<ul>
+<li>Bitcoinwas invented in 2008by an anonymous person (maybe a team) call  Satoshi Nakamotoallegedly in Japan (but likely in the Silicon Valley)</li>
+<li>The Bitcoin protocol for generating and exchanging Bitcoin is  implemented in publicly available, open source software –this has led to  other cybercurrencies–called “forks”</li>
+<li>Anyone can obtain and run a BitcoinclientSatoshi NakamotoWhite Paper  Link: <a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener">https://bitcoin.org/bitcoin.pdf</a> (available on the course Moodle  Website)</li>
+</ul>
+</li>
+<li>Bitcoinaddresses<ul>
+<li>Bitcoinsoftware generates addresses of 25-44 characters for users, e.g. , 1BBsbEq8Q29JpQr4jygjPof7F7uphqyUCQ</li>
+<li>The address is actually an elliptic curve public key; a 44  characterkey is as secure as a 7000-bit RSA key</li>
+<li>To send  Bitcoins, user specifies a receiving address (public)  and amountand then initiates the transaction</li>
+<li>To receive Bitcoins, only an address (public) is needed</li>
+<li>Addresses are notdirectly registered to users; there can be a  different address for each transaction if desired</li>
+</ul>
+</li>
+<li>Possible vulnerabilities<ul>
+<li>No way to reverse a transaction without the payee’s cooperation</li>
+<li>Software bugs</li>
+<li>Bank robbery by hackers</li>
+<li>Malware attacks against wallets</li>
+<li>Government attempts to control</li>
+<li>Competing digital currencies easy to make (fork) –Auroracoin,  Dogecoin, Namecoin, Primecoin, etc. –imitation is flattery</li>
+</ul>
+</li>
+<li>Challenges for Bitcoin<ul>
+<li>Scalability –Currently, bitcoin can process approximately 4.6  transactions per second, compared with 1,700 transactions per second  that Visa can process worldwide!! (old number, likely fewer transaction)</li>
+<li>Time to solve a block (mine one bit-coin) takes ~10 min, no matter how  many people are actively mining (part of the bitcoin algorithm) –always  limit its speed of processing</li>
+<li>It takes 120 exahashes/s to solve a new block in bit-coin in early  2020 (1 exa=quitillion=1018)</li>
+<li>The bitcoin network is estimated to consume about 343 megawatts of  power in total (about 1/3 of all homes in San Jose, or 285,000 homes in  US, 2018 figure, assuming most efficient ASIC can use 1W to solve 1  gigahashper second.).</li>
+<li>In August 2018, it was estimated bitcoin mining is responsible for 1%  of world’s energy consumption (by a US Senate Committee).</li>
+<li>This makes transaction of fractions of bitcoin (smallest unit is 1/100  millionth = 1 Satoshi!) meaningless and highly inefficient.</li>
+</ul>
+</li>
+<li>Possible future of Bitcoin/virtual currencies (social)<ul>
+<li>For the world’s unbanked, there is no choice</li>
+<li>For small businesses, freelancers and startups in developing nations,  there is no choice (at present, but is changing fast!)</li>
+<li>“From stones ➜precious metals ➜paper  ➜bytes” –inevitable development  of “money”</li>
+<li>Distributed trust is still trust!!</li>
+</ul>
+</li>
+<li>Possible future of Bitcoin/virtual currencies (economic/political)<ul>
+<li>A future with digital currencies and decentralized stores is likely to  be positive –some people trust math over people (how sad!)</li>
+<li>National adoption of decentralized currencies may bring political  transparency and economic neutrality</li>
+<li>Developing nations seeking to curb corruption and break free of  economic dependence on other countries could see potential in these  technologies</li>
+<li>What next? –come Central Bank Digital Currency (CBDC)</li>
+<li>China has announced it has launched its own CBDC and is experimenting  in 4 cities within China.  Plan to do it across China in 1-2 years</li>
+<li>Could this be one of the reasons for Facebook to withdraw Libra?</li>
+<li>To learn more about CBDC, read the IMF Working Paper “A Survey of  Research on Retail Central Bank Digital Currency” released in June 2020  on our Moodle Course Website</li>
+</ul>
+</li>
+<li>Want to Know More?<ul>
+<li>Read the original paper by Satoshi Nakamoto published in 2009</li>
+<li>Read the ”Distributed Ledger Technology: beyond block chain” -A  88-pages white-paper by the UK Government Chief Scientific Adviser  published in 2016</li>
+<li>Watch the 26 min video on ”How Bitcoins actual Work?” by 3Blue1Brown</li>
+</ul>
+</li>
+</ol>
+<h2 id="Emerging-amp-Disruptive-Technologies-IoT-and-AI"><a href="#Emerging-amp-Disruptive-Technologies-IoT-and-AI" class="headerlink" title="Emerging &amp; Disruptive Technologies, IoT and AI"></a>Emerging &amp; Disruptive Technologies, IoT and AI</h2><ol>
+<li>Adoption of Disruptive Technologies<ol>
+<li>A new disruptive technology<ol>
+<li>Initially underperforms the dominant one along the dimensions mainstream customers in major markets have historically valued</li>
+<li>Has other features a few fringe (and generally new) customers value</li>
+</ol>
+</li>
+<li>Products based on disruptive technologies are typically<ol>
+<li>Cheaper</li>
+<li>Simpler</li>
+<li>Smaller</li>
+<li>More convenient than those established on the dominant technolog</li>
+</ol>
+</li>
+<li>The most profitable customers generally do not want and initially cannot use products based on disruptive technologies</li>
+<li>First commercialized in engaging or insignificant markets</li>
+<li>Incumbents conclude that investment is not a rational financial decision</li>
+<li>The new disruptive technology<ol>
+<li>Steadily improves in performance</li>
+<li>Until it meets the standards of performance demanded by the mainstream mark</li>
+</ol>
+</li>
+<li>Finally<ol>
+<li>The new technology displaces the dominant one</li>
+<li>The new entrant displaces the dominant one in the mainstream mark</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>The Long Nose of Innovation<ul>
+<li>The bulk of innovation is low-amplitude and takes place over a long period</li>
+<li>Technologists should focus on refining existing technologies as much as on creation new ones</li>
+<li>Therefore, most technology likely to have an impact in the next five years is already at least 15 years old and unrecognized</li>
+<li>Examples: IoT and A.I.</li>
+</ul>
+</li>
+<li>Consider the current technology landscape<ul>
+<li>Internet connecting the whole world at low cost</li>
+<li>Cheap, small, dense data storage – hence big data possible</li>
+<li>High speed networks; ubiquitous wi-fi and mobile network</li>
+<li>Access to almost unlimited processing power at low cost</li>
+<li>Moore’s Law leads to cheap, small processors and sensors; “embedded systems”; “smart devices”</li>
+<li>Advancements in energy efficiency – yet more innovation needed</li>
+<li>A good example of disruptive technology is Internet of Things (IoT) and Artificial Intelligence (A.I.)</li>
+</ul>
+</li>
+<li>Disruptive digital technologies<ul>
+<li>Technologies which offer opportunities for business for new products and services for customers and can transform internal business processes (Dave Chaffey)</li>
+<li>A technology that changes the bases of competition by changing the performance metrics along which firms compete (Erwin Danneels)</li>
+<li>Technology based on customer needs that drive customers to seek certain benefits in the products they use and form the basis for customer choices between competing products</li>
+<li>For IoT, we have the capability to fully connect and integrate a wide diversity of devices and objects into the online environment and interact with them</li>
+<li>For AI, we have Big Data and powerful Cloud processing power to support it</li>
+</ul>
+</li>
+<li>IoT “worlds”<ol>
+<li>Tagging world - Identifiers such as RFIDs are attached to things (e.g., packages) to enable their automatic identification and tracking. Based on ID, the information about things can be accessed from a database or from the Web.</li>
+<li>Sensors world – is about identifying things – is about sensing things. - “second hand” access to the properties of things, that can be perceived from the outside using a variety of available sensors</li>
+<li>Embedded systems world – is about reading things. - “first-hand” access to data possessed by things</li>
+</ol>
+</li>
+<li>IOT strategic areas <a href="Top 10 IoT Garner">link</a><ul>
+<li>Transport – e.g., smart cars, smart traffic<ul>
+<li>In San Francisco, 20-30% of all traffic congestion is due to drivers looking for parking</li>
+</ul>
+</li>
+<li>Energy</li>
+<li>Healthcare<ul>
+<li>Population 65+ (2018): World – 9%; China – 11%; India – 6%; EU – 20% ; HK – 17%; UK – 18%; US – 16%; Japan – 28% (source: World Bank)</li>
+</ul>
+</li>
+<li>Agriculture</li>
+<li>Buildings</li>
+<li>Smart City</li>
+</ul>
+</li>
+<li>4-Stages of IoT Architecture, See In 10 years<ol>
+<li>Sensors / Actuators (wired, wireless)</li>
+<li>Sensors / Actuators, Data Acquisition Systems (data aggregation, A/D, measurement, control)</li>
+<li>Edge IT (Analytics, pre-processing)</li>
+<li>Data Centre / Cloud (analytics, management, archice)</li>
+</ol>
+</li>
+<li><a href="https://www.asimovinstitute.org/neural-network-zoo/" target="_blank" rel="noopener">THE NEURAL NETWORK ZOO</a><ol>
+<li>todo</li>
+</ol>
+</li>
+</ol>
+<h2 id="Technologies-and-E-Commerce-Trends"><a href="#Technologies-and-E-Commerce-Trends" class="headerlink" title="Technologies and E-Commerce Trends"></a>Technologies and E-Commerce Trends</h2><ol>
+<li>Gartner Hype Cycle for Emerging Technologies, 2019</li>
+<li>Gartner Hype Cycle of Emerging Technology 2020<ol>
+<li>Innovation Trigger</li>
+<li>Peak of Inflated Expectations</li>
+<li>Trough of Diillusionment</li>
+<li>Slope of Enlightenment</li>
+<li>Plateau of Productivity</li>
+</ol>
+</li>
+<li>The Top 10 Strategic Technologies for 2020 - Gartner Report<ol>
+<li>People-centric<ol>
+<li>Hyperautomation</li>
+<li>Multiexperience</li>
+<li>Democratization of Expertise</li>
+<li>Human Augmentation</li>
+<li>Transparency and Traceability</li>
+</ol>
+</li>
+<li>Smart spaces<ol>
+<li>The Empowered Edge</li>
+<li>Distributed Cloud</li>
+<li>Autonomous Things</li>
+<li>Practical Blockchain</li>
+<li>AI Security</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Automation utilizes<ol>
+<li>RPA - Connects legacy systems</li>
+<li>Intelligent business process management suites (iBPMSs) - Manage long-running processes</li>
+</ol>
+</li>
+<li>Mary Meeker –The Internet Guru<ol>
+<li>Publish the Landmark “Internet Report” in 1995 (with Chris Depuy) –considered as a game changing report</li>
+<li>Publish “Internet Trends Report” Every year</li>
+</ol>
+</li>
+<li>5 Key Takeaway for E-Commerce in 2019 (in US)<ol>
+<li>We still have huge potential in e-commerce (only 15% of total retail sales in US in 2019, was 13% last year) growing @ 12.4% per year (compared with 2% for Brick-and-Mortar sales growth).</li>
+<li>Social media is now mostly multimedia (photos and videos). (Multimedia content is a must now).</li>
+<li>Technology rules –7 out of 10 most valuable companies in the world are tech companies (other 3 are Berkshire Hathaway, Visa and Johnson &amp; Johnson)</li>
+<li>Move from computer to mobile devices –3.8 billion on Internet and most now use mobile devices –Mobile first for E-Commerce Presence</li>
+<li>Digital Ad is gaining importance –also use freemium to attract customer, then keep them using appropriate engagement.(There is a separate section in this report on China)</li>
+</ol>
+</li>
+<li>Top 10 Take Away from the SCMP China Internet Report 2020 (XinmeiShen)<ol>
+<li>People are spending more time online during the pandemic</li>
+<li>Office apps boom as millions work from home</li>
+<li>More people are seeing doctors online…</li>
+<li>…and going to school online</li>
+<li>China is trying to reduce its dependency on US components</li>
+<li>2020 is the year of 5G</li>
+<li>Shopping is giving a boost to live streaming</li>
+<li>There are plenty of online video platforms, but few paying users</li>
+<li>China is making huge strides in self-driving cars</li>
+<li>China smartphones gain global market share</li>
+</ol>
+</li>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Notes/" rel="tag"># Notes</a>
+          
+            <a href="/tags/Study/" rel="tag"># Study</a>
+          
+            <a href="/tags/Lecture/" rel="tag"># Lecture</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020-08-06-Work-Intellectual/" rel="next" title="电子商务与商标?知识产权?企业创新">
+                <i class="fa fa-chevron-left"></i> 电子商务与商标?知识产权?企业创新
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020-09-16-Study-SemanticDataArchi/" rel="prev" title="Semantic data archi">
+                Semantic data archi <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Jack Xia" />
+          <p class="site-author-name" itemprop="name">Jack Xia</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">161</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-Lecture-Notes"><span class="nav-number">1.</span> <span class="nav-text">Introduction Lecture Notes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mobile-Technology-amp-E-Commerce"><span class="nav-number">2.</span> <span class="nav-text">Mobile Technology &amp; E-Commerce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Internet-and-E-Commerce-Security"><span class="nav-number">3.</span> <span class="nav-text">Internet and E-Commerce Security</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#E-Commerce-Payment-Systems"><span class="nav-number">4.</span> <span class="nav-text">E-Commerce Payment Systems</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Blockchain-amp-Cybercurrency"><span class="nav-number">5.</span> <span class="nav-text">Blockchain &amp; Cybercurrency</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Emerging-amp-Disruptive-Technologies-IoT-and-AI"><span class="nav-number">6.</span> <span class="nav-text">Emerging &amp; Disruptive Technologies, IoT and AI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Technologies-and-E-Commerce-Trends"><span class="nav-number">7.</span> <span class="nav-text">Technologies and E-Commerce Trends</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack Xia</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mermaid/6.0.0/mermaid.min.js"></script>
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

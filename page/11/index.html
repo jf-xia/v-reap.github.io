@@ -274,6 +274,981 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-26-Python-rrdtool/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-06-26-Python-rrdtool/" itemprop="url">rrdtool绘制趋势图 - Python自动化运维</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-26T08:00:00+08:00">
+                2017-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>rrdtool（round robin database）工具为环状数据库的存储格式，round robin是一种处理定量数据以及当前元素指针的技术。rrd<br>tool主要用来跟踪对象的变化情况，生成这些变化的走势图，比如业务的访问流量、系统性能、磁盘利用率等趋势图，很多流行监控平台都使用到rrdtool，比较有名<br>的为Cacti、Ganglia、Monitorix等。更多rrdtool介绍见官网<a href="http://oss.oetiker.ch/rrdtool/。rrdtoo" target="_blank" rel="noopener">http://oss.oetiker.ch/rrdtool/。rrdtoo</a><br>l是一个复杂的工具，涉及较多参数概念，本节主要通过Python的rrdtool模块对rrdtool的几个常用方法进行封装，包括create、fetch、gr<br>aph、info、update等方法，本节对rrdtool的基本知识不展开说明，重点放在Python rrdtool模块的常用方法使用介绍上。</p>
+<ol>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install rrdtool</li>
+</ol>
+<p>Examples:</p>
+<p>第一步　采用create方法创建rrd数据库，参数指定了一个rrd文件、更新频率setp、起始时间–<br>start、数据源DS、数据源类型DST、数据周期定义RRA等，详细源码如下：【/root/xls/create.py】</p>
+<p>```python</p>
+<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> #!/usr/bin/python  </p>
+<p> import rrdtool  </p>
+<p> import time  </p>
+<p>r_time=str(int(time.time()))    #获取当前Linux时间戳作为rrd起始时间  </p>
+<p> #数据写频率–step为300秒(即5分钟一个数据点)  </p>
+<p>d=rrdtool.create(‘Flow.rrd’,’–step’,’300’,’–start’,cur_time,  </p>
+<p>义数据源eth1_in(入流量)、eth1_out(出流量)；类型都为COUNTER(递增)；600秒为心跳值，  </p>
+<p>含义是600秒没有收到值，则会用UNKNOWN代替；0为最小值；最大值用U代替，表示不确定  </p>
+<p>‘DS:eth1_in:COUNTER:600:0:U’,  </p>
+<p>‘DS:eth1_out:COUNTER:600:0:U’,  </p>
+<p>#RRA定义格式为[RRA:CF:xff:steps:rows]，CF定义了AVERAGE、MAX、MIN三种数据合并方式  </p>
+<p>#xff定义为0.5，表示一个CDP中的PDP值如超过一半值为UNKNOWN，则该CDP的值就被标为UNKNOWN  </p>
+<p>#下列前4个RRA的定义说明如下，其他定义与AVERAGE方式相似，区别是存最大值与最小值  </p>
+<h1 id="每隔5分钟-1-300秒-存一次数据的平均值-存600笔，即2-08天"><a href="#每隔5分钟-1-300秒-存一次数据的平均值-存600笔，即2-08天" class="headerlink" title="每隔5分钟(1*300秒)存一次数据的平均值,存600笔，即2.08天"></a>每隔5分钟(1*300秒)存一次数据的平均值,存600笔，即2.08天</h1><pre><code># 每隔30分钟(6*300秒)存一次数据的平均值,存700笔，即14.58天（2周）  
+
+# 每隔2小时(24*300秒)存一次数据的平均值,存775笔，即64.58天（2个月）  
+
+# 每隔24小时(288*300秒)存一次数据的平均值,存797笔，即797天(2年)  
+
+&apos;RRA:AVERAGE:0.5:1:600&apos;,  
+
+&apos;RRA:AVERAGE:0.5:6:700&apos;,  
+</code></pre><p>   ‘RRA:AVERAGE:0.5:24:775’,  </p>
+<p>   ‘RRA:AVERAGE:0.5:288:797’,  </p>
+<p>   ‘RRA:MAX:0.5:1:600’,  </p>
+<p>   ‘RRA:MAX:0.5:6:700’,  </p>
+<p>   ‘RRA:MAX:0.5:24:775’,  </p>
+<p>   ‘RRA:MAX:0.5:444:797’,  </p>
+<p>   ‘RRA:MIN:0.5:1:600’,  </p>
+<pre><code>&apos;RRA:MIN:0.5:6:700&apos;,  
+
+&apos;RRA:MIN:0.5:24:775&apos;,  
+
+&apos;RRA:MIN:0.5:444:797&apos;)  
+</code></pre><p> if rrd:  </p>
+<pre><code>print rrdtool.error()
+</code></pre><p>　采用updatev方法更新rrd数据库，参数指定了当前的Linux时间戳，以及指定eth1_in、eth1_out值（当前网卡的出入流量），网卡流量<br>过psutil模块来获取，如psutil.network_io_counters()[1]为入流量，关于psutil模块的介绍见第1.1。详细源码如下<br>root/xls/update.py】</p>
+<p>加入crontab，并配置5分钟作为采集频率，crontab配置如下：<em>/5 </em> <em> </em> * /usr/bin/python<br>ot/xls/update.py &gt; /dev/null 2&gt;&amp;1</p>
+<h1 id="–-coding-utf-8-–-1"><a href="#–-coding-utf-8-–-1" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> #!/usr/bin/python  </p>
+<p> import rrdtool  </p>
+<p> import time,psutil  </p>
+<p> total_input_trwork_io_counters()[1]    #获取网卡入流量  </p>
+<p> total_output_traffic = psutil.network_io_counters()[0] #获取网卡出流量  </p>
+<p> starttime=int(time.time())    #获取当前Linux时间戳  </p>
+<p> #将获取到的三个数据作为updatev的参数，返回{‘return_value’: 0L}则说明更新成功，反  </p>
+<p> update=rrdtool.updatev(‘/root/xls/Flow.rrd’,’%s:%s:%s’ % r(starttime),str(total_input_traffic),str(total_output_traffic)))  </p>
+<p> print update</p>
+<p>第三步　采用graph方法绘制图表，此示例中关键参数使用了–x-grid定义X轴网格刻度；DEF指定数据源；使用CDEF合并数据；HRULE绘制水平线（告<br>警线）；GPRINT输出最大值、最小值、平均值等。详细源码如下：【/root/xls/graph.py】</p>
+<pre><code># -- coding: utf-8 --
+
+#!/usr/bin/python  
+
+import rrdtool  
+
+import time  
+
+#定义图表上方大标题  
+
+title=&quot;Server network  traffic flow (&quot;+time.strftime(&apos;%Y-%m-%d&apos;,time.localtime(time.time()))+&quot;)&quot;  
+
+#重点解释&quot;--x-grid&quot;,&quot;MINUTE:12:HOUR:1:HOUR:1:0:%H&quot;参数的作用（从左往右进行分解）  
+
+&quot;MINUTE:12&quot; #表示控制每隔12分钟放置一根次要格线  
+
+&quot;HOUR:1&quot;  #表示控制每隔1小时放置一根主要格线  
+
+&quot;HOUR:1&quot; # 表示控制1个小时输出一个label标签  
+
+&quot;0:%H&quot;  #0表示数字对齐格线，%H表示标签以小时显示  
+
+rrdtool.graph( &quot;Flow.png&quot;, &quot;--start&quot;, &quot;-1d&quot;,&quot;--vertical-label=Bytes/s&quot;,
+
+&quot;--x-grid&quot;,&quot;MINUTE:12:HOUR:1:HOUR:1:0:%H&quot;,
+
+ &quot;--width&quot;,&quot;650&quot;,&quot;--height&quot;,&quot;230&quot;,&quot;--title&quot;,title,  
+
+ &quot;DEF:inoctets=Flow.rrd:eth1_in:AVERAGE&quot;,    #指定网卡入流量数据源DS及CF  
+
+ &quot;DEF:outoctets=Flow.rrd:eth1_out:AVERAGE&quot;,    #指定网卡出流量数据源DS及CF  
+
+ &quot;CDEF:total=inoctets,outoctets,+&quot;,    #通过CDEF合并网卡出入流量，得出总流量total  
+
+
+
+&quot;LINE1:total#FF8833:Total traffic&quot;,    #以线条方式绘制总流量  
+
+ &quot;AREA:inoctets#00FF00:In traffic&quot;,    #以面积方式绘制入流量  
+
+ &quot;LINE1:outoctets#0000FF:Out traffic&quot;,    #以线条方式绘制出流量  
+
+ &quot;HRULE:6144#FF0000:Alarm value\\r&quot;,    #绘制水平线，作为告警线，阈值为6.1k  
+
+ &quot;CDEF:inbits=inoctets,8,*&quot;,    #将入流量换算成bit，即*8，计算结果给inbits  
+
+ &quot;CDEF:outbits=outoctets,8,*&quot;,    #将出流量换算成bit，即*8，计算结果给outbits  
+
+&quot;COMMENT:\\r&quot;,                    #在网格下方输出一个换行符  
+
+ &quot;COMMENT:\\r&quot;,  
+
+ &quot;GPRINT:inbits:AVERAGE:Avg In traffic\: %6.2lf %Sbps&quot;,    #绘制入流量平均值  
+
+ &quot;COMMENT:   &quot;,  
+
+ &quot;GPRINT:inbits:MAX:Max In traffic\: %6.2lf %Sbps&quot;,    #绘制入流量最大值  
+
+ &quot;COMMENT:  &quot;,  
+
+ &quot;GPRINT:inbits:MIN:MIN In traffic\: %6.2lf %Sbps\\r&quot;,    #绘制入流量最小值  
+
+ &quot;COMMENT: &quot;,  
+
+ &quot;GPRINT:outbits:AVERAGE:Avg Out traffic\: %6.2lf %Sbps&quot;,    #绘制出流量平均值  
+
+ &quot;COMMENT: &quot;,  
+
+ &quot;GPRINT:outbits:MAX:Max Out traffic\: %6.2lf %Sbps&quot;,    #绘制出流量最大值  
+
+ &quot;COMMENT: &quot;,  
+
+ &quot;GPRINT:outbits:MIN:MIN Out traffic\: %6.2lf %Sbps\\r&quot;)    #绘制出流量最小值
+</code></pre><p>以上代码将生成一个Flow.png文件</p>
+<p>查看rrd文件内容有利于观察数据的结构、更新等情况，rrdtool提供几个常用命令：</p>
+<p>info查看rrd文件的结构信息，如rrdtool info Flow.rrd；</p>
+<p>first查看rrd文件第一个数据的更新时间，如rrdtool first Flow.rrd；</p>
+<p>last查看rrd文件最近一次更新的时间，如rrdtool last Flow.rrd；</p>
+<p>fetch根据指定时间、CF查询rrd文件，如rrdtool fetch Flow.rrd AVERAGE （必须为大写）</p>
+<p><strong>rrdtool参数说明</strong>: <a href="http://bbs.chinaunix.net/thread-2150417-1-1.html和http://oss.oetiker.ch/rrdtool/doc/index.en.html。" target="_blank" rel="noopener">http://bbs.chinaunix.net/thread-2150417-1-1.html和http://oss.oetiker.ch/rrdtool/doc/index.en.html。</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-23-Python-smtplib/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-06-23-Python-smtplib/" itemprop="url">smtplib发送邮件 - Python自动化运维</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-23T08:00:00+08:00">
+                2017-06-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install smtplib</li>
+</ol>
+<p>Examples:</p>
+<p>```python</p>
+<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> import smtplib</p>
+<p> from email.mime.multipart import MIMEMultipart</p>
+<p> from email.mime.text import MIMEText</p>
+<p> from email.mime.image import MIMEImage</p>
+<p> HOST = “m.xxx.com”</p>
+<p> TO = “jianfeng.xia@xxx.com”</p>
+<p> EmailUser = “Task.system”</p>
+<p> EmailPass = “gta@2017”</p>
+<p> FROM = “Task.system@xxx.com”</p>
+<p>BJECT = u”官网业务服务质量周报”</p>
+<p> def addimg(src,imgid):</p>
+<pre><code>    fp = open(src, &apos;rb&apos;)
+
+
+    msgImage = MIMEImage(fp.read())
+
+
+    fp.close()
+
+
+    msgImage.add_header(&apos;Content-ID&apos;, imgid)
+
+
+    return msgImage
+
+
+
+
+
+msg = MIMEMultipart(&apos;related&apos;)
+
+
+msgtext = MIMEText(&quot;&lt;font color=red&gt;官网业务周平均延时图表:&lt;br&gt;&lt;img src=\&quot;cid:weekly\&quot; border=\&quot;1\&quot;&gt;&lt;br&gt;详细内容见附件。&lt;/font&gt;&quot;,&quot;html&quot;,&quot;utf-8&quot;)
+
+
+msg.attach(msgtext)
+
+
+#msg.attach(addimg(&quot;img/weekly.png&quot;,&quot;weekly&quot;))
+
+
+
+
+
+#attach = MIMEText(open(&quot;doc/week_report.xlsx&quot;, &quot;rb&quot;).read(), &quot;base64&quot;, &quot;utf-8&quot;)
+
+
+#attach[&quot;Content-Type&quot;] = &quot;application/octet-stream&quot;
+
+
+#attach[&quot;Content-Disposition&quot;] = &quot;attachment; filename=\&quot;业务服务质量周报(12周).xlsx\&quot;&quot;.decode(&quot;utf-8&quot;).encode(&quot;gb18030&quot;)
+
+
+#msg.attach(attach)
+
+
+
+
+
+msg[&apos;Subject&apos;] = SUBJECT
+
+
+msg[&apos;From&apos;]=FROM
+
+
+msg[&apos;To&apos;]=TO
+
+
+try:
+
+
+    server = smtplib.SMTP()
+
+
+    server.connect(HOST,&quot;587&quot;)
+
+
+    server.starttls()
+
+
+    server.login(EmailUser, EmailPass)
+
+
+    server.sendmail(FROM, TO, msg.as_string())
+
+
+    server.quit()
+
+
+    print &quot;邮件发送成功！&quot;
+
+
+except Exception, e:  
+
+
+    print &quot;失败：&quot;+str(e)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-22-JS-npm.taobao/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-06-22-JS-npm.taobao/" itemprop="url">nodejs服务部署&搭建&学习&淘宝 NPM 镜像</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-22T15:00:00+08:00">
+                2017-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="使用淘宝-NPM-镜像"><a href="#使用淘宝-NPM-镜像" class="headerlink" title="使用淘宝 NPM 镜像"></a>使用淘宝 NPM 镜像</h2><p>大家都知道国内直接使用 npm 的官方镜像是非常慢的，这里推荐使用淘宝 NPM 镜像。</p>
+<p>淘宝 NPM 镜像是一个完整 npmjs.org 镜像，你可以用此代替官方版本(只读)，同步频率目前为 10分钟 一次以保证尽量与官方服务同步。</p>
+<p>你可以使用淘宝定制的 cnpm (gzip 压缩支持) 命令行工具代替默认的 npm:</p>
+<p> $ npm install -g cnpm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>
+<p>这样就可以使用 cnpm 命令来安装模块了：</p>
+<p> $ cnpm install [name]</p>
+<p>更多信息可以查阅：<a href="http://npm.taobao.org/" target="_blank" rel="noopener">http://npm.taobao.org/</a>。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-22-Python-pycurl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-06-22-Python-pycurl/" itemprop="url">PycURL模拟用户访问服务器 - Python自动化运维</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-22T08:00:00+08:00">
+                2017-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Libcurl 是一个支持FTP，FTPS，HTTP，HTTPS，GOPHER，TELNET，DICT，FILE 和<br>LDAP的客户端URL传输库。libcurl也支持HTTPS认证，HTTP、POST、HTTP<br>PUT、FTP上传，代理，Cookies，基本身份验证，FTP文件断点继传，HTTP代理通道等等。</p>
+<ol>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install pycurl<br>Examples:</li>
+</ol>
+<p>```python</p>
+<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> import os,sys<br> import time<br> import sys<br> import pycurl</p>
+<p> URL=”<a href="http://www.xxx.com" target="_blank" rel="noopener">http://www.xxx.com</a>“</p>
+<p> #URL=”<a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a>“</p>
+<p> #URL=”<a href="http://www.google.com.hk" target="_blank" rel="noopener">http://www.google.com.hk</a>“<br>= pycurl.Curl()<br>setopt(pycurl.URL, URL)</p>
+<p> #连接超时时间,5秒<br> c.setopt(pycurl.CONNECTTIMEOUT, 5)</p>
+<p> #下载超时时间,5秒<br> c.setopt(pycurl.TIMEOUT, 5)<br> c.setopt(pycurl.FORBID_REUSE, 1)<br> c.setopt(pycurl.MAXREDIRS, 1)<br>    c.setopt(pycurl.NOPROGRESS, 1)<br>    c.setopt(pycurl.DNS_CACHE_TIMEOUT,30)<br>    indexfile = open(os.path.dirname(os.path.realpath(<strong>file</strong>))+”/content.txt”, “wb”)<br>    c.setopt(pycurl.WRITEHEADER, indexfile)<br>    c.setopt(pycurl.WRITEDATA, indexfile)<br>    try:<br>        c.perform()<br>    except Exception,e:<br>        print “connecion error:”+str(e)<br>        indexfile.close()<br>        c.close()<br>        sys.exit()</p>
+<pre><code>NAMELOOKUP_TIME =  c.getinfo(c.NAMELOOKUP_TIME)
+CONNECT_TIME =  c.getinfo(c.CONNECT_TIME)
+PRETRANSFER_TIME =   c.getinfo(c.PRETRANSFER_TIME)
+STARTTRANSFER_TIME = c.getinfo(c.STARTTRANSFER_TIME)
+TOTAL_TIME = c.getinfo(c.TOTAL_TIME)
+HTTP_CODE =  c.getinfo(c.HTTP_CODE)
+SIZE_DOWNLOAD =  c.getinfo(c.SIZE_DOWNLOAD)
+HEADER_SIZE = c.getinfo(c.HEADER_SIZE)
+SPEED_DOWNLOAD=c.getinfo(c.SPEED_DOWNLOAD)
+
+print &quot;HTTP Code: %s&quot; %(HTTP_CODE)
+print &quot;DNS time: %.2f ms&quot;%(NAMELOOKUP_TIME*1000)
+print &quot;start connecion time: %.2f ms&quot; %(CONNECT_TIME*1000)
+print &quot;perpare tran time: %.2f ms&quot; %(PRETRANSFER_TIME*1000)
+print &quot;tran start time: %.2f ms&quot; %(STARTTRANSFER_TIME*1000)
+print &quot;tran total time: %.2f ms&quot; %(TOTAL_TIME*1000)
+
+print &quot;download data size: %d bytes/s&quot; %(SIZE_DOWNLOAD)
+print &quot;HTTP head size: %d byte&quot; %(HEADER_SIZE)
+print &quot;avg download speed: %d bytes/s&quot; %(SPEED_DOWNLOAD)
+
+indexfile.close()
+c.close()
+</code></pre><p><img src="/uploads/ueditor/php/upload/image/20170619/1497862725.png" alt="blob.png"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-21-Python-filecmp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017-06-21-Python-filecmp/" itemprop="url">filecmp比较文件夹的内容 - Python自动化运维</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-21T08:00:00+08:00">
+                2017-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>安装Pip &amp; Python 2.7 (or 3.6),并配置环境变量(默认安装会自动添加)</li>
+<li>设置Notepad++作为IDE开发工具:运行中输入命令cmd /k python “$(FULL_CURRENT_PATH)” &amp; ECHO. &amp; PAUSE &amp; EXIT</li>
+<li>安装第三方库: pip install filecmp</li>
+</ol>
+<p>Examples:</p>
+<p>```python</p>
+<h1 id="–-coding-utf-8-–"><a href="#–-coding-utf-8-–" class="headerlink" title="– coding: utf-8 –"></a>– coding: utf-8 –</h1><p> import filecmp</p>
+<p> a=”E:\python\pyauto\2\filecmp\dir1”</p>
+<p> b=”E:\python\pyauto\2\filecmp\dir2”</p>
+<p> dirobj=filecmp.dircmp(a,b,[‘test.py’])</p>
+<p> print “——————-report———————“</p>
+<p> dirobj.report()</p>
+<p> print “————-report_partial_closure———–”</p>
+<p> dirobj.report_partial_closure()</p>
+<p> print “————-report_full_closure————–”</p>
+<pre><code>dirobj.report_full_closure()
+</code></pre><p> print “left_list:”+ str(dirobj.left_list)</p>
+<p> print “right_list:”+ str(dirobj.right_list)</p>
+<p> print “common:”+ str(dirobj.common)</p>
+<p> print “left_only:”+ str(dirobj.left_only)</p>
+<p> print “right_only:”+ str(dirobj.right_only)</p>
+<p> print “common_dirs:”+ str(dirobj.common_dirs)</p>
+<p>int “common_files:”+ str(dirobj.common_files)</p>
+<p>int “common_funny:”+ str(dirobj.common_funny)</p>
+<p>int “same_file:”+ str(dirobj.same_files)</p>
+<p>iff_files:”+ str(dirobj.diff_files)</p>
+<p>y_files:”+ str(dirobj.funny_files)</p>
+<p> Example(比较2个文件夹的不同之处):</p>
+<p>ing: utf-8 –</p>
+<p>in/env python</p>
+<p>port os, sys</p>
+<p>port filecmp</p>
+<p>port re</p>
+<p> import shutil</p>
+<p>st=[]</p>
+<p>dir1, dir2):</p>
+<pre><code>dircomp=filecmp.dircmp(dir1,dir2)
+</code></pre><p>_in_one=dircomp.left_only</p>
+<p>_in_one=dircomp.diff_files</p>
+<p>=os.path.abspath(dir1)</p>
+<pre><code>[holderlist.append(os.path.abspath( os.path.join(dir1,x) )) for x in only_in_one]
+</code></pre><p>  [holderlist.append(os.path.abspath( os.path.join(dir1,x) )) for x in diff_in_one]</p>
+<p>  if len(dircomp.common_dirs) &gt; 0:</p>
+<p>for item in dircomp.common_dirs:</p>
+<pre><code>         compareme(os.path.abspath(os.path.join(dir1,item)), \
+
+      os.path.abspath(os.path.join(dir2,item)))
+
+        return holderlist
+
+
+
+def main():
+
+    if len(sys.argv) &gt; 2:
+
+        dir1=sys.argv[1]
+
+        dir2=sys.argv[2]
+
+    else:
+
+        print &quot;Usage: &quot;, sys.argv[0], &quot;datadir backupdir&quot;
+
+        sys.exit()
+
+
+
+    source_files=compareme(dir1,dir2)
+
+    dir1=os.path.abspath(dir1)
+
+
+
+    if not dir2.endswith(&apos;/&apos;): dir2=dir2+&apos;/&apos;
+
+    dir2=os.path.abspath(dir2)
+
+    destination_files=[]
+
+    createdir_bool=False
+
+
+
+    for item in source_files:
+
+        destination_dir=re.sub(dir1, dir2, item)
+
+        destination_files.append(destination_dir)
+
+        if os.path.isdir(item):
+
+            if not os.path.exists(destination_dir):
+
+                os.makedirs(destination_dir)
+
+                createdir_bool=True
+
+
+
+    if createdir_bool:
+
+        destination_files=[]
+
+        source_files=[]
+
+        source_files=compareme(dir1,dir2)
+
+        for item in source_files:
+
+            destination_dir=re.sub(dir1, dir2, item)
+
+            destination_files.append(destination_dir)
+
+
+
+    print &quot;update item:&quot;
+
+    print source_files 
+
+
+
+    copy_pair=zip(source_files,destination_files)
+
+    for item in copy_pair:
+
+        if os.path.isfile(item[0]):
+
+            shutil.copyfile(item[0], item[1])
+
+
+
+if __name__ == &apos;__main__&apos;:
+
+    main()
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-20-Python-difflib/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1045,759 +2020,11 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-06-01-IT-500W_PV/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-06-01-IT-500W_PV/" itemprop="url">建设一个能承受500万PV/每天的网站</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-01T08:00:00+08:00">
-                2017-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>你想建设一个能承受500万PV/每天的网站吗？ 500万PV是什么概念？服务器每秒要处理多少个请求才能应对？如果计算呢？  </p>
-<h1 id="PV是什么："><a href="#PV是什么：" class="headerlink" title="PV是什么："></a>PV是什么：</h1><p>PV是page view的简写。PV是指页面的访问次数，每打开或刷新一次页面，就算做一个pv。</p>
-<h1 id="计算模型："><a href="#计算模型：" class="headerlink" title="计算模型："></a>计算模型：</h1><p>每台服务器每秒处理请求的数量=((80%<em>总PV量)/(24小时</em>60分<em>60秒</em>40%)) / 服务器数量 。<br>其中关键的参数是80%、40%。表示一天中有80%的请求发生在一天的40%的时间内。24小时的40%是9.6小时，有80%的请求发生一天的9.6个小时当中（很适合互联网的应用，白天请求多，晚上请求少）。</p>
-<h1 id="简单计算的结果："><a href="#简单计算的结果：" class="headerlink" title="简单计算的结果："></a>简单计算的结果：</h1><p>((80%<em>500万)/(24小时</em>60分<em>60秒</em>40%))/1 = 115.7个请求/秒<br>((80%<em>100万)/(24小时</em>60分<em>60秒</em>40%))/1 = 23.1个请求/秒</p>
-<h1 id="初步结论："><a href="#初步结论：" class="headerlink" title="初步结论："></a>初步结论：</h1><p>现在我们在做压力测试时，就有了标准，如果你的服务器一秒能处理115.7个请求，就可以承受500万PV/每天。如果你的服务器一秒能处理23.1个请求，就可以承受100万PV/每天。</p>
-<h1 id="留足余量："><a href="#留足余量：" class="headerlink" title="留足余量："></a>留足余量：</h1><p>以上请求数量是均匀的分布在白天的9.6个小时中，但实际情况并不会这么均匀的分布，会有高峰有低谷。为了应对高峰时段，应该留一些余地，最少也要x2倍，x3倍也不为过。<br>115.7个请求/秒 <em>2倍=231.4个请求/秒<br>115.7个请求/秒 </em>3倍=347.1个请求/秒<br>23.1个请求/秒 <em>2倍=46.2个请求/秒<br>23.1个请求/秒 </em>3倍=69.3个请求/秒</p>
-<h1 id="最终结论："><a href="#最终结论：" class="headerlink" title="最终结论："></a>最终结论：</h1><p>如果你的服务器一秒能处理231.4–347.1个请求/秒，就可以应对平均500万PV/每天。<br>如果你的服务器一秒能处理46.2–69.3个请求，就可以应对平均100万PV/每天。</p>
-<h1 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h1><p>这里说明每秒N个请求，就是QPS。因为我关心的是应用程序处理业务的能力。</p>
-<h1 id="实际经验："><a href="#实际经验：" class="headerlink" title="实际经验："></a>实际经验：</h1><ol>
-<li>根据实际经验，采用两台常规配置的机架式服务器，配置是很常见的配置，例如一个4核CPU+4G内存+服务器SAS硬盘。</li>
-<li>个人武断的认为在服务器CPU领域Intel的CPU要优于AMD的CPU，有反对的就反对吧，我都说我武断了（请看CPU性能比较），不要太相信AMD的广告，<br>比较CPU性能简单办法就是比价格，不要比频率与核心数，价格相差不多的性能也相差不多。</li>
-<li>硬盘的性能很重要，由其是数据库服务器。一般的服务器都配1.5万转的SAS硬盘，高级一点的可以配SSD固态硬盘，性能会更好。最最最最重要的指标是“随机读写<br>性能”而不是“顺序读写性能”。（本例还是配置最常见的1.5万转的SAS硬盘吧）</li>
-<li>一台服务器跑Tomcat运行j2ee程序,一台服务器跑MySql数据库,程序写的中等水平(这个真的不好量化)，是论坛类型的应用(总有回帖,不太容易做缓存<br>,也无法静态化)。</li>
-<li>以上软硬件情况下，是可以承受100万PV/每天的。(已留有余量应对突然的访问高峰)</li>
-</ol>
-<h1 id="注意机房的网络带宽："><a href="#注意机房的网络带宽：" class="headerlink" title="注意机房的网络带宽："></a>注意机房的网络带宽：</h1><p>有人说以上条件我都满足了，但实际性能还是达不到目标。这时请注意你对外的网络的带宽，在国内服务器便宜但带宽很贵，很可能你在机房是与大家共享一条100M的光纤，实际每个人可分到2M左右带宽。再好一点5M,再好一点双线机房10M独享，这已经很贵了（北京价格）。<br>一天总流量：每个页面20k字节*100万个页面/1024=19531M字节=19G字节，19531M/9.6小时=2034M/小时=578K字节/s如果请求是均匀分布的，需要5M（640K字节）带宽（5Mb=640KB注意大小写，b是位，B是字节，差了8倍），但所有请求不可能是均匀分布的，当有高峰时5M带宽一定不够，X2倍就是10M带宽。10M带宽基本可以满足要求。<br>以上是假设每个页面20k字节，基本不包含图片，要是包含图片就更大了，10M带宽也不能满足要求了。你自已计算吧。</p>
-<h1 id="附：性能测试基本概念"><a href="#附：性能测试基本概念" class="headerlink" title="附：性能测试基本概念"></a>附：性能测试基本概念</h1><hr>
-<p>基本概念：<br>Throughput（吞吐量）：按照常规理解网络吞吐量表示在单位时间内通过网卡数据量之和，其中即包括本机网卡发送出去的数据量也包括本机网卡接收到的数据量。<br>一个100Mb(位)的双工网卡，最大发送数据的速度是12.5M字节/s ， 最大接收数据的速度是12.5M字节/s， 可以 同时 收发 数据。<br>并发用户数：是同时执行操作的用户(线程数)。<br>响应时间：从请求发出到收到响应花费的时间 。<br>QPS - Queries Per Second  每秒处理的查询数（如果是数据库，就相当于读取）<br>TPS - Transactions Per Second  每秒处理的事务数(如果是数据库，就相当于写入、修改)<br>IOPS，每秒磁盘进行的I/O操作次数<br>例如对某个数据库测试，分开两次测QPS与TPS。<br>QPS（读取）值总是高于TPS(写、改)，并且有倍率关系，因为：</p>
-<ol>
-<li>数据库对查询可能有缓存。</li>
-<li>机械硬盘或SSD硬盘的读就是比写快。</li>
-</ol>
-<hr>
-<p>JMeter测试参数说明：<br>Label：每一个测试单元的名字。<br>Samples：表示一个测试单元一共发出了多少个请求。<br>Average：平均响应时间——默认情况下是单个 Request 的平均响应时间，当使用了 Transaction Controller<br>时，也可以以Transaction 为单位显示平均响应时间。，不重要。<br>Median：中位数，也就是 50％ 用户的响应时间，如果把响应时间从小到大顺序排序，那么50％的请求的响应时间在这个范围之内。重要。<br>90% Line：90％ 用户的响应时间，如果把响应时间从小到大顺序排序，那么90％的请求的响应时间在这个范围之内。重要 。<br>Min：最小响应时间，不重要。<br>Max：最大响应时间，出现几率只不过是千分之一甚至万分之一，不重要。<br>Error%：本次测试中出现错误的请求的数量<br>Throughput：吞吐量——默认情况下表示每秒完成的请求数（Request per Second），当使用了 Transaction<br>Controller 时，也可以表示类似 LoadRunner 的 Transaction per Second 数</p>
-<h2 id="KB-Sec：每秒从服务器端接收-到的数据量-只是接收-，相当于LoadRunner中的Throughput-Sec"><a href="#KB-Sec：每秒从服务器端接收-到的数据量-只是接收-，相当于LoadRunner中的Throughput-Sec" class="headerlink" title="KB/Sec：每秒从服务器端接收 到的数据量(只是接收)，相当于LoadRunner中的Throughput/Sec"></a>KB/Sec：每秒从服务器端接收 到的数据量(只是接收)，相当于LoadRunner中的Throughput/Sec</h2><p>loadrunner测试参数说明：<br>响应时间： 取90%值，如果把响应时间从小到大顺序排序，那么90％的请求的响应时间在这个范围之内。重要。<br>每秒点击数 ：hits per Second,每秒钟向服务器提交请求的数量。<br>TPS： Transaction per Second ，每秒事务数，一个事务是指一个客户机向服务器发送请求然后服务器做出反应的过程<br>Throughput（吞吐量）： Loadrunner记录的Throughput是接收到服务器返回的所有字节数之和，与本地发出的字节数无关。<br>Throughput/Sec： 每秒的吞吐量。<br>对于BS架构的一般分析 响应时间、点击率、吞吐量、TPS（每秒事务数）。</p>
-<h2 id="对于CS架构的一般分析-TPS（每秒事务数）"><a href="#对于CS架构的一般分析-TPS（每秒事务数）" class="headerlink" title="对于CS架构的一般分析 TPS（每秒事务数）"></a>对于CS架构的一般分析 TPS（每秒事务数）</h2><p>Apache ab测试参数说明：<br>RPS： Request per Second,每秒处理的请求数</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-05-26-Book-ITIL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-05-26-Book-ITIL/" itemprop="url">ITIL</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-26T08:00:00+08:00">
-                2017-05-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>ITIL即IT基础架构库(Information Technology Infrastructure Library,ITIL，信息技术基础架构库)由英国政府部门CCTA(Central Computing and Telecommunications Agency)在20世纪80年代末制订，现由英国商务部OGC(Office of Government Commerce)负责管理，主要适用于IT服务管理（ITSM）。ITIL为企业的IT服务管理实践提供了一个客观、严谨、可量化的标准和规范。</p>
-<p>ITIL最新版本是V3.0，它包含5个生命周期：</p>
-<ul>
-<li>战略阶段（Service Strategy)</li>
-<li>设计阶段（Service Design)</li>
-<li>转换阶段（Service Transition)</li>
-<li>运营阶段（Service Operation)</li>
-<li>改进阶段（Service Improvement)</li>
-</ul>
-<p><a href="/uploads/ueditor/php/upload/file/20170526/1495792665.pdf">ITIL_V3中文蓝皮书.pdf</a></p>
-<p><a href="/uploads/ueditor/php/upload/file/20170526/1495792666.pdf">翰纬-ITIL+v3白皮书.pdf</a></p>
-<p><img src="/uploads/ueditor/php/upload/image/20170526/1495792595.png" alt="blob.png"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-05-19-Book-ConwayLaw/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-05-19-Book-ConwayLaw/" itemprop="url">康威定律</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-19T08:00:00+08:00">
-                2017-05-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Mike从他的角度归纳这篇论文中的其他一些核心观点，如下：</p>
-<ul>
-<li>第一定律<ul>
-<li>Communication dictates design</li>
-<li>组织沟通方式会通过系统设计表达出来</li>
-</ul>
-</li>
-<li>第二定律<ul>
-<li>There is never enough time to do something right, but there is always enough time to do it over  </li>
-<li>时间再多一件事情也不可能做的完美，但总有时间做完一件事情</li>
-</ul>
-</li>
-<li>第三定律<ul>
-<li>There is a homomorphism from the linear graph of a system to the linear graph of its design organization</li>
-<li>线型系统和线型组织架构间有潜在的异质同态特性</li>
-</ul>
-</li>
-<li>第四定律<ul>
-<li>The structures of large systems tend to disintegrate during development, qualitatively more so than with small systems</li>
-<li>大的系统组织总是比小系统更倾向于分解</li>
-</ul>
-</li>
-</ul>
-<h3 id="人是复杂社会动物"><a href="#人是复杂社会动物" class="headerlink" title="人是复杂社会动物"></a>人是复杂社会动物</h3><ul>
-<li>第一定律<ul>
-<li>Communication dictates design</li>
-<li>组织沟通方式决定系统设计<br>沟通成本 = n(n-1)/2，沟通成本随着项目或者组织的人员增加呈指数级增长。是的，项目管理这个算法的复杂度是O(n^2)。举个例子</li>
-</ul>
-</li>
-<li>5个人的项目组，需要沟通的渠道是 5*(5–1)/2 = 10</li>
-<li>15个人的项目组，需要沟通的渠道是15*(15–1)/2 = 105</li>
-<li>50个人的项目组，需要沟通的渠道是50*(50–1)/2 = 1,225</li>
-<li>150个人的项目组，需要沟通的渠道是150*(150–1)/2 = 11,175</li>
-<li>第二定律:<ul>
-<li>There is never enough time to do something right, but there is always enough time to do it over</li>
-<li>时间再多一件事情也不可能做的完美，但总有时间做完一件事情</li>
-</ul>
-</li>
-<li>第三定律<ul>
-<li>There is a homomorphism from the linear graph of a system to the linear graph of its design organization</li>
-<li>线型系统和线型组织架构间有潜在的异质同态特性</li>
-</ul>
-</li>
-</ul>
-<h3 id="康威定律如何解释微服务的合理性"><a href="#康威定律如何解释微服务的合理性" class="headerlink" title="康威定律如何解释微服务的合理性"></a>康威定律如何解释微服务的合理性</h3><p>了解了康威定律是什么，再来看看他如何在半个世纪前就奠定了微服务架构的理论基础。</p>
-<ul>
-<li>人与人的沟通是非常复杂的，一个人的沟通精力是有限的，所以当问题太复杂需要很多人解决的时候，我们需要做拆分组织来达成对沟通效率的管理</li>
-<li>组织内人与人的沟通方式决定了他们参与的系统设计，管理者可以通过不同的拆分方式带来不同的团队间沟通方式，从而影响系统设计</li>
-<li>如果子系统是内聚的，和外部的沟通边界是明确的，能降低沟通成本，对应的设计也会更合理高效</li>
-<li>复杂的系统需要通过容错弹性的方式持续优化，不要指望一个大而全的设计或架构，好的架构和设计都是慢慢迭代出来的<br>带来的具体的实践建议是：</li>
-<li>我们要用一切手段提升沟通效率，比如slack，github，wiki。能2个人讲清楚的事情，就不要拉更多人，每个人每个系统都有明确的分工，出了问题知道马上找谁，避免踢皮球的问题。</li>
-<li>通过MVP的方式来设计系统，通过不断的迭代来验证优化，系统应该是弹性设计的。</li>
-<li>你想要什么样的系统设计，就架构什么样的团队，能扁平化就扁平化。最好按业务来划分团队，这样能让团队自然的自治内聚，明确的业务边界会减少和外部的沟通成本，每个小团队都对自己的模块的整个生命周期负责，没有边界不清，没有无效的扯皮，inter-operate, not integrate。</li>
-<li>做小而美的团队，人多会带来沟通的成本，让效率下降。亚马逊的Bezos有个逗趣的比喻，如果2个披萨不够一个团队吃的，那么这个团队就太大了。事实上一般一个互联网公司小产品的团队差不多就是7，8人左右（包含前后端测试交互用研等，可能身兼数职）。<br>再对应下衡量微服务的标准，我们很容易会发现他们之间的密切关系：</li>
-<li>分布式服务组成的系统</li>
-<li>按照业务而不是技术来划分组织</li>
-<li>做有生命的产品而不是项目</li>
-<li>Smart endpoints and dumb pipes（我的理解是强服务个体和弱通信）</li>
-<li>自动化运维（DevOps）</li>
-<li>容错</li>
-<li>快速演化</li>
-</ul>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
-<li><a href="http://www.infoq.com/cn/presentations/team-building-implementation-in-distributed-world" target="_blank" rel="noopener">远距离条件下的康威定律——分布式世界中实现团队构建</a>，本文图片来源该ppt截图</li>
-<li><a href="https://en.wikipedia.org/wiki/Conway%27s_law" target="_blank" rel="noopener">Conway‘s Law in wiki</a></li>
-<li><a href="http://www.melconway.com/Home/Conways_Law.html" target="_blank" rel="noopener">Conway’s Law Homepage</a></li>
-</ul>
-<p><img src="/uploads/ueditor/php/upload/image/20170519/1495179187.png" alt="blob.png"><br><img src="/uploads/ueditor/php/upload/image/20170519/1495179911.png" alt="blob.png"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-05-09-Book-LifePsychology/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-05-09-Book-LifePsychology/" itemprop="url">心理学与生活 - 南京大学</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-09T08:00:00+08:00">
-                2017-05-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="记忆的分类"><a href="#记忆的分类" class="headerlink" title="记忆的分类"></a>记忆的分类</h2><ol>
-<li>外显记忆（explicit memory）：需要可以努力去记忆。</li>
-<li>内隐记忆（implicit memory）：不需要意识控制，也不需要意志努力。</li>
-<li>程序性记忆（procedural memory）：一种关于怎么做事情的过程、步骤等具体操作的记忆。</li>
-<li>陈述性记忆（declarative memory）：一种依靠语言描述来进行的记忆。如背单词。</li>
-<li>情景记忆（episodic ）：对过去经验中时间、地点、过程等的记忆。</li>
-<li>语义记忆（semantic memory）：对抽象语言符号的记忆。</li>
-</ol>
-<ul>
-<li>容易忘记：语义记忆，外显记忆，陈述性记忆。难以忘记：情景记忆，程序性记忆，内隐记忆。</li>
-<li>感觉记忆（0.5—4s）；短时记忆（5s—60s）：容易被打扰；长时记忆（大于60s）<br><img src="/uploads/ueditor/php/upload/image/20170508/1494208289.png" alt="blob.png"></li>
-</ul>
-<h2 id="三大学习方式"><a href="#三大学习方式" class="headerlink" title="三大学习方式"></a>三大学习方式</h2><ul>
-<li>经典条件反射（classical conditional reflex）：巴普洛夫的狗。先有刺激再有反应。</li>
-<li>操作性条件反射（operant conditioning reflex）：斯金纳的老鼠。先有反应再有刺激。即行为的结果，增加了行为的频率。</li>
-<li>观察学习（observational learning）：班都拉提出来的。模仿，即看着看着就会了。譬如，谈恋爱。<br><img src="/uploads/ueditor/php/upload/image/20170508/1494208358.png" alt="blob.png"></li>
-</ul>
-<h2 id="你不知道的东西，潜意识知道"><a href="#你不知道的东西，潜意识知道" class="headerlink" title="你不知道的东西，潜意识知道"></a>你不知道的东西，潜意识知道</h2><p>意识和潜意识。通过梦、自由联想和催眠可以进入潜意识。弗洛伊德的精神分析基本假设认为人的行为是受到原始欲望所驱使的，所以归根到底人的行为是由本能驱动的。<br><strong>弗洛伊德人格结构理论：</strong></p>
-<ul>
-<li>本我（id）：原始冲动。按照快乐原则行事。</li>
-<li>自我（ego）：人格中相对理性的一面，它协调者本我和外界之间的关系。以我按照现实原则行事。</li>
-<li>超我（superego）：所有价值观的源泉，是我们后天慢慢习得的一种社会规范和道德。超我就是被内化的道德。按照道德原则行事。<br>本我和超我常常有冲突。自我起到调节两者的作用。调节失败的话就有可能会人格分裂。<br>自我通过部分第压抑本我的冲动，从而避免了和超我之间产生冲突。即自我开启了自我防御机制。<br><img src="/uploads/ueditor/php/upload/image/20170508/1494208396.jpg" alt=""><br><img src="/uploads/ueditor/php/upload/image/20170508/1494208465.png" alt="blob.png"></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2017-05-08-Book-IntrPsychology/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017-05-08-Book-IntrPsychology/" itemprop="url">心理学概论(历史) - 清华大学</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-08T08:00:00+08:00">
-                2017-05-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="http://blog.sina.com.cn/s/blog_6011d5ef0101rr0j.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_6011d5ef0101rr0j.html</a></p>
-<p>著名心理学家艾宾浩斯曾经说过，心理学有一个长期的过去，但是只有一个短暂的历史。</p>
-<p>这句话是什么意思呢？也就是说我们人类对自己心理的关注其实是渊远流传，在我们中国文化里头，就有很多对心的分析、心的判断。洛阳亲友如相问、一片冰心在玉壶，讲得就是自己的心；知我者谓我心忧不知我者谓我何求，讲的也就是我们人类的需求。</p>
-<p>人类的心理活动，甚至上升到了哲学的高度。在中国历史上有一个哲学流派叫心学，它的基本观点就是：<strong>世上无心外之物,世上无心外之理</strong>。</p>
-<p>但是什么是心、心存在何处、心有什么样的表现，这样一个问题难住了人类的科学家几千年，那么心理学的历史到底从何算起呢？</p>
-<p>德国冯特创建第一个心理学实验室。1879年12月。用以研究人类意识活动的基本过程。</p>
-<p>冯特不光创建了第一个心理学实验室，他还招收了很多优秀的学生，这些人都成为各个国家的心理学的领军人物，其中一个是铁钦纳。</p>
-<p>铁钦纳作为冯特的学生，把心理学的实验传统带到了美国，创立完善了结构主义的心理学理论。(在康乃尔大学创建美国第一个心理学实验室)。</p>
-<p>结构主义认为心理学应该研究人类的意识，而人类的意识就是由一块块意识的元素所组成，所以这就是像科学的结构主义理论一样，人类的心理活动也应该从元素研究开始。</p>
-<p>斯坦利霍尔：儿童心理学运动之父和青春期发展理论家</p>
-<p>心理学历史上还有一个非常重要的人物叫威廉•杰姆斯，他是公认的美国心理学的奠基者。</p>
-<p>威廉杰姆斯：美国心理学的奠基者【机能主义】，信奉达尔文主义。认为意识就像一条生命的泉水，源源不断融入到我们的心中。创造了意识流的概念。心理学应该关注各种心理活动存在的原因意义和价值。认为人类的心理活动都是几千万年人类进化选择出来的心理特征和心理特质，这种特质都有它存在的意义。</p>
-<p>威廉•杰姆斯是哈佛大学的心理学教授，他对意识问题也很关注，但他不同意冯特和铁钦纳的观点，他不认为意识只是一些毫无生命的简单的元素和方块，他觉得意识就像一条生命的泉水源源不断融入到我们的心中，所以他创造了一个概念叫意识流。</p>
-<p>作为这个机能主义的奠基人，他觉得心理学家更应该关注各种心理活动它存在的原因意义和价值，他信奉达尔文主义，所以认为所有的人类的心理活动，都是几千万年人类进化选择出来的心理特征和心理特质，而这种心理特质都有它存在的意义，所以我们把以威廉•杰姆斯为首的心理学理论流派叫机能主义流派。</p>
-<p>当机能主义在美国兴起的时候，在欧洲悄然兴起了另外一种心理学的研究理论流派，就是著名的弗洛伊德的精神分析理论。</p>
-<p>弗洛尹德精神分析理论：人类的心理活动主要由无意识的心理活动引起，自由联想，反映心理下意识的欲望和需求。引用一些梦的分析来探索人类的内在的无意识的冲动【欧洲】</p>
-<p>他引用一些梦的分析来探索人类的内在的、无意识的冲动，他也对生活中间人类的口误、人类的一些基本的错误感兴趣。一个学生迟到了，开口就说我恨不得还可以晚点再来，其实就反映了他内在的一些心理的冲动和欲望。</p>
-<p>弗洛伊德是20世纪最有影响的心理学家，不光是对我们心理学影响很大，对人类的哲学、艺术、历史学、社会学、政治学都有非常大的影响，所以有人说弗洛伊德代表了心理学。</p>
-<p>其实这是一种误解，我们现在的心理学，早已经发现弗洛伊德的很多观点和理论其实没有现代科学的证据，而且大部分的证据来自于对病人的分析，所以有很多以偏概全的倾向性。</p>
-<p>弗洛伊德的主要理论包括冰山理论意识、潜意识理论、心理发展阶段理论、心理防御机制。</p>
-<p><img src="/uploads/ueditor/php/upload/image/20170508/1494207483.png" alt="blob.png"><img src="/uploads/ueditor/php/upload/image/20170508/1494207491.png" alt="blob.png"></p>
-<p><img src="/uploads/ueditor/php/upload/image/20170508/1494207506.png" alt="blob.png"><img src="/uploads/ueditor/php/upload/image/20170508/1494207523.png" alt="blob.png"></p>
-<p>当弗洛伊德理论在欧洲大陆兴盛的时候，在美国出现了一种新的心理学理论流派叫做行为主义，其代表任务包括华生和斯金纳。</p>
-<p>华生：认为心理学家应该更多的研究一些可以观察可以测量，可以定义的心理学变量【行为】。行为是人类外显的表现，可以做具体的观察，研究。是人类对外在刺激的一种自发的，自动的反应。行为是可以塑造可以改变的。“任何人如果给以足够的行为塑造，可以让它变成我们所期望的任何其他人”</p>
-<p>行为主义的第二个代表人物叫斯金纳，他认为心理学家不应该花时间去研究不可捉摸的人类意识，我们应该去研究人类的行为，人类行为都是可以通过操作性条件反射加以塑造、加以改变的。</p>
-<p>斯金纳的行为主义，对人类的学习、记忆、教育研究都有很大的促进作用，但他的很多观点、已经过时，因为我们现代心理学发现，人类的思维一定是我们心理活动非常重要的一个方面，我们不可能把人类的思维、意识排除在心理学研究的范围之外。</p>
-<p>在谈到行为主义的时候，我们就不得不介绍一个做出了世界性贡献的中国人，他就是著名的行为主义心理学家郭任远先生。《向本能主义说不》第一次提出来本能的研究，在很大程度上都是循环论证，应该用行为的研究来分析，人类的心理活动。</p>
-<p>无论是弗洛伊德的精神分析理论，还是行为主义的基本理论，都有很大程度的宿命论的意思，放弃了人类的主观的主动精神和自由意志，所以有些心理学家认为我们心理学应该具有更大的人文的精神、人文的情怀。两个代表人物，一个叫罗杰斯，一个叫马斯洛，他们认为我们人类应该有更高级的追求，我们不是简单的对外在环境做出反应、做出适应、做出调整。</p>
-<p>马斯洛是一个著名的人文主义的心理学家，他的基本理论就是认为人类有很多的需求，有些需求是我们基本的生存需求，但是人类也有很多更高级的追求，在基本需求满足以后，我们人类一定会追求高级的心理需求。马斯洛的需求层次理论到底有哪些具体内容呢？</p>
-<p>下面我们看一看马斯洛需求层次结构： 生理的需求physiological needs【本能层次的需要，包括食欲，睡眠，欲望等】；安全的需求security needs【避免对生命构成威胁的需要】；社交的需求social needs【社会需要，包括对友谊，爱情以及隶属关系的需求】；尊重的需求esteemneeds【想被人承认的需要】；自我实现的需求sell-actualization needs【对理想实现，发挥最大潜能的需要；最高境界，人的潜能和理想的最大化】</p>
-<p><img src="/uploads/ueditor/php/upload/image/20170508/1494207594.png" alt="blob.png"></p>
-<p>马斯洛的需求层次的最高境界就是自我实现，指的是人的潜能和理想的最大化，那么这种自我实现在我们中国文化环境下可能是另外一种境界。</p>
-<p>台湾中央研究院的著名心理学家杨国枢先生，就认为我们中国人的自我，其实是国家、家庭和个人的三位一体，是一种整体性的、集体的自我实现。这种自我实现是我们人类追求<br>的最高的境界。</p>
-<p>到底什么样的人能够达到自我实现的境界呢？马斯洛通过对林肯、斯宾诺莎和他周围的很多成功人士的分析和调查总结出来自我实现的人应该具备的一些心理特质。</p>
-<p><img src="/uploads/ueditor/php/upload/image/20170508/1494207626.png" alt="blob.png"></p>
-<p> <img src="/uploads/ueditor/php/upload/image/20170508/1494207678.png" alt="blob.png"></p>
-<p>这些特质包括： </p>
-<ol>
-<li>全面准确的知觉现实 </li>
-<li>接纳自己与他人 </li>
-<li>对人自发坦率和真实 </li>
-<li>以问题为中心而不是以自我为中心 </li>
-<li>具有超然于世和独处的需求</li>
-<li>具有自主性在环境和文化中能保持相对独立性 </li>
-<li>具有永不衰退的鉴赏力 </li>
-<li>具有难以形容的高峰体验 </li>
-<li>对人充满爱心 </li>
-<li>具有深厚的友情 </li>
-<li>具备民主精神 </li>
-<li>区分手段和目的 </li>
-<li>富于创造性 </li>
-<li>处事幽默风趣 </li>
-<li>反对盲目遵从</li>
-</ol>
-<p>为什么心理学有这么多的流派、有这么多的不同的看法和争论，其实它核心的问题就是心理的复杂、心理活动的不可捉摸和心理研究的巨大的挑战。</p>
-<p>心理学和其他任何人类科学一样，都是需要通过不断的发展、不断的升华、不断的总结，真正的掌握我们科学的基本规律。在很多情况下，不同的学派其实是抓住了心理活动的不同的侧面，就像盲人摸象一样，每一个盲人其实只是接触了象的某一个部分、某一个部位、某一种角度，我们心理学的各种流派也是抓住了人类心理活动的不同的角度，不同的方<br>向、不同的方面，整合起来就形成了一个对人心的基本认识基本判断。</p>
-<p>那么心理学未来如何去发展呢，现在看来起码有三大研究领域会产生引人入胜的层出不穷的新的研究、新的发现，我个人认为这三大领域，也许能够代表人类心理学未来的研究重点、研究突破和研究方向。</p>
-<p>第一个领域就是认知神经领域，它是七十年代兴起的认知革命的延续，它借用了生物科学的一些全新的技术，特别是核磁共振技术来研究人类心理活动的脑机制。看一看我们的心理活动，是不是受到了人脑的生物的具体的局限，它的脑区的范围在什么地方，表现又有如何，这些脑科学的革命，对人类的认知科学有巨大的促进作用。认知革命发源于七十年代，主要是用计算机信息技术来分析，了解人类的心理活动的普遍规律，它的一个核心思想，就是我们人脑它是一个黑箱，我们很难知道这个黑箱的具体运作，通过对我们的输入和输出的分析，我们可以推测黑箱的基本运作和基本的研究范式，认知革命借助神经科学技术，它现在正在进行，我们在未来的心理学概论课中会介绍认知的一些新的发现、新的突破和新的证据。</p>
-<p>心理学第二个非常重要的革命，我个人认为是文化革命。在九十年代，美国心理学家开始意识到不是所有人都说英文，不是所有的人都有美国人那样特殊的心理的表现，这些心理学家认为我们应该从社会文化的角度，分析探索人类心理活动的基本规律。文化心理学研究领域的一个著名的代表人物，就是我的导师理查德.尼斯贝特，美国密西根大学心理学的终身教授和美国科学院和文学院双料院士，他和我以及其他同事做了很多文化差异的基本研究，发现东方人和西方人在思维、判断、情绪、认识等各个方面都有非常大的差异。</p>
-<p>其中一个有趣的研究就是让来自世界不同地方的人观察一下鱼缸的活动。下面就请看我当年在美国密西根大学做博士论文时候完成的一个跨文化的比较。</p>
-<p>心理学的未来研究发展值得关注的第三个方向，我个人认为是九十年代末期兴起的积极心理学，积极心理学奠基人马丁•塞利格曼和奇克森特米海伊，他们认为心理学家应该多多关注人类的优点、美德和最佳行为，人类的优势其实是多方面的，我们不光有思维的优势，我们也有情感的优势，我们也有道德的优势，我们还有创造的优势，我们人有追求、有理想，我们人也有同情心、利他心，人不光是一个生物的动物，也是一个社会的动物，更是一个道德的动物。</p>
-<p><img src="/uploads/ueditor/php/upload/image/20170508/1494207873.png" alt="blob.png"></p>
-<p>积极心理学是我们心理学未来发展，非常有前途、有希望的学科，因为我们心理学家是关心人类、共情人类、支持人类，也是希望能够理解人类的学科。</p>
-<p>心理学是一个通人心 、接地气、有追求的、伟大的科学，心理学的历史就是不断升华自己 、提升自己、创造新的自己的一个历史。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1842,7 +2069,7 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">156</span>
+                <span class="site-state-item-count">161</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1855,7 +2082,7 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1897,7 +2124,7 @@ es/icon_pdf.gif" alt=""><a href="/uploads/ueditor/php/upload/file/20170623/14981
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -1,0 +1,1441 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Notes,Study,Book," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+<meta name="description" content="Introduction E-Commerce TechnologiesQUESTIONS1.What does Omni-channel mean in terms of e-commerce presence?Company’s channels are aligned to present a seamless, single-face to the customer and one con">
+<meta name="keywords" content="Notes,Study,Book">
+<meta property="og:type" content="article">
+<meta property="og:title" content="E-commerce Technologies Book Notes">
+<meta property="og:url" content="http://blog.toob.net.cn/2020-11-05-Book-EComTechBook/index.html">
+<meta property="og:site_name" content="Jack Xia">
+<meta property="og:description" content="Introduction E-Commerce TechnologiesQUESTIONS1.What does Omni-channel mean in terms of e-commerce presence?Company’s channels are aligned to present a seamless, single-face to the customer and one con">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-11-05T13:09:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="E-commerce Technologies Book Notes">
+<meta name="twitter:description" content="Introduction E-Commerce TechnologiesQUESTIONS1.What does Omni-channel mean in terms of e-commerce presence?Company’s channels are aligned to present a seamless, single-face to the customer and one con">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.toob.net.cn/2020-11-05-Book-EComTechBook/"/>
+
+
+
+
+
+  <title>E-commerce Technologies Book Notes | Jack Xia</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jack Xia</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">笔记</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2020-11-05-Book-EComTechBook/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">E-commerce Technologies Book Notes</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-05T08:00:00+08:00">
+                2020-11-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Introduction-E-Commerce-Technologies"><a href="#Introduction-E-Commerce-Technologies" class="headerlink" title="Introduction E-Commerce Technologies"></a>Introduction E-Commerce Technologies</h2><h3 id="QUESTIONS"><a href="#QUESTIONS" class="headerlink" title="QUESTIONS"></a>QUESTIONS</h3><p>1.What does Omni-channel mean in terms of e-commerce presence?<br>Company’s channels are aligned to present a seamless, single-face to the customer and one consistent approach to doing business</p>
+<ol>
+<li>What is information asymmetry?<br>Any disparity in relevant market information among parties in a transaction</li>
+</ol>
+<ol>
+<li><p>What are some of the unique features of e-commerce technology?<br>Ubiquity, Global reach, universal standards, richness, interactivity, information density, personalization and customization, social technology</p>
+</li>
+<li><p>What are some of the factors driving the growth of social e-commerce?<br>social sign-on, network notification, online collaborative shopping tools, and social search</p>
+</li>
+<li><p>What are three benefits of universal standards?<br>Lowers cost of industry, lowering barrier to entry, enable broad scope strategies</p>
+</li>
+<li><p>How does the ubiquity of e-commerce impact consumers?<br>Available just about everywhere, at all times</p>
+</li>
+<li><p>Name three of the business consequences that can result from growth in information density.<br>Price transparency, cost transparency, price discrimination</p>
+</li>
+<li><p>What difficulties are presented in trying to measure the number of Web pages in existence?<br>In part because today’s search engines index only a portion of the known universe of Web pages, and also because the size of the web universe is unknown.</p>
+</li>
+<li><p>Give examples of B2C, B2B, C2C, and social, mobile, and local e-commerce besides those listed in the<br>chapter<br>…</p>
+</li>
+<li><p>How are e-commerce technologies similar to or different from other technologies that have changed<br>commerce in the past?<br>…</p>
+</li>
+<li><p>Describe the three different stages in the evolution of e-commerce.<br>Innovation, consolidation, and reinvention</p>
+</li>
+<li><p>Define disintermediation and explain the benefits to Internet users of such a phenomenon. How does<br>disintermediation impact friction-free commerce?<br>Displacement of market middlemen who traditionally are intermediaries between producers and consumers by a direct relationship between producers and consumers. A vision of commerce in which information is equally distributed, transaction costs are low, prices can be dynamically adjusted to reflect actual demand, intermediaries decline, and unfair competitive advantages are eliminated</p>
+</li>
+<li><p>What are some of the major advantages and disadvantages of being a first mover?<br>a firm that is first to market in a particular area and that moves quickly to gather market share</p>
+</li>
+<li><p>What is a network effect, and why is it valuable?<br>Occurs where users receive value from the fact that everyone else uses the same tool or product</p>
+</li>
+<li><p>Discuss the ways in which the early years of e-commerce can be considered both a success and a failure.<br>Profitable after years of losses, dotcom bust</p>
+</li>
+<li><p>What are five of the major differences between the early years of e-commerce and today’s e-commerce?<br>…</p>
+</li>
+<li><p>Why is a multidisciplinary approach necessary if one hopes to understand e-commerce?<br>Technical Approaches and behavioral approaches</p>
+</li>
+<li><p>Why is the term “sharing economy” a misnomer?<br>transactions involve<br>an online intermediary: a third party that takes a cut of all transactions and arranges for<br>the marketplace to exist in the first place</p>
+</li>
+<li><p>What are those who take a behavioral approach to studying e-commerce interested in?<br>primarily interested<br>in e-commerce because of its implications for firm and industry value chains,<br>industry structure, and corporate strategy</p>
+</li>
+<li><p>Why has Rocket Internet been criticized, and how do the Samwer brothers respond to that criticism?<br>…</p>
+</li>
+<li><p>What does omni-channel mean in terms of e-commerce presence?</p>
+<ol>
+<li>omnichannel commerce is a multichannel approach to sales that focus on providing seamless customer experience whether the client is shopping online from a mobile device, a laptop or in a brick-and-mortar store.</li>
+<li><a href="https://www.bloomreach.com/en/blog/2019/07/omnichannel-commerce-for-business.html#:~:text=Omni%2Dchannel%20retail%20(or%20omnichannel,brick%2Dand%2Dmortar%20store" target="_blank" rel="noopener">https://www.bloomreach.com/en/blog/2019/07/omnichannel-commerce-for-business.html#:~:text=Omni%2Dchannel%20retail%20(or%20omnichannel,brick%2Dand%2Dmortar%20store</a>.</li>
+</ol>
+</li>
+<li><p>What is the deep Web?</p>
+<ol>
+<li>The deep web are parts of the World Wide Web whose contents are not indexed by standard web search-engines. Wikipedia</li>
+</ol>
+</li>
+<li><p>What are some of the unique features of e-commerce technology?</p>
+<ul>
+<li>There are eight features of e-commerce technology that are unique to this medium: <a href="https://medium.com/@atul_chauhan1/8-unique-features-of-e-commerce-technology-435ef63c1a3f" target="_blank" rel="noopener">https://medium.com/@atul_chauhan1/8-unique-features-of-e-commerce-technology-435ef63c1a3f</a></li>
+</ul>
+<ol>
+<li>Ubiquity—available just about everywhere, at all times, making it possible to shop from your desktop, at home, at work, or even from your car.</li>
+<li>Global reach—permits commercial transactions to cross cultural and national boundaries far more conveniently and cost-effectively than is true in traditional commerce.</li>
+<li>Universal standards—shared by all nations around the world, in contrast to most traditional commerce technologies, which differ from one nation to the next.</li>
+<li>Richness—enables an online merchant to deliver marketing messages in a way not possible with traditional commerce technologies.</li>
+<li>Interactivity—allows for two-way communication between merchant and consumer and enables the merchant to engage a consumer in ways similar to a face-to-face experience, but on a much more massive, global scale.</li>
+<li>Information density—is the total amount and quality of information available to all market participants. The Internet reduces information collection, storage, processing, and communication costs while increasing the currency, accuracy, and timeliness of information.</li>
+<li>Personalization and customization—the increase in information density allows merchants to target their marketing messages to specific individuals and results in a level of personalization and customization unthinkable with previously existing commerce technologies.</li>
+<li>Social technology—provides a many-to-many model of mass communications. Millions of users are able to generate content consumed by millions of other users. The result is the formation of social networks on a wide scale and the aggregation of large audiences on social network platforms.</li>
+</ol>
+</li>
+<li><p>What are some of the factors driving the growth of social e-commerce?</p>
+<ol>
+<li>Explosion in the mobile internet penetration</li>
+<li>Increased range of payments for underbanked shoppers - blckchain crytocurrency</li>
+<li>Increased political willingness and promotion of online trade</li>
+<li>Growth of Big Data &amp; AI</li>
+<li>Localisation of Internet content</li>
+<li>Growth of mobile commerce</li>
+<li>Growing investment in logistics and warehouses</li>
+<li>privacy concerns</li>
+<li>perceived convenience</li>
+<li>low perceived symbolic value</li>
+<li>perceived social utility</li>
+</ol>
+</li>
+<li><p>Why is it likely that the Internet and e-commerce are entering a period of closer regulatory oversight?</p>
+<ol>
+<li>Cybersecurity, competition and order fulfillment are the top three challenges facing e-commerce businesses.</li>
+<li>The average conversion rate for e-commerce sites is less than 3%, so driving relevant traffic to your site is crucial.  </li>
+<li>E-commerce has exploded, meaning there’s more fierce competition now than ever before.</li>
+<li>privacy concerns, Internet security <a href="https://www.businessnewsdaily.com/6028-small-ecommerce-challenges.html" target="_blank" rel="noopener">https://www.businessnewsdaily.com/6028-small-ecommerce-challenges.html</a></li>
+</ol>
+</li>
+<li><p>How does the ubiquity of e-commerce impact consumers?</p>
+<ol>
+<li>available just about everywhere, at all times, making it possible to shop from your desktop, at home, at work, or even from your car.</li>
+<li>with IoT, Mobile technologies, online payment</li>
+</ol>
+</li>
+<li><p>What impact does the increased interactivity provided by e-commerce technologies have on business?</p>
+<ol>
+<li>Interactivity increases brand loyalty by giving customers ownership of their product, leading to more involved and satisfied customers.</li>
+</ol>
+</li>
+<li><p>What difficulties are presented in trying to measure the number of web pages in existence?</p>
+<ol>
+<li>deep web</li>
+<li>Duplicate content</li>
+<li>omni-channel presence, like mobile, PC</li>
+<li>single page applications by React, page may uncountable</li>
+</ol>
+</li>
+<li><p>Why is the mobile platform not just a hardware phenomenon?</p>
+<ol>
+<li>it not just sell mobile, but app platform in mobile system</li>
+</ol>
+</li>
+<li><p>What is conversational commerce and how does it relate to m-commerce?</p>
+</li>
+<li><p>Describe the three different stages in the evolution of e-commerce. 88 CHAPTER 1 Introduction to E-commerce</p>
+</li>
+<li><p>Define disintermediation and explain the benefits to Internet users of such a phenomenon. How does disin-termediation impact friction-free commerce?</p>
+</li>
+<li><p>What is the difference between a PWA and a regular app?</p>
+</li>
+<li><p>What is driving the growth of social e-commerce?</p>
+</li>
+<li><p>Discuss the ways in which the early years of e-commerce can be considered both a success and a failure.</p>
+</li>
+<li><p>What are five of the major differences between the early years of e-commerce and today’s e-commerce?</p>
+</li>
+<li><p>How do the Internet and the Web fit into the development of corporate computing?</p>
+</li>
+<li><p>Why is the term “sharing economy” a misnomer?</p>
+</li>
+<li><p>What are those who take a technical approach to studying e-commerce interested in?</p>
+</li>
+<li><p>What have been some of the surprises that have occurred in the evolution of e-commerce?</p>
+</li>
+</ol>
+<h3 id="Case-Study-Questions"><a href="#Case-Study-Questions" class="headerlink" title="Case Study Questions"></a>Case Study Questions</h3><ol>
+<li>How can P2P file-sharing networks make money if they do not sell music?</li>
+</ol>
+<p>Many P2P file-sharing networks obtain revenue from advertising.  They can also use a subscription or a pay-for-download business model in conjunction with offering P2P file sharing.</p>
+<ol>
+<li>Into which category or categories of e-commerce do P2P file-sharing networks fall?</li>
+</ol>
+<p>P2P file-sharing networks fall primarily into the P2P category of e-commerce. However, many P2P file sharing networks can also be considered as advertising networks which may be characterized as B2B: they make money from selling access to its users to advertisers.</p>
+<ol>
+<li>What social issues are raised by P2P file-sharing protocols and programs such as BitTorrent? Is the record industry justified in attempting to shut them down? Why or why not?</li>
+</ol>
+<p>The primary social issue raised by P2P file-sharing networks is copyright infringement. You will have students taking both sides on the issue of whether the record label industry is justified in attempting to shut down P2P file-sharing networks. </p>
+<ol>
+<li>Will the Supreme Court’s decision inhibit the development of P2P technology or the Internet itself, as proponents of P2P services have claimed?</li>
+</ol>
+<p>As with the previous question, you will have students taking both sides of the issue. Students who claim that the Supreme Court’s decision will inhibit the development of P2P technology can point to the fact that few new P2P networks have been created in the United States since the Supreme Court’s decision. Students who feel that the decision will not inhibit the development of P2P technology can point to the fact that outside the United States, P2P networks continue to flourish. Also, the decision does not prohibit use of P2P networks for lawful purposes and therefore, incentive still remains for inventors and entrepreneurs to invest in this technology. This is particularly true if they can couple the technology with a legal, revenue-producing business model.</p>
+<ol>
+<li>Why do people older than 21 tend to use legitimate downloading sites whereas younger people tend to use illegal sites?</li>
+</ol>
+<p>Young, tech-savvy males in the 14-21 age group are responsible for the bulk of illegal music downloads.  It might be that this demographic is least likely to have the kind of disposable income required for legitimate music downloads, but most likely to have access to sites and networks that allow them to acquire the music illegally.  For example, college students with access to extremely fast Internet connections are likely candidates to download music illegally. On the other hand, people older than 21 may not have as easy access to these sites and, generally speaking, may have more money available to spend on legitimate music downloads.</p>
+<ol>
+<li>What difference would it make if the existing music labels disappeared for lack of  </li>
+</ol>
+<p>revenue? What legitimate function do the music labels perform in the creation and distribution of original music?</p>
+<p>The music labels perform the legitimate function of compensating artists for their creative efforts. Illegal downloads of music directly threaten a music label’s ability to support the artists belonging to it, harming both the labels and the creators of the music. If illegal downloading continues unchecked and existing music labels disappear for lack of revenue, it would force the industry to pursue a new digital business model that somehow gave more incentives to consumers for obtaining music legally.</p>
+<h3 id="End-of-Chapter-Questions"><a href="#End-of-Chapter-Questions" class="headerlink" title="End of Chapter Questions"></a>End of Chapter Questions</h3><ol>
+<li>What is e-commerce? How does it differ from e-business? Where does it intersect with e-business?</li>
+</ol>
+<p>E-commerce, in the popular sense, can be defined as: The use of the Internet and the Web to conduct business transactions. A more technical definition would be: E-commerce involves digitally enabled commercial transactions between and among organizations and individuals. E-commerce differs from e-business in that no commercial transaction, an exchange of value across organizational or individual boundaries, takes place in e-business. E-business is the digital enablement of transactions and processes within a firm and therefore does not include any exchange in value. E-commerce and e-business intersect at the business firm boundary at the point where internal business systems link up with suppliers. For instance, e-business turns into e-commerce when an exchange of value occurs across firm boundaries.</p>
+<ol>
+<li>What is information asymmetry?</li>
+</ol>
+<p>Information asymmetry refers to any disparity in relevant market information among the parties involved in a transaction. It generally applies to information about price, cost, and hidden fees. </p>
+<ol>
+<li>What are some of the unique features of e-commerce technology?</li>
+</ol>
+<p>​            The unique features of e-commerce technology include:</p>
+<p>Ubiquity: It is available just about everywhere and at all times.</p>
+<p>Global Reach: The potential market size is roughly equal to the size of the online population of the world.</p>
+<p>Universal standards: The technical standards of the Internet and therefore of conducting e-commerce, are shared by all of the nations in the world.</p>
+<p>Richness: Information that is complex and content-rich can be delivered without sacrificing reach.</p>
+<p>Interactivity: E-commerce technologies allow two-way communication between the merchant and the consumer.</p>
+<p>Information density: The total amount and quality of information available to all market participants is vastly increased and is cheaper to deliver.</p>
+<p>Personalization/Customization: E-commerce technologies enable merchants to target their marketing messages to a person’s name, interests and past purchases. They allow a merchant to change the product or service to suit the purchasing behavior and preferences of a consumer.</p>
+<p>Social technology: User content generation and social networking technologies </p>
+<ol>
+<li>What is a marketspace?</li>
+</ol>
+<p>A market space is a marketplace that is extended beyond traditional boundaries because it is removed from the restrictions of geography and time. The ubiquity of e-commerce technologies liberates the market from these limitations.</p>
+<ol>
+<li>What are three benefits of universal standards?</li>
+</ol>
+<p>​     The benefits of universal standards are:</p>
+<p>reduced search costs for consumers</p>
+<p>becomes simpler, faster, with more accurate price discovery</p>
+<p>lower market entry costs for merchants</p>
+<ol>
+<li>Compare online and traditional transactions in terms of richness.</li>
+</ol>
+<p>Traditional transactions can provide more richness in terms of face-to-face service including visual and aural cues. However, traditional transactions are limited in terms of how many people can be reached at a single time. Online transactions, which can be global in reach, can provide content that is both complex and rich, overcoming the traditional trade-off between reach and richness.</p>
+<ol>
+<li>Name three of the business consequences that can result from growth in information density.</li>
+</ol>
+<p>Growth in information density could result in:</p>
+<p>Greater price transparency: Consumers can easily find out the variety of prices in a market.</p>
+<p>Greater cost transparency: Consumers can discover the actual costs merchants pay for products.</p>
+<p>Greater opportunities for marketers to practice price discrimination: Since marketers are able to gather much more information about their customers, they can segment the market into groups based on willingness to pay different prices for the same or nearly the same goods.</p>
+<ol>
+<li>What is Web 2.0? Give examples of Web 2.0 sites and explain why you included them in your list.</li>
+</ol>
+<p>Web 2.0 is a set of applications and technologies that allows users to create, edit, and distribute content; share preferences, bookmarks, and online personas; participate in virtual lives; and build online communities. In other words, Web 2.0 is the set of new, advanced applications that have evolved along with the Web’s ability to support larger audiences and more involved content. Students may list Photobucket, YouTube, MySpace, Facebook, Google, Wikipedia, and Second Life as example sites.</p>
+<ol>
+<li>Give examples of B2C, B2B, C2C, and P2P Web sites besides those listed in the chapter materials.</li>
+</ol>
+<p>The answers to this question will vary. Possible examples include:</p>
+<p>B2C: E-tailers:</p>
+<p>Bluefly </p>
+<p>BarnesandNoble.com </p>
+<p>1800Flowers.com </p>
+<p>Godiva.com </p>
+<p>Wine.com </p>
+<p>REI.com</p>
+<p>B2C: Service Providers:</p>
+<p>Expedia </p>
+<p>Travelocity </p>
+<p>B2C: Portals:</p>
+<p>Yahoo </p>
+<p>B2C: Content Providers:</p>
+<p>WSJonline.com </p>
+<p>Consumerreports.com</p>
+<p>B2B: </p>
+<p>Grainger.com </p>
+<p>Ariba </p>
+<p>PerfectCommerce</p>
+<p>Quadram </p>
+<p>C2C: </p>
+<p>Half.com </p>
+<p>Craigslist </p>
+<p>Velvetbazaar.com</p>
+<p>Ubid </p>
+<p>Oldandsold </p>
+<p>Ewanted</p>
+<p>P2P: </p>
+<p>Streamcast Networks </p>
+<p>eMule-Project.net </p>
+<p>Frostwire</p>
+<ol>
+<li>How are the Internet and the Web similar to or different from other technologies that have changed commerce in the past?</li>
+</ol>
+<p>The Internet and the Web are similar to other technologies that have changed commerce in the past in that each new technological innovation spawns explosive growth characterized by thousands of start-up companies. Many of these fail in a period of retrenchment and consolidation that follows. As with other technological revolutions, eventually it is the large, already established firms who have the resources to exploit the new technology. The growth of the Internet, when compared to other electronic technologies such as radio and television, has been much more rapid: the Internet and Web achieved a 53% share of U.S households in only 10 years. In comparison, it took 38 years for radio and 17 for television to achieve a 30% share.</p>
+<ol>
+<li>Describe the three different stages in the evolution of e-commerce.</li>
+</ol>
+<p>The three stages in the evolution of e-commerce are innovation, consolidation, and reinvention. Innovation took place from 1995-2000 and was characterized by excitement and idealistic visions of markets in which quality information was equally available to both buyers and merchants. E-commerce did not fulfill these visions during its early</p>
+<p>years, however. After 2000, e-commerce entered its second stage of development: consolidation. In this stage, more traditional firms began to use the Web to enhance their existing businesses. Less emphasis was placed on creating new brands. In 2006, though, e-commerce entered its current stage, reinvention, as social networking and Web 2.0 applications reinvigorated e-commerce and encouraged the development of new business models.</p>
+<ol>
+<li>What are the major limitations on the growth of e-commerce? Which is potentially the toughest to overcome?</li>
+</ol>
+<p>One major limitation to the growth of e-commerce is the price of personal computers. Another limitation is the need for many people to learn complicated operating systems, at least in comparison to other technologies such as the television or the telephone. People must also learn a set of sophisticated skills to make effective use of the Internet and e-commerce capabilities. Another limitation is the unlikelihood that the digital shopping experience will ever replace the social and cultural experience that many seek from the traditional shopping environment. Finally, persistent global income inequality will exclude most of the world’s population, who do not and probably will not in the foreseeable future, have access to telephones or PCs. Social and cultural limitations are likely to be tougher to overcome than technological limitations.</p>
+<ol>
+<li>What are three of the factors that will contribute to greater Internet penetration in U.S. households?</li>
+</ol>
+<p>Factors that will contribute to greater Internet penetration into U.S. households in the next decade include:</p>
+<p>The price of an entry-level PC is expected to fall to $200 by2010.</p>
+<p>Enhanced capabilities, such as integration with television and access to film libraries on a pay-per-view basis, will draw in more consumers.</p>
+<p>The PC operating system is likely to evolve into a simpler platform with simpler choice panels.</p>
+<p>The use of wireless Web technology is increasing.</p>
+<ol>
+<li>Define disintermediation and explain the benefits to Internet users of such a phenomenon. How does disintermediation impact friction-free commerce?</li>
+</ol>
+<p>Disintermediation means the removal of the market middlemen – the distributors, wholesalers, and other intermediaries – between producers and consumers. The predicted benefits to Internet users include the decline of prices for products and services as manufacturers and content originators develop a direct relationship with their customers, and the elimination of payments to these middlemen. Disintermediation of markets would create intense competition. This, along with lowered transaction costs, would eliminate product brands, eventually resulting in the elimination of unfair competitive advantages and extraordinary returns on capital: the vision of friction-free commerce.</p>
+<ol>
+<li>What are some of the major advantages and disadvantages of being a first mover?</li>
+</ol>
+<p>The major advantages of being a first mover are the ability to build a brand name early on and establish a large customer base before followers enter the market, and the ability to build switching costs into the technology or services offered so that customers will find it discomfiting to change to a late entering competitor. The major disadvantage is that </p>
+<p>historically, many first movers have not succeeded and are instead replaced by the fast follower, larger firms with the financial, marketing, legal, and production assets necessary to develop mature markets. Generally, only a handful of first mover firms become successful long-term businesses as the start-up costs and time it takes to build a profitable business are often underestimated.</p>
+<ol>
+<li>Discuss the ways in which the early years of e-commerce can be considered both a success and a failure.</li>
+</ol>
+<p>The early years of e-commerce can be considered a success because of the technological success that occurred as Web-enabled transactions grew from thousands to billions. The digital infrastructure proved to be a solid foundation on which to build a viable marketing channel. From a business perspective, the early years of e-commerce were a mixed success with just a tiny percentage of dot.com companies surviving. However, the survivors have benefited from the continued growth in B2C revenues. The early years of e-commerce can also be considered a success in that the transfer of information has been a huge accomplishment as consumers learned to use the Web to procure information about products they wanted to purchase (Internet-influenced commerce).</p>
+<ol>
+<li>What are five of the major differences between the early years of e-commerce and today’s e-commerce?</li>
+</ol>
+<p>The major differences between the early years of e-commerce (the Innovation stage), the period between 2001-2006 (the Consolidation stage) and today’s e-commerce (the Reinvention stage) are: </p>
+<p>During the Innovation stage, e-commerce was primarily technology-driven. During the Consolidation stage, it was primarily business-driven. Today’s e-commerce, while still business-driven, is also audience, customer, and community-driven. </p>
+<p>During the Innovation stage, firms placed an emphasis on revenue growth, quickly achieving high market visibility/market share. During the Consolidation stage, the emphasis was on building profitable firms. Today, audience and social network growth are being emphasized.</p>
+<p>Startups during the Innovation stage were financed by venture capitalists, while those in the Consolidation stage were primarily financed by traditional methods. Today, startups are once again being financed by venture capitalists, albeit with smaller investments. In addition, many large online firms are now entering the market, and acquiring early stage firms via buy-outs. </p>
+<p>During the Innovation phase, e-commerce was, for the most part, ungoverned. In the Consolidation stage, there was a rise in the amount of regulation and governmental controls by governments worldwide. Today, there is extensive government regulation and surveillance. </p>
+<p>The Innovation stage of e-commerce was characterized by the young entrepreneurial spirit. During the Consolidation stage, e-commerce was primarily dominated by the retail giants. Today, large purely Web-based firms are playing a major role. </p>
+<p>The Innovation phase was characterized by an emphasis on deconstructing traditional distribution channels and disintermediating existing channels.  During the Consolidation stage, intermediaries strengthened. Today, there are a proliferation of small online intermediaries that are renting the business </p>
+<p>processes of larger firms. </p>
+<p>“Perfect markets” in which direct market relationships with consumers, the decline of intermediaries, and lower transaction costs resulted in intense competition and the elimination of brands, are being replaced by imperfect markets. Imperfect markets are characterized by a strengthening of brand name importance, increasing information asymmetries, price discrimination, and network effects.</p>
+<p>The early years of e-commerce saw an infusion of pure online businesses that thought they could achieve unassailable first mover advantages. During the Consolidation period, successful firms used a mixed “bricks-and-clicks” strategy, combining traditional sales channels such as physical stores and printed catalogs with online efforts. Today, there is a return of pure online strategies in new markets, as well as continuing extension of the “bricks and clicks” strategy in traditional retail markets.</p>
+<p>The early years of e-commerce were dominated by the first movers. In the Consolidation stage, e-commerce was dominated by the well-endowed and experienced Fortune 500 and other traditional firms. Today, first-mover advantages are returning in new markets as traditional Web players catch up.</p>
+<ol>
+<li>What factors will help define the future of e-commerce over the next five years?</li>
+</ol>
+<p>The factors that will help define the future of e-commerce over the next five years include:</p>
+<p>The technology of e-commerce – the Internet, the Web, and the number of wireless appliances – will continue to proliferate through all commercial activity; overall revenues will continue to rise rapidly; and the numbers of both visitors and products and services sold will continue to grow.</p>
+<p>Prices will rise to cover the real costs of doing business on the Web and to pay investors a reasonable rate of return on their capital.</p>
+<p>E-commerce margins and profits will rise to the level of traditional retailers. (The difference between revenues from sales and cost of goods sold will be equal to that of traditional firms.)</p>
+<p>The top e-commerce sites will increasingly obtain very well known brands from strong, older firms.</p>
+<p>The number of successful purely online companies will further decline. The most successful e-commerce firms will use both traditional marketing channels such as physical stores, printed catalogs, and e-commerce Web sites.</p>
+<ol>
+<li>Why is a multi-disciplinary approach necessary if one hopes to understand e-commerce?</li>
+</ol>
+<p>A multi-disciplinary approach is necessary in order to understand e-commerce because no single academic discipline covers all facets of the e-commerce phenomenon. E-commerce is primarily a technologically driven occurrence, including information technologies developed over the past fifty years, with the Internet and the Web at the core. However, beyond the infrastructure are the business purposes that drive the phenomenon: the changing business models and strategies that will transform old companies and spawn new ones. To understand e-commerce, one must understand some basic business concepts such as: industry structures, business models, firm and industry value chains, and consumer behavior. They must also comprehend the nature of </p>
+<p>electronic markets and information goods. Finally, the impact on society must be considered: global e-commerce can have consequences for individuals concerning their intellectual property and privacy rights. Public policy issues such as equal access, equity, content control, and taxation will need to be addressed.</p>
+<h3 id="Projects"><a href="#Projects" class="headerlink" title="Projects"></a>Projects</h3><ol>
+<li>Search the Web for an example of each of the five major types of e-commerce described in Section 1.1. Create a PowerPoint slide presentation or written report describing each Web site (take a screenshot of each, if possible) and explain why it fits into one of the five types of e-commerce.</li>
+</ol>
+<p>The purpose of this project is for students to begin looking at the Web sites they visit from a critical perspective and begin analyzing the information they can find at those sites. Presentations/reports submitted for this project will differ depending on the examples selected by students. Examples might include the following: </p>
+<p>B2C: Any one of a number of B2C companies such as e-tailers, service providers, portals, content providers, and community providers, might be selected. </p>
+<p>B2B: Any one of a number of B2B companies such as Elemica (consortia), Grainger.com (e-distributor), ChemConnect.com (exchange), could be selected. </p>
+<p>C2C: Leading examples of C2C e-commerce companies include eBay, Half.com, Craigslist and others that act as an intermediary between consumers seeking to make transactions.</p>
+<p>P2P: Companies engaged in P2P e-commerce include: Kazaa, Streamcast Networks, and Frostwire.</p>
+<p>M-commerce: Students may have somewhat more difficulty locating a company that engages solely in m-commerce. They will have more success if they look for an e-commerce company that includes m-commerce capabilities. Examples might include: portals such as AOL with its AOL Anywhere, Yahoo Mobile, and Moviefone’s reservation system.</p>
+<p>For each example chosen, the student should describe the features of the company that indicate which particular category of e-commerce it falls into. For example, if barnesandnoble.com is chosen as a representative of B2C e-commerce, the student might describe the features he or she sees available on the home page. They should note that barnesandnoble.com focuses primarily on the sale of books, music, software, magazines, prints, posters, and related products to individual consumers.  </p>
+<ol>
+<li>Choose an e-commerce Web site and assess it in terms of the eight unique features of e-commerce technology described in Table 1.2. Which of the features does the site implement well, and which features poorly, in your opinion? Prepare a short memo to the president of the company you have chosen, detailing your findings and any suggestions for improvement you may have.</li>
+</ol>
+<p>As with the first project, the purpose of this exercise is for students to begin looking at the Web sites they visit from a critical perspective and to begin analyzing the information they can find at those sites. Presentations/reports submitted for this project will differ depending on the example selected by students.  </p>
+<p>In assessing a Web site in terms of the eight unique features of e-commerce technology, a student might focus on the following: </p>
+<p>Ubiquity: What kinds of m-commerce applications, if any, does the site offer? (Such applications increase ubiquity by making e-commerce available from a wider range of devices.)</p>
+<p>Global reach: Does the Web site try to reach consumers outside of its host country? If so, how well is this implemented?</p>
+<p>Universal standards: There should not be much variance between Web sites with respect to this feature of e-commerce technology.</p>
+<p>Richness: Does the Web site use animated graphics, Flash animations, or streaming media to deliver marketing messages? If so, how effective does the student find these features? Do they aid the consuming experience, or hinder it?</p>
+<p>Interactivity: In what ways is the Web site interactive? </p>
+<p>Information Density: Students should note what, if any, information (via registration or through other means) a Web site overtly collects from visitors or users.</p>
+<p>Personalization/Customization: In what ways does the Web site personalize its marketing messages? For instance, is the user greeted by name? Can products and services be customized?</p>
+<p>Social technology: Does the Web site offer any ways for consumers to share opinions and preferences? Is there any capacity for content generation?   </p>
+<ol>
+<li>Given the development and history of e-commerce in the years from 1995-2008, what do you predict we will see during the next five years of e-commerce? Describe some of the technological, business, and societal shifts that may occur as the Internet continues to grow and expand. Prepare a brief PowerPoint slide presentation or written report to explain your vision of what e-commerce looks like today.</li>
+</ol>
+<p>Although each student’s answer may differ depending on their personal perspective on e-commerce, here are some possible predictions:</p>
+<p>Technological Shifts: the Internet will continue to grow, but at a slower pace.  Internet usage, however, will become more focused, targeted, and intense.  New client platforms like tablet computers will emerge.  New networking technologies  </p>
+<p>will emerge to permit mobile commerce.</p>
+<p>Business Shifts: Larger traditional firms will come to dominate e-commerce.  There will be a greater emphasis on profitability for online ventures.</p>
+<p>Societal Shifts: There will be a greater emphasis on regulation and control over the Internet and e-commerce in areas such as taxation, content, and entertainment. </p>
+<ol>
+<li>Follow up on events at Facebook and MySpace subsequent to September 2008 (when the opening case was prepared). Has Facebook continued to challenge the dominance of MySpace (the world’s largest social networking site)? What are its current prospects for success or failure? Prepare a short report on your findings.</li>
+</ol>
+<p>Given the abundance of information and discussion on Facebook and MySpace (students should be able to find a plethora of information about the two companies by using the Web to search for articles), students may arrive at differing conclusions. MySpace continues to reach record highs in members and its revenues have grown exponentially since its purchase by News Corp. But Facebook has steadily generated more buzz with its capacity to allow users to create customized applications and its more organized, streamlined interface. Both sites’ prospects for success are very bright. </p>
+<h3 id="PROJECTS"><a href="#PROJECTS" class="headerlink" title="PROJECTS"></a>PROJECTS</h3><ol>
+<li>Choose an e-commerce company and assess it in terms of the eight unique features of e-commerce tech-nology described in Table 1.2. Which of the features does the company implement well, and which features poorly, in your opinion? Prepare a short memo to the president of the company you have chosen detailing your findings and any suggestions for improvement you may have.</li>
+<li>Search online for an example of each of the major types of e-commerce described in Section 1.4 and listed in Table 1.3. Create a presentation or written report describing each company (take a screenshot of each, if possible), and explain why it fits into the category of e-commerce to which you have assigned it.</li>
+<li>Given the development and history of e-commerce in the years 1995–2019, what do you predict we will see during the next five years of e-commerce? Describe some of the technological, business, and societal shifts that may occur as the Internet continues to grow and expand. Prepare a brief presentation or written report to explain your vision of what e-commerce will look like in 2024.</li>
+<li>Prepare a brief report or presentation on how companies are using Instagram or another company of your choosing as a social e-commerce platform.</li>
+<li>Follow up on events at Uber since December 2019 (when the opening case was prepared). Prepare a short report on your findings.</li>
+</ol>
+<h2 id="E-commerce-Infrastructure"><a href="#E-commerce-Infrastructure" class="headerlink" title="E-commerce Infrastructure"></a>E-commerce Infrastructure</h2><h3 id="QUESTIONS-1"><a href="#QUESTIONS-1" class="headerlink" title="QUESTIONS"></a>QUESTIONS</h3><ol>
+<li>What advantages does client/server computing have over mainframe computing?<ol>
+<li>Acquisition Cost</li>
+<li>Maintenance Cost</li>
+<li>Operating System Differences</li>
+<li>Operating Environments</li>
+<li>Size</li>
+<li>Operations</li>
+<li><a href="https://itstillworks.com/mainframe-vs-client-server-10058.html" target="_blank" rel="noopener">https://itstillworks.com/mainframe-vs-client-server-10058.html</a></li>
+</ol>
+</li>
+<li>What are three different types of cloud computing models that have been developed?</li>
+<li>Why is packet switching so essential to the Internet?<ol>
+<li>it is easy to expand capacity by adding servers and clients. Also, client/ server networks are less vulnerable than centralized computing architectures. If one server goes down, backup or mirror servers can pick up the slack</li>
+</ol>
+</li>
+<li>What are four Internet protocols besides HTTP (the Web) and sending e-mail (SMTP)?</li>
+<li>What are the three main phases in the evolution of the Internet? Briefly describe each.</li>
+<li>How does virtual reality differ from augmented reality?</li>
+<li>Why is VoIP considered to be a disruptive technology?</li>
+<li>How is Microsoft aiming to provide Internet access to remote areas?</li>
+<li>Identify the various types of narrowband and broadband ISP Internet connections. Of all, which is the fastest and which is the slowest?</li>
+<li>What is the Internet of Things and how is it being created and enabled?</li>
+<li>Explain what domain names, URLs, and IP addresses are and provide an example of each. How are they used when a user is browsing the Web?</li>
+<li>How does 5G differ from 4G?</li>
+<li>How does HTTP/2 improve on HTTP? Why isn’t it being used by more websites?</li>
+<li>Identify the layers used in Internet technology. What is their importance to Internet communications?</li>
+<li>Why does the mobile platform have profound implications for e-commerce?</li>
+<li>What is the difference between Tier 1, Tier 2, and Tier 3 Internet Service Providers?</li>
+<li>What are three concerns about the Internet of Things?</li>
+<li>What is the difference between HTML and XML?</li>
+<li>What is podcasting?</li>
+<li>What are the implications of the app ecosystem for e-commerce?</li>
+</ol>
+<h3 id="PROJECTS-1"><a href="#PROJECTS-1" class="headerlink" title="PROJECTS"></a>PROJECTS</h3><ol>
+<li>Review the Insight on Business case on Apple Watch. What developments have occurred since this case was written in December 2019?</li>
+<li>Call or visit the websites of a cable provider, a DSL provider, and a satellite provider to obtain information on their Internet services. Prepare a brief report summarizing the features, benefits, and costs of each. Which is the fastest? What, if any, are the downsides of selecting any of the three for Internet service (such as addi-tional equipment purchases)?</li>
+<li>Select two countries (excluding the United States) and prepare a short report describing their basic Internet infrastructure. Are they public or commercial? How and where do they connect to backbones within the United States?</li>
+<li>Investigate the Internet of Things. Select one example and describe what it is and how it works.</li>
+</ol>
+<p>## </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Notes/" rel="tag"># Notes</a>
+          
+            <a href="/tags/Study/" rel="tag"># Study</a>
+          
+            <a href="/tags/Book/" rel="tag"># Book</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020-10-02-Book-MetaData/" rel="next" title="Metadata">
+                <i class="fa fa-chevron-left"></i> Metadata
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021-01-25-Work-Steemit/" rel="prev" title="E-commerce Technologies Project & Discussion">
+                E-commerce Technologies Project & Discussion <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Jack Xia" />
+          <p class="site-author-name" itemprop="name">Jack Xia</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">161</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-E-Commerce-Technologies"><span class="nav-number">1.</span> <span class="nav-text">Introduction E-Commerce Technologies</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#QUESTIONS"><span class="nav-number">1.1.</span> <span class="nav-text">QUESTIONS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Case-Study-Questions"><span class="nav-number">1.2.</span> <span class="nav-text">Case Study Questions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#End-of-Chapter-Questions"><span class="nav-number">1.3.</span> <span class="nav-text">End of Chapter Questions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Projects"><span class="nav-number">1.4.</span> <span class="nav-text">Projects</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PROJECTS"><span class="nav-number">1.5.</span> <span class="nav-text">PROJECTS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#E-commerce-Infrastructure"><span class="nav-number">2.</span> <span class="nav-text">E-commerce Infrastructure</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#QUESTIONS-1"><span class="nav-number">2.1.</span> <span class="nav-text">QUESTIONS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PROJECTS-1"><span class="nav-number">2.2.</span> <span class="nav-text">PROJECTS</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack Xia</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mermaid/6.0.0/mermaid.min.js"></script>
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

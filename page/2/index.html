@@ -274,6 +274,1765 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2020-04-08-Study-Data-Science-QA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020-04-08-Study-Data-Science-QA/" itemprop="url">Data Science Question and Answer</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-09T08:00:00+08:00">
+                2020-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>The purpose of this repo is two fold:</p>
+<ul>
+<li>To help you (data science practitioners) prepare for data science related interviews</li>
+<li>To introduce to people who don’t know but want to learn some basic data science concepts</li>
+</ul>
+<p>The focus is on the knowledge breadth so this is more of a quick reference rather than an in-depth study material. If you want to learn a specific topic in detail please refer to other content or reach out and I’d love to point you to materials I found useful.</p>
+<p>I might add some topics from time to time but hey, this should also be a community effort, right? Any pull request is welcome!</p>
+<p>Here are the categorizes:</p>
+<ul>
+<li><a href="#resume">Resume</a></li>
+<li><a href="#sql">SQL</a></li>
+<li><a href="#tools-and-framework">Tools and Framework</a></li>
+<li><a href="#statistics-and-ml-in-general">Statistics and ML In General</a></li>
+<li><a href="#supervised-learning">Supervised Learning</a></li>
+<li><a href="#unsupervised-learning">Unsupervised Learning</a></li>
+<li><a href="#reinforcement-learning">Reinforcement Learning</a></li>
+<li><a href="#natural-language-processing">Natural Language Processing</a></li>
+<li><a href="#system">System</a></li>
+</ul>
+<h2 id="Resume"><a href="#Resume" class="headerlink" title="Resume"></a>Resume</h2><p>The only advice I can give about resume is to indicate your past data science / machine learning projects in a specific, <strong>quantifiable</strong> way. Consider the following two statements:</p>
+<blockquote>
+<p>Trained a machine learning system</p>
+</blockquote>
+<p>and</p>
+<blockquote>
+<p>Designed and deployed a deep learning model to recognize objects using Keras, Tensorflow, and Node.js. The model has 1/30 model size, 1/3 training time, 1/5 inference time, and 2x faster convergence compared with traditional neural networks (e.g, ResNet)</p>
+</blockquote>
+<p>The second is much better because it quantifies your contribution and also highlights specific technologies you used (and therefore have expertise in). This would require you to log what you’ve done during experiments. But don’t exaggerate.</p>
+<p>Spend some time going over your resume / past projects to make sure you explain them well.</p>
+<h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><ul>
+<li><a href="#difference-between-joins">Difference between joins</a></li>
+</ul>
+<h3 id="Difference-between-joins"><a href="#Difference-between-joins" class="headerlink" title="Difference between joins"></a>Difference between joins</h3><ul>
+<li><strong>(INNER) JOIN</strong>: Returns records that have matching values in both tables</li>
+<li><strong>LEFT (OUTER) JOIN</strong>: Return all records from the left table, and the matched records from the right table</li>
+<li><strong>RIGHT (OUTER) JOIN</strong>: Return all records from the right table, and the matched records from the left table</li>
+<li><strong>FULL (OUTER) JOIN</strong>: Return all records when there is a match in either left or right table</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/sql-join.PNG" alt="link"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h2 id="Tools-and-Framework"><a href="#Tools-and-Framework" class="headerlink" title="Tools and Framework"></a>Tools and Framework</h2><p>The resources here are only meant to help you brush up on the topis rather than making you an expert.</p>
+<ul>
+<li><a href="#spark">Spark</a></li>
+</ul>
+<h3 id="Spark"><a href="#Spark" class="headerlink" title="Spark"></a>Spark</h3><p>Using PySpark API.</p>
+<ul>
+<li>The best resource is of course <a href="https://spark.apache.org/docs/latest/" target="_blank" rel="noopener">Spark’s documentation</a>. Take a thorough review of the topics</li>
+<li>If you are really time constrained, scan the Spark’s documentation and check <a href="https://s3.amazonaws.com/assets.datacamp.com/blog_assets/PySpark_Cheat_Sheet_Python.pdf" target="_blank" rel="noopener">PySpark cheat sheet</a> for the basics</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h2 id="Statistics-and-ML-In-General"><a href="#Statistics-and-ML-In-General" class="headerlink" title="Statistics and ML In General"></a>Statistics and ML In General</h2><ul>
+<li><a href="#resume">Resume</a></li>
+<li><a href="#sql">SQL</a><ul>
+<li><a href="#difference-between-joins">Difference between joins</a></li>
+</ul>
+</li>
+<li><a href="#tools-and-framework">Tools and Framework</a><ul>
+<li><a href="#spark">Spark</a></li>
+</ul>
+</li>
+<li><a href="#statistics-and-ml-in-general">Statistics and ML In General</a><ul>
+<li><a href="#project-workflow">Project Workflow</a></li>
+<li><a href="#cross-validation">Cross Validation</a></li>
+<li><a href="#feature-importance">Feature Importance</a></li>
+<li><a href="#mean-squared-error-vs-mean-absolute-error">Mean Squared Error vs. Mean Absolute Error</a></li>
+<li><a href="#l1-vs-l2-regularization">L1 vs L2 regularization</a></li>
+<li><a href="#correlation-vs-covariance">Correlation vs Covariance</a></li>
+<li><a href="#would-adding-more-data-address-underfitting">Would adding more data address underfitting</a></li>
+<li><a href="#activation-function">Activation Function</a></li>
+<li><a href="#bagging">Bagging</a></li>
+<li><a href="#stacking">Stacking</a></li>
+<li><a href="#generative-vs-discriminative">Generative vs discriminative</a></li>
+<li><a href="#parametric-vs-nonparametric">Parametric vs Nonparametric</a></li>
+<li><a href="#recommender-system">Recommender System</a></li>
+</ul>
+</li>
+<li><a href="#supervised-learning">Supervised Learning</a><ul>
+<li><a href="#linear-regression">Linear regression</a></li>
+<li><a href="#logistic-regression">Logistic regression</a></li>
+<li><a href="#naive-bayes">Naive Bayes</a></li>
+<li><a href="#knn">KNN</a></li>
+<li><a href="#svm">SVM</a></li>
+<li><a href="#decision-tree">Decision tree</a></li>
+<li><a href="#random-forest">Random forest</a></li>
+<li><a href="#boosting-tree">Boosting Tree</a></li>
+<li><a href="#mlp">MLP</a></li>
+<li><a href="#cnn">CNN</a></li>
+<li><a href="#rnn-and-lstm">RNN and LSTM</a></li>
+</ul>
+</li>
+<li><a href="#unsupervised-learning">Unsupervised Learning</a><ul>
+<li><a href="#clustering">Clustering</a></li>
+<li><a href="#principal-component-analysis">Principal Component Analysis</a></li>
+<li><a href="#autoencoder">Autoencoder</a></li>
+<li><a href="#generative-adversarial-network">Generative Adversarial Network</a></li>
+</ul>
+</li>
+<li><a href="#reinforcement-learning">Reinforcement Learning</a></li>
+<li><a href="#natural-language-processing">Natural Language Processing</a><ul>
+<li><a href="#tokenization">Tokenization</a></li>
+<li><a href="#stemming-and-lemmatization">Stemming and lemmatization</a></li>
+<li><a href="#n-gram">N gram</a></li>
+<li><a href="#bag-of-words">Bag of Words</a></li>
+<li><a href="#word2vec">word2vec</a></li>
+</ul>
+</li>
+<li><a href="#system">System</a><ul>
+<li><a href="#cron-job">Cron job</a></li>
+<li><a href="#linux">Linux</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="Project-Workflow"><a href="#Project-Workflow" class="headerlink" title="Project Workflow"></a>Project Workflow</h3><p>Given a data science / machine learning project, what steps should we follow? Here’s<br>how I would tackle it:</p>
+<ul>
+<li><strong>Specify business objective.</strong> Are we trying to win more customers, achieve higher satisfaction, or gain more revenues?</li>
+<li><strong>Define problem.</strong> What is the specific gap in your ideal world and the real one that requires machine learning to fill? Ask questions that can be addressed using your data and predictive modeling (ML algorithms).</li>
+<li><strong>Create a common sense baseline.</strong> But before you resort to ML, set up a baseline to solve the problem as if you know zero data science. You may be amazed at how effective this baseline is. It can be as simple as recommending the top N popular items or other rule-based logic. This baseline can also server as a good benchmark for ML algorithms.</li>
+<li><strong>Review ML literatures.</strong> To avoid reinventing the wheel and get inspired on what techniques / algorithms are good at addressing the questions using our data.</li>
+<li><strong>Set up a single-number metric.</strong> What it means to be successful - high accuracy, lower error, or bigger AUC - and how do you measure it? The metric has to align with high-level goals, most often the success of your business. Set up a single-number against which all models are measured.</li>
+<li><strong>Do exploratory data analysis (EDA).</strong> Play with the data to get a general idea of data type, distribution, variable correlation, facets etc. This step would involve a lot of plotting.</li>
+<li><strong>Partition data.</strong> Validation set should be large enough to detect differences between the models you are training; test set should be large enough to indicate the overall performance of the final model; training set, needless to say, the larger the merrier.</li>
+<li><strong>Preprocess.</strong> This would include data integration, cleaning, transformation, reduction, discretization and more.</li>
+<li><strong>Engineer features.</strong> Coming up with features is difficult, time-consuming, requires expert knowledge. Applied machine learning is basically feature engineering. This step usually involves feature selection and creation, using domain knowledge. Can be minimal for deep learning projects.</li>
+<li><strong>Develop models.</strong> Choose which algorithm to use, what hyperparameters to tune, which architecture to use etc.</li>
+<li><strong>Ensemble.</strong> Ensemble can usually boost performance, depending on the correlations of the models/features. So it’s always a good idea to try out. But be open-minded about making tradeoff - some ensemble are too complex/slow to put into production.</li>
+<li><strong>Deploy model.</strong> Deploy models into production for inference.</li>
+<li><strong>Monitor model.</strong> Monitor model performance, and collect feedbacks.</li>
+<li><strong>Iterate.</strong> Iterate the previous steps. Data science tends to be an iterative process, with new and improved models being developed over time.</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/workflow.png" alt="link"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Cross-Validation"><a href="#Cross-Validation" class="headerlink" title="Cross Validation"></a>Cross Validation</h3><p>Cross-validation is a technique to evaluate predictive models by partitioning the original sample into a training set to train the model, and a validation set to evaluate it. For example, a k-fold cross validation divides the data into k folds (or partitions), trains on each k-1 fold, and evaluate on the remaining 1 fold. This results to k models/evaluations, which can be averaged to get a overall model performance.</p>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/cv.png" alt="link"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Feature-Importance"><a href="#Feature-Importance" class="headerlink" title="Feature Importance"></a>Feature Importance</h3><ul>
+<li>In linear models, feature importance can be calculated by the scale of the coefficients</li>
+<li>In tree-based methods (such as random forest), important features are likely to appear closer to the root of the tree.  We can get a feature’s importance for random forest by computing the averaging depth at which it appears across all trees in the forest.</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Mean-Squared-Error-vs-Mean-Absolute-Error"><a href="#Mean-Squared-Error-vs-Mean-Absolute-Error" class="headerlink" title="Mean Squared Error vs. Mean Absolute Error"></a>Mean Squared Error vs. Mean Absolute Error</h3><ul>
+<li><strong>Similarity</strong>: both measure the average model prediction error; range from 0 to infinity; the lower the better</li>
+<li>Mean Squared Error (MSE) gives higher weights to large error (e.g., being off by 10 just MORE THAN TWICE as bad as being off by 5), whereas Mean Absolute Error (MAE) assign equal weights (being off by 10 is just twice as bad as being off by 5)</li>
+<li>MSE is continuously differentiable, MAE is not (where y_pred == y_true)</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="L1-vs-L2-regularization"><a href="#L1-vs-L2-regularization" class="headerlink" title="L1 vs L2 regularization"></a>L1 vs L2 regularization</h3><ul>
+<li><strong>Similarity</strong>: both L1 and L2 regularization <strong>prevent overfitting</strong> by shrinking (imposing a penalty) on the coefficients</li>
+<li><strong>Difference</strong>: L2 (Ridge) shrinks all the coefficient by the same proportions but eliminates none, while L1 (Lasso) can shrink some coefficients to zero, performing variable selection.</li>
+<li><strong>Which to choose</strong>: If all the features are correlated with the label, ridge outperforms lasso, as the coefficients are never zero in ridge. If only a subset of features are correlated with the label, lasso outperforms ridge as in lasso model some coefficient can be shrunken to zero.</li>
+<li>In Graph (a), the black square represents the feasible region of the L1 regularization while graph (b) represents the feasible region for L2 regularization. The contours in the plots represent different loss values (for the unconstrained regression model ). The feasible point that minimizes the loss is more likely to happen on the coordinates on graph (a) than on graph (b) since graph (a) is more <strong>angular</strong>.  This effect amplifies when your number of coefficients increases, i.e. from 2 to 200. The implication of this is that the L1 regularization gives you sparse estimates. Namely, in a high dimensional space, you got mostly zeros and a small number of non-zero coefficients.</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/l1l2.png" alt="link"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Correlation-vs-Covariance"><a href="#Correlation-vs-Covariance" class="headerlink" title="Correlation vs Covariance"></a>Correlation vs Covariance</h3><ul>
+<li>Both determine the relationship and measure the dependency between two random variables</li>
+<li>Correlation is when the change in one item may result in the change in the another item, while covariance is when two items vary together (joint variability)</li>
+<li>Covariance is nothing but a measure of correlation. On the contrary, correlation refers to the scaled form of covariance</li>
+<li>Range: correlation is between -1 and +1, while covariance lies between negative infinity and infinity.</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Would-adding-more-data-address-underfitting"><a href="#Would-adding-more-data-address-underfitting" class="headerlink" title="Would adding more data address underfitting"></a>Would adding more data address underfitting</h3><p>Underfitting happens when a model is not complex enough to learn well from the data. It is the problem of model rather than data size. So a potential way to address underfitting is to increase the model complexity (e.g., to add higher order coefficients for linear model, increase depth for tree-based methods, add more layers / number of neurons for neural networks etc.)</p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Activation-Function"><a href="#Activation-Function" class="headerlink" title="Activation Function"></a>Activation Function</h3><p>For neural networks</p>
+<ul>
+<li>Non-linearity: ReLU is often used. Use Leaky ReLU (a small positive gradient for negative input, say, <code>y = 0.01x</code> when x &lt; 0) to address dead ReLU issue</li>
+<li>Multi-class: softmax</li>
+<li>Binary: sigmoid</li>
+<li>Regression: linear</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Bagging"><a href="#Bagging" class="headerlink" title="Bagging"></a>Bagging</h3><p>To address overfitting, we can use an ensemble method called bagging (bootstrap aggregating),<br>which reduces the variance of the meta learning algorithm. Bagging can be applied<br>to decision tree or other algorithms.</p>
+<p>Here is a <a href="http://scikit-learn.org/stable/auto_examples/ensemble/plot_bias_variance.html#sphx-glr-auto-examples-ensemble-plot-bias-variance-py" target="_blank" rel="noopener">great illustration</a> of a single estimator vs. bagging.</p>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/bagging.png" alt="link"></p>
+<ul>
+<li>Bagging is when samlping is performed <em>with</em> replacement. When sampling is performed <em>without</em> replacement, it’s called pasting.</li>
+<li>Bagging is popular due to its boost for performance, but also due to that individual learners can be trained in parallel and scale well</li>
+<li>Ensemble methods work best when the learners are as independent from one another as possible</li>
+<li>Voting: soft voting (predict probability and average over all individual learners) often works better than hard voting</li>
+<li>out-of-bag instances can act validation set for bagging</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Stacking"><a href="#Stacking" class="headerlink" title="Stacking"></a>Stacking</h3><ul>
+<li>Instead of using trivial functions (such as hard voting) to aggregate the predictions from individual learners, train a model to perform this aggregation</li>
+<li>First split the training set into two subsets: the first subset is used to train the learners in the first layer</li>
+<li>Next the first layer learners are used to make predictions (meta features) on the second subset, and those predictions are used to train another models (to obtain the weigts of different learners) in the second layer</li>
+<li>We can train multiple models in the second layer, but this entails subsetting the original dataset into 3 parts</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/stacking.jpg" alt="stacking"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Generative-vs-discriminative"><a href="#Generative-vs-discriminative" class="headerlink" title="Generative vs discriminative"></a>Generative vs discriminative</h3><ul>
+<li>Discriminative algorithms model <em>p(y|x; w)</em>, that is, given the dataset and learned<br>parameter, what is the probability of y belonging to a specific class. A discriminative algorithm<br>doesn’t care about how the data was generated, it simply categorizes a given example</li>
+<li>Generative algorithms try to model <em>p(x|y)</em>, that is, the distribution of features given<br>that it belongs to a certain class. A generative algorithm models how the data was<br>generated.</li>
+</ul>
+<blockquote>
+<p>Given a training set, an algorithm like logistic regression or<br>the perceptron algorithm (basically) tries to find a straight line—that is, a<br>decision boundary—that separates the elephants and dogs. Then, to classify<br>a new animal as either an elephant or a dog, it checks on which side of the<br>decision boundary it falls, and makes its prediction accordingly.</p>
+<p>Here’s a different approach. First, looking at elephants, we can build a<br>model of what elephants look like. Then, looking at dogs, we can build a<br>separate model of what dogs look like. Finally, to classify a new animal, we<br>can match the new animal against the elephant model, and match it against<br>the dog model, to see whether the new animal looks more like the elephants<br>or more like the dogs we had seen in the training set.</p>
+</blockquote>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Parametric-vs-Nonparametric"><a href="#Parametric-vs-Nonparametric" class="headerlink" title="Parametric vs Nonparametric"></a>Parametric vs Nonparametric</h3><ul>
+<li>A learning model that summarizes data with a set of parameters of fixed size (independent of the number of training examples) is called a parametric model.</li>
+<li>A model where the number of parameters is not determined prior to training. Nonparametric does not mean that they have no parameters. On the contrary, nonparametric models (can) become more and more complex with an increasing amount of data.</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Recommender-System"><a href="#Recommender-System" class="headerlink" title="Recommender System"></a>Recommender System</h3><ul>
+<li>I put recommend system here since technically it falls neither under supervised nor unsupervised learning</li>
+<li>A recommender system seeks to predict the ‘rating’ or ‘preference’ a user would give to items and then recommend items accordingly</li>
+<li>Content based recommender systems recommends items similar to those a given user has liked in the past, based on either explicit (ratings, like/dislike button) or implicit (viewed/finished an article) feedbacks. Content based recommenders work solely with the past interactions of a given user and do not take other users into consideration.</li>
+<li>Collaborative filtering is based on past interactions of the whole user base. There are two Collaborative filtering approaches: <strong>item-based</strong> or <strong>user-based</strong><ul>
+<li>item-based: for user u, a score for an unrated item is produced by combining the ratings of users similar to u.</li>
+<li>user-based:  a rating (u, i) is produced by looking at the set of items similar to i (interaction similarity), then the ratings by u of similar items are combined into a predicted rating</li>
+</ul>
+</li>
+<li>In recommender systems traditionally matrix factorization methods are used, although we recently there are also deep learning based methods</li>
+<li>Cold start and sparse matrix can be issues for recommender systems</li>
+<li>Widely used in movies, news, research articles, products, social tags, music, etc.</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/collaborative_filtering.gif" alt="cf"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h2 id="Supervised-Learning"><a href="#Supervised-Learning" class="headerlink" title="Supervised Learning"></a>Supervised Learning</h2><ul>
+<li><a href="#linear-regression">Linear regression</a></li>
+<li><a href="#logistic-regression">Logistic regression</a></li>
+<li><a href="#naive-bayes">Naive Bayes</a></li>
+<li><a href="#knn">KNN</a></li>
+<li><a href="#svm">SVM</a></li>
+<li><a href="#decision-tree">Decision tree</a></li>
+<li><a href="#random-forest">Random forest</a></li>
+<li><a href="#boosting-tree">Boosting Tree</a></li>
+<li><a href="#mlp">MLP</a></li>
+<li><a href="#cnn">CNN</a></li>
+<li><a href="#rnn-and-lstm">RNN and LSTM</a></li>
+</ul>
+<h3 id="Linear-regression"><a href="#Linear-regression" class="headerlink" title="Linear regression"></a>Linear regression</h3><ul>
+<li>How to learn the parameter: minimize the cost function</li>
+<li>How to minimize cost function: gradient descent</li>
+<li>Regularization:<ul>
+<li>L1 (Lasso): can shrink certain coef to zero, thus performing feature selection</li>
+<li>L2 (Ridge): shrink all coef with the same proportion; almost always outperforms L1</li>
+<li>Elastic Net: combined L1 and L2 priors as regularizer</li>
+</ul>
+</li>
+<li>Assumes linear relationship between features and the label</li>
+<li>Can add polynomial and interaction features to add non-linearity</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/lr.png" alt="lr"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Logistic-regression"><a href="#Logistic-regression" class="headerlink" title="Logistic regression"></a>Logistic regression</h3><ul>
+<li>Generalized linear model (GLM) for binary classification problems</li>
+<li>Apply the sigmoid function to the output of linear models, squeezing the target<br>to range [0, 1]</li>
+<li>Threshold to make prediction: usually if the output &gt; .5, prediction 1; otherwise prediction 0</li>
+<li>A special case of softmax function, which deals with multi-class problems</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Naive-Bayes"><a href="#Naive-Bayes" class="headerlink" title="Naive Bayes"></a>Naive Bayes</h3><ul>
+<li>Naive Bayes (NB) is a supervised learning algorithm based on applying <a href="https://en.wikipedia.org/wiki/Bayes%27_theorem" target="_blank" rel="noopener">Bayes’ theorem</a></li>
+<li>It is called naive because it builds the naive assumption that each feature<br>are independent of each other</li>
+<li>NB can make different assumptions (i.e., data distributions, such as Gaussian,<br>Multinomial, Bernoulli)</li>
+<li>Despite the over-simplified assumptions, NB classifier works quite well in real-world<br>applications, especially for text classification (e.g., spam filtering)</li>
+<li>NB can be extremely fast compared to more sophisticated methods</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="KNN"><a href="#KNN" class="headerlink" title="KNN"></a>KNN</h3><ul>
+<li>Given a data point, we compute the K nearest data points (neighbors) using certain<br>distance metric (e.g., Euclidean metric). For classification, we take the majority label<br>of neighbors; for regression, we take the mean of the label values.</li>
+<li>Note for KNN we don’t train a model; we simply compute during<br>inference time. This can be computationally expensive since each of the test example<br>need to be compared with every training example to see how close they are.</li>
+<li>There are approximation methods can have faster inference time by<br>partitioning the training data into regions (e.g., <a href="https://github.com/spotify/annoy" target="_blank" rel="noopener">annoy</a>)</li>
+<li>When K equals 1 or other small number the model is prone to overfitting (high variance), while<br>when K equals number of data points or other large number the model is prone to underfitting (high bias)</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/knn.png" alt="KNN"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h3><ul>
+<li>Can perform linear, nonlinear, or outlier detection (unsupervised)</li>
+<li>Large margin classifier: using SVM we not only have a decision boundary, but want the boundary<br>to be as far from the closest training point as possible</li>
+<li>The closest training examples are called support vectors, since they are the points<br>based on which the decision boundary is drawn</li>
+<li>SVMs are sensitive to feature scaling</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/svm.png" alt="svm"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Decision-tree"><a href="#Decision-tree" class="headerlink" title="Decision tree"></a>Decision tree</h3><ul>
+<li>Non-parametric, supervised learning algorithms</li>
+<li>Given the training data, a decision tree algorithm divides the feature space into<br>regions. For inference, we first see which<br>region does the test data point fall in, and take the mean label values (regression)<br>or the majority label value (classification).</li>
+<li><strong>Construction</strong>: top-down, chooses a variable to split the data such that the<br>target variables within each region are as homogeneous as possible. Two common<br>metrics: gini impurity or information gain, won’t matter much in practice.</li>
+<li>Advantage: simply to understand &amp; interpret, mirrors human decision making</li>
+<li>Disadvantage:<ul>
+<li>can overfit easily (and generalize poorly) if we don’t limit the depth of the tree</li>
+<li>can be non-robust: A small change in the training data can lead to a totally different tree</li>
+<li>instability: sensitive to training set rotation due to its orthogonal decision boundaries</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/tree.gif" alt="decision tree"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Random-forest"><a href="#Random-forest" class="headerlink" title="Random forest"></a>Random forest</h3><p>Random forest improves bagging further by adding some randomness. In random forest,<br>only a subset of features are selected at random to construct a tree (while often not subsample instances).<br>The benefit is that random forest <strong>decorrelates</strong> the trees.</p>
+<p>For example, suppose we have a dataset. There is one very predicative feature, and a couple<br>of moderately predicative features. In bagging trees, most of the trees<br>will use this very predicative feature in the top split, and therefore making most of the trees<br>look similar, <strong>and highly correlated</strong>. Averaging many highly correlated results won’t lead<br>to a large reduction in variance compared with uncorrelated results.<br>In random forest for each split we only consider a subset of the features and therefore<br>reduce the variance even further by introducing more uncorrelated trees.</p>
+<p>I wrote a <a href="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/bag-rf-var.ipynb" target="_blank" rel="noopener">notebook</a> to illustrate this point.</p>
+<p>In practice, tuning random forest entails having a large number of trees (the more the better, but<br>always consider computation constraint). Also, <code>min_samples_leaf</code> (The minimum number of<br>samples at the leaf node)to control the tree size and overfitting. Always cross validate the parameters.</p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Boosting-Tree"><a href="#Boosting-Tree" class="headerlink" title="Boosting Tree"></a>Boosting Tree</h3><p><strong>How it works</strong></p>
+<p>Boosting builds on weak learners, and in an iterative fashion. In each iteration,<br>a new learner is added, while all existing learners are kept unchanged. All learners<br>are weighted based on their performance (e.g., accuracy), and after a weak learner<br>is added, the data are re-weighted: examples that are misclassified gain more weights,<br>while examples that are correctly classified lose weights. Thus, future weak learners<br>focus more on examples that previous weak learners misclassified.</p>
+<p><strong>Difference from random forest (RF)</strong></p>
+<ul>
+<li>RF grows trees <strong>in parallel</strong>, while Boosting is sequential</li>
+<li>RF reduces variance, while Boosting reduces errors by reducing bias</li>
+</ul>
+<p><strong>XGBoost (Extreme Gradient Boosting)</strong></p>
+<blockquote>
+<p>XGBoost uses a more regularized model formalization to control overfitting, which gives it better performance</p>
+</blockquote>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="MLP"><a href="#MLP" class="headerlink" title="MLP"></a>MLP</h3><p>A feedforward neural network of multiple layers. In each layer we<br>can have multiple neurons, and each of the neuron in the next layer is a linear/nonlinear<br>combination of the all the neurons in the previous layer. In order to train the network<br>we back propagate the errors layer by layer. In theory MLP can approximate any functions.</p>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/mlp.jpg" alt="mlp"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h3><p>The Conv layer is the building block of a Convolutional Network. The Conv layer consists<br>of a set of learnable filters (such as 5 <em> 5 </em> 3, width <em> height </em> depth). During the forward<br>pass, we slide (or more precisely, convolve) the filter across the input and compute the dot<br>product. Learning again happens when the network back propagate the error layer by layer.</p>
+<p>Initial layers capture low-level features such as angle and edges, while later<br>layers learn a combination of the low-level features and in the previous layers<br>and can therefore represent higher level feature, such as shape and object parts.</p>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/cnn.jpg" alt="CNN"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="RNN-and-LSTM"><a href="#RNN-and-LSTM" class="headerlink" title="RNN and LSTM"></a>RNN and LSTM</h3><p>RNN is another paradigm of neural network where we have difference layers of cells,<br>and each cell not only takes as input the cell from the previous layer, but also the previous<br>cell within the same layer. This gives RNN the power to model sequence.</p>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/rnn.jpeg" alt="RNN"></p>
+<p>This seems great, but in practice RNN barely works due to exploding/vanishing gradient, which<br>is cause by a series of multiplication of the same matrix. To solve this, we can use<br>a variation of RNN, called long short-term memory (LSTM), which is capable of learning<br>long-term dependencies.</p>
+<p>The math behind LSTM can be pretty complicated, but intuitively LSTM introduce</p>
+<ul>
+<li>input gate</li>
+<li>output gate</li>
+<li>forget gate</li>
+<li>memory cell (internal state)</li>
+</ul>
+<p>LSTM resembles human memory: it forgets old stuff (old internal state <em> forget gate)<br>and learns from new input (input node </em> input gate)</p>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/lstm.png" alt="lstm"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h2 id="Unsupervised-Learning"><a href="#Unsupervised-Learning" class="headerlink" title="Unsupervised Learning"></a>Unsupervised Learning</h2><ul>
+<li><a href="#clustering">Clustering</a></li>
+<li><a href="#principal-component-analysis">Principal Component Analysis</a></li>
+<li><a href="#autoencoder">Autoencoder</a></li>
+<li><a href="#generative-adversarial-network">Generative Adversarial Network</a></li>
+</ul>
+<h3 id="Clustering"><a href="#Clustering" class="headerlink" title="Clustering"></a>Clustering</h3><ul>
+<li>Clustering is a unsupervised learning algorithm that groups data in such<br>a way that data points in the same group are more similar to each other than to<br>those from other groups</li>
+<li>Similarity is usually defined using a distance measure (e.g, Euclidean, Cosine, Jaccard, etc.)</li>
+<li>The goal is usually to discover the underlying structure within the data (usually high dimensional)</li>
+<li>The most common clustering algorithm is K-means, where we define K (the number of clusters)<br>and the algorithm iteratively finds the cluster each data point belongs to</li>
+</ul>
+<p><a href="http://scikit-learn.org/stable/modules/clustering.html" target="_blank" rel="noopener">scikit-learn</a> implements many clustering algorithms. Below is a comparison adopted from its page.</p>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/clustering.png" alt="clustering"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Principal-Component-Analysis"><a href="#Principal-Component-Analysis" class="headerlink" title="Principal Component Analysis"></a>Principal Component Analysis</h3><ul>
+<li>Principal Component Analysis (PCA) is a dimension reduction technique that projects<br>the data into a lower dimensional space</li>
+<li>PCA uses Singular Value Decomposition (SVD), which is a matrix factorization method<br>that decomposes a matrix into three smaller matrices (more details of SVD <a href="https://en.wikipedia.org/wiki/Singular-value_decomposition" target="_blank" rel="noopener">here</a>)</li>
+<li>PCA finds top N principal components, which are dimensions along which the data vary<br>(spread out) the most. Intuitively, the more spread out the data along a specific dimension,<br>the more information is contained, thus the more important this dimension is for the<br>pattern recognition of the dataset</li>
+<li>PCA can be used as pre-step for data visualization: reducing high dimensional data<br>into 2D or 3D. An alternative dimensionality reduction technique is <a href="https://lvdmaaten.github.io/tsne/" target="_blank" rel="noopener">t-SNE</a></li>
+</ul>
+<p>Here is a visual explanation of PCA</p>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/pca.gif" alt="pca"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Autoencoder"><a href="#Autoencoder" class="headerlink" title="Autoencoder"></a>Autoencoder</h3><ul>
+<li>The aim of an autoencoder is to learn a representation (encoding) for a set of data</li>
+<li>An autoencoder always consists of two parts, the encoder and the decoder. The encoder would find a lower dimension representation (latent variable) of the original input, while the decoder is used to reconstruct from the lower-dimension vector such that the distance between the original and reconstruction is minimized</li>
+<li>Can be used for data denoising and dimensionality reduction</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/autoencoder.png" alt="link"></p>
+<h3 id="Generative-Adversarial-Network"><a href="#Generative-Adversarial-Network" class="headerlink" title="Generative Adversarial Network"></a>Generative Adversarial Network</h3><ul>
+<li>Generative Adversarial Network (GAN) is an unsupervised learning algorithm that also has supervised flavor: using supervised loss as part of training</li>
+<li>GAN typically has two major components: the <strong>generator</strong> and the <strong>discriminator</strong>. The generator tries to generate “fake” data (e.g, images or sentences) that fool the discriminator into thinking that they’re real, while the discriminator tries to distinguish between real and generated data. It’s a fight between the two players thus the name adversarial, and this fight drives both sides to improve until “fake” data are indistinguishable from the real data</li>
+<li>How does it work, intuitively<ul>
+<li>The generator takes a <strong>random</strong> input and generates a sample of data</li>
+<li>The discriminator then either takes the generated sample or a real data sample, and tries to predict whether the input is real or generated (i.e., solving a binary classification problem)</li>
+<li>Given a truth score range of [0, 1], ideally the we’d love to see discriminator give low score to generated data but high score to real data. On the other hand, we also wanna see the generated data fool the discriminator. And this paradox drives both sides become stronger</li>
+</ul>
+</li>
+<li>How does it work, from a training perspective<ul>
+<li>Without training, the generator creates ‘garbage’ data only while the discriminator is too ‘innocent’ to tell the difference between fake and real data</li>
+<li>Usually we would first train the discriminator with both real (label 1) and generated data (label 0) for N epochs so it would have a good judgement of what is real vs. fake</li>
+<li>Then we <strong>set the discriminator non-trainable</strong>, and train the generator. Even though the discriminator is non-trainable at this stage, we still use it as a classifier so that <strong>error signals can be back propagated and therefore enable the generator to learn</strong></li>
+<li>The above two steps would continue in turn until both sides cannot be improved further</li>
+</ul>
+</li>
+<li>Here are some <a href="https://github.com/soumith/ganhacks" target="_blank" rel="noopener">tips and tricks to make GANs work</a></li>
+<li>One Caveat is that the <strong>adversarial part is only auxiliary: The end goal of using GAN is to generate data that even experts cannot tell if it’s real or fake</strong></li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/gan.jpg" alt="gan"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h2 id="Reinforcement-Learning"><a href="#Reinforcement-Learning" class="headerlink" title="Reinforcement Learning"></a>Reinforcement Learning</h2><p>[TODO]</p>
+<h2 id="Natural-Language-Processing"><a href="#Natural-Language-Processing" class="headerlink" title="Natural Language Processing"></a>Natural Language Processing</h2><ul>
+<li><a href="#tokenization">Tokenization</a></li>
+<li><a href="#stemming-and-lemmatization">Stemming and lemmatization</a></li>
+<li><a href="#ngram">N-gram</a></li>
+<li><a href="#bag-of-words">Bag of Words</a></li>
+<li><a href="#word2vec">word2vec</a></li>
+</ul>
+<h3 id="Tokenization"><a href="#Tokenization" class="headerlink" title="Tokenization"></a>Tokenization</h3><ul>
+<li>Tokenization is the process of converting a sequence of characters into a sequence of tokens</li>
+<li>Consider this example: <code>The quick brown fox jumped over the lazy dog</code>. In this case each word (separated by space) would be a token</li>
+<li>Sometimes tokenization doesn’t have a definitive answer. For instance, <code>O&#39;Neill</code> can be tokenized to <code>o</code> and <code>neill</code>, <code>oneill</code>, or <code>o&#39;neill</code>.</li>
+<li>In some cases tokenization requires language-specific knowledge. For example, it doesn’t make sense to tokenize <code>aren&#39;t</code> into <code>aren</code> and <code>t</code></li>
+<li>For a more detailed treatment of tokenization please check <a href="https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html" target="_blank" rel="noopener">here</a></li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Stemming-and-lemmatization"><a href="#Stemming-and-lemmatization" class="headerlink" title="Stemming and lemmatization"></a>Stemming and lemmatization</h3><ul>
+<li>The goal of both stemming and lemmatization is to reduce inflectional forms and sometimes derivationally related forms of a word to a common base form</li>
+<li>Stemming usually refers to a crude heuristic process that chops off the ends of words</li>
+<li>Lemmatization usually refers to doing things properly with the use of a vocabulary and morphological analysis of words</li>
+<li>If confronted with the token <code>saw</code>, stemming might return just <code>s</code>, whereas lemmatization would attempt to return either <code>see</code> or <code>saw</code> depending on whether the use of the token was as a verb or a noun</li>
+<li>For a more detailed treatment please check <a href="https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html" target="_blank" rel="noopener">here</a></li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="N-gram"><a href="#N-gram" class="headerlink" title="N gram"></a>N gram</h3><ul>
+<li>n-gram is a contiguous sequence of n items from a given sample of text or speech</li>
+<li>An n-gram of size 1 is referred to as a “unigram”; size 2 is a “bigram” size 3 is a “trigram”. Larger sizes are sometimes referred to by the value of n in modern language, e.g., “four-gram”, “five-gram”, and so on.</li>
+<li>Consider this example: <code>The quick brown fox jumped over the lazy dog.</code><ul>
+<li>bigram would be <code>the quick</code>, <code>quick brown</code>, <code>brown fox</code>, …, i.e, every two consecutive words (or tokens)</li>
+<li>trigram would be <code>the quick brown</code>, <code>quick brown fox</code>, <code>brown fox jumped</code>, …, i.e., every three consecutive words (or tokens)</li>
+</ul>
+</li>
+<li>ngram model models sequence, i.e., predicts next word (n) given previous words (1, 2, 3, …, n-1)</li>
+<li>multiple gram (bigram and above) captures <strong>context</strong></li>
+<li>to choose n in n-gram requires experiments and making tradeoff between stability of the estimate against its appropriateness. Rule of thumb: trigram is a common choice with large training corpora (millions of words), whereas a bigram is often used with smaller ones.</li>
+<li>n-gram can be used as features for machine learning and downstream NLP tasks</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Bag-of-Words"><a href="#Bag-of-Words" class="headerlink" title="Bag of Words"></a>Bag of Words</h3><ul>
+<li>Why? Machine learning models cannot work with raw text directly; rather, they take numerical values as input.</li>
+<li>Bag of words (BoW) builds a <strong>vocabulary</strong> of all the unique words in our dataset, and associate a unique index to each word in the vocabulary</li>
+<li>It is called a “bag” of words, because it is a representation that completely ignores the order of words</li>
+<li>Consider this example of two sentences: (1) <code>John likes to watch movies, especially horor movies.</code>, (2) <code>Mary likes movies too.</code> We would first build a vocabulary of unique words (all lower cases and ignoring punctuations): <code>[john, likes, to, watch, movies, especially, horor, mary, too]</code>. Then we can represent each sentence using term frequency, i.e, the number of times a term appears. So (1) would be <code>[1, 1, 1, 1, 2, 1, 1, 0, 0]</code>, and (2) would be <code>[0, 1, 0, 0, 1, 0, 0, 1, 1]</code></li>
+<li>A common alternative to the use of dictionaries is the <a href="https://en.wikipedia.org/wiki/Feature_hashing" target="_blank" rel="noopener">hashing trick</a>, where words are directly mapped to indices with a hashing function</li>
+<li>As the vocabulary grows bigger (tens of thousand), the vector to represent short sentences / document becomes sparse (almost all zeros)</li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="word2vec"><a href="#word2vec" class="headerlink" title="word2vec"></a>word2vec</h3><ul>
+<li>Shallow, two-layer neural networks that are trained to construct linguistic context of words</li>
+<li>Takes as input a large corpus, and produce a vector space, typically of several hundred<br>dimension, and each word in the corpus is assigned a vector in the space</li>
+<li>The key idea is <strong>context</strong>: words that occur often in the same context should have same/opposite<br>meanings.</li>
+<li>Two flavors<ul>
+<li>continuous bag of words (CBOW): the model predicts the current word given a window of surrounding context words</li>
+<li>skip gram: predicts the surrounding context words using the current word</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/w2v.png" alt="link"></p>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h2 id="System"><a href="#System" class="headerlink" title="System"></a>System</h2><ul>
+<li><a href="#cron-job">Cron job</a></li>
+<li><a href="#linux">Linux</a></li>
+</ul>
+<h3 id="Cron-job"><a href="#Cron-job" class="headerlink" title="Cron job"></a>Cron job</h3><p>The software utility <strong>cron</strong> is a <strong>time-based job scheduler</strong> in Unix-like computer operating systems. People who set up and maintain software environments use cron to schedule jobs (commands or shell scripts) to run periodically at fixed times, dates, or intervals. It typically automates system maintenance or administration – though its general-purpose nature makes it useful for things like downloading files from the Internet and downloading email at regular intervals.</p>
+<p><img src="https://github.com/ShuaiW/data-science-question-answer/blob/master/assets/cron-job.PNG" alt="link"></p>
+<p>Tools:</p>
+<ul>
+<li><a href="https://airflow.apache.org/" target="_blank" rel="noopener">Apache Airflow</a></li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><p>Using <strong>Ubuntu</strong> as an example.</p>
+<ul>
+<li>Become root: <code>sudo su</code></li>
+<li>Install package: <code>sudo apt-get install &lt;package&gt;</code></li>
+</ul>
+<p><a href="#data-science-question-answer">back to top</a></p>
+<p>Confession: some images are adopted from the internet without proper credit. If you are the author and this would be an issue for you, please let me know.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2020-03-29-Study-AI-Code-Lv1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020-03-29-Study-AI-Code-Lv1/" itemprop="url">AI Code Level 1</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-29T08:00:00+08:00">
+                2020-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://github.com/Microsoft/ai-edu" target="_blank" rel="noopener">AI-Edu</a></p>
+<h2 id="房价预测问题"><a href="#房价预测问题" class="headerlink" title="房价预测问题"></a>房价预测问题</h2><p>如果用传统的数学方法解决这个问题，我们可以使用正规方程，从而可以得到数学解析解，然后再使用神经网络方式来求得近似解，从而比较两者的精度，再进一步调试神经网络的参数，达到学习的目的。</p>
+<p>我们不妨先把两种方式在这里做一个对比，读者阅读并运行代码，得到结果后，再回到这里来仔细体会表5-3中的比较项。</p>
+<p>表5-3 两种方法的比较</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>正规方程</th>
+<th>梯度下降</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原理</td>
+<td>几次矩阵运算</td>
+<td>多次迭代</td>
+</tr>
+<tr>
+<td>特殊要求</td>
+<td>$X^TX$的逆矩阵存在</td>
+<td>需要确定学习率</td>
+</tr>
+<tr>
+<td>复杂度</td>
+<td>$O(n^3)$</td>
+<td>$O(n^2)$</td>
+</tr>
+<tr>
+<td>适用样本数</td>
+<td>$m \lt 10000$</td>
+<td>$m \ge 10000$</td>
+</tr>
+</tbody>
+</table>
+<p>DialogFlow，Python 和 Flask 打造 ChatBot<br><a href="https://github.com/virgili0/Virgilio/blob/master/zh-CN/Topics/DialogFlow.md" target="_blank" rel="noopener">https://github.com/virgili0/Virgilio/blob/master/zh-CN/Topics/DialogFlow.md</a></p>
+<p>Object Instance Segmentation using TensorFlow Framework and Cloud GPU Technology<br><a href="https://github.com/virgili0/Virgilio/blob/master/zh-CN/Topics/Computer%20Vision/Object_Instance_Segmentation_using_TensorFlow_Framework_and_Cloud_GPU_Technology.ipynb" target="_blank" rel="noopener">https://github.com/virgili0/Virgilio/blob/master/zh-CN/Topics/Computer%20Vision/Object_Instance_Segmentation_using_TensorFlow_Framework_and_Cloud_GPU_Technology.ipynb</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2020-03-28-Study-Data-Science-for-Business-Notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020-03-28-Study-Data-Science-for-Business-Notes/" itemprop="url">Data Science for Business Notes</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-28T08:00:00+08:00">
+                2020-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Foster Provost and Tom Fawcett, Data Science for Business: What you need to know about data mining and data-analytic thinking, O’Reilly Media; 1 edition (August 16, 2013)</p>
+<ol>
+<li>Introduction: Data-Analytic Thinking<ol>
+<li>Data science: a set of fundamental principles that guide the extraction of knowledge from data</li>
+<li>Churn: customers switching from one company to another</li>
+<li>DDD: Data-Driven Decition Making =by&gt; Data science involces principles, processes, and techniques for understanding phenomena via the (automated) analysis of data. <a href="0">data-driven-decision-making-notes.pdf</a><ol>
+<li>Discovery</li>
+<li>Accuracy</li>
+</ol>
+</li>
+<li>Big Data: datasets that are too large for traditional data processing systems</li>
+<li>Data, Data Science Capability as a Dtrategic Asset: the capability to extract useful knowledge from data</li>
+<li>Fundamental concept:<ol>
+<li>Extracting useful knowledge from data to solve business problemscan be treated systematically by following a process with reasonably well-defined stages</li>
+<li>From a large mass of data, information technology can be used tofind  informative  descriptive  attributes of entities of interest</li>
+<li>If you look too hard at a set of data, you will find something—butit might not generalize beyond the data you’re looking at</li>
+<li>Formulating  data  mining  solutions  and  evaluating  the  resultsinvolves thinking carefully about the context in which they will be used</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Business Problems and Data Science Solutions<ol>
+<li>Fundamentally different types of tasks data mining algorithms address:<ol>
+<li>Classification and class probability estimation<ol>
+<li>attempts to predict, for each individual in a population, which of a (small) set of classes this individual belongs to (binary target)</li>
+<li>scoring model applied to an individual produces a score representing the probability that that individual belongs to each class</li>
+</ol>
+</li>
+<li>Regression (“value estimation”)<ol>
+<li>attempts to estimate or predict, for each individual, the numerical value of some variable for that individual (numeric target)</li>
+</ol>
+</li>
+<li>Similarity matching<ol>
+<li>attempts to identify similar individuals based on data known about them</li>
+</ol>
+</li>
+<li>Clustering<ol>
+<li>attempts to group individuals in a population together by their similarity, but not driven by any specific purpose</li>
+</ol>
+</li>
+<li>Co-occurrence grouping<ol>
+<li>attempts to find associations between entities based on transactions involving them</li>
+</ol>
+</li>
+<li>Profiling (behaviour description)<ol>
+<li>attempts to characterize the typical behaviour of an individual, group, or population</li>
+</ol>
+</li>
+<li>Link prediction<ol>
+<li>attempts to predict connections between data items, usually by suggesting that a link should exist, and possibly also estimating the strength of the link</li>
+</ol>
+</li>
+<li>Data reduction<ol>
+<li>attempts to take a large set of data and replace it with a smaller set of data that contains much of the important information in the larger set</li>
+</ol>
+</li>
+<li>Casual modelling<ol>
+<li>attempts to understand what events or actions actually influence others</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Unsupervised: data mining problem when there is no clear target</li>
+<li>Supervised: data mining problem where a specific target is defined and there must be data on the target</li>
+<li>Label: the value for the target variable for an individual</li>
+<li>Data mining algorithms:<ol>
+<li>supervised methods<ol>
+<li>classification</li>
+<li>regression</li>
+<li>casual modelling</li>
+<li>similarity matching</li>
+<li>link prediction</li>
+<li>data reduction</li>
+</ol>
+</li>
+<li>unsupervised<ol>
+<li>clustering</li>
+<li>co-occurrence grouping</li>
+<li>profiling</li>
+<li>similarity matching</li>
+<li>link prediction</li>
+<li>data reduction</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>The data mining process given by the Cross Industry Standard Process for Data Mining (CRSIP-DM):<ol>
+<li>Business Understanding<ul>
+<li>to understand the problem to be solved</li>
+<li>the design team should think carefully about the problem to be solved and about the use scenario (the analysts’ creativity plays a large role)</li>
+</ul>
+</li>
+<li>Data Understanding<ul>
+<li>to understand the strengths and limitations of the data because there rarely is there an exact match with the problem</li>
+<li>cost of data may vary (some data may be purchased, free, or doesn’t exist at all)</li>
+</ul>
+</li>
+<li>Data Preparation<ul>
+<li>conversing the data into forms that yield better results (removing or inferring missing values, converting data to different types)</li>
+<li>leakage must be considered carefully (a situation where a variable collected in historical data gives information on the target variable – information that appears in historical data but is not actually available when the decision has to be made)</li>
+</ul>
+</li>
+<li>Modelling<ul>
+<li>the output of modelling is some sort of model or pattern capturing regularities in the data</li>
+</ul>
+</li>
+<li>Evaluation<ul>
+<li>to assess the data mining results rigorously and to gain confidence that they are valid and reliable before moving on</li>
+<li>ensure that the model satisfies the original business goals</li>
+<li>evaluating the results includes both quantitative and qualitative assessments</li>
+</ul>
+</li>
+<li>Deployment<ul>
+<li>the results are put into real use in order to realize some return on investment</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>Related analytic techniques:<ol>
+<li>Statistics</li>
+<li>Database Querying</li>
+<li>Data Warehousing</li>
+<li>Regression Analysis</li>
+<li>Machine Learning and Data Mining</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Introduction to Predictive Modelling: From Correlation to Supervised Segmentation<ol>
+<li>Model: a simplified representation of reality created to serve a purpose</li>
+<li>Predictive modelling: the primary purpose of the model is to estimate an unknown value</li>
+<li>Descriptive modelling: the primary purpose of the model is to gain insight into the underlying phenomenon or process</li>
+<li>Supervised learning: model creation where the model describes a relationship between a set of selected variables (attributes or features) and a predefined variable called the target variable</li>
+<li>Instance (feature vector): a set of attributes (fields, columns, variables, or features)</li>
+<li>Model induction: the creation of models</li>
+<li>Induction algorithm/learner: the procedure that creates the model from the data</li>
+<li>Training data/labelled data: the input data for the induction algorithm, used for inducing the model</li>
+<li>Supervised Segmentation &amp; Selecting Informative Attributes - Pure: homogeneous with respect to the target variable</li>
+<li>Entropy: a measure of disorder that can be applied to a set</li>
+<li>Information Gain (IG): measures the change in entropy due to any amount of new information being added</li>
+<li>Classification tree are one sort of tree-structured model</li>
+<li>probability estimation tree - Y/N</li>
+<li>regression tree - numeric</li>
+</ol>
+</li>
+<li>Fitting a Model to Data<ol>
+<li>Parameter learning/parametric modeling: tuning parameters so that the model fits the data as well modelling as possible</li>
+<li>Linear discriminant: linear functions (𝑦 = 𝑚𝑥 + 𝑏) that discriminates between the classes, and the function of the decision boundary is a linear combination – a weighted sum – of the attributes</li>
+<li>Support vector machine (SVM)<ol>
+<li>First fit the fattest bar between the classes</li>
+<li>the linear discriminant will be the center line through the dashed parallel lines (margin)</li>
+<li>has hinge loss - “small” errors</li>
+</ol>
+</li>
+<li>Regression via Mathematical Functions<ol>
+<li>Loss functions - hinge loss, Zero-one loss</li>
+<li>absolute error</li>
+</ol>
+</li>
+<li>Least squares regression: its very sensitive to the date, outlying data points can severely skew the resultant linear function</li>
+<li>Logistic regression f(x) is the model’s estimation of the log-odds that x belongs to the positive class<ol>
+<li>Most important parts logistic regression</li>
+<li>Differences between classification trees and linear classifiers</li>
+</ol>
+</li>
+<li>Neural networks: can be seen as a “stack” of models</li>
+</ol>
+</li>
+<li>Overfitting and Its Avoidance<ol>
+<li>Generalization - the property of a model or modelling process, whereby the model applies to data that were not used to build the model</li>
+<li>Overfitting - the tendency of data mining procedures to tailor models to the training data, at the expense of generalization to previously unseen data points<ol>
+<li>There is a fundamental trade-off between model complexity and the possibility of overfitting.</li>
+</ol>
+</li>
+<li>Fitting graph - shows the accuracy of a model as a function of complexity<ol>
+<li>Estimate generalization performance by comparing the predicted values with the hidden true values.</li>
+</ol>
+</li>
+<li>Holdout data - data not used in building the model, but for which we do know the actual value of the target variable<ol>
+<li>Generally, there will be more overfitting as one allows the model to be more complex.</li>
+<li>One way mathematical functions can become more complex is by adding more variables (more attributes) or changing the function from being truly linear to nonlinear.</li>
+<li>Overfitting is bad because as a model gets more complex it is allowed to pick up harmful spurious correlations. The harm occurs when these spurious correlations produce incorrect generalizations in the model.</li>
+<li>A holdout set gives us an estimate of generalization performance.</li>
+</ol>
+</li>
+<li>Cross-validation - a more sophisticated holdout training and testing procedure<ol>
+<li>Cross-validation begins by splitting a labelled dataset into k partitions called folds. The purpose of cross-validation is to use the original labelled data efficiently to estimate the performance of a modelling procedure. The result is k-different accuracy results, which then can be used to compute the average accuracy and its variance.</li>
+</ol>
+</li>
+<li>Learning curve - a plot of the generalization performance against the amount of training data<ol>
+<li>A learning curve shows the generalization performance – the performance only on testing data, plotted against the amount of training data used. A fitting graph shows the generalization performance as well as the performance on the training data, but plotted against model complexity.</li>
+<li>Tree induction uses two techniques to avoid overfitting:<ol>
+<li>stop growing the tree before it gets too complex<ol>
+<li>the threshold can be determined using a hypothesis test.</li>
+</ol>
+</li>
+<li>grow the tree until it is too large, then “prune” it back, reducing its size (and thereby its complexity)</li>
+</ol>
+</li>
+<li>The general method for avoiding overfitting is to choose the value for some complexity parameter by using some sort of nested holdout procedure.</li>
+</ol>
+</li>
+<li>Sequential forward selection (SFS) - uses a nested holdout procedure to first pick the best individual feature, by looking at all models built using just one feature</li>
+<li>Regularization - a combination of fit to the data and simplicity of the model</li>
+</ol>
+</li>
+<li>Similarity, Neighbors, and Clusters<ol>
+<li>Similarity and Distance (Nearest-Neighbor Reasoning)<ol>
+<li>nearest-neighbor methods often use weighted  voting or imilarity moderated voting</li>
+<li>instance-based learning</li>
+<li>Case-Based Reasoning</li>
+</ol>
+</li>
+<li>Geometric Interpretation, Overfitting, and Complexity Control<ol>
+<li>k-NN e.g. k = n | k = 1</li>
+<li>Issues with Nearest-Neighbor Methods<ol>
+<li>Intelligibility</li>
+<li>Dimensionality and domain knowledge</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Technical Details - Calculating Scores from Neighbors<ol>
+<li>Heterogeneous Attributes</li>
+<li>Manhattan distance or L1-norm</li>
+<li>Jaccard distance</li>
+<li>Cosine distance - text classification</li>
+<li>edit distance or the Levenshtein metric</li>
+<li>Majority vote classification</li>
+<li>Majority scoring function</li>
+<li>Similarity-moderated classification</li>
+<li>Similarity-moderated scoring</li>
+<li>Similarity-moderated regression</li>
+</ol>
+</li>
+<li>Clustering<ol>
+<li>Hierarchical Clustering - e.g. Tree of Life</li>
+<li>Clustering Around Centroids - k-means clustering</li>
+<li>Using Supervised Learning to Generate Cluster Descriptions</li>
+<li>CRISP data mining process</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Decision Analytic Thinking I: What Is a Good Model?<ol>
+<li>Evaluating Classifiers<ol>
+<li>Classifier accuracy</li>
+<li>Confusion Matrix</li>
+</ol>
+</li>
+<li>Generalizing Beyond Classification</li>
+<li>A Key Analytical Framework: Expected Value<ol>
+<li>cost-benefit matrix</li>
+<li>b(predicted, actual)</li>
+</ol>
+</li>
+<li>Evaluation, Baseline Performance, and Implications for Investments in Data</li>
+</ol>
+</li>
+<li>Visualizing Model Performance<ol>
+<li>Profit Curves<ol>
+<li>class priors</li>
+<li>costs and benefits</li>
+</ol>
+</li>
+<li>Receiver Operating Characteristics (ROC) Graphs and Curves</li>
+<li>Cumulative Response Curves (Lift Curves)</li>
+<li>Evaluating Learning Algorithms: A Classification Perspective (Japkowicz &amp; Shah, 2011)</li>
+</ol>
+</li>
+<li>Evidence and Probabilities<ol>
+<li>Combining Evidence Probabilistically<ol>
+<li>Joint Probability and Independence</li>
+<li>Bayes’ Rule - <a href="https://www.cnblogs.com/pegasus923/p/10470230.html" target="_blank" rel="noopener">Notes</a></li>
+</ol>
+</li>
+<li>Applying Bayes’ Rule to Data Science<ol>
+<li>Conditional Independence and Naive Bayes</li>
+<li>Advantages and Disadvantages of Naive Bayes</li>
+</ol>
+</li>
+<li>A Model of Evidence “Lift”</li>
+<li>Example: Evidence Lifts from Facebook “Likes”</li>
+</ol>
+</li>
+<li>Representing and Mining Text<ol>
+<li>Representation<ol>
+<li>Bag of Words</li>
+<li>Term Frequency</li>
+<li>Inverse document frequency (IDF) &amp; TFIDF</li>
+</ol>
+</li>
+<li>The Relationship of IDF to Entropy ?</li>
+<li>Beyond Bag of Words<ol>
+<li>N-gram Sequences</li>
+<li>Named Entity Extraction</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Decision Analytic Thinking II: Toward Analytical Engineering<ol>
+<li>The Expected Value Framework: Decomposing the Business Problem and Recomposing the Solution Pieces</li>
+<li>The Expected Value Framework: Structuring a More Complicated Business Problem<ol>
+<li>value of targeting</li>
+<li>From an Expected Value Decomposition to a Data Science Solution</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Other Data Science Tasks and Techniques<ol>
+<li>Co-occurrences and Associations: Finding Items That Go Together</li>
+<li>Profiling: Finding Typical Behavior<ol>
+<li>Gaussian Mixture Model (GMM)</li>
+</ol>
+</li>
+<li>Link Prediction and Social Recommendation<ol>
+<li>multivariate similarity</li>
+</ol>
+</li>
+<li>Data Reduction, Latent Information, and Movie Recommendation<ol>
+<li>regularization</li>
+</ol>
+</li>
+<li>Bias, Variance, and Ensemble Methods<ol>
+<li>k-NN prediction</li>
+<li>inherent randomness, learning curves</li>
+</ol>
+</li>
+<li>Data-Driven Causal Explanation and a Viral Marketing Example<ol>
+<li>Causal explanation</li>
+<li>Causal data analysis</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Data Science and Business Strategy<ol>
+<li>Thinking Data-Analytically, Redux</li>
+<li>Achieving Competitive Advantage with Data Science</li>
+<li>Sustaining Competitive Advantage with Data Science</li>
+<li>Attracting and Nurturing Data Scientists and Their Teams</li>
+<li>Be Ready to Accept Creative Ideas from Any Source</li>
+<li>Be Ready to Evaluate Proposals for Data Science Projects</li>
+<li>A Firm’s Data Science Maturity</li>
+</ol>
+</li>
+<li>Conclusion<ol>
+<li>The Fundamental Concepts of Data Science</li>
+<li>“What Data Can’t Do” (Brooks, 2013) New York Times</li>
+<li>Privacy, Ethics, and Mining Data About Individuals</li>
+<li>ACM SIGKDD International Conference on Data Mining and Knowledge Discovery</li>
+<li>IEEE International Conference on Data Mining</li>
+<li>Final Example: From Crowd-Sourcing to Cloud-Sourcing<ol>
+<li>Amazon Mechanical Turk (MTurk)</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>Understanding Data and the Data Mining Process</li>
+<li>Exploring and Visualizing Data</li>
+<li>Market Segmentation of Customers</li>
+<li>Working with Unstructured Datasets</li>
+<li>Predictive Modeling</li>
+<li>Overfitting and Evaluating Models</li>
+<li>Data Mining Techniques for Prediction</li>
+<li>Pro-Active Churn Management</li>
+<li>Data Based Decision Making</li>
+<li>Business Strategy for Employing Data Science</li>
+</ul>
+<p>Tools:</p>
+<ol>
+<li>Calculus</li>
+<li>Linear Algebra - <a href="https://mitmath.github.io/1806/" target="_blank" rel="noopener">MIT Math</a></li>
+<li>Probability And Statitics</li>
+<li>Statistical Inference</li>
+<li>Applied Linear Regression 4th edition by Weisberg</li>
+<li>Statistics for Experimenters: Design, Innovation, and Discovery, 2nd Edition</li>
+<li>Probability and Measure</li>
+<li>SVD cholesky decomposition matrix differentiation</li>
+<li>..</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2020-03-26-Study-Data-Science-Links/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020-03-26-Study-Data-Science-Links/" itemprop="url">Data Science Links</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-26T08:00:00+08:00">
+                2020-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="数据科学家修炼之道"><a href="#数据科学家修炼之道" class="headerlink" title="数据科学家修炼之道"></a>数据科学家修炼之道</h2><p>[美] Zacharias Voulgaris 弗格里斯</p>
+<h3 id="有用的网页链接"><a href="#有用的网页链接" class="headerlink" title="有用的网页链接"></a>有用的网页链接</h3><ul>
+<li><a href="http://www.kaggle.com" target="_blank" rel="noopener">www.kaggle.com</a> - 人际网络、大数据分析竞赛、找工作可能是目前有关于数据科学家和机器学习专家的最流行的网站。一定要记得把它添加进入你的浏览器收藏夹</li>
+<li><a href="http://www.linkedin.com" target="_blank" rel="noopener">www.linkedin.com</a> - 人际网络、找工作、在线简历最流行的社交平台之一，适合于各种工作各种级别的人加入。有很多领域内小组，并且可以在上面遇到其他的数据科学家并向他们学习</li>
+<li><a href="http://www.datasciencecentral.com" target="_blank" rel="noopener">www.datasciencecentral.com</a> - 文章、找工作、人际网络、新闻、背景知识也是最流行的一个高质量数据科学网站。对于数据科学专家和新手都很适合，是一个非常好的寻找灵感和技术的地方</li>
+<li><a href="http://www.coursera.com" target="_blank" rel="noopener">www.coursera.com</a> - 在线学习、人际网络是目前最流行的在线教育平台，由斯坦福大学的一群教授建立。上边有一些有关于数据科学的课程，在每一个课程的论坛中，你可以找到一些其他志同道合的人</li>
+<li><a href="http://datascience01.wordpress.com" target="_blank" rel="noopener">datascience01.wordpress.com</a> - 新闻一个适合新人找到最新领域内新闻的地方</li>
+<li><a href="http://cran.rproject.org" target="_blank" rel="noopener">cran.rproject.org</a> - R、新闻、软件一个熟悉R语言开发流程的好地方，并且可以轻松下载各种R包进行开发</li>
+<li><a href="http://www.indeed.com" target="_blank" rel="noopener">www.indeed.com</a> - 找工作、在线简历最著名的招聘网站</li>
+<li><a href="http://whatsthebigdata.com" target="_blank" rel="noopener">whatsthebigdata.com</a> - 新闻、背景知识、文章、大数据一个可以很好地拓展自己的大数据领域知识，并且可以发现最多目前的前沿技术发展情况的地方</li>
+<li><a href="http://www.bigdatauniversity.com" target="_blank" rel="noopener">www.bigdatauniversity.com</a> - 在线学习、大数据最好的获得数据技术专业知识和资源的地方，由IBM创建与维护</li>
+<li><a href="http://www.rproject.org" target="_blank" rel="noopener">www.rproject.org</a> - R、新闻、软件适合开发者经常浏览的，充满了大量流行的大数据分析方法的开源平台</li>
+<li><a href="http://www.eclipse.org" target="_blank" rel="noopener">www.eclipse.org</a> - Eclipse、新闻、软件最流行的一个面向对象编程语言集成开发平台</li>
+<li><a href="http://Hadoop.apache.org" target="_blank" rel="noopener">Hadoop.apache.org</a> - 大数据、Hadoop软件最流行的大数据技术平台</li>
+<li><a href="http://www.careerealism.com" target="_blank" rel="noopener">www.careerealism.com</a> - 找工作一个充满了很多找工作教程和指导资源的网站</li>
+<li><a href="http://stackoverflow.com" target="_blank" rel="noopener">stackoverflow.com</a> - 技术问题一个可以找到各种技术问题的解决方案的地方（例如R语言）</li>
+<li><a href="http://coursetalk.org" target="_blank" rel="noopener">coursetalk.org</a> - 在线学习一个适合学生们找到各种各样的课程进行学习的在线教育平台，并且学生们可以评价他们选择过的课程</li>
+<li><a href="http://www.edX.org" target="_blank" rel="noopener">www.edX.org</a> - 在线学习一个可以提供不同课题的大数据课程的在线教育平台</li>
+<li><a href="http://www.classcentral.com" target="_blank" rel="noopener">www.classcentral.com</a> - 在线学习一个可以从不同的在线教育平台找到各种课程资源的网站，例如Coursera、edX等</li>
+<li><a href="http://www.technicspub.com" target="_blank" rel="noopener">www.technicspub.com</a> - 线下学习一个可以找到各种技术书籍的网站</li>
+<li><a href="http://www.java.com" target="_blank" rel="noopener">www.java.com</a> - 面向对象编程、Java、软件目前世界上最流行的面向对象编程语言之一</li>
+<li><a href="http://www.python.org" target="_blank" rel="noopener">www.python.org</a> - 面向对象编程、Python、Software目前世界上最流行的面向对象编程语言之一</li>
+<li><a href="http://www.gnu.org/software/octave" target="_blank" rel="noopener">www.gnu.org/software/octave</a> - 面向对象编程、Octave、软件目前最流行的一个开源数据分析平台之一，与Matlab非常类似</li>
+<li><a href="http://www.mathworks.com/matlabcentral" target="_blank" rel="noopener">www.mathworks.com/matlabcentral</a> - 面向对象编程、Matlab、软件目前非常流行的一个数据分析平台</li>
+<li><a href="http://www.tableausoftware.com" target="_blank" rel="noopener">www.tableausoftware.com</a> - 数据可视化、软件目前最流行的一种可视化软件</li>
+<li><a href="http://www.1.ibm.com/software/data/infosphere/biginsights" target="_blank" rel="noopener">ibm infosphere biginsights</a> - 大数据、软件IBM开发的一个非常适于处理大数据的平台（基于Hadoop）</li>
+<li><a href="http://gitscm.com" target="_blank" rel="noopener">gitscm.com</a> - 版本控制、软件一个非常流行的用来控制软件或者程序版本的网站</li>
+<li><a href="http://www.oracle.com" target="_blank" rel="noopener">www.oracle.com</a> - 数据库管理、软件目前世界上最流行的一个数据库</li>
+<li><a href="http://www.datascience201.com?kid=21QD6" target="_blank" rel="noopener">www.datascience201.com</a> - 在线学习一个可以找到很多学习数据科学的各种有趣资源的地方，主要针对数据新手</li>
+<li><a href="http://www.udacity.com" target="_blank" rel="noopener">www.udacity.com</a> - 在线学习一个可以提供大量数据科学课题学习的在线学习平台</li>
+<li><a href="http://www.cs.toronto.edu/~hinton" target="_blank" rel="noopener">www.cs.toronto.edu</a> - 个人目前世界上最著名的一个数据科学家的主页</li>
+<li><a href="http://www.meetup.com" target="_blank" rel="noopener">www.meetup.com</a> - 人际网络、线下学习目前最好的一个基于线下自组织团体的社交平台。上面有很多专业的团队，非常适合用来建立人际网络以及寻找教育资源</li>
+</ul>
+<h3 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h3><ul>
+<li><a href="flowingdata.com/">Link</a>数据科学家的职责有关于过往几年的数据科学的流行情况、相关技术以及其他有关于数据科学家的信息的文章</li>
+<li><a href="www.datacommunitydc.org/">Link</a>数据产品有关于最近的流行的数据产品的文章</li>
+<li><a href="www.cooldailyinfographics.com/post/describinghowdifferentindustrieshavecapitalizedbigdata">Link</a>信息图、大数据有关于数据科学在各个领域的功能与作用的信息图谱</li>
+<li><a href="gigaom.com/2011/09/30/bigdataequalsbigopportunitiesforbusinessesinfographic">Link</a>信息图、大数据另一个有关于大数据在不同领域中发挥作用的信息图谱</li>
+<li><a href="whatsthebigdata.com/">Link</a>数据科学史提供长年累月依赖的经典数据科学里程碑信息的文章</li>
+<li><a href="www.forbes.com/sites/gilpress/2013/05/28/averyshorthistoryofdatascience">Link</a>数据科学史另一篇有关于数据科学史的文章</li>
+<li><a href="www.verious.com/tutorial/bigdatastoragemediumsdatastructures">Link</a>技术简介、大数据非常有用的有关于数据存储和大数据数据库的文章</li>
+<li><a href="howtojboss.com/2013/02/13/bigdatastoragemediumsdatastructures">Link</a>技术简介、大数据有关于数据存储与数据库的重要文章</li>
+<li><a href="www.techopedia.com/definition/28789/dataexploration">Link</a>数据科学流程、数据探索有关于数据探索以及其在数据科学中的作用的文章</li>
+<li><a href="www.bytemining.com/2011/08/HadoopfatiguealternativestoHadoop">Link</a>技术简介、大数据技术介绍除了Hadoop以外的其他大数据处理平台的文章</li>
+<li><a href="www.enterpriseappstoday.com/datamanagement/4hotopensourcebigdataprojects.html">Link</a>技术简介、大数据科技另一篇有关于Hadoop替代品的文章</li>
+<li><a href="strata.oreilly.com/2012/02/whatisapacheHadoop.html">Link</a>技术简介、大数据技术 Hadoop平台系统简介</li>
+<li><a href="apandre.wordpress.com/tools/comparison/">Link</a>数据科学流程、数据可视化有关于比较当前的不同的数据可视化工具的文章</li>
+<li><a href="www.mlplatform.nl/whatismachinelearning">Link</a>数据科学史、机器学习有关于机器学习经典算法的简要介绍</li>
+<li><a href="sge.wonderville.ca/machinelearning/history/history.html">Link</a>数据科学史、机器学习更多有关于机器学习的介绍，包括其经典算法</li>
+<li><a href="cran.rproject.org/web/views/MachineLearning.html">Link</a>机器学习、R包有关于机器学习包和库的完整列表</li>
+<li><a href="www.datasciencecentral.com/profiles/blogs/datascientistcoreskills">Link</a>数据科学家技能有关于当前的数据科学家所需技能的文章</li>
+<li><a href="datainformed.com/glossaryofbigdataterms">Link</a>大数据、词汇表本书词汇表来源之一</li>
+<li><a href="www.bigdatastartups.com/abcbigdataglossaryterminology">Link</a>大数据、词汇表另一个本书的词汇表来源</li>
+<li><a href="www.mhhe.com/business/buscom/gregg/docs/appd.pdf">Link</a>词汇表</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2020-03-18-Study-Digital-forensics-Notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Xia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack Xia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020-03-18-Study-Digital-forensics-Notes/" itemprop="url">Digital forensics Notes</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-20T08:00:00+08:00">
+                2020-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Prescribed textbook: André Årnes, Digital Forensic, Wiley; 1 edition (July 24, 2017)</p>
+<p>Session 1: Introduction of Digital Forensics</p>
+<ol>
+<li>Introduction - Andre Arnes<ol>
+<li>History</li>
+<li>Locard’s Exchange Principle</li>
+<li>Crime Reconstruction</li>
+<li>Ivestigations</li>
+<li>Evidence Dynamics</li>
+<li>Layers of Abstraction</li>
+<li>Metadata</li>
+<li>Online Bank Fraud<ol>
+<li>Modus Operandi</li>
+<li>The SpyEye Case</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>The Digital Forensics Process - Anders O. Flaglien<ol>
+<li>Principles of a Forensics Process</li>
+<li>Finding the Digital Evidence</li>
+<li>The Identification Phase<ol>
+<li>Preparations and Deployment of Tools and Resources</li>
+<li>The First Responder</li>
+<li>At the Scene of the Incident</li>
+<li>Dealing with Live and Dead Systems</li>
+<li>Chain of Custody</li>
+</ol>
+</li>
+<li>The Collection Phase<ol>
+<li>Sources of Digital Evidence</li>
+<li>Systems Physically Tied to a Location</li>
+<li>Multiple Evidence Sources</li>
+<li>Reconstruction</li>
+<li>Evidence Integrity</li>
+<li>Dual-Tool Verification</li>
+<li>Remote Acquisition</li>
+<li>External Competency and Forensics Cooperation</li>
+</ol>
+</li>
+<li>The Examination Phase<ol>
+<li>Initial Data Source Examination and Preprocessing</li>
+<li>Forensic File Formats and Structures</li>
+<li>Data Reduction and Filtering</li>
+<li>Timestamps</li>
+<li>Compression, Encryption and Obfuscation</li>
+<li>Data and File Carving</li>
+<li>Automation</li>
+</ol>
+</li>
+<li>The Analysis Phase<ol>
+<li>Layers of Abstraction</li>
+<li>Evidence Types</li>
+<li>String and Keyword Searches</li>
+<li>Anti-Forensics<ol>
+<li>Computer Media Wiping</li>
+<li>Analysis of Encrypted and Obfuscated Data</li>
+</ol>
+</li>
+<li>Automated Analysis</li>
+<li>Timelining of Events</li>
+<li>Graphs and Visual Representaitons</li>
+<li>Link Analysis</li>
+</ol>
+</li>
+<li>The Presentation Phase<ol>
+<li>The Final Reports</li>
+<li>Presentation of Evidence and Work Conducted</li>
+<li>The Chain of Custody Circle Closes</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>Session 2-4: Traditional Digital Forensics Investigation</p>
+<ol>
+<li>Cybercrime Law - Inger Marie Sunde<ol>
+<li>The International Legal Framework of Cybercrime Law<ol>
+<li>The International Involved in Criminal Activity and in Crime-Prevention Initiatives</li>
+<li>The National Legal System Versus the International legal Framework</li>
+<li>Fundamental Rights Relating to Cybercrime Law - The ECHR<ol>
+<li>The ECtHR as a Driving Force for Development of Human Rights</li>
+<li>The Right to Bring a Case before the ECtHR</li>
+<li>A Special Note on Transborder Search and the rule of Law</li>
+<li>The Connection between Fundamental Rights and the Rule of Law</li>
+<li>The Principle of Legality in the Context of Crime</li>
+<li>The Principle of Legality in the Context of a Criminal Investigation</li>
+<li>The Positive Obligation of the Nation State</li>
+<li>The Right to Fair Trial</li>
+<li>A Special Note on Evidence Rules in Different Legal Systems</li>
+<li>Possible Outcomes of a Violation of Fundamental Rights</li>
+</ol>
+</li>
+<li>Special Legal Framework: The Cybercrime Convention</li>
+<li>Interpretation of Cybercrime Law<ol>
+<li>Interpretation of Substantive Criminal Law</li>
+<li>Application of Old Criminal Provisions to New Modes of Conduct</li>
+<li>Interpretation of Procedural Procedural Provisions Authorizing Coersive Measures</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Digital Crime - Substantive Criminal Law<ol>
+<li>General Conditions for Criminal Liability</li>
+<li>Real-Life Modus Operandi</li>
+<li>Offenses against the Confidentiality, Integrity, and Availability of Computer Data and Systems<ol>
+<li>Illegal Access and Illegal Interception</li>
+<li>Data and System Interference</li>
+<li>Misuse of Devices</li>
+</ol>
+</li>
+<li>Computer-Related Offenses</li>
+<li>Content-Related Offenses</li>
+<li>Offenses Related to Infringements of Copyright and Related Rights</li>
+<li>Racist and Xenophobic Speech</li>
+</ol>
+</li>
+<li>Investigation Methods for Collecting Digital Evidence<ol>
+<li>The Digital Forensic Process in the Context of Criminal Procedure</li>
+<li>Computer Data That Are Publicly Available<ol>
+<li>Transborder Access to Stored Computer Data Where Publicly Available</li>
+<li>Online Undercover Operations</li>
+</ol>
+</li>
+<li>Scope and Safeguards fo the Investigation Methods<ol>
+<li>Suspicion-Based Investigation Methods</li>
+<li>The Scope of the Investigation Methods</li>
+<li>Conditions and Safeguards</li>
+<li>Considerations Relating to Third Parties</li>
+</ol>
+</li>
+<li>Search and Seizure<ol>
+<li>Main Rules</li>
+<li>Special Issues</li>
+</ol>
+</li>
+<li>Production Order</li>
+<li>Expedited Preservation and Partial Disclosure of Traffic Data<ol>
+<li>Real-Time Investigation Methods</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>International Cooperation in Order to Collect Digital Evidence<ol>
+<li>Narowing the Focus</li>
+<li>A Special Note on Transborder Access to Digital Evidence</li>
+<li>Mutual Legal Assistance<ol>
+<li>Basic Principles and Formal steps of the procedure</li>
+<li>International Police Cooperation and Joint Investigation</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Digital Forensic Readiness - Ausra Dilijonaite<ol>
+<li>Definition</li>
+<li>Law Enforcement versus Enterprise Digital Forensic Readiness</li>
+<li>Why? A Rationale for Difital Forensic Readiness<ol>
+<li>Cost</li>
+<li>Usefulness of Digital Evidence<ol>
+<li>Existence of Digital Evidence</li>
+<li>Evidentiary Weight of Digital Evidence</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Frameworks, Standards, and Methodologies<ol>
+<li>Standards<ol>
+<li>ISO/IEC 27037</li>
+<li>ISO/IEC 17025</li>
+<li>NIST SP 800-86</li>
+</ol>
+</li>
+<li>Guidelines<ol>
+<li>IOCE Guidelines</li>
+<li>Scientific Working Group on Digital Evidence (SWGDE)</li>
+<li>ENFSI Guidelines</li>
+</ol>
+</li>
+<li>Research<ol>
+<li>Rowlingson’s Ten-step Process</li>
+<li>Grobler et al.’s Forensic Readiness Framework</li>
+<li>Endicott-Popovsky et al.’s Forensic Readiness Framework</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Becoming “Digital Forensic” Ready</li>
+<li>Enterprise Digital Forensic Readiness<ol>
+<li>Legal Aspects</li>
+<li>Policy, Processes, and Procedures</li>
+<li>People</li>
+<li>Technology: Digital Forensic Laboratory</li>
+<li>Technology: Tools and Infrastructure</li>
+<li>Outsourcing Digital Forensic Capabilities</li>
+</ol>
+</li>
+<li>Considerations for Law Enforcement</li>
+</ol>
+</li>
+<li>Computer Forensics - Jeff Hamm<ol>
+<li>Evidence Collection<ol>
+<li>Data Acquisition<ol>
+<li>Live Data</li>
+<li>Forensic</li>
+</ol>
+</li>
+<li>Forensic Copy</li>
+</ol>
+</li>
+<li>Examination<ol>
+<li>Disk Structures</li>
+<li>File Systems</li>
+</ol>
+</li>
+<li>Analysis<ol>
+<li>Analysis Tools</li>
+<li>Timeline Analysis</li>
+<li>File Hashing</li>
+<li>Filtering</li>
+<li>Data Carving</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>Session 5: Network Forensics Investigation<br>Internet Forensics</p>
+<ol>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li>Tracing Information on the Internet<ol>
+<li>DNS and Reverse DNS</li>
+<li>Whois and Reverse Whois</li>
+<li>Ping and Port Scan</li>
+<li>Traceroute</li>
+<li>IP Geolocation</li>
+<li>Tracing BitTorrent Peers</li>
+<li>Bitcoin Unconfirmed Transaction Tracing</li>
+</ol>
+</li>
+<li>Collection Phase - Local Acquisition<ol>
+<li>Server: Server Logs, Web Application Logs, Virtual Hosts</li>
+<li>Cloud Services</li>
+<li>Open Sources</li>
+</ol>
+</li>
+<li>Other Considerations<ol>
+<li>APIs</li>
+<li>Integrity of Remote Artifacts</li>
+</ol>
+</li>
+<li>The Examination and Analysis Phases</li>
+</ol>
+<p>Session 6: Live and Memory Forensics Investigation</p>
+<p>Session 7: Mobile Forensics Investigation<br>Mobile and Embedded Forensics - Jens-Petter Sandvik</p>
+<ol>
+<li>Introduction<ol>
+<li>Embedded Systems and Consumer Electronics</li>
+<li>Mobile Phone</li>
+<li>Telecommunication Networks</li>
+<li>Mobile Devices and Embedded Systems as Evidence</li>
+<li>Malware and Security Considerations</li>
+</ol>
+</li>
+</ol>
+<p>Session 8-9: Practical Exercise<br>Educational Guide - Stefan Axelsson</p>
+<p>Session 10: Big Data Forensics<br>Challenges in Digital Forensics - Katrin Franke and Andre Arnes</p>
+<ol>
+<li>Computational Forensics</li>
+<li>Automation and Standardization</li>
+<li>Research Agenda</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2020-01-10-Study-MIS-Course-From-Minnsota/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1283,1200 +3042,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2019-09-20-Study-Electronic-Commerce-Notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019-09-20-Study-Electronic-Commerce-Notes/" itemprop="url">Electronic Commerce Notes</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-20T08:00:00+08:00">
-                2019-09-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>e-commerce-notes.pdf</p>
-</blockquote>
-<p>1. </p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2019-08-20-Study-Business-Information-Systems-Notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019-08-20-Study-Business-Information-Systems-Notes/" itemprop="url">Business Information Systems Notes</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-20T08:00:00+08:00">
-                2019-08-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>business-information-systems-lecture-notes.pdf</p>
-</blockquote>
-<ol>
-<li>MIS - intersection of people, technology, and processes</li>
-<li>Accept and store info; perform mathematical equations; apply logic to make decisions; retrieve, display, and send info; consistently repeat these actions</li>
-<li>Technology is a collection of tools that enable; enables strategy, business processes, problem solving and decision making<ol>
-<li>Business Strategy: According to Michael Porter strategy is – a broad based formula for how a business is going to compete, what its goals should be, and what plans and policies will be neededto carry out those goals</li>
-<li>Porter’s Five Forces Model</li>
-<li>Competitive Advantage = quality of insight + speed of execution + cost competitiveness</li>
-<li>3 aspects to create business value and competitive advantage<ol>
-<li>Automating</li>
-<li>Informating</li>
-<li>Transforming</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>Value Chain<ol>
-<li>Inbound logistics</li>
-<li>Operations</li>
-<li>Outbound logistics</li>
-<li>Marketing Sales</li>
-<li>Service activities</li>
-</ol>
-</li>
-<li>E-commerce</li>
-<li>business counts on its IS to deliver accurate data and information; it wants data in different forms and organized in different ways</li>
-<li>Business Intelligence<ol>
-<li>Data sourcing: mining data information</li>
-<li>Data analysis: producing useful knowledge</li>
-<li>Situation awareness</li>
-<li>Risk assessment</li>
-<li>Decision support</li>
-</ol>
-</li>
-<li>Decision Support Systems<ol>
-<li>Tactical decisions: making informed decisions after conducting research</li>
-<li>Operational decisions: analyzing operations and then making decisions based on performance</li>
-<li>Strategic decisions: making a final decision to continue with a product or not, based on previous analyses.</li>
-</ol>
-</li>
-<li>agile development - rational unified process (RUP)<ol>
-<li>Develop iteratively</li>
-<li>manage requirement</li>
-<li>use component architecture</li>
-<li>model visually</li>
-<li>verify quality</li>
-<li>control changes</li>
-</ol>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2019-07-20-Study-Principles-of-Marketing-Notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019-07-20-Study-Principles-of-Marketing-Notes/" itemprop="url">Principles of Marketing Notes</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-20T08:00:00+08:00">
-                2019-07-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>principles-of-marketing.pdf</p>
-</blockquote>
-<ol>
-<li>Marketing – creating and capturing value<ol>
-<li>core marketplace concepts<ol>
-<li>needs, wants, and demands</li>
-<li>market offerings (products, services, and experiences) with market segmentation</li>
-<li>value and satisfaction (fulfilling customer needs)</li>
-<li>exchanges and relationships</li>
-<li>markets</li>
-</ol>
-</li>
-<li>Designing marketing strategy and integrated marketing plan<ol>
-<li>Selecting customers to serve</li>
-<li>Choosing value proposition</li>
-<li>Marketing management orientations<ol>
-<li>Production concept</li>
-<li>Product concept</li>
-<li>Selling concept</li>
-<li>Marketing concept</li>
-<li>Societal marketing concept</li>
-</ol>
-</li>
-<li>Integrated marketing program</li>
-</ol>
-</li>
-<li>CRM and creating &amp; capturing value<ol>
-<li>Relationship Building Blocks</li>
-<li>Customer relationship levels and tools</li>
-<li>Changing nature of customer relationships</li>
-<li>Partner relationship management</li>
-<li>Capturing value from customers</li>
-<li>Building the right relationships with the right customers</li>
-</ol>
-</li>
-<li>Trends and forces in marketing landscape<ol>
-<li>Changing economic environment</li>
-<li>Digital age</li>
-<li>Growth of not-for-profit marketing</li>
-<li>Rapid globalization</li>
-<li>Call for more ethics and social responsibility</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>Strategy – partnering to build customer relationships<ol>
-<li>company-wide strategic planning (mission, objectives)<ol>
-<li>corporate level</li>
-<li>business unit, product and market level</li>
-</ol>
-</li>
-<li>Designing the business portfolio<ol>
-<li>4 strategies can be pursued after classifying:<ol>
-<li>Build share by investing</li>
-<li>Hold share by investing just enough</li>
-<li>Harvest by focusing on short-term cash flow</li>
-<li>Divest by selling and using resources elsewhere</li>
-</ol>
-</li>
-<li>Problems with matrix approaches</li>
-<li>Strategies for growth and downsizing (future)</li>
-<li>Product market expansion grid<ol>
-<li>Market penetration</li>
-<li>Market development</li>
-<li>Product development</li>
-<li>Diversification</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>Planning marketing<ol>
-<li>Marketing strategy and mix<ol>
-<li>who (segmentation and targeting)</li>
-<li>how (differentiation and positioning)</li>
-</ol>
-</li>
-<li>Customer-driven marketing strategy</li>
-<li>Developing an integrated marketing mix (4Ps)<ol>
-<li>Product</li>
-<li>Price</li>
-<li>Place</li>
-<li>Promotion</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>Managing marketing effort and ROI<ol>
-<li>analysis - SWOT</li>
-<li>planning - assessments, goals and recommendations</li>
-<li>implementation - addressing who, where, when and how, different arrangement:<ol>
-<li>Functional organization</li>
-<li>Geographic organization</li>
-<li>Product management organization</li>
-<li>Customer/market management organization</li>
-<li>combination of all of the above</li>
-</ol>
-</li>
-<li>control<ol>
-<li>ROI</li>
-<li>Marketing dashboards</li>
-<li>customer-centred measures</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>Analysing the marketing environment<ol>
-<li>Environmental forces that affect companies - value delivery network<ol>
-<li>Microenvironment - the company, suppliers, marketing intermediaries, customer markets, competitors and publics</li>
-<li>Macro environment - demographic, economic, natural, technological, political and cultural forces</li>
-</ol>
-</li>
-<li>Effects of demographic and economic environments on marketing<ol>
-<li>Macro environment</li>
-<li>Economic environment</li>
-</ol>
-</li>
-<li>Major trends in natural and technological environments of firm’s Natural environment<ol>
-<li>Natural environment<ol>
-<li>growing shortage of raw materials</li>
-<li>increased pullution</li>
-<li>increased goverment intervention</li>
-<li>environmental sustainability</li>
-</ol>
-</li>
-<li>Technological environment</li>
-</ol>
-</li>
-<li>Changes in political and cultural environments<ol>
-<li>Political environment</li>
-<li>Cultural environment</li>
-</ol>
-</li>
-<li>Changes in political and cultural environments</li>
-</ol>
-</li>
-<li>Managing marketing information<ol>
-<li>Marketing information and customer insights</li>
-<li>Marketing information system</li>
-<li>Marketing research</li>
-<li>Analysis and use marketing information</li>
-<li>Marketing information issues</li>
-</ol>
-</li>
-<li>Consumer markets and buyer behaviour<ol>
-<li>Model: environment-&gt;Buyer’s black box-&gt;Buyer responses</li>
-<li>4 characteristics that affect consumer behavior<ol>
-<li>Cultural: subculture</li>
-<li>Social: Opinion leader, Group, Family</li>
-<li>Personal: Age, Lifestyle, Personality</li>
-<li>Psychological: Motive, perception, learning, belief, attitude</li>
-</ol>
-</li>
-<li>Types of buying decision behaviour (involvement and diff brands)<ol>
-<li>Complex buying behaviour</li>
-<li>Dissonance-reducing buying behaviour</li>
-<li>Habitual buying behaviour</li>
-<li>Variety-seeking buyer behaviour</li>
-</ol>
-</li>
-<li>The buyer decision process<ol>
-<li>Need recognition</li>
-<li>Information search</li>
-<li>Evaluation of alternatives</li>
-<li>Purchase decision</li>
-<li>Post-purchase behaviour</li>
-</ol>
-</li>
-<li>Adoption and diffusion process for new products</li>
-</ol>
-</li>
-<li>Business markets and buyer behaviour<ol>
-<li>Business buyer behaviour<ol>
-<li>Market structure and demand</li>
-<li>Nature of buying unit</li>
-</ol>
-</li>
-<li>Model of business buyer behaviour<ol>
-<li>Major types: Straight rebuy, Modified rebuy, New task</li>
-<li>Systems selling (or solutions selling)</li>
-<li>Participants in the business buying process<ol>
-<li>Users</li>
-<li>Influencers</li>
-<li>Buyers</li>
-<li>Deciders</li>
-<li>Gatekeepers</li>
-</ol>
-</li>
-<li>Influences on business buyers<ol>
-<li>Environmental factors</li>
-<li>Organizational factors</li>
-<li>Interpersonal factors</li>
-<li>Individual factors</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>Business buying process and e-procurement<ol>
-<li>Problem recognition</li>
-<li>General need description</li>
-<li>Product specification</li>
-<li>Supplier search</li>
-<li>Proposal solicitation</li>
-<li>Supplier selection</li>
-<li>Order-routine specification</li>
-<li>Performance review</li>
-</ol>
-</li>
-<li>Institutional and government markets</li>
-</ol>
-</li>
-<li>Customer-driven marketing strategy<ol>
-<li>Market Segmentation<ol>
-<li>Geographic segmentation</li>
-<li>Demographic segmentation</li>
-<li>Psychographic segmentation</li>
-<li>Behavioral segmentation</li>
-<li>Requirements for effective segmentation<ol>
-<li>Measurable</li>
-<li>Accessible</li>
-<li>Substantial</li>
-<li>Differentiable</li>
-<li>Actionable</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>Market Targeting<ol>
-<li>Undifferentiated marketing</li>
-<li>Differentiated marketing</li>
-<li>Concentrated marketing</li>
-<li>Micromarketing</li>
-</ol>
-</li>
-<li>Differentlation</li>
-<li>Positioning</li>
-</ol>
-</li>
-<li>Products, services and brands<ol>
-<li>Product and major classification of products and services</li>
-<li>Product and service decisions</li>
-<li>Services marketing<ol>
-<li>Service characteristics<ol>
-<li>Service intangibility</li>
-<li>Service inseparability</li>
-<li>Service variability</li>
-<li>Service perishability</li>
-</ol>
-</li>
-<li>Marketing strategies for service firms<ol>
-<li>Service profit chain</li>
-<li>Internal marketing</li>
-<li>Interactive marketing</li>
-</ol>
-</li>
-<li>Service companies marketing tasks<ol>
-<li>Managing service differentiation</li>
-<li>Managing service quality</li>
-<li>Managing service productivity</li>
-</ol>
-</li>
-<li>Branding strategy</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>New product development<ol>
-<li>New-product development strategy</li>
-<li>New-product development process and management<ol>
-<li>Idea generation</li>
-<li>Idea screening - Real-Win-Worth</li>
-<li>Concept development and testing</li>
-<li>Marketing strategy development</li>
-<li>Business analysis</li>
-<li>Product development</li>
-<li>Test marketing</li>
-<li>Commercialization</li>
-</ol>
-</li>
-<li>Product life-cycle strategies - 5 stages</li>
-<li>Additional product and service considerations</li>
-</ol>
-</li>
-<li>Pricing<ol>
-<li>Customer value-based pricing</li>
-<li>Cost-based pricing<ol>
-<li>Costs at different levels of production</li>
-<li>Costs as a function of production experience</li>
-<li>Cost-plus pricing</li>
-<li>Break-even pricing</li>
-</ol>
-</li>
-<li>Competition-based pricing</li>
-<li>Internal and external considerations affecting price decisions</li>
-</ol>
-</li>
-<li>Pricing strategies<ol>
-<li>New-product pricing strategies<ol>
-<li>Market-skimming pricing (price skimming)</li>
-<li>Market-penetration pricing</li>
-</ol>
-</li>
-<li>Product mix pricing strategies<ol>
-<li>Product line pricing</li>
-<li>Optional product pricing</li>
-<li>Captive product pricing</li>
-<li>By-product pricing</li>
-<li>Product bundle pricing</li>
-</ol>
-</li>
-<li>Price-adjustment strategies<ol>
-<li>Discount</li>
-<li>Allowance</li>
-<li>Segmented pricing</li>
-<li>Psychological pricing</li>
-<li>Promotional pricing</li>
-<li>Geographical pricing</li>
-<li>Dynamic pricing</li>
-<li>International pricing</li>
-</ol>
-</li>
-<li>Price changes<ol>
-<li>Competitor reactions to price changes<ol>
-<li>competitor</li>
-<li>market share</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>Public policy and marketing</li>
-</ol>
-</li>
-<li>Marketing Channels<ol>
-<li>Value delivery network and marketing channels<ol>
-<li>Direct marketing channel</li>
-<li>Indirect marketing channel</li>
-</ol>
-</li>
-<li>Channel behaviour and organization<ol>
-<li>vertical marketing system<ol>
-<li>Corporate VMS</li>
-<li>Contractual VMS (e.g. Franchise organization)</li>
-<li>Administered VMS</li>
-</ol>
-</li>
-<li>Horizontal marketing system</li>
-<li>Multichannel distribution system</li>
-<li>Changing channel organization</li>
-</ol>
-</li>
-<li>Channel design decisions</li>
-<li>Channel management, public policy and distribution decisions</li>
-<li>Marketing logistics and supply chain management</li>
-</ol>
-</li>
-<li>Retailing and wholesaling</li>
-<li>Communicating customer value<ol>
-<li>Promotion mix<ol>
-<li>Advertising</li>
-<li>Sales promotion</li>
-<li>Personal selling</li>
-<li>Public relations</li>
-<li>Direct marketing</li>
-</ol>
-</li>
-<li>Integrated marketing communications</li>
-<li>Communication process and developing effective marketing communication</li>
-<li>Setting the total promotion budget and mix &amp; socially responsible marketing communication<ol>
-<li>Affordable method</li>
-<li>Percentage-of-sales method</li>
-<li>Competitive-parity method</li>
-<li>Objective-and-task method</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>Advertising and public relations<ol>
-<li>Developing an advertising program<ol>
-<li>Setting advertising objectives<ol>
-<li>Informative</li>
-<li>Persuasive - when competition is increasing</li>
-<li>Reminder - maintain customer relationships</li>
-</ol>
-</li>
-<li>Setting the advertising budget</li>
-<li>Developing an advertising strategy<ol>
-<li>Creating advertising messages</li>
-<li>Selecting advertising media</li>
-</ol>
-</li>
-<li>Evaluating advertising effectiveness and ROAI</li>
-<li>Other advertising considerations</li>
-</ol>
-</li>
-<li>Public relations and its role and impact</li>
-<li>Major public relations tools - news, special events, written materials, audio-visual materials, corporate identity materials, public services activities</li>
-</ol>
-</li>
-<li>Personal selling and sales promotion</li>
-<li>Direct and online marketing<ol>
-<li>Model, growth, benefits, customer databases of direct marketing (geographic, demographic, psychographic and behavioural data)</li>
-<li>Forms of direct marketing</li>
-<li>Online marketing</li>
-<li>Setting up online marketing presence<ol>
-<li>Creating web sites</li>
-<li>Placing ads (advertising) and promotions online (e.g. Viral marketing)</li>
-<li>Creating or participating in online social networks</li>
-<li>Sending e-mail</li>
-<li>Using mobile marketing</li>
-<li>Public policy issues in direct marketing<ol>
-<li>Irritation, unfairness, deception, and fraud</li>
-<li>Consumer privacy</li>
-<li>Need for action</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>Creating competitive advantage<ol>
-<li>Competitor analysis<ol>
-<li>Identifying competitors</li>
-<li>Assessing competitors<ol>
-<li>Determining competitors’ objectives</li>
-<li>Identifying competitors’ strategies</li>
-<li>Assessing competitors’ strengths and weaknesses</li>
-<li>Estimating competitors’ reactions</li>
-</ol>
-</li>
-<li>Selecting which competitors to attack and avoid</li>
-</ol>
-</li>
-<li>Completive marketing strategies<ol>
-<li>3 stages Approaches to marketing strategy<ol>
-<li>Entrepreneurial marketing</li>
-<li>Formulated marketing</li>
-<li>Intrepreneurial marketing</li>
-</ol>
-</li>
-<li>Basic competitive strategies<ol>
-<li>Cost leadership</li>
-<li>Differentiation</li>
-<li>Focus strategy</li>
-</ol>
-</li>
-<li>superior customer value<ol>
-<li>Operational excellence</li>
-<li>Customer intimacy</li>
-<li>Product leadership</li>
-</ol>
-</li>
-<li>Competitive positions<ol>
-<li>Market leader</li>
-<li>Market challenger</li>
-<li>Market follower</li>
-<li>Market niches</li>
-</ol>
-</li>
-<li>Balancing customer and competitor orientation</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>Global marketplace<ol>
-<li>Effects of international trade system and environments on company’s international marketing decisions<ol>
-<li>Looking at the global marketing environment</li>
-<li>Economic environment</li>
-<li>Political and legal environment</li>
-<li>Cultural environment</li>
-<li>Deciding whether to go global</li>
-<li>Deciding which markets to enter</li>
-</ol>
-</li>
-<li>Deciding how to enter the market</li>
-<li>Deciding on the global marketing programe</li>
-<li>Deciding on the global marketing organization</li>
-</ol>
-</li>
-<li>Sustainable marketing<ol>
-<li>Sustainable marketing</li>
-<li>Social criticisms of marketing</li>
-<li>Consumer actions to promote sustainable marketing</li>
-<li>Business actions toward sustainable marketing</li>
-<li>Marketing ethics and sustainable companies</li>
-</ol>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2019-06-20-Study-Business-Strategy-Notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019-06-20-Study-Business-Strategy-Notes/" itemprop="url">Business Strategy Notes</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-20T08:00:00+08:00">
-                2019-06-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>strategic-management-notes-lecture.pdf<br>contemporary-strategy-analysis-1-16.pdf<br>strategic-management-chapter-1-9.pdf<br>strategic-management-ppt-slides.pdf<br>bsg-2017-business-strategy-game-guide-how-to-win-v2.pdf<br>an-introduction-to-game-theory.pdf<br>exploring-strategy-chapter-1-15.pdf</p>
-</blockquote>
-<ol>
-<li>Competitive strategy is about being different. It means deliberately choosing a different set of activities to deliver a unique mix of value</li>
-<li>Mission statements and Vision statements</li>
-<li>Objectives: financial terms, market terms and social terms</li>
-<li>defined as:<ol>
-<li>the <strong>direction</strong> and <strong>scope</strong> of an organisation</li>
-<li>over the <strong>long term</strong></li>
-<li>which achieves <strong>advantage</strong></li>
-<li>in a changing <strong>environment</strong></li>
-<li>through the configuration of <strong>resources</strong> &amp; <strong>competences</strong></li>
-<li>with the ain to fulfil <strong>stakeholder expectations</strong></li>
-</ol>
-</li>
-<li>Sustained competitive advantage<ol>
-<li>calue creation strategy</li>
-<li>not simultaneously being implemented by any competitors</li>
-<li>other firms are unable to duplicate the benefits of this strategy</li>
-</ol>
-</li>
-<li>understand an organisation’s purposes, taking into account stakeholder expectations<ol>
-<li>MICRO, EXTERNAL ANALYSIS - Porter’s five forces analysis - identify potential for change</li>
-<li>MACRO, EXTERNAL ANALYSIS - PESTEL analysis - Identify key drivers of change</li>
-<li>INTERNAL ANALYSIS - SWOT analysis - substitute for analysis</li>
-</ol>
-</li>
-<li>Strategy, environment, capabilities and key stakeholders<ol>
-<li>Cost-leadership strategy</li>
-<li>Differentiation strategy</li>
-<li>Focus strategy</li>
-</ol>
-</li>
-<li>The SAFe criteria:<ol>
-<li>Suitability - Examples page 107</li>
-<li>Acceptability - Risk, Return, Reactions</li>
-<li>Feasibility - Financial, People and Skills</li>
-</ol>
-</li>
-<li>Comparing acquisitions, alliances and organic development</li>
-<li>The CAGE framework:<ol>
-<li>Cultural distance</li>
-<li>Administrative and political distance</li>
-<li>Geographic distance</li>
-<li>Economic/ wealth distance</li>
-</ol>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.toob.net.cn/2019-05-20-Study-Operations-management-Notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Xia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack Xia">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019-05-20-Study-Operations-management-Notes/" itemprop="url">Operations management Notes</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-20T08:00:00+08:00">
-                2019-05-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>operations-management-lecture-notes-lectures-1-11.pdf</p>
-</blockquote>
-<p>Operations management is relevant to all parts of the business. It has 5 objective: quality, Speed, Dependability, Flexibility, Cost.</p>
-<p>Differents: Operations strategy is long-term, Macro, Aggregated and Philosophical, and it should be appropriate, comprehensive, coherent, Consistent over time.</p>
-<p>Process design and product/service design are interrelated. Design helps businesses connect strongly with their customers by anticipating their real needs.</p>
-<p>Supply network design.</p>
-<p>Fixed-position layout, Functional layout, Cell layout and Product layout.</p>
-<p>Job design and work organization, Work measurement in job design, behavioural approaches to job design.</p>
-<p>Planning and control, Planning concerns what should happen in the future. Control copes with changes.</p>
-<p>Capacity planning and control, Measuring demand and capacity</p>
-<p>Inventory planning and control. Economic order quantity (EOQ): The quantity of items to order that supposedly minimizes the total cost of inventory management, derived from various EOQ formulae. Economic batch quantity (EBQ): The amount of items to be produced by a machine or process that supposedly minimizes the costs associated with production and inventory holding.</p>
-<p>Supply chain planning and control, A supply network is all the operations linked together to provide goods and services.</p>
-<p>Enterprise resource planning (ERP): The integration of all significant resource planning systems in an organization that, in an operations context, integrates planning and control with the other functions of the business.</p>
-<p>Lean operations: It means moving towards the elimination of all waste in order to develop anoperation that is faster, more dependable, produces higher-quality products and services, and, above all, operates at low cost.<br>Just-in-time (JIT): A method of planning and control and an operations philosophy that aimsto meet demand instantaneously with perfect quality and no waste.</p>
-<p>3 core functions:</p>
-<ul>
-<li>Marketing function (communicating)</li>
-<li>Product/service development function (creating)</li>
-<li>Operations function (fulfilling)</li>
-</ul>
-<p>Support functions:</p>
-<ul>
-<li>The accounting and finance function</li>
-<li>The human resources function</li>
-</ul>
-<p>Inputs to the process:</p>
-<ul>
-<li>Transformed resources:<ul>
-<li>Materials (shape, composition)</li>
-<li>Information</li>
-<li>Customers (hairdressers)</li>
-</ul>
-</li>
-<li>Transforming resources:<ul>
-<li>Facilities</li>
-<li>Staff</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2521,7 +3091,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">156</span>
+                <span class="site-state-item-count">161</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2534,7 +3104,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2576,7 +3146,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
